@@ -21,7 +21,8 @@ public class WebSecurityConfig {
                 .cors((cors) -> cors.disable())
                 .authorizeHttpRequests(request -> request
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/layouts/**").permitAll()
                         .requestMatchers("/css/**","/js/**","/img/**").permitAll()
                         .requestMatchers("/member/**").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/admin/**").hasAnyRole("ADMIN")
