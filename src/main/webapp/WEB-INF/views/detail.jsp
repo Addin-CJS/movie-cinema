@@ -14,41 +14,32 @@
        <jsp:include page="layouts/header.jsp" />
     </header>
     <section>
-        <div class="popular-movie-slider">
+         <div class="popular-movie-slider">
 
-            <img src="https://imageio.forbes.com/blogs-images/scottmendelson/files/2014/10/2v00kg8.jpg?format=jpg&width=1200"
-                 class="poster">
+              <img src="https://imageio.forbes.com/blogs-images/scottmendelson/files/2014/10/2v00kg8.jpg?format=jpg&width=1200" class="poster">
 
-            <div class="popular-movie-slider-content">
+              <div class="popular-movie-slider-content">
                 <p class="release">2017</p>
-                <h2 class="movie-name">Interstellar</h2>
+                <h2 class="movie-name">${movie.mvTitle}</h2>
                 <ul class="category">
-                    <p>Science fiction</p>
-                    <li>drama</li>
-                    <li>action</li>
+                  <p>${movie.mvGenre}</p>
                 </ul>
-                <p class="desc">Interstellar is a 2014 epic science fiction film co-written, directed, and produced by
-                    Christopher Nolan. It stars Matthew McConaughey, Anne Hathaway, Jessica Chastain, Bill Irwin, Ellen
-                    Burstyn, Matt Damon, and Michael Caine. Set in a dystopian future where humanity is embroiled in a
-                    catastrophic blight and famine, the film follows a group of astronauts who travel through a wormhole
-                    near Saturn in search of a new home for humankind.</p>
+                <p class="desc">${movie.mvDescription}</p>
 
                 <div class="movie-info">
-                    <i class="fa fa-clock-o"> &nbsp;&nbsp;&nbsp;<span>164 min.</span></i>
-                    <i class="fa fa-volume-up"> &nbsp;&nbsp;&nbsp;<span>Subtitles</span></i>
-                    <i class="fa fa-circle"> &nbsp;&nbsp;&nbsp;<span>Imdb: <b>9.1/10</b></span></i>
+                  <i class="fa fa-clock-o"> &nbsp;&nbsp;&nbsp;<span>164 min.</span></i>
+                  <i class="fa fa-volume-up"> &nbsp;&nbsp;&nbsp;<span>Subtitles</span></i>
+                  <i class="fa fa-circle"> &nbsp;&nbsp;&nbsp;<span>Imdb: <b>9.1/10</b></span></i>
                 </div>
 
                 <div class="movie-btns">
-                    <button><i class="fa fa-play"></i> &nbsp; Watch trailer</button>
-                    <button class="read-more"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i
-                            class="fa fa-circle"></i>&nbsp; Read more
-                    </button>
+                  <button><i class="fa fa-play"></i> &nbsp; Watch trailer</button>
+                  <button class="read-more"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i>&nbsp; Read more</button>
                 </div>
 
-            </div>
+              </div>
 
-        </div>
+            </div>
      <div class="movie-ticket-book">
                 <div class="choose-date">
                     <p class="heading">
@@ -104,9 +95,10 @@
                         <div class="marker"></div>
                     </div>
                 </div>
-                <button>Buy ticket</button>
+                <button type="button" onclick="location.href='movieSeats?movieId=${movie.movieId}'">좌석선택하기</button>
             </div>
             <!---movie-ticket-book-->
     </section>
+    <jsp:include page="layouts/footer.jsp" />
 </body>
 </html>
