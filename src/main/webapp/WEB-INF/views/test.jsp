@@ -11,7 +11,15 @@
 <head>
     <title>Title</title>
 </head>
-<body>
 
+<body>
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="image">
+    <input type="submit" value="업로드">
+</form>
+    <h1>test</h1>
+    <c:forEach items="${movies}" var="movie">
+        <p>${movie}</p>
+    </c:forEach>
 </body>
 </html>

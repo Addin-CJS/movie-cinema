@@ -16,7 +16,6 @@ public class TestController {
         model.addAttribute("movies",movieRepository.findAll());
         return "test";
     }
-
     @RequestMapping("/")
     public String index() {
         return "index";

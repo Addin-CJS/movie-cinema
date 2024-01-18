@@ -1,17 +1,16 @@
 package com.dealim.domain.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Data
+@SequenceGenerator(name = "ticket_SEQ", sequenceName = "ticket_SEQ", allocationSize = 1)
 public class Ticket {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket_SEQ")
     private Long ticketId;
     private Long memberId;
     private Long movieId;
