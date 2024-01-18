@@ -22,9 +22,13 @@ repositories {
 }
 
 dependencies {
+    // db
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
+    // security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    // sesssion
     implementation 'org.springframework.session:spring-session-core'
     // jsp를 위한 의존성 주입
     implementation 'jakarta.servlet:jakarta.servlet-api'
@@ -32,13 +36,12 @@ dependencies {
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     // Log4j2 의존성 추가
-//    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
-//    implementation 'org.apache.logging.log4j:log4j-api'
-//    implementation 'org.apache.logging.log4j:log4j-core'
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation 'org.apache.logging.log4j:log4j-api'
+    implementation 'org.apache.logging.log4j:log4j-core'
 
-    compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
