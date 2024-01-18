@@ -19,12 +19,11 @@
 
         <ul id="menu-box">
             <div class="marker"></div>
-            <li>main</li>
-            <li>schedlues</li>
-            <li>tickets</li>
-            <li>news</li>
-            <li>contact</li>
-            <li><span>mr.john doe <img
+            <li>메인</li>
+            <li>영화</li>
+            <li>예매</li>
+            <li>이벤트</li>
+            <li><span>ooo님<img
                     src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg"> <i
                     class="fa fa-angle-down"></i></span></li>
             <li><b>sign out</b></li>

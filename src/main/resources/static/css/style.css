@@ -14,7 +14,7 @@ body{
 
 
 header{
-    background:url('https://s3picturehouses.s3.eu-central-1.amazonaws.com/header/ph_15977496885f3bb9b84457c.jpg');
+    /*background:url('https://s3picturehouses.s3.eu-central-1.amazonaws.com/header/ph_15977496885f3bb9b84457c.jpg');*/
     background-size:cover;
     background-position:center;
     width:100%;
@@ -41,7 +41,7 @@ header nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:10px 100px;
+    padding:20px 100px;
     position:fixed;
     top:0;
     left:0;
@@ -488,7 +488,7 @@ footer{
 
 
 footer .logo-box{
-    font-size:.85em;
+    font-size:.65em;
 }
 
 

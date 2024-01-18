@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-       <jsp:include page="layouts/nav-top.jsp" />
+       <jsp:include page="layouts/header.jsp" />
     </header>
     <section>
         <div class="popular-movie-slider">

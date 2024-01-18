@@ -15,7 +15,7 @@
 
             <div class="logo-box">
                 <p class="logo">
-                    multi<span>flex</span>
+                    김지창과<span>아이들</span>
                 </p>
                 <p><i class="fa fa-copyright"></i> 2001-2017, SIA Multiflex</p>
             </div>
