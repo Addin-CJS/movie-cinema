@@ -1,4 +1,4 @@
-package com.dealim.domain.model;
+package com.dealim.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;

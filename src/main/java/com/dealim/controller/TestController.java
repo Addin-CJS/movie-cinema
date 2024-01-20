@@ -1,6 +1,6 @@
 package com.dealim.controller;
 
-import com.dealim.domain.repository.MovieRepository;
+import com.dealim.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

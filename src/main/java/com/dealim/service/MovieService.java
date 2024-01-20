@@ -1,7 +1,7 @@
-package com.dealim.domain.service;
+package com.dealim.service;
 
-import com.dealim.domain.model.Movie;
-import com.dealim.domain.repository.MovieRepository;
+import com.dealim.domain.Movie;
+import com.dealim.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
