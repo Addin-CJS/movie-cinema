@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MemberController {
@@ -19,19 +21,32 @@ public class MemberController {
 
     @GetMapping("/member/register")
     public String register() {
+
+
         return "member/register";
     }
 
 
 
     @PostMapping("/member/register")
-    public  String insertMember(Member member){
+    public String insertMember(Member member){
         System.out.println("member");
 
-            Member insert = memberService.insertMember(member);
+        memberService.insertMember(member);
 
-        return "redirect:member/login";
+        return "redirect:login";
     }
+
+
+    @GetMapping("/idCheck")
+    @ResponseBody
+    public boolean checkId(@RequestParam("id")Long userId){
+        boolean checkId = memberService.idCheck(userId);
+
+        return checkId;
+
+    }
+
 
 
 }

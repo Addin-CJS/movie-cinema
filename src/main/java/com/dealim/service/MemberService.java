@@ -18,4 +18,10 @@ public class MemberService {
 
         return insertMember;
     }
+
+    public boolean idCheck(Long userId) {
+        boolean checkId = memberRepository.existsById(userId);
+
+        return  checkId;
+    }
 }
