@@ -22,7 +22,7 @@ public class MemberService {
     }
 
     public Optional<Member> selectMemberById(Member member) {
-        Optional<Member> loginUser = memberRepository.findById(member.getMemberId());
+        Optional<Member> loginUser = memberRepository.findByUsername(member.getUsername());
 
         if(loginUser.isPresent()) {
             return loginUser;
