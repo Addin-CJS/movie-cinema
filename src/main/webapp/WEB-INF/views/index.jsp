@@ -45,7 +45,7 @@
             </div>
 
         </div>
-        <!----filter-search-box---->
+        <!----filter-search-box ---->
 
 
         <div class="movie-card-section">
