@@ -40,19 +40,20 @@
                     </tr>
                     <tr>
                         <th><label for="email" class="form-label">EMAIL</label></th>
-                        <td><div class="mb-3 d-flex">
-                            <input name="email" class="form-control" id="email" placeholder="메일 아이디">
-                            <input type="emailAdr" class="form-control" id="emailAdr" placeholder="@메일 주소">
-                             <select class="form-select" aria-label="Default select example" id="emailOption" onchange="handleEmailOption()">
-                                <option value="input">직접입력</option>
-                                <option>@naver.com</option>
-                                <option>@hanmail.net</option>
-                                <option>@google.com</option>
-                                <option>@apple.com</option>
-                            </select>
-                            <option>
-                        </div></td>
+                        <td>
+                            <div class="mb-3 d-flex">
+                                <input name="email" class="form-control" id="email" placeholder="메일 주소">
+                                <select class="form-select" aria-label="Default select example" id="emailOption" onchange="handleEmailOption()">
+                                    <option value="input">직접입력</option>
+                                    <option value="@naver.com">@naver.com</option>
+                                    <option value="@hanmail.net">@hanmail.net</option>
+                                    <option value="@google.com">@google.com</option>
+                                    <option value="@apple.com">@apple.com</option>
+                                </select>
+                            </div>
+                        </td>
                     </tr>
+
                      <tr>
                         <th><label for="phoneNumber" class="form-label">PHONE</label></th>
                         <td><div class="mb-3">

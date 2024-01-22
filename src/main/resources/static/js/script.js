@@ -316,10 +316,10 @@ allSeatCont.each(function() {
 
         emailOption.addEventListener('change', function() {
             if (emailOption.value === 'input') {
-                emailInput.value = ''; // 직접 입력을 선택하면 입력 필드를 비웁니다.
-                emailInput.disabled = false; // 입력 필드 활성화
+                emailInput.value = '';
+                emailInput.disabled = false;
             } else {
                 emailInput.value = emailOption.value;
-                emailInput.disabled = true; // 입력 필드 비활성화
+                emailInput.disabled = true;
             }
         });
