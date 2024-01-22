@@ -1361,3 +1361,29 @@ body.modal-active .overlay {
     margin-top: 0px;
   }
 }
+
+section .login {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 70px;
+    height : 100%;
+}
+
+section .login table {
+    margin: 0 auto;
+}
+
+section .login th{
+    color: white;
+    width: 50px;
+}
+
+section .login td{
+    color: white;
+    width: 300px;
+}
+
+section .login button {
+    margin-top: 10px;
+}
