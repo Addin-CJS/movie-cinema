@@ -19,7 +19,7 @@ public class Member {
     private String email;
     private String phoneNumber;
     private String homeAddress;
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private LocalDateTime withdrawnAt;
     private Character isWithdrawn;

@@ -18,7 +18,7 @@
     <section>
         <div class="register">
            <h4>회원가입</h4>
-           <form action="/member/register" method="post">
+           <form action="register" method="post">
                <table>
                     <tr>
                         <th><label for="username" class="form-label">ID</label></th>
@@ -67,7 +67,7 @@
                         </div></td>
                     </tr>
                </table>
-               <button type="button" class="btn btn-light">회원가입</button>&emsp;
+               <button type="submit" class="btn btn-light">회원가입</button>&emsp;
                <button type="reset" class="btn btn-light">초기화</button>
            </form>
         </div>
