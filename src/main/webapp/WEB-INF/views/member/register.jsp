@@ -18,7 +18,10 @@
     <section>
         <div class="register">
            <h4>회원가입</h4>
+
            <form action="register" method="post" id="enrollForm">
+
+
                <table>
                     <tr>
                         <th><label for="username" class="form-label">ID</label></th>
@@ -101,7 +104,7 @@
                         }
                     })
                 } else {
-                    $("checkResult").hide();
+                    $("#checkResult").hide();
                     $("#enrollForm :submit").attr("disabled", true);
                 }
             })

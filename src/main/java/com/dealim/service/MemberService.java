@@ -5,6 +5,8 @@ import com.dealim.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 public class MemberService {
@@ -19,9 +21,20 @@ public class MemberService {
         return insertMember;
     }
 
-    public boolean idCheck(Long userId) {
-        boolean checkId = memberRepository.existsById(userId);
 
-        return  checkId;
+    public boolean idCheck(String username) {
+
+        return memberRepository.existsByUsername(username);
+
     }
-}
+
+        public Optional<Member> selectMemberById (Member member){
+            Optional<Member> loginUser = memberRepository.findById(member.getMemberId());
+
+            if (loginUser.isPresent()) {
+                return loginUser;
+            } else {
+                return null;
+            }
+        }
+    }
