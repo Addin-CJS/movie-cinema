@@ -73,13 +73,17 @@ $(()=>{
 
 });
 
+
+
+/*
 const moviesList = [
   { movieName: "Tom and Jerry 2021", price: 7 },
   { movieName: "Master", price: 5 },
   { movieName: "Justice League", price: 4 },
 ];
+*/
 
-const selectMovieEl = document.getElementById("selectMovie");
+/*const selectMovieEl = document.getElementById("selectMovie");*/
 
 const allSeatCont = document.querySelectorAll("#seatCont .seat");
 
@@ -91,162 +95,146 @@ const cancelBtnEL = document.getElementById("cancelBtn");
 
 const proceedBtnEl = document.getElementById("proceedBtn");
 
-moviesList.forEach((movie) => {
-  const optionEl = document.createElement("option");
-  optionEl.innerHTML = `${movie.movieName} $${movie.price}`;
-  selectMovieEl.appendChild(optionEl);
-});
+/*$.each(moviesList, function(index, movie) {
+  const optionEl = $("<option>").html(movie.movieName + " $" + movie.price);
+  selectMovieEl.append(optionEl);
+});*/
 
-let moviePrice = 7;
+
+/*let moviePrice = 7;
 let currentMovieName = `Tom and Jerry 2021`;
 
-selectMovieEl.addEventListener("input", (e) => {
-  let movieName = e.target.value.split("");
+$(selectMovieEl).on("input", function(e) {
+  let movieName = $(e.target).val().split("");
   let dollarIndex = movieName.indexOf("$");
   let movie = movieName.splice(0, dollarIndex - 1).join("");
   currentMovieName = movie;
   moviePrice = JSON.parse(movieName.splice(2, dollarIndex).join(""));
 
-  updatMovieName(movie, moviePrice);
+  updateMovieName(movie, moviePrice);
   updatePrice(moviePrice, takenSeats.length);
-});
+});*/
+
 
 let initialSeatValue = 0;
-allSeatCont.forEach((seat) => {
-  const attr = document.createAttribute("data-seatid");
-  attr.value = ++initialSeatValue;
-  seat.setAttributeNode(attr);
+allSeatCont.forEach((seat, index) => {
+  seat.setAttribute("data-seatid", ++initialSeatValue);
 });
 
-const seatContEl = document.querySelectorAll("#seatCont .seat:not(.occupied)");
+
+const seatContEl = $("#seatCont .seat:not(.occupied)");
 
 let takenSeats = [];
 
-seatContEl.forEach((seat) => {
-  seat.addEventListener("click", (e) => {
-    let isSelected = seat.classList.contains("selected");
+seatContEl.on("click", function() {
+  let isSelected = $(this).hasClass("selected");
 
-    let seatId = JSON.parse(seat.dataset.seatid);
+  let seatId = JSON.parse($(this).data("data-seatid"));
 
-    if (!isSelected) {
-      seat.classList.add("selected");
-      takenSeats.push(seatId);
-      takenSeats = [...new Set(takenSeats)];
-    } else if (isSelected) {
-      seat.classList.remove("selected");
+  if (!isSelected) {
+    $(this).addClass("selected");
+    takenSeats.push(seatId);
+    takenSeats = [...new Set(takenSeats)];
+  } else if (isSelected) {
+    $(this).removeClass("selected");
 
-      takenSeats = takenSeats.filter((seat) => {
-        if (seat !== seatId) {
-          return seat;
-        }
-      });
-    }
-    updateSeats();
-    updatePrice(moviePrice, takenSeats.length);
-  });
+    takenSeats = takenSeats.filter(function(seat) {
+      return seat !== seatId;
+    });
+  }
+  updateSeats();
+  updatePrice(moviePrice, takenSeats.length);
 });
 
+
 function updateSeats() {
-  selectedSeatsHolderEl.innerHTML = ``;
+  selectedSeatsHolderEl.html("");
 
-  takenSeats.forEach((seat) => {
-    const seatHolder = document.createElement("div");
-    seatHolder.classList.add("selectedSeat");
-    selectedSeatsHolderEl.appendChild(seatHolder);
+  $.each(takenSeats, function(index, seat) {
+    const seatHolder = $("<div>").addClass("selectedSeat");
+    selectedSeatsHolderEl.append(seatHolder);
 
-    seatHolder.innerHTML = seat;
+    seatHolder.html(seat);
   });
 
   if (!takenSeats.length) {
-    const spanEl = document.createElement("span");
-    spanEl.classList.add("noSelected");
-    spanEl.innerHTML = `NO SEAT SELECTED`;
-    selectedSeatsHolderEl.appendChild(spanEl);
+    const spanEl = $("<span>").addClass("noSelected").html("NO SEAT SELECTED");
+    selectedSeatsHolderEl.append(spanEl);
   }
 
   seatCount();
 }
 
+
 function seatCount() {
-  const numberOfSeatEl = document.getElementById("numberOfSeat");
-  numberOfSeatEl.innerHTML = takenSeats.length;
+  const numberOfSeatEl = $("#numberOfSeat");
+  numberOfSeatEl.html(takenSeats.length);
 }
 
-function updatMovieName(movieName, price) {
-  const movieNameEl = document.getElementById("movieName");
-  const moviePriceEl = document.getElementById("moviePrice");
-  movieNameEl.innerHTML = movieName;
-  moviePriceEl.innerHTML = `$ ${price}`;
+
+function updateMovieName(movieName, price) {
+  const movieNameEl = $("#movieName");
+  const moviePriceEl = $("#moviePrice");
+  movieNameEl.html(movieName);
+  moviePriceEl.html(`$ ${price}`);
 }
 
 function updatePrice(price, seats) {
-  const totalPriceEl = document.getElementById("totalPrice");
+  const totalPriceEl = $("#totalPrice");
   let total = seats * price;
-  totalPriceEl.innerHTML = `$ ${total}`;
+  totalPriceEl.html(`$ ${total}`);
 }
 
-cancelBtn.addEventListener("click", (e) => {
+
+$("#cancelBtn").on("click", function(e) {
   cancelSeats();
 });
 
 function cancelSeats() {
   takenSeats = [];
-  seatContEl.forEach((seat) => {
-    seat.classList.remove("selected");
+  seatContEl.each(function(index, seat) {
+    $(seat).removeClass("selected");
   });
   updatePrice(0, 0);
   updateSeats();
 }
 
+
 function successModal(movieNameIn, totalPrice, successTrue) {
-  const bodyEl = document.querySelector("body");
+  const bodyEl = $("body");
+  const sectionEl = $("#section");
 
-  const sectionEl = document.getElementById("section");
+  const overlay = $("<div>").addClass("overlay");
+  sectionEl.append(overlay);
 
-  const overlay = document.createElement("div");
-
-  overlay.classList.add("overlay");
-
-  sectionEl.appendChild(overlay);
-
-  const successModal = document.createElement("div");
-  successModal.classList.add("successModal");
-  const modalTop = document.createElement("div");
-  modalTop.classList.add("modalTop");
-  const popImg = document.createElement("img");
-  popImg.src = "https://github.com/Dinesh1042/Vanilla-JavaScript-Projects/blob/main/Movie%20Booking/asset/pop.png?raw=true";
-  modalTop.appendChild(popImg);
-
-  successModal.appendChild(modalTop);
+  const successModal = $("<div>").addClass("successModal");
+  const modalTop = $("<div>").addClass("modalTop");
+  const popImg = $("<img>").attr("src", "https://github.com/Dinesh1042/Vanilla-JavaScript-Projects/blob/main/Movie%20Booking/asset/pop.png?raw=true");
+  modalTop.append(popImg);
+  successModal.append(modalTop);
 
   // Modal Center
 
-  const modalCenter = document.createElement("div");
-  const modalHeading = document.createElement("h1");
-  modalCenter.classList.add("modalCenter");
-  modalHeading.innerHTML = `Ticked Booked Successfully`;
-  modalCenter.appendChild(modalHeading);
-  const modalPara = document.createElement("p");
-  modalCenter.appendChild(modalPara);
-  modalPara.innerHTML = `${movieNameIn} movie ticket have been booked successfully.`;
-  successModal.appendChild(modalCenter);
+  const modalCenter = $("<div>").addClass("modalCenter");
+  const modalHeading = $("<h1>").html("Ticked Booked Successfully");
+  modalCenter.append(modalHeading);
+  const modalPara = $("<p>").html(`${movieNameIn} movie ticket has been booked successfully.`);
+  modalCenter.append(modalPara);
+  successModal.append(modalCenter);
 
-  // modal Bottom
+  // Modal Bottom
 
-  const modalBottom = document.createElement("div");
-  modalBottom.classList.add("modalBottom");
-  const successBtn = document.createElement("button");
+  const modalBottom = $("<div>").addClass("modalBottom");
+  const successBtn = $("<button>").html("Ok Got It!");
+  modalBottom.append(successBtn);
+  successModal.append(modalBottom);
 
-  successBtn.innerHTML = `Ok Got It!`;
-  modalBottom.appendChild(successBtn);
-  successModal.appendChild(modalBottom);
-
-  successBtn.addEventListener("click", (e) => {
+  successBtn.on("click", function(e) {
     removeModal();
   });
 
-  window.addEventListener("click", (e) => {
-    if (e.target.classList.contains("overlay")) {
+  $(window).on("click", function(e) {
+    if ($(e.target).hasClass("overlay")) {
       removeModal();
     }
   });
@@ -254,40 +242,39 @@ function successModal(movieNameIn, totalPrice, successTrue) {
   function removeModal() {
     overlay.remove();
     successModal.remove();
-    bodyEl.classList.remove("modal-active");
+    bodyEl.removeClass("modal-active");
     cancelSeats();
   }
 
-  sectionEl.appendChild(successModal);
+  sectionEl.append(successModal);
 }
 
-proceedBtnEl.addEventListener("click", (e) => {
+$("#proceedBtnEl").on("click", function(e) {
   if (takenSeats.length) {
-    const bodyEl = document.querySelector("body");
-    bodyEl.classList.add("modal-active");
+    const bodyEl = $("body");
+    bodyEl.addClass("modal-active");
     successModal(currentMovieName, moviePrice * takenSeats.length);
   } else {
-    alert("Oops no seat Selected");
+    alert("Oops no seat selected");
   }
 });
 
-seatContEl.forEach((seat) => {
-  seat.addEventListener("click", (e) => {
-    let isSelected = seat.classList.contains("selected");
 
-    let seatId = JSON.parse(seat.dataset.seatid);
+seatContEl.each(function() {
+  $(this).on("click", function(e) {
+    let isSelected = $(this).hasClass("selected");
+
+    let seatId = JSON.parse($(this).data("seatid"));
 
     if (!isSelected) {
-      seat.classList.add("selected");
+      $(this).addClass("selected");
       takenSeats.push(seatId);
       takenSeats = [...new Set(takenSeats)];
     } else if (isSelected) {
-      seat.classList.remove("selected");
+      $(this).removeClass("selected");
 
-      takenSeats = takenSeats.filter((seat) => {
-        if (seat !== seatId) {
-          return seat;
-        }
+      takenSeats = takenSeats.filter(function(seat) {
+        return seat !== seatId;
       });
     }
     updateSeats();
@@ -298,17 +285,41 @@ seatContEl.forEach((seat) => {
   });
 });
 
-function updateSeatStyles() {
-  // 모든 좌석에 대해 초기화
-  allSeatCont.forEach((seat) => {
-    seat.classList.remove("selected");
-  });
+// 모든 좌석에 대해 초기화
+allSeatCont.each(function() {
+  $(this).removeClass("selected");
+});
 
-  // 선택된 좌석에 대해 스타일 추가
-  takenSeats.forEach((seatId) => {
-    const selectedSeat = document.querySelector(`.seat[data-seatid="${seatId}"]`);
-    if (selectedSeat) {
-      selectedSeat.classList.add("selected");
-    }
-  });
-}
+
+ // 선택된 좌석에 대해 스타일 추가
+ $.each(takenSeats, function(index, seatId) {
+   const selectedSeat = $(`.seat[data-seatid="${seatId}"]`);
+   if (selectedSeat.length) {
+     selectedSeat.addClass("selected");
+   }
+ });
+
+// 회원가입
+ function handleEmailOption() {
+                var emailOption = document.getElementById("emailOption");
+                var emailInput = document.getElementById("emailAdr");
+
+                if (emailOption.value === "input") {
+                    emailInput.style.display = "block";
+                } else {
+                    emailInput.style.display = "none";
+                }
+            }
+
+        const emailOptions = document.getElementById('emailOption');
+        const emailInput = document.getElementById('emailAdr');
+
+        emailOption.addEventListener('change', function() {
+            if (emailOption.value === 'input') {
+                emailInput.value = ''; // 직접 입력을 선택하면 입력 필드를 비웁니다.
+                emailInput.disabled = false; // 입력 필드 활성화
+            } else {
+                emailInput.value = emailOption.value;
+                emailInput.disabled = true; // 입력 필드 비활성화
+            }
+        });

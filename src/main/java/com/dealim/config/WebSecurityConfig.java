@@ -20,7 +20,7 @@ public class WebSecurityConfig {
                 .cors((cors) -> cors.disable())
                 .authorizeHttpRequests(request -> request
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/**").permitAll() // 개발동안에만
                         .requestMatchers("/layouts/**").permitAll()
                         .requestMatchers("/css/**","/js/**","/img/**").permitAll()
                         .requestMatchers("/member/**").hasAnyRole("USER","ADMIN")
@@ -30,6 +30,7 @@ public class WebSecurityConfig {
 
         http.formLogin((formLogin)->
                 formLogin
+                        .loginPage("/member/login")
                         .successForwardUrl("/")
                         .permitAll());
 

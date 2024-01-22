@@ -1,4 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
 <body>
     <header>
        <jsp:include page="layouts/header.jsp" />
@@ -134,13 +143,14 @@
                      <select id="selectMovie"></select>
                    </label>
                  </div> -->
+
                  <div class="movieName">
                    <p>MOVIE NAME</p>
                    <h1 id="movieName">${movie.mvTitle}</h1>
                  </div>
                  <div class="moviePrice">
                    <p>MOVIE PRICE</p>
-                   <h1 id="moviePrice">$ 7</h1>
+                   <h1 id="moviePrice">15,000</h1>
                  </div>
                  <div class="dateCont">
                    <p>Date</p>
