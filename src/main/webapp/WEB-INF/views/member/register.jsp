@@ -18,7 +18,7 @@
     <section>
         <div class="register">
            <h4>회원가입</h4>
-           <form action="register" method="post">
+           <form action="/member/register" method="post">
                <table>
                     <tr>
                         <th><label for="username" class="form-label">ID</label></th>
