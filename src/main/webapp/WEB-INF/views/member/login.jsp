@@ -23,13 +23,13 @@
                     <tr>
                         <th><label for="userId" class="form-label">ID</label></th>
                         <td><div class="mb-3">
-                            <input type="username" class="form-control" id="userId" placeholder="아이디를 입력해주세요">
+                            <input name="username" class="form-control" id="userId" placeholder="아이디를 입력해주세요">
                         </div></td>
                     </tr>
                     <tr>
                         <th><label for="password" class="form-label">PW</label></th>
                         <td><div class="mb-3">
-                            <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해주세요">
+                            <input type="password" name="password" class="form-control" id="password" placeholder="비밀번호를 입력해주세요">
                         </div></td>
                     </tr>
                </table>
