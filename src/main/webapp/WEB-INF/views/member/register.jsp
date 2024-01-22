@@ -21,27 +21,27 @@
            <form action="register" method="post">
                <table>
                     <tr>
-                        <th><label for="memberId" class="form-label">ID</label></th>
+                        <th><label for="username" class="form-label">ID</label></th>
                         <td><div class="mb-3">
-                            <input type="memberId" class="form-control" id="memberId" placeholder="영문 6글자 이상">
+                            <input type="text" name="username" class="form-control" id="username" placeholder="영문 6글자 이상">
                         </div></td>
                     </tr>
                     <tr>
-                        <th><label for="username" class="form-label">NAME</label></th>
+                        <th><label for="name" class="form-label">NAME</label></th>
                         <td><div class="mb-3">
-                            <input type="username" class="form-control" id="username" placeholder="이름 입력">
+                            <input type="text" name="name" class="form-control" id="name" placeholder="이름 입력">
                         </div></td>
                     </tr>
                     <tr>
                         <th><label for="password" class="form-label">PW</label></th>
                         <td><div class="mb-3">
-                            <input type="password" class="form-control" id="password" placeholder="영문, 숫자 포함 8글자 이상">
+                            <input type="password" name="password" class="form-control" id="password" placeholder="영문, 숫자 포함 8글자 이상">
                         </div></td>
                     </tr>
                     <tr>
                         <th><label for="email" class="form-label">EMAIL</label></th>
                         <td><div class="mb-3 d-flex">
-                            <input type="email" class="form-control" id="email" placeholder="메일 아이디">
+                            <input name="email" class="form-control" id="email" placeholder="메일 아이디">
                             <input type="emailAdr" class="form-control" id="emailAdr" placeholder="@메일 주소">
                              <select class="form-select" aria-label="Default select example" id="emailOption" onchange="handleEmailOption()">
                                 <option value="input">직접입력</option>
@@ -56,13 +56,13 @@
                      <tr>
                         <th><label for="phoneNumber" class="form-label">PHONE</label></th>
                         <td><div class="mb-3">
-                            <input type="phoneNumber" class="form-control" id="phoneNumber" placeholder="-빼고 입력해주세요">
+                            <input name="phoneNumber" class="form-control" id="phoneNumber" placeholder="-빼고 입력해주세요">
                         </div></td>
                     </tr>
                     <tr>
                         <th><label for="homeAddress" class="form-label">ADDRESS</label></th>
                         <td><div class="mb-3">
-                            <input type="homeAddress" class="form-control" id="homeAddress" placeholder="주소를 입력해주세요">
+                            <input name="homeAddress" class="form-control" id="homeAddress" placeholder="주소를 입력해주세요">
                         </div></td>
                     </tr>
                </table>
