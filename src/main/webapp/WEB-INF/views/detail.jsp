@@ -98,6 +98,13 @@
                 <button type="button" onclick="location.href='movieSeats?movieId=${movie.movieId}'">좌석선택하기</button>
             </div>
             <!---movie-ticket-book-->
+
+            <div>
+                영화 스틸 컷
+            </div>
+            <div>
+               영화 평점 및 리뷰
+            </div>
     </section>
     <jsp:include page="layouts/footer.jsp" />
 </body>
