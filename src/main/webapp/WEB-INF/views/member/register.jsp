@@ -17,7 +17,7 @@
     </header>
     <section>
         <div class="register">
-           <h3> < 회원가입 > </h3>
+           <h4>회원가입</h4>
            <form action="register" method="post">
                <table>
                     <tr>
