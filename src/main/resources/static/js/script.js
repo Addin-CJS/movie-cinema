@@ -299,3 +299,27 @@ allSeatCont.each(function() {
    }
  });
 
+// 회원가입
+ function handleEmailOption() {
+                var emailOption = document.getElementById("emailOption");
+                var emailInput = document.getElementById("emailAdr");
+
+                if (emailOption.value === "input") {
+                    emailInput.style.display = "block";
+                } else {
+                    emailInput.style.display = "none";
+                }
+            }
+
+        const emailOptions = document.getElementById('emailOption');
+        const emailInput = document.getElementById('emailAdr');
+
+        emailOption.addEventListener('change', function() {
+            if (emailOption.value === 'input') {
+                emailInput.value = ''; // 직접 입력을 선택하면 입력 필드를 비웁니다.
+                emailInput.disabled = false; // 입력 필드 활성화
+            } else {
+                emailInput.value = emailOption.value;
+                emailInput.disabled = true; // 입력 필드 비활성화
+            }
+        });

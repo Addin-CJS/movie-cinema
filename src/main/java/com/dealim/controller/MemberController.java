@@ -9,4 +9,9 @@ public class MemberController {
     public String login() {
         return "member/login";
     }
+
+    @GetMapping("/member/register")
+    public String register() {
+        return "member/register";
+    }
 }

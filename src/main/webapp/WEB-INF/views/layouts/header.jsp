@@ -19,7 +19,7 @@
 
         <ul id="menu-box">
             <div class="marker"></div>
-            <li>메인</li>
+            <li onclick="location.href='/show'">메인</li>
             <li>영화</li>
             <li>예매</li>
             <!--
