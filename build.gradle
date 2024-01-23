@@ -35,10 +35,10 @@ dependencies {
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
-    // Log4j2 의존성 추가
-//    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
-//    implementation 'org.apache.logging.log4j:log4j-api'
-//    implementation 'org.apache.logging.log4j:log4j-core'
+    // 영화 DB API
+    implementation 'uk.co.conoregan:themoviedbapi:1.15.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.6'
+    implementation 'org.json:json:20231013'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     compileOnly 'org.projectlombok:lombok'

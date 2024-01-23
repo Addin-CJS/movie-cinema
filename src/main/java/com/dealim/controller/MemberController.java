@@ -22,8 +22,6 @@ public class MemberController {
         return "member/register";
     }
 
-
-
     @PostMapping("/member/register")
     public  String insertMember(Member member){
         System.out.println("member");
@@ -32,7 +30,4 @@ public class MemberController {
 
         return "redirect:member/login";
     }
-
-
 }
-
