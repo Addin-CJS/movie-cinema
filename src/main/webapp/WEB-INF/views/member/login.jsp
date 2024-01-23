@@ -8,8 +8,6 @@
     <script src="../js/script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -33,8 +31,8 @@
                         </div></td>
                     </tr>
                </table>
-               <button type="button" class="btn btn-light" onclick="location.href='/member/register'">회원가입</button>&emsp;
-               <button type="submit" class="btn btn-light">로그인</button>
+               <button type="button" onclick="location.href='/member/register'">회원가입</button>&emsp;
+               <button type="submit">로그인</button>
            </form>
         </div>
     </section>

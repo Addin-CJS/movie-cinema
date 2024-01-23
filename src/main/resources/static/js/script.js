@@ -323,3 +323,11 @@ allSeatCont.each(function() {
                 emailInput.disabled = true;
             }
         });
+
+          function findAddr() {
+                    new daum.Postcode({
+                        oncomplete: function(data) {
+                            $("#kakaoAddress").val(data.address);
+                        }
+                    }).open();
+                }

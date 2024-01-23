@@ -1,7 +1,9 @@
 package com.dealim.controller;
 
 import com.dealim.domain.Movie;
+import com.dealim.domain.Review;
 import com.dealim.service.MovieService;
+import com.dealim.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,9 @@ public class MovieController {
 
     @Autowired
     MovieService movieService;
+
+    @Autowired
+    ReviewService reviewService;
 
     @RequestMapping("/show")
     public String index(Model model) {
@@ -36,6 +41,9 @@ public class MovieController {
            } else {
                model.addAttribute("movie", null);
            }
+
+           List<Review> reviewList = reviewService.selctReviewByMovieNo(movieId);
+           model.addAttribute("reviewList", reviewList);
         return "detail";
     }
 

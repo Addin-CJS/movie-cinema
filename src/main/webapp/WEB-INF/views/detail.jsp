@@ -8,6 +8,9 @@
     <script src="js/script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 </head>
 <body>
     <header>
@@ -33,8 +36,7 @@
                 </div>
 
                 <div class="movie-btns">
-                  <button><i class="fa fa-play"></i> &nbsp; Watch trailer</button>
-                  <button class="read-more"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i>&nbsp; Read more</button>
+                  <button> ▶  예고편 보기</button>
                 </div>
 
               </div>
@@ -98,14 +100,61 @@
                 <button type="button" onclick="location.href='movieSeats?movieId=${movie.movieId}'">좌석선택하기</button>
             </div>
             <!---movie-ticket-book-->
+             <div class="slider-wrap">
+                <div class="carousel owl-carousel">
+                    <div class="card card-1">
+                        <p><img src="img/img.png" alt="사진1"></p>
+                    </div>
+                    <div class="card card-2">
+                        <p><img src="img/img_1.png" alt="사진2"></p>
+                    </div>
+                    <div class="card card-3">
+                        <p><img src="img/img_2.png" alt="사진3"></p>
+                    </div>
+                    <div class="card card-4">
+                        <p><img src="img/img_3.png" alt="사진4"></p>
+                    </div>
 
-            <div>
-                영화 스틸 컷222
+                </div>
             </div>
-            <div>
-               영화 평점 및 리뷰
+            <div class="review">
+               <table class="reviewList">
+                   <tr id="reviewTitle">
+                       <th>댓글작성</th>
+                       <th><textarea cols="100" rows="4" id="reviewContent"></textarea></th>
+                       <th><button onclick="insertReview();">평점 및 리뷰작성</button></th>
+                   </tr>
+
+                  <c:forEach var="reviews" items="${reviewList}">
+                    <tr id="reviewContent">
+                        <td>${reviews.reviewWriter}</td>
+                        <td>${reviews.reviewContent}</td>
+                        <td>${reviews.createReviewDate}</td>
+                    </tr>
+                 </c:forEach>
+               </table>
             </div>
     </section>
+        <script>
+            function insertReview() {
+                $.ajax({
+                    url: "reviewInsert",
+                    data: {
+                        movieNo:${movie.movieId},
+                        <!-- reviewWriter:"${loginUser.user_id}", -->
+                        reviewContent:$("#reviewContent").val()
+                    },
+                    type: "post",
+                    success:function(result) {
+                        location.reload();
+                    },
+                    error:function(){
+                        console.log("댓글 등록 ajax통신 실패");
+                    }
+                })
+            }
+
+    	</script>
     <jsp:include page="layouts/footer.jsp" />
 </body>
 </html>
