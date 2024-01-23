@@ -24,8 +24,8 @@ public class Member {
     private String phoneNumber;
     private String homeAddress;
     @CreatedDate
-    private LocalDateTime createAt;
     @LastModifiedDate
+    private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private LocalDateTime withdrawnAt;
     private Character isWithdrawn;

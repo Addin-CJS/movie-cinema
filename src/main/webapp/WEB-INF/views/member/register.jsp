@@ -18,12 +18,16 @@
     <section>
         <div class="register">
            <h4>회원가입</h4>
-           <form action="/member/register" method="post">
+
+           <form action="register" method="post" id="enrollForm">
+
+
                <table>
                     <tr>
                         <th><label for="username" class="form-label">ID</label></th>
                         <td><div class="mb-3">
                             <input type="text" name="username" class="form-control" id="username" placeholder="영문 6글자 이상">
+                            <div id="checkResult" style="font-size: 0.8em; display: none;"></div>
                         </div></td>
                     </tr>
                     <tr>
@@ -67,12 +71,50 @@
                         </div></td>
                     </tr>
                </table>
-               <button type="button" class="btn btn-light">회원가입</button>&emsp;
+               <button type="submit" class="btn btn-light">회원가입</button>&emsp;
                <button type="reset" class="btn btn-light">초기화</button>
            </form>
         </div>
     </section>
     <jsp:include page="../layouts/footer.jsp" />
+
+
+    <script>
+        $(()=>{
+            const $idInput = $("#username");
+            $idInput.keyup(function() {
+                if($idInput.val().length >= 5) {
+                    $.ajax({
+                        url: "idCheck",
+                        data: {id: $idInput.val()},
+                        success:function(result) {
+                            console.log(result);
+                            if(result) {
+                                $("#checkResult").show();
+                                $("#checkResult").css("color", "red").text("이미 사용중인 ID입니다.");
+                                $("#enrollForm :submit").attr("disabled", true);
+                            } else {
+                                $("#checkResult").show();
+                                $("#checkResult").css("color", "green").text("사용가능한 ID입니다.");
+                                $("#enrollForm :submit").attr("disabled", false);
+                            }
+                        },
+                        error:function(){
+                            console.log("아이디 중복체크용 ajax통신 실패");
+                        }
+                    })
+                } else {
+                    $("#checkResult").hide();
+                    $("#enrollForm :submit").attr("disabled", true);
+                }
+            })
+        })
+    </script>
+
+
+
+
+
 </body>
 </html>
 

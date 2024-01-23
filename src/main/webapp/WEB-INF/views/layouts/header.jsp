@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
     <title>Title</title>
@@ -22,6 +23,24 @@
             <li onclick="location.href='/show'">메인</li>
             <li>영화</li>
             <li>예매</li>
+
+            <%-- 로그인 후 --%>
+            <c:if test="${not empty loginUser}">
+                <div align="right">
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <h3>${loginUser.name}님 환영합니다.</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="">마이페이지</a> /</td>
+                            <td><a href="<c:url value='/logout' />">로그아웃</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </c:if>
+
             <!--
             <li><span>ooo님<img
                     src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg"> <i
