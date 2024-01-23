@@ -21,5 +21,5 @@ public class Movie {
     private LocalDateTime modifiedAt;
     private LocalDateTime withdrawnAt;
     private Character isWithdrawn;
-    private byte[] mvImg;
+    private String mvImg;
 }

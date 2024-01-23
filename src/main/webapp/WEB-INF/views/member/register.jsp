@@ -6,10 +6,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="../js/script.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -21,28 +20,28 @@
            <form action="register" method="post">
                <table>
                     <tr>
-                        <th><label for="username" class="form-label">ID</label></th>
+                        <th><label for="username">ID</label></th>
                         <td><div class="mb-3">
-                            <input type="text" name="username" class="form-control" id="username" placeholder="영문 6글자 이상">
+                            <input type="text" name="username" id="username" placeholder="영문 6글자 이상">
                         </div></td>
                     </tr>
                     <tr>
-                        <th><label for="name" class="form-label">NAME</label></th>
+                        <th><label for="name">NAME</label></th>
                         <td><div class="mb-3">
-                            <input type="text" name="name" class="form-control" id="name" placeholder="이름 입력">
+                            <input type="text" name="name" id="name" placeholder="이름 입력">
                         </div></td>
                     </tr>
                     <tr>
-                        <th><label for="password" class="form-label">PW</label></th>
+                        <th><label for="password">PW</label></th>
                         <td><div class="mb-3">
-                            <input type="password" name="password" class="form-control" id="password" placeholder="영문, 숫자 포함 8글자 이상">
+                            <input type="password" name="password" id="password" placeholder="영문, 숫자 포함 8글자 이상">
                         </div></td>
                     </tr>
                     <tr>
-                        <th><label for="email" class="form-label">EMAIL</label></th>
+                        <th><label for="email">EMAIL</label></th>
                         <td>
-                            <div class="mb-3 d-flex">
-                                <input name="email" class="form-control" id="email" placeholder="메일 주소">
+                            <div>
+                                <input name="email" id="email" placeholder="메일 주소">
                                 <select class="form-select" aria-label="Default select example" id="emailOption" onchange="handleEmailOption()">
                                     <option value="input">직접입력</option>
                                     <option value="@naver.com">@naver.com</option>
@@ -55,24 +54,25 @@
                     </tr>
 
                      <tr>
-                        <th><label for="phoneNumber" class="form-label">PHONE</label></th>
+                        <th><label for="phoneNumber">PHONE</label></th>
                         <td><div class="mb-3">
-                            <input name="phoneNumber" class="form-control" id="phoneNumber" placeholder="-빼고 입력해주세요">
+                            <input name="phoneNumber" id="phoneNumber" placeholder="-빼고 입력해주세요">
                         </div></td>
                     </tr>
                     <tr>
-                        <th><label for="homeAddress" class="form-label">ADDRESS</label></th>
-                        <td><div class="mb-3">
-                            <input name="homeAddress" class="form-control" id="homeAddress" placeholder="주소를 입력해주세요">
-                        </div></td>
+                        <th><label for="kakaoAddress">ADDRESS</label></th>
+                        <td>
+                            <input type="text" name="homeAddress"  id="kakaoAddress" readonly>
+                            <input type="button" value="주소 검색" onclick="findAddr();">
+                        </td>
                     </tr>
                </table>
-               <button type="submit" class="btn btn-light">회원가입</button>&emsp;
-               <button type="reset" class="btn btn-light">초기화</button>
+               <button type="submit">회원가입</button>&emsp;
+               <button type="reset">초기화</button>
            </form>
         </div>
     </section>
-    <jsp:include page="../layouts/footer.jsp" />
+       <jsp:include page="../layouts/footer.jsp" />
 </body>
 </html>
 
