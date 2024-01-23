@@ -21,6 +21,11 @@ public class MemberService {
         return insertMember;
     }
 
+<<<<<<< HEAD
+=======
+    public Optional<Member> selectMemberById(Member member) {
+        Optional<Member> loginUser = memberRepository.findByUsername(member.getUsername());
+>>>>>>> 00d9431d25a797d81840357dcf209d5a35570791
 
     public boolean idCheck(String username) {
 

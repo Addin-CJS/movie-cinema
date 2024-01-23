@@ -212,16 +212,8 @@ section .popular-movie-slider .popular-movie-slider-content .movie-btns button .
 }
 
 
-section .popular-movie-slider .popular-movie-slider-content .movie-btns .read-more{
-    background:none;
-}
-
-section .popular-movie-slider .popular-movie-slider-content .movie-btns .read-more:hover{
-    background:#000;
-}
-
 section .popular-movie-slider .popular-movie-slider-content .movie-btns button:hover{
-    background:#000;
+    background:white;
 }
 
 
@@ -634,12 +626,6 @@ footer .socail-box .fa:hover{
       gap:30px;
       margin:25px 0;
     }
-
-    section .popular-movie-slider .popular-movie-slider-content .movie-info .fa-circle{
-      color:#DB0000;
-      font-size:.85em;
-    }
-
     section .popular-movie-slider .popular-movie-slider-content .movie-info .fa span{
       font-family: 'Roboto', sans-serif;
       color:#fff;
@@ -675,16 +661,9 @@ footer .socail-box .fa:hover{
     }
 
 
-    section .popular-movie-slider .popular-movie-slider-content .movie-btns .read-more{
-      background:none;
-    }
-
-    section .popular-movie-slider .popular-movie-slider-content .movie-btns .read-more:hover{
-      background:#000;
-    }
-
     section .popular-movie-slider .popular-movie-slider-content .movie-btns button:hover{
-      background:#000;
+      background:white;
+      color:black;
     }
 
 
@@ -1387,6 +1366,14 @@ section .login td{
 
 section .login button {
     margin-top: 10px;
+    outline: none;
+    height: 50px;
+    background: #DB0000;
+    color: #fff;
+    border-radius: 50px;
+    padding: 10px 50px;
+    cursor: pointer;
+    cursor: pointer;
 }
 /* 회원가입 */
 
@@ -1409,9 +1396,54 @@ section .register th{
 
 section .register td{
     color: white;
-    width: 350px;
+    width: 500px;
 }
 
 section .register button {
     margin-top: 10px;
+    outline: none;
+    height: 50px;
+    background: #DB0000;
+    color: #fff;
+    border-radius: 50px;
+    padding: 10px 50px;
+    cursor: pointer;
+
 }
+
+/* 리뷰 */
+    .reviewList {
+      background-color: black;
+        color: white;
+        text-align: center;
+        padding: 70px;
+        width:100%;
+}
+
+   .reviewList #reviewTitle {
+       padding-bottom: 10px;
+   }
+
+   .reviewList textarea {
+        border-radius: 10px;
+   }
+
+
+   .reviewList button {
+            /* border: none; */
+            outline: none;
+            height: 50px;
+            background: #DB0000;
+            color: #fff;
+            border-radius: 50px;
+            padding: 10px 50px;
+            cursor: pointer;
+   }
+
+   section .slider-wrap {
+        background-color: black;
+   }
+
+   section .slider-wrap img {
+    height : 500px;
+   }
