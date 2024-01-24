@@ -19,6 +19,7 @@ a{
 body {
     width: 100%;
     overflow-x: hidden;
+    background-color:#111;
 }
 
 body,a{
@@ -91,14 +92,12 @@ header nav .fa:hover {
     background: #fff;
     color: #000;
     transition: background .5s;
-
 }
 
 .navBlack {
     background: #000;
     color: #fff;
     transition: background .5s;
-
 }
 
 header nav .logo a{
@@ -446,6 +445,8 @@ section .pagination {
     width: 100%;
     text-align: center;
     background: #111;
+    margin-top:50px;
+    margin-bottom:50px;
 }
 
 section .pagination a {

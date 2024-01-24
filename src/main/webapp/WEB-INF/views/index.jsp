@@ -70,13 +70,6 @@
           <a href="?page=${movieList.getTotalPages()-1}">마지막으로</a>
      </div>
      <!---- pagination ---->
-
-        <div class="show">
-            <div class="show-bar">
-                <div class="bar"></div>
-        </div>
-        <button>Show more</button>
-    </div>
 </section>
 <jsp:include page="layouts/footer.jsp"/>
 
