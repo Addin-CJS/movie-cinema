@@ -17,9 +17,7 @@ public class ReviewController {
     @ResponseBody
     public String insertReview(Review review) {
 
-
         reviewService.reviewInsert(review);
         return "review";
     }
-
 }

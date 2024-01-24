@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="layouts/header.jsp"/>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<jsp:include page="layouts/header.jsp"/>
+
 <section>
     <div class="popular-movie-slider">
-
         <img src="https://imageio.forbes.com/blogs-images/scottmendelson/files/2014/10/2v00kg8.jpg?format=jpg&width=1200"
              class="poster">
-
         <div class="popular-movie-slider-content">
             <p class="release">2017</p>
             <h2 class="movie-name">${movie.mvTitle}</h2>
@@ -24,9 +24,7 @@
             <div class="movie-btns">
                 <button> ▶ 예고편 보기</button>
             </div>
-
         </div>
-
     </div>
     <div class="movie-ticket-book">
         <div class="choose-date">
@@ -113,18 +111,14 @@
                 </th>
             </tr>
 
-
             <c:forEach var="review" items="${reviewList}">
                 <tr id="reviewItem">
                     <td>${review.reviewWriter}</td>
                     <td>${review.reviewContent}</td>
-                    <td>${review.createReviewDate}</td>
+                    <td>${fn:substringBefore(review.createReviewDate.toString(), 'T')}</td>
                 </tr>
             </c:forEach>
         </table>
-
-
-
     </div>
 </section>
 <script>
@@ -145,6 +139,5 @@
             }
         })
     }
-
 </script>
 <jsp:include page="layouts/footer.jsp"/>
