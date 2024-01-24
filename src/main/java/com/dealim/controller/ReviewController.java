@@ -30,6 +30,7 @@ public class ReviewController {
     @ResponseBody
     public String getReviewsByMovieId(@RequestParam("movieNo") Long movieId, Model model) {
         List<Review> reviews = reviewService.selectReviewByMovieNo(movieId);
+
         model.addAttribute("reviews", reviews);
 
         System.out.println(reviews);

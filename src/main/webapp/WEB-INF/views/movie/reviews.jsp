@@ -46,13 +46,12 @@
            $.ajax({
                url: "reviewList", // 리뷰 목록을 불러오는 서버의 URL
                data: {
-                    movieNo: ${movie.movieId},
-                    reviewContent: $("#reviewContent").val()
+                    movieNo: ${movie.movieId}
                },
                type: "get",
                success: function (response) {
                    // 리뷰 목록을 페이지에 표시하는 로직
-                    $('#reviewList').html(response);
+                    $('#reviews').html(response);
                },
                error: function () {
                    console.log("리뷰 목록 불러오기 실패");
