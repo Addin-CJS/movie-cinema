@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="layouts/header.jsp"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <section>
     <div class="popular-movie-slider">
 
@@ -105,21 +106,25 @@
     <div class="review">
         <table class="reviewList">
             <tr id="reviewTitle">
-                <th>댓글작성</th>
+                <th>영화후기</th>
                 <th><textarea cols="100" rows="4" id="reviewContent"></textarea></th>
                 <th>
                     <button onclick="insertReview();">평점 및 리뷰작성</button>
                 </th>
             </tr>
 
-            <c:forEach var="reviews" items="${reviewList}">
-                <tr id="reviewContent">
-                    <td>${reviews.reviewWriter}</td>
-                    <td>${reviews.reviewContent}</td>
-                    <td>${reviews.createReviewDate}</td>
+
+            <c:forEach var="review" items="${reviewList}">
+                <tr id="reviewItem">
+                    <td>${review.reviewWriter}</td>
+                    <td>${review.reviewContent}</td>
+                    <td>${review.createReviewDate}</td>
                 </tr>
             </c:forEach>
         </table>
+
+
+
     </div>
 </section>
 <script>

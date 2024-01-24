@@ -63,7 +63,8 @@ public class MovieController {
            }
 
            List<Review> reviewList = reviewService.selctReviewByMovieNo(movieId);
-           model.addAttribute("reviewList", reviewList);
+
+        model.addAttribute("reviewList", reviewList);
         return "detail";
     }
 
