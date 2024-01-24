@@ -59,7 +59,7 @@
           <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
               <a href="${pageContext.request.contextPath}/?page=${pageNum}" ${pageNum == nowPage ? 'class="active"' : ''}>${pageNum}</a>
           </c:forEach>
-          <a href="${pageContext.request.contextPath}/?page=${nowPage + 1}" ${nowPage >= movieList.getTotalPages() ? 'style="display:none;"' : ''}>다음</a>
+          <a href="${pageContext.request.contextPath}/?page=${nowPage + 1}" ${nowPage >= movieList.getTotalPages()-1 ? 'style="display:none;"' : ''}>다음</a>
           <a href="?page=${movieList.getTotalPages()-1}">마지막으로</a>
      </div>
      <!---- pagination ---->

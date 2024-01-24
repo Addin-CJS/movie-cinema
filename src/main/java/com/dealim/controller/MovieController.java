@@ -31,9 +31,6 @@ public class MovieController {
     @Autowired
     MovieService movieService;
 
-    @Autowired
-    ReviewService reviewService;
-
     @RequestMapping("/")
     public String index(Model model,
                         @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
@@ -70,12 +67,6 @@ public class MovieController {
            } else {
                model.addAttribute("movie", null);
            }
-
-           List<Review> reviewList = reviewService.selctReviewByMovieNo(movieId);
-
-        model.addAttribute("reviewList", reviewList);
-
-
 
         return "detail";
     }
