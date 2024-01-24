@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<html>
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -11,9 +11,10 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<header>
     <nav>
         <p class="logo">
-            영화<span>예매<span>
+            영화<span>예매</span>
         </p>
 
         <i class="fa fa-bars" id="menu"></i>
@@ -49,3 +50,4 @@
             <li onclick="location.href='/member/login'">로그인</li>
         </ul>
     </nav>
+</header>

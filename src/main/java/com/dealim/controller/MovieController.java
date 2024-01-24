@@ -23,7 +23,7 @@ public class MovieController {
     @Autowired
     ReviewService reviewService;
 
-    @RequestMapping("/show")
+    @RequestMapping("/")
     public String index(Model model) {
         List<Movie> movie = movieService.selectNowMovie();
 
