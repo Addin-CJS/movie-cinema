@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -67,6 +68,30 @@ public class MovieController {
            } else {
                model.addAttribute("movie", null);
            }
+
+        Float popularityValue = movie.get().getMvPopularity();
+        Float minPopularity = 0.0f;
+        Float maxPopularity = 10.0f;
+        Float minRating = 0.0f;
+        Float maxRating = 5.0f;
+
+        if (popularityValue == null) {
+            popularityValue = 0.0f;
+        }
+
+        Float rating = ((popularityValue - minPopularity) / (maxPopularity - minPopularity)) * (maxRating - minRating) + minRating;
+
+
+        DecimalFormat df = new DecimalFormat("0.0");
+        String formattedRating = df.format(rating);
+
+
+        String finalRating = formattedRating + "/100";
+
+
+        model.addAttribute("movieRating", finalRating);
+
+
 
         return "detail";
     }
