@@ -5,10 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.cglib.core.Local;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -34,4 +36,9 @@ public class Movie {
     private LocalDateTime withdrawnAt;
     private Character isWithdrawn;
     private String mvImg;
+    private LocalDate mvReleaseDate;
+    private Integer mvRuntime;
+    private Float mvPopularity;
+    private Character isAdult;
+    private String mvVideo;
 }
