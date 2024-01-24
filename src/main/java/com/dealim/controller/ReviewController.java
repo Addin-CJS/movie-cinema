@@ -16,6 +16,8 @@ public class ReviewController {
     @PostMapping("/reviewInsert")
     @ResponseBody
     public String insertReview(Review review) {
+
+
         reviewService.reviewInsert(review);
         return "review";
     }
