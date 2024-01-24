@@ -14,15 +14,15 @@
 <body>
 <header>
     <nav>
-        <p class="logo">
-            영화<span>예매</span>
-        </p>
+        <h1 class="logo">
+            <a href="/">영화<span>예매</span></a>
+        </h1>
 
         <i class="fa fa-bars" id="menu"></i>
 
         <ul id="menu-box">
             <div class="marker"></div>
-            <li onclick="location.href='/show'">메인</li>
+            <li onclick="location.href='/'">메인</li>
             <li>영화</li>
             <li>예매</li>
 
