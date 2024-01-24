@@ -23,41 +23,44 @@
     </div>
     </section>
 
-    <script>
-       function insertReview() {
-           $.ajax({
-               url: "reviewInsert",
-               data: {
-                   movieNo: ${movie.movieId},
-                   reviewContent: $("#reviewContent").val()
-               },
-               type: "post",
-               success: function (result) {
-                   // 리뷰 목록을 업데이트
-                   updateReviewList(${movie.movieId});
-               },
-               error: function () {
-                   console.log("리뷰 등록 ajax통신 실패");
-               }
-           });
-       }
+ <script>
+     var movieId = ${movie.movieId}; // JSP 표현식을 JavaScript 변수에 할당
 
-       function updateReviewList(movieId) {
-           $.ajax({
-               url: "reviewList", // 리뷰 목록을 불러오는 서버의 URL
-               data: {
-                    movieNo: ${movie.movieId}
-               },
-               type: "get",
-               success: function (response) {
-                   // 리뷰 목록을 페이지에 표시하는 로직
-                    $('#reviews').html(response);
-               },
-               error: function () {
-                   console.log("리뷰 목록 불러오기 실패");
-               }
-           });
-       }
-    </script>
+     function insertReview() {
+         $.ajax({
+             url: "reviewInsert",
+             data: {
+                 movieNo: movieId,
+                 reviewContent: $("#reviewContent").val()
+             },
+             type: "post",
+             success: function (result) {
+                 updateReviewList(movieId); // movieId 변수 사용
+             },
+             error: function () {
+                 console.log("리뷰 등록 ajax통신 실패");
+             }
+         });
+     }
+
+     function updateReviewList(movieId) {
+         $.ajax({
+             url: "reviewList",
+             data: { movieId: movieId }, // 파라미터 명 수정
+             type: "get",
+             dataType: "json",
+             success: function (reviews) {
+                 var reviewsHtml = '';
+                 reviews.forEach(function(review) { // 변수 이름 수정
+                     reviewsHtml += '<tr><td>' + review.reviewWriter + '</td><td>' + review.reviewContent + '</td><td>' + review.createReviewDate.substring(0, 10) + '</td></tr>';
+                 });
+                 $('.reviewList tbody').html(reviewsHtml); // 후기 목록 업데이트
+             },
+             error: function() {
+                 console.log("리뷰 목록 불러오기 실패");
+             }
+         });
+     }
+ </script>
 
     <jsp:include page="../layouts/footer.jsp"/>

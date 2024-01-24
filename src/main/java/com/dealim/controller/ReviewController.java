@@ -4,6 +4,7 @@ import com.dealim.domain.Review;
 import com.dealim.service.MovieService;
 import com.dealim.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,12 +29,8 @@ public class ReviewController {
 
     @GetMapping("/reviewList")
     @ResponseBody
-    public String getReviewsByMovieId(@RequestParam("movieNo") Long movieId, Model model) {
+    public ResponseEntity<List<Review>> getReviewsByMovieId(@RequestParam("movieId") Long movieId) {
         List<Review> reviews = reviewService.selectReviewByMovieNo(movieId);
-
-        model.addAttribute("reviews", reviews);
-
-        System.out.println(reviews);
-        return "movie/reviews";
+        return ResponseEntity.ok(reviews);
     }
 }
