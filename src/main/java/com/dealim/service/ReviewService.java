@@ -15,7 +15,8 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
-    public List<Review> selctReviewByMovieNo(Long movieId) {
+    public List<Review> selectReviewByMovieNo(Long movieId) {
+
         return reviewRepository.findAllByMovieNo(movieId);
     }
 }
