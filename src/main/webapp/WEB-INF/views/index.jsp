@@ -29,7 +29,18 @@
                 Coming soon
             </div>
 
+
+
         </div>
+
+                    <div class="search-filters">
+                        <input type="text" placeholder="Search by name...">
+                        <i class="fa fa-search"></i>
+                      </div>
+
+                    <div class="search-bar">
+                      <div class="bar"></div>
+                    </div>
     </div>
     <!----filter-search-box ---->
     <div class="movie-card-section">
@@ -48,18 +59,21 @@
                 </div>
             </div>
         </c:forEach>
-        <div class="pagination">
-            <a href="/show?page=1">처음으로</a>
-            <a href="/show?page=${startPage - pageGroupSize}" ${startPage == 1 ? 'style="display:none;"' : ''}>이전</a>
-            <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
-                <a href="/show?page=${pageNum}" ${pageNum == nowPage ? 'class="active"' : ''}>${pageNum}</a>
-            </c:forEach>
-            <a href="/show?page=${startPage + pageGroupSize}" ${endPage >= movieList.getTotalPages() ? 'style="display:none;"' : ''}>다음</a>
-        </div>
     </div>
-    <div class="show">
-        <div class="show-bar">
-            <div class="bar"></div>
+     <div class="pagination">
+          <a href="${pageContext.request.contextPath}/?page=1">처음으로</a>
+          <a href="${pageContext.request.contextPath}/?page=${nowPage - 1}" ${nowPage <= 1 ? 'style="display:none;"' : ''}>이전</a>
+          <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
+              <a href="${pageContext.request.contextPath}/?page=${pageNum}" ${pageNum == nowPage ? 'class="active"' : ''}>${pageNum}</a>
+          </c:forEach>
+          <a href="${pageContext.request.contextPath}/?page=${nowPage + 1}" ${nowPage >= movieList.getTotalPages() ? 'style="display:none;"' : ''}>다음</a>
+          <a href="?page=${movieList.getTotalPages()-1}">마지막으로</a>
+     </div>
+     <!---- pagination ---->
+
+        <div class="show">
+            <div class="show-bar">
+                <div class="bar"></div>
         </div>
         <button>Show more</button>
     </div>

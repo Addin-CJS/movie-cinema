@@ -6,8 +6,15 @@
     box-sizing: border-box;
     transition: all .2s;
 }
+
 h1,h2,h3,h4,h5,h6{
     font-weight:500;
+
+body{
+    font-family: 'Roboto', sans-serif;
+    overflow:hidden;
+    overflow-y:scroll;
+    background:#111
 }
 ul,li,dl,dt,dd,ol{
     list-style:none;
@@ -388,8 +395,8 @@ section .movie-card-section {
     width: 100%;
     display: grid;
     grid-template-columns:1fr 1fr 1fr 1fr;
-    gap: 18px;
-    padding-top: 50px;
+    gap:18px;
+    padding-top:50px;
 }
 
 
@@ -431,6 +438,32 @@ section .movie-card-section .card .card-content .movie-info .d3 {
     padding: 3px;
     margin-left: 3px;
 }
+
+section .pagination {
+    width: 100%;
+    text-align: center;
+}
+
+section .pagination a {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #DB0000;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+section .pagination a:hover {
+    background-color: #FFA500;
+}
+
+section .pagination .active {
+    background-color: #FFA500;
+    font-weight: bold;
+}
+
 
 
 section .show {
@@ -904,10 +937,6 @@ footer .socail-box .fa:hover {
 
 .leftMainCont {
     width: 100%;
-}
-
-body {
-    background-color: #f1f1f1;
 }
 
 .container .legendContainer {
