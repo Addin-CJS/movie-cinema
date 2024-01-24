@@ -5,6 +5,10 @@ import com.dealim.domain.Review;
 import com.dealim.service.MovieService;
 import com.dealim.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +27,37 @@ public class MovieController {
     @Autowired
     ReviewService reviewService;
 
-    @RequestMapping("/show")
+    /* @RequestMapping("/show")
     public String index(Model model) {
         List<Movie> movie = movieService.selectNowMovie();
 
         model.addAttribute("movies", movie);
+
+        return "index";
+    } */
+
+    @RequestMapping("/show")
+    public String index(Model model,
+                        @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
+                        String searchKeyword) {
+        Page<Movie> mlist = null;
+
+        if(searchKeyword == null) {
+            mlist=movieService.movieList(pageable);
+        }
+        System.out.println(mlist);
+
+        int nowPage = mlist.getPageable().getPageNumber()+1;
+        int pageGroupSize = 5;  // 한 페이지 그룹에서 보여줄 페이지 수
+        int totalPageGroups = (int)Math.ceil((double)mlist.getTotalPages() / pageGroupSize);    // 전체 페이지 그룹 수
+        int currentPageGroup = (nowPage -1) / pageGroupSize;    // 현재 페이지가 속한 페이지 그룹
+        int startPage = currentPageGroup * pageGroupSize + 1; // 현재 페이지
+        int endPage = Math.min(startPage + pageGroupSize - 1, mlist.getTotalPages()); // 현재 페이지 그룹의 마지막 페이지
+
+        model.addAttribute("movieList", mlist);
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
 
         return "index";
     }

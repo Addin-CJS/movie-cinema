@@ -46,16 +46,14 @@
 
         </div>
         <!----filter-search-box ---->
-
-
         <div class="movie-card-section">
-            <c:forEach var="movies" items="${movies}">
+            <c:forEach var="movie" items="${movieList.content}">
                 <div class="card">
                     <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTCXgCV-ZNb3InBCTaLdED58dF6iZJxIvCOBurktiWxXrwGc8DB">
 
                     <div class="card-content">
                         <p class="movie-name">
-                           <a href="/showDetail?movieId=${movies.movieId}"> ${movies.mvTitle}</a>
+                           <a href="/showDetail?movieId=${movie.movieId}"> ${movie.mvTitle}</a>
                         </p>
 
                         <div class="movie-info">
@@ -67,6 +65,17 @@
             </c:forEach>
         </div>
         <!---movie-card--->
+        <div class="pagination">
+            <a href="/show?page=1">처음으로</a>
+            <a href="/show?page=${startPage - pageGroupSize}" ${startPage == 1 ? 'style="display:none;"' : ''}>이전</a>
+            <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
+                <a href="/show?page=${pageNum}" ${pageNum == nowPage ? 'class="active"' : ''}>${pageNum}</a>
+            </c:forEach>
+            <a href="/show?page=${startPage + pageGroupSize}" ${endPage >= movieList.getTotalPages() ? 'style="display:none;"' : ''}>다음</a>
+        </div>
+
+
+        <!-- 페이징 -->
 
         <div class="show">
             <div class="show-bar">
