@@ -69,6 +69,7 @@ public class MovieController {
                model.addAttribute("movie", null);
            }
 
+        //영화 평점 start
         Float popularityValue = movie.get().getMvPopularity();
         Float minPopularity = 0.0f;
         Float maxPopularity = 10.0f;
@@ -78,18 +79,15 @@ public class MovieController {
         if (popularityValue == null) {
             popularityValue = 0.0f;
         }
-
         Float rating = ((popularityValue - minPopularity) / (maxPopularity - minPopularity)) * (maxRating - minRating) + minRating;
-
 
         DecimalFormat df = new DecimalFormat("0.0");
         String formattedRating = df.format(rating);
 
-
         String finalRating = formattedRating + "/100";
 
-
         model.addAttribute("movieRating", finalRating);
+        //영화 평점  end
 
 
 
