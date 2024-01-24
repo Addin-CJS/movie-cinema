@@ -1490,10 +1490,6 @@ section .register button {
     width: 100%;
 }
 
-.reviewList #reviewTitle {
-    padding-bottom: 10px;
-}
-
 .reviewList textarea {
     border-radius: 10px;
 }
