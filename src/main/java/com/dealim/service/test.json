@@ -1,0 +1,60 @@
+{
+  "original_language": "de",
+  "imdb_id": "tt0070299",
+  "video": false,
+  "title": "The Legend of Paul and Paula",
+  "backdrop_path": "/eVXPF4fvlt4g39qyAESvODHbDNJ.jpg",
+  "revenue": 0,
+  "genres": [
+    {
+      "name": "Drama",
+      "id": 18
+    },
+    {
+      "name": "Romance",
+      "id": 10749
+    }
+  ],
+  "popularity": 4.691,
+  "production_countries": [
+    {
+      "iso_3166_1": "XG",
+      "name": "East Germany"
+    }
+  ],
+  "id": 2232,
+  "vote_count": 24,
+  "budget": 0,
+  "overview": "Paul and Paula have had bad experiences with love: Paul is financially well off but has lost all affection for his wife, and Paula leads a troublesome life raising two children on her own. They meet and discover a strong passion for each other. Life seems like a dream when they're together - but their short flights from the burdens of reality are once and again interrupted by Paul's ties to family and career.",
+  "original_title": "Die Legende von Paul und Paula",
+  "runtime": 105,
+  "poster_path": "/7bhyvM6dnKsLZwbfpI4pK78IXJ.jpg",
+  "spoken_languages": [
+    {
+      "name": "Deutsch",
+      "iso_639_1": "de",
+      "english_name": "German"
+    }
+  ],
+  "production_companies": [
+    {
+      "logo_path": "/pVsXRFbYVDe5BhsATCAh1rt5F0k.png",
+      "name": "DEFA",
+      "id": 602,
+      "origin_country": "DE"
+    },
+    {
+      "logo_path": null,
+      "name": "Künstlerische Arbeitsgruppe ''Berlin''",
+      "id": 55767,
+      "origin_country": "XG"
+    }
+  ],
+  "release_date": "1973-03-14",
+  "vote_average": 6,
+  "belongs_to_collection": null,
+  "tagline": "The controversial comedy from behind the iron curtain.",
+  "adult": false,
+  "homepage": "",
+  "status": "Released"
+}

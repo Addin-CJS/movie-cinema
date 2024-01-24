@@ -50,13 +50,13 @@ public class OpenApiService {
                         String overview = jsonObject.getString("overview");
                         Movie movie = Movie.builder()
                                 .mvTitle(movieDb.getTitle())
-                                .mvImg("https://image.tmdb.org/t/p/w500/" + movieDb.getPosterPath())
+                                .mvImg("https://image.tmdb.org/t/p/w500" + movieDb.getPosterPath())
                                 .mvGenre(subbedGenre)
                                 .mvDescription(overview)
                                 .build();
 
-                        movieRepository.save(movie);
-//                        System.out.println(movie);
+//                        movieRepository.save(movie);
+                        System.out.println(movie);
                     }
                 }
 
