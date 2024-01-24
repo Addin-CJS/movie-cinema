@@ -43,6 +43,7 @@
              type: "post",
              success: function (result) {
                  updateReviewList(movieId);
+                 $("#reviewContent").val("");
              },
              error: function () {
                  console.log("리뷰 등록 ajax통신 실패");
