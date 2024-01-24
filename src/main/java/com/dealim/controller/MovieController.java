@@ -31,21 +31,20 @@ public class MovieController {
     public String index(Model model,
                         @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
                         String searchKeyword) {
-        Page<Movie> mlist = null;
+        Page<Movie> movieList = null;
 
         if(searchKeyword == null) {
-            mlist=movieService.movieList(pageable);
+            movieList = movieService.movieList(pageable);
         }
-        System.out.println(mlist);
 
-        int nowPage = mlist.getPageable().getPageNumber()+1;
+        int nowPage = movieList .getPageable().getPageNumber()+1;
         int pageGroupSize = 5;  // 한 페이지 그룹에서 보여줄 페이지 수
-        int totalPageGroups = (int)Math.ceil((double)mlist.getTotalPages() / pageGroupSize);    // 전체 페이지 그룹 수
+        int totalPageGroups = (int)Math.ceil((double)movieList .getTotalPages() / pageGroupSize);    // 전체 페이지 그룹 수
         int currentPageGroup = (nowPage -1) / pageGroupSize;    // 현재 페이지가 속한 페이지 그룹
         int startPage = currentPageGroup * pageGroupSize + 1; // 현재 페이지
-        int endPage = Math.min(startPage + pageGroupSize - 1, mlist.getTotalPages()); // 현재 페이지 그룹의 마지막 페이지
+        int endPage = Math.min(startPage + pageGroupSize - 1, movieList .getTotalPages()); // 현재 페이지 그룹의 마지막 페이지
 
-        model.addAttribute("movieList", mlist);
+        model.addAttribute("movieList", movieList);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
