@@ -3,9 +3,7 @@
 <jsp:include page="layouts/header.jsp"/>
 <section>
     <div class="filter-search-box">
-
         <div class="filters-box">
-
             <div class="all-filters filters">
                 All formats <i class="fa fa-angle-down"></i>
             </div>
@@ -21,19 +19,14 @@
             <div class="category-filters filters">
                 Coming soon
             </div>
-
-
-
         </div>
-
-                    <div class="search-filters">
-                        <input type="text" placeholder="Search by name...">
-                        <i class="fa fa-search"></i>
-                      </div>
-
-                    <div class="search-bar">
-                      <div class="bar"></div>
-                    </div>
+        <div class="search-filters">
+            <input type="text" placeholder="Search by name...">
+            <i class="fa fa-search"></i>
+        </div>
+        <div class="search-bar">
+          <div class="bar"></div>
+        </div>
     </div>
     <!----filter-search-box ---->
     <div class="movie-card-section">
