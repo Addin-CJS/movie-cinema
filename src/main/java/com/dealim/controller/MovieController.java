@@ -27,16 +27,7 @@ public class MovieController {
     @Autowired
     ReviewService reviewService;
 
-    /* @RequestMapping("/show")
-    public String index(Model model) {
-        List<Movie> movie = movieService.selectNowMovie();
-
-        model.addAttribute("movies", movie);
-
-        return "index";
-    } */
-
-    @RequestMapping("/show")
+    @RequestMapping("/")
     public String index(Model model,
                         @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
                         String searchKeyword) {
