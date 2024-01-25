@@ -7,11 +7,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.DecimalFormat;
 import java.util.Optional;
@@ -25,7 +27,7 @@ public class MovieController {
     @RequestMapping("/movieHome")
     public String movieHome(Model model,
                         @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
-                        String searchKeyword) {
+                            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
       Page<Movie> movieList = null;
 
         if(searchKeyword == null) {
@@ -40,10 +42,12 @@ public class MovieController {
         int endPage = Math.min(startPage + pageGroupSize - 1, movieList.getTotalPages()); // 현재 페이지 그룹의 마지막 페이지
 
 
-     model.addAttribute("movieList", movieList);
+        model.addAttribute("movieList", movieList);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+
+
 
         return "movieHome";
     }
@@ -96,21 +100,21 @@ public class MovieController {
         return "movieSeats";
     }
 
-//    @GetMapping("/moviesList")
-//    @ResponseBody
-//    public ResponseEntity<Page<Movie>> getMovies(
-//            @PageableDefault(page = 0, size = 8, sort = "movieId", direction = Sort.Direction.DESC) Pageable pageable,
-//            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
-//
-//        Page<Movie> movieList;
-//        if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
-//            movieList = movieService.findMoviesByKeyword(searchKeyword, pageable);
-//        } else {
-//            movieList = movieService.movieList(pageable);
-//        }
-//
-//        return ResponseEntity.ok(movieList);
-//    }
+    @GetMapping("/moviesList")
+    @ResponseBody
+    public ResponseEntity<Page<Movie>> getMovies(
+            @PageableDefault(page = 0, size = 8, sort = "movieId", direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
+
+        Page<Movie> movieList;
+        if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
+            movieList = movieService.findMoviesByKeyword(searchKeyword, pageable);
+        } else {
+            movieList = movieService.movieList(pageable);
+        }
+
+        return ResponseEntity.ok(movieList);
+    }
 
 
 }
