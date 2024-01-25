@@ -54,10 +54,12 @@ public class ReviewController {
         model.addAttribute("endPage", endPage);
 
         return ResponseEntity.ok(reviewList);
+    }
 
-
-        /*List<Review> reviews = reviewService.selectReviewByMovieNo(movieId);
-
-        return ResponseEntity.ok(reviews);*/
+    @GetMapping("/deleteReview")
+    @ResponseBody
+    public String deleteReview(Long reviewId) {
+        reviewService.deleteReview(reviewId);
+        return "success";
     }
 }

@@ -23,4 +23,8 @@ public class ReviewService {
     public Page<Review> selectReviewListByMovieNo(Long movieId, Pageable pageable) {
         return reviewRepository.findAllByMovieId(movieId, pageable);
     }
+
+    public void deleteReview(Long reviewId) {
+        reviewRepository.deleteById(reviewId);
+    }
 }
