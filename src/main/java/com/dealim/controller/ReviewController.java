@@ -1,8 +1,8 @@
 package com.dealim.controller;
 
 import com.dealim.domain.Review;
-import com.dealim.service.MovieService;
 import com.dealim.service.ReviewService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
-
 @Controller
 public class ReviewController {
     @Autowired
@@ -25,10 +23,13 @@ public class ReviewController {
 
     @PostMapping("/reviewInsert")
     @ResponseBody
-    public String insertReview(Review review) {
+    public String insertReview(Review review, HttpSession session) {
 
+        if(session.getAttribute("loginUser") == null) {
+            return "fail";
+        }
         reviewService.reviewInsert(review);
-        return "review";
+        return "success";
     }
 
     @GetMapping("/reviewList")
