@@ -290,7 +290,7 @@
 
         // 성공 하면 티켓 발행하는 ajax 구현
         $(proceedBtnEl).click(()=>{
-
+            console.log(takenSeats);
         });
 
     });
