@@ -12,7 +12,7 @@
 <script>
     function redirectParent() {
         if (window.opener) {
-            window.opener.location.href = 'http://localhost:8080/';
+            window.opener.location.href = 'http://localhost:8080/movieHome';
         }
     }
 </script>

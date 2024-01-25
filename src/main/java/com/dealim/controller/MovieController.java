@@ -49,7 +49,7 @@ public class MovieController {
 
 
 
-        return "movieHome";
+        return "movie/movieHome";
     }
 
     @GetMapping("/showDetail")
@@ -84,7 +84,7 @@ public class MovieController {
 
 
 
-        return "detail";
+        return "movie/detail";
     }
 
     @GetMapping("/movieSeats")
@@ -97,7 +97,7 @@ public class MovieController {
         } else {
             model.addAttribute("movie", null);
         }
-        return "movieSeats";
+        return "movie/movieSeats";
     }
 
     @GetMapping("/moviesList")
@@ -116,5 +116,9 @@ public class MovieController {
         return ResponseEntity.ok(movieList);
     }
 
+    @GetMapping("/ticketing")
+    public String ticketing () {
+        return "movie/ticketing";
+    }
 
 }

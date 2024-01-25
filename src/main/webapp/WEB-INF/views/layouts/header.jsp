@@ -28,7 +28,7 @@
         <ul id="menu-box">
             <div class="marker"></div>
             <li onclick="location.href='/'">메인</li>
-            <li onclick="location.href='movieHome'">영화</li>
+            <li onclick="location.href='/movieHome'">영화</li>
             <li>예매</li>
             <li onclick="location.href='/member/login'">로그인</li>
         </ul>

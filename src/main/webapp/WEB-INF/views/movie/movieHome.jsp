@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="layouts/header.jsp"/>
+<jsp:include page="../layouts/header.jsp"/>
 <section>
     <div class="filter-search-box">
         <div class="filters-box">
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <jsp:include page="movie/movieList.jsp"/>
+    <jsp:include page="movieList.jsp"/>
 
 
     <div class="pagination">
@@ -50,6 +50,6 @@
 
 
 
-<jsp:include page="layouts/footer.jsp"/>
+<jsp:include page="../layouts/footer.jsp"/>
 
 

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<jsp:include page="layouts/header.jsp"/>
+<jsp:include page="../layouts/header.jsp"/>
 
 <section>
     <div class="popular-movie-slider">
@@ -90,4 +90,4 @@
     <!---movie-ticket-book-->
 
 
-<jsp:include page="movie/reviews.jsp"/>
+<jsp:include page="../movie/reviews.jsp"/>
