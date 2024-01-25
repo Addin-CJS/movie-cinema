@@ -1,15 +1,12 @@
 package com.dealim.controller;
 
 import com.dealim.domain.Movie;
-import com.dealim.domain.Review;
 import com.dealim.service.MovieService;
-import com.dealim.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -32,14 +22,14 @@ public class MovieController {
     @Autowired
     MovieService movieService;
 
-    @RequestMapping("/")
-    public String index(Model model,
+    @RequestMapping("/movieHome")
+    public String movieHome(Model model,
                         @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
                         String searchKeyword) {
-        Page<Movie> movieList = null;
+      Page<Movie> movieList = null;
 
         if(searchKeyword == null) {
-            movieList = movieService.movieList(pageable);
+          movieList = movieService.movieList(pageable);
         }
 
         int nowPage = movieList.getPageable().getPageNumber();
@@ -51,12 +41,12 @@ public class MovieController {
 
         System.out.println(endPage);
 
-        model.addAttribute("movieList", movieList);
+     model.addAttribute("movieList", movieList);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
 
-        return "index";
+        return "movieHome";
     }
 
     @GetMapping("/showDetail")
@@ -106,5 +96,22 @@ public class MovieController {
         }
         return "movieSeats";
     }
+
+//    @GetMapping("/moviesList")
+//    @ResponseBody
+//    public ResponseEntity<Page<Movie>> getMovies(
+//            @PageableDefault(page = 0, size = 8, sort = "movieId", direction = Sort.Direction.DESC) Pageable pageable,
+//            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
+//
+//        Page<Movie> movieList;
+//        if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
+//            movieList = movieService.findMoviesByKeyword(searchKeyword, pageable);
+//        } else {
+//            movieList = movieService.movieList(pageable);
+//        }
+//
+//        return ResponseEntity.ok(movieList);
+//    }
+
 
 }

@@ -396,6 +396,21 @@ section .filter-search-box .search-filters input {
 
 }
 
+#search-icon {
+    cursor: pointer;
+}
+
+
+#search-icon:hover {
+    color: #007bff;
+}
+
+
+
+
+
+
+
 
 section .movie-card-section {
     background: #111;
