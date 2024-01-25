@@ -29,6 +29,7 @@
 
  <script>
        var movieId = ${movie.movieId};
+       var loginUsername = "<c:out value='${loginUser.username}'/>";
 
       $(document).ready(function() {
              updateReviewList(movieId);
@@ -39,6 +40,7 @@
              url: "reviewInsert",
              data: {
                  movieNo: movieId,
+                 reviewWriter: loginUsername,
                  reviewContent: $("#reviewContent").val()
              },
              type: "post",

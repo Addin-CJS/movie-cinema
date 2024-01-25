@@ -359,3 +359,4 @@ function handleEmailOption() {
             $("#emailAddress").val(emailOption.replace("@", "")).attr("disabled", true);
         }
     }
+
