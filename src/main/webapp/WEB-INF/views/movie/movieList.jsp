@@ -100,4 +100,45 @@
 <%--    }--%>
 <%--</script>--%>
 
+<script>
+    $(document).ready(function() {
+        // 검색 버튼 클릭 이벤트
+        $("#search-icon").click(function() {
+            var searchKeyword = $("#search-input").val(); // 검색어 입력값 가져오기
+            fetchMovies(searchKeyword); // 검색어를 인자로 넘겨 영화 목록 가져오기
+        });
+    });
+
+    function fetchMovies(searchKeyword) {
+        $.ajax({
+            url: 'moviesList',
+            type: 'GET',
+            data: { searchKeyword: searchKeyword },
+            dataType: 'json',
+            success: function(data) {
+                console.log("통신성공")
+                searchMovieList(data); // 영화 목록 업데이트
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+
+    function searchMovieList(data) {
+        var movieListSection = $('.movie-card-section').empty();
+
+        data.content.forEach(function(movie) {
+            // 각 영화 정보에 대한 card 요소 생성 및 추가
+            var cardHtml = '<div class="card">' +
+                '<img src="' + movie.mvImg + '">' +
+                '<div class="card-content">' +
+                '<p class="movie-name">' +
+                '<a href="/showDetail?movieId=' + movie.movieId + '">' + movie.mvTitle + '</a>' +
+                '</p></div></div>';
+
+            movieListSection.append(cardHtml);
+        });
+    }
+</script>
 

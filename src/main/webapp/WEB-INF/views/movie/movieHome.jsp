@@ -20,12 +20,12 @@
                 Coming soon
             </div>
         </div>
-        <form action="searchMovie" method="get">
+
             <div class="search-filters">
-                <input type="text" name="movieTitle" placeholder="Search by name...">
+                <input type="text" id="search-input" name="movieTitle" placeholder="Search by name...">
                 <i class="fa fa-search" id="search-icon"></i>
             </div>
-        </form>
+
 
 
         <div class="search-bar">
