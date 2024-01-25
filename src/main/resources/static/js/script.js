@@ -323,10 +323,3 @@ emailOption.addEventListener('change', function () {
     }
 });
 
-function findAddr() {
-    new daum.Postcode({
-        oncomplete: function (data) {
-            $("#kakaoAddress").val(data.address);
-        }
-    }).open();
-}
