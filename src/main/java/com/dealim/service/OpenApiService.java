@@ -4,7 +4,6 @@ import com.dealim.domain.Movie;
 import com.dealim.repository.MovieRepository;
 import info.movito.themoviedbapi.TmdbApi;
 import info.movito.themoviedbapi.TmdbMovies;
-import info.movito.themoviedbapi.model.Artwork;
 import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
 import okhttp3.OkHttpClient;
@@ -13,7 +12,6 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
