@@ -5,10 +5,11 @@
 
 <section>
     <div class="popular-movie-slider">
-        <img src="https://imageio.forbes.com/blogs-images/scottmendelson/files/2014/10/2v00kg8.jpg?format=jpg&width=1200"
-             class="poster">
+
+        <img src="${movie.mvImg}" alt="영화 이미지"  class="poster">
+
         <div class="popular-movie-slider-content">
-            <p class="release">2017</p>
+            <p class="release">${movie.mvReleaseDate}</p>
             <h2 class="movie-name">${movie.mvTitle}</h2>
             <ul class="category">
                 <p>${movie.mvGenre}</p>
@@ -16,14 +17,17 @@
             <p class="desc">${movie.mvDescription}</p>
 
             <div class="movie-info">
-                <i class="fa fa-clock-o"> &nbsp;&nbsp;&nbsp;<span>164 min.</span></i>
+                <i class="fa fa-clock-o"> &nbsp;&nbsp;&nbsp;<span>${movie.mvRuntime}min</span></i>
                 <i class="fa fa-volume-up"> &nbsp;&nbsp;&nbsp;<span>Subtitles</span></i>
-                <i class="fa fa-circle"> &nbsp;&nbsp;&nbsp;<span>Imdb: <b>9.1/10</b></span></i>
+                <i class="fa fa-circle"> &nbsp;&nbsp;&nbsp;<span>Imdb: <b>${movieRating}</b></span></i>
             </div>
 
+
             <div class="movie-btns">
-                <button> ▶ 예고편 보기</button>
+                <button onclick="window.open('${movie.mvVideo}', '_blank');">▶ 예고편 보기</button>
             </div>
+
+
         </div>
     </div>
     <div class="movie-ticket-book">
