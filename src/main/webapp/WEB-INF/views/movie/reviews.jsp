@@ -36,6 +36,12 @@
          });
 
      function insertReview() {
+        var reviewContent =  $("#reviewContent").val();
+        if (!reviewContent.trim()) {
+                alert('리뷰 내용 작성은 필수입니다.');
+                $("#reviewContent").focus();
+                return;
+            }
          $.ajax({
              url: "reviewInsert",
              data: {
@@ -45,8 +51,16 @@
              },
              type: "post",
              success: function (result) {
-                 updateReviewList(movieId);
-                 $("#reviewContent").val("");
+                if(result === "fail") {
+                    const yn = confirm('로그인 후에 리뷰 작성 가능합니다. 로그인 창으로 이동할까요 ?');
+                        if(yn) {
+                                returnUrl = '/showDetail?movieId=${movie.movieId}'
+                                location.href='/member/login?returnUrl=' + returnUrl;
+                               }
+                } else {
+                     updateReviewList(movieId);
+                     $("#reviewContent").val("");
+                }
              },
              error: function () {
                  console.log("리뷰 등록 ajax통신 실패");
