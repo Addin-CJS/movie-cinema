@@ -39,7 +39,6 @@ public class MovieController {
         int startPage = currentPageGroup * pageGroupSize + 1; // 현재 페이지
         int endPage = Math.min(startPage + pageGroupSize - 1, movieList.getTotalPages()); // 현재 페이지 그룹의 마지막 페이지
 
-        System.out.println(endPage);
 
      model.addAttribute("movieList", movieList);
         model.addAttribute("nowPage", nowPage);

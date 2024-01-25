@@ -2,10 +2,10 @@ package com.dealim.controller;
 
 import com.dealim.domain.Member;
 import com.dealim.service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,12 +27,12 @@ PasswordEncoder pEncoder;
     }
 
     @PostMapping("/member/login")
-    public String login(Member member, Model model) {
-        Member loginUser = memberService.selectMemberById(member).get();
+    public String login(Member member, HttpSession session) {
+        Member loginUser = memberService.selectMemberByUsername(member).get();
         if(loginUser != null && pEncoder.matches(member.getPassword(), loginUser.getPassword())) {
-            model.addAttribute("loginUser", loginUser);
+            session.setAttribute("loginUser", loginUser);
         }
-        return "redirect:index";
+        return "redirect:/";
     }
 
     @GetMapping("/member/register")
@@ -56,6 +56,6 @@ PasswordEncoder pEncoder;
         boolean checkId = memberService.idCheck(username);
 
         return checkId;
-
     }
+
 }

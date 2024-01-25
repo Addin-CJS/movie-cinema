@@ -7,7 +7,6 @@
         <h4>회원가입</h4>
 
         <form action="register" method="post" id="enrollForm">
-
             <table>
                 <tr>
                     <th><label for="username">ID</label></th>
@@ -39,15 +38,16 @@
                     <th><label for="email">EMAIL</label></th>
                     <td>
                         <div>
-                            <input name="email" id="email" placeholder="메일 주소">
+                            <input id="emailId" required><span id="middle">@</span><input id="emailAddress">
                             <select class="form-select" aria-label="Default select example" id="emailOption"
                                     onchange="handleEmailOption()">
                                 <option value="input">직접입력</option>
-                                <option value="@naver.com">@naver.com</option>
-                                <option value="@hanmail.net">@hanmail.net</option>
-                                <option value="@google.com">@google.com</option>
-                                <option value="@apple.com">@apple.com</option>
+                                <option value="@naver.com">naver.com</option>
+                                <option value="@hanmail.net">hanmail.net</option>
+                                <option value="@google.com">google.com</option>
+                                <option value="@apple.com">apple.com</option>
                             </select>
+                            <input type="hidden" id="totalEmail" name="email" value="">
                         </div>
                     </td>
                 </tr>
@@ -103,12 +103,35 @@
             }
         })
     })
+// 카카오 주소
  function findAddr() {
         new daum.Postcode({
             oncomplete: function (data) {
                 $("#kakaoAddress").val(data.address);
             }
         }).open();
+    }
+
+// 이메일 주소 가져오기
+$("#emailId, #emailAddress, #emailOption").on('blur change', function() {
+    email();
+});
+
+function email() {
+    const emailId = $("#emailId").val();
+    const middle = $("#middle").text();
+    const emailAddress = $("#emailAddress").val();
+    if(emailId != null && emailAddress != null) {
+        $("#totalEmail").val(emailId+middle+emailAddress);
+    }
+}
+function handleEmailOption() {
+     var emailOption = $("#emailOption").val();
+        if (emailOption === "input") {
+            $("#emailAddress").val("").attr("disabled", false);
+        } else {
+            $("#emailAddress").val(emailOption.replace("@", "")).attr("disabled", true);
+        }
     }
 
 </script>

@@ -7,8 +7,8 @@
             <thead>
                 <tr id="reviewTitle">
                     <th>영화후기</th>
-                    <th><textarea cols="120" rows="4" id="reviewContent"> </textarea></th>
-                    <th>
+                    <th><textarea cols="100" rows="4" id="reviewContent"> </textarea></th>
+                    <th colspan="2">
                         <button onclick="insertReview();">평점 및 리뷰작성</button>
                     </th>
                 </tr>
@@ -19,6 +19,10 @@
                         <td>${review.reviewWriter}</td>
                         <td>${review.reviewContent}</td>
                         <td>${fn:substringBefore(review.createReviewDate.toString(), 'T')}</td>
+                        <td>
+                            <button onclick="editReview(${review.reviewId});">수정</button>
+                            <button onclick="deleteReview(${review.reviewId});">삭제</button>
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -29,22 +33,42 @@
 
  <script>
        var movieId = ${movie.movieId};
+       var loginUsername = "<c:out value='${loginUser.username}'/>";
 
       $(document).ready(function() {
              updateReviewList(movieId);
          });
 
      function insertReview() {
+        var reviewContent =  $("#reviewContent").val();
+        if (!reviewContent.trim()) {
+                alert('리뷰 내용 작성은 필수입니다.');
+                $("#reviewContent").focus();
+                return;
+            } else if (reviewContent.trim().length < 10) {
+                alert('리뷰는 최소 10글자 이상 작성해야 합니다.');
+                $("#reviewContent").focus();
+                return;
+            }
          $.ajax({
              url: "reviewInsert",
              data: {
                  movieNo: movieId,
+                 reviewWriter: loginUsername,
                  reviewContent: $("#reviewContent").val()
              },
              type: "post",
              success: function (result) {
-                 updateReviewList(movieId);
-                 $("#reviewContent").val("");
+                if(result === "fail") {
+                    const yn = confirm('로그인 후에 리뷰 작성 가능합니다. 로그인 창으로 이동할까요 ?');
+                        if(yn) {
+                                returnUrl = '/showDetail?movieId=${movie.movieId}'
+                                location.href='/member/login?returnUrl=' + returnUrl;
+                               }
+                } else {
+                     updateReviewList(movieId);
+                     $("#reviewContent").val("");
+                }
              },
              error: function () {
                  console.log("리뷰 등록 ajax통신 실패");
@@ -67,7 +91,8 @@
                         reviewsHtml += '<tr><td>'
                                     + review.reviewWriter + '</td><td>'
                                     + review.reviewContent + '</td><td>'
-                                    + review.createReviewDate.substring(0, 10) + '</td></tr>';
+                                    + review.createReviewDate.substring(0, 10) + '</td><td>'
+                                    + '<a>[수정]  </a>' + '<a>  [삭제]</a>'+ '</td></tr>';
                     });
 
                     var paginationHtml = '';
