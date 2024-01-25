@@ -1,10 +1,8 @@
 package com.dealim.controller;
 
 import com.dealim.domain.Member;
-import com.dealim.security.UserDetailsImpl;
 import com.dealim.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +27,7 @@ PasswordEncoder pEncoder;
     }
 
     @PostMapping("/member/login")
-    public String login(Member member, Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public String login(Member member, Model model) {
         Member loginUser = memberService.selectMemberById(member).get();
         if(loginUser != null && pEncoder.matches(member.getPassword(), loginUser.getPassword())) {
             model.addAttribute("loginUser", loginUser);
