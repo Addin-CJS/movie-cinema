@@ -3,9 +3,7 @@
 <jsp:include page="layouts/header.jsp"/>
 <section>
     <div class="filter-search-box">
-
         <div class="filters-box">
-
             <div class="all-filters filters">
                 All formats <i class="fa fa-angle-down"></i>
             </div>
@@ -21,19 +19,14 @@
             <div class="category-filters filters">
                 Coming soon
             </div>
-
-
-
         </div>
-
-                    <div class="search-filters">
-                        <input type="text" placeholder="Search by name...">
-                        <i class="fa fa-search"></i>
-                      </div>
-
-                    <div class="search-bar">
-                      <div class="bar"></div>
-                    </div>
+        <div class="search-filters">
+            <input type="text" placeholder="Search by name...">
+            <i class="fa fa-search"></i>
+        </div>
+        <div class="search-bar">
+          <div class="bar"></div>
+        </div>
     </div>
     <!----filter-search-box ---->
     <div class="movie-card-section">
@@ -59,7 +52,7 @@
           <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
               <a href="${pageContext.request.contextPath}/?page=${pageNum}" ${pageNum == nowPage ? 'class="active"' : ''}>${pageNum}</a>
           </c:forEach>
-          <a href="${pageContext.request.contextPath}/?page=${nowPage + 1}" ${nowPage >= movieList.getTotalPages() ? 'style="display:none;"' : ''}>다음</a>
+          <a href="${pageContext.request.contextPath}/?page=${nowPage + 1}" ${nowPage >= movieList.getTotalPages()-1 ? 'style="display:none;"' : ''}>다음</a>
           <a href="?page=${movieList.getTotalPages()-1}">마지막으로</a>
      </div>
      <!---- pagination ---->

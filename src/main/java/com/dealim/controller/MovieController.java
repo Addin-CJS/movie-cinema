@@ -31,9 +31,6 @@ public class MovieController {
     @Autowired
     MovieService movieService;
 
-    @Autowired
-    ReviewService reviewService;
-
     @RequestMapping("/")
     public String index(Model model,
                         @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
@@ -49,7 +46,7 @@ public class MovieController {
         int totalPageGroups = (int)Math.ceil((double)movieList .getTotalPages() / pageGroupSize);    // 전체 페이지 그룹 수
         int currentPageGroup = (nowPage -1) / pageGroupSize;    // 현재 페이지가 속한 페이지 그룹
         int startPage = currentPageGroup * pageGroupSize + 1; // 현재 페이지
-        int endPage = Math.min(startPage + pageGroupSize - 1, movieList.getTotalPages())-1; // 현재 페이지 그룹의 마지막 페이지
+        int endPage = Math.min(startPage + pageGroupSize - 1, movieList.getTotalPages()); // 현재 페이지 그룹의 마지막 페이지
 
         System.out.println(endPage);
 
@@ -70,12 +67,6 @@ public class MovieController {
            } else {
                model.addAttribute("movie", null);
            }
-
-           List<Review> reviewList = reviewService.selctReviewByMovieNo(movieId);
-
-        model.addAttribute("reviewList", reviewList);
-
-
 
         return "detail";
     }

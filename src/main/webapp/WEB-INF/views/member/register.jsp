@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../layouts/header.jsp"/>
+
+
 <section>
     <div class="register">
         <h4>회원가입</h4>
@@ -101,5 +103,13 @@
             }
         })
     })
+ function findAddr() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                $("#kakaoAddress").val(data.address);
+            }
+        }).open();
+    }
+
 </script>
 <jsp:include page="../layouts/footer.jsp"/>

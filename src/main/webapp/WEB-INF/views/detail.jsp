@@ -84,60 +84,6 @@
         <button type="button" onclick="location.href='movieSeats?movieId=${movie.movieId}'">좌석선택하기</button>
     </div>
     <!---movie-ticket-book-->
-    <div class="slider-wrap">
-        <div class="carousel owl-carousel">
-            <div class="card card-1">
-                <p><img src="img/img.png" alt="사진1"></p>
-            </div>
-            <div class="card card-2">
-                <p><img src="img/img_1.png" alt="사진2"></p>
-            </div>
-            <div class="card card-3">
-                <p><img src="img/img_2.png" alt="사진3"></p>
-            </div>
-            <div class="card card-4">
-                <p><img src="img/img_3.png" alt="사진4"></p>
-            </div>
 
-        </div>
-    </div>
-    <div class="review">
-        <table class="reviewList">
-            <tr id="reviewTitle">
-                <th>영화후기</th>
-                <th><textarea cols="100" rows="4" id="reviewContent"></textarea></th>
-                <th>
-                    <button onclick="insertReview();">평점 및 리뷰작성</button>
-                </th>
-            </tr>
 
-            <c:forEach var="review" items="${reviewList}">
-                <tr id="reviewItem">
-                    <td>${review.reviewWriter}</td>
-                    <td>${review.reviewContent}</td>
-                    <td>${fn:substringBefore(review.createReviewDate.toString(), 'T')}</td>
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
-</section>
-<script>
-    function insertReview() {
-        $.ajax({
-            url: "reviewInsert",
-            data: {
-                movieNo:${movie.movieId},
-                <!-- reviewWriter:"${loginUser.user_id}", -->
-                reviewContent: $("#reviewContent").val()
-            },
-            type: "post",
-            success: function (result) {
-                location.reload();
-            },
-            error: function () {
-                console.log("댓글 등록 ajax통신 실패");
-            }
-        })
-    }
-</script>
-<jsp:include page="layouts/footer.jsp"/>
+<jsp:include page="movie/reviews.jsp"/>
