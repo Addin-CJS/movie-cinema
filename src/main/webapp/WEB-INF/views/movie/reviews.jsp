@@ -6,7 +6,7 @@
         <table class="reviewList">
             <thead>
                 <tr id="reviewTitle">
-                    <th>영화후기</th>
+                    <th colspan="2">영화후기</th>
                     <th><textarea cols="100" rows="4" id="reviewContent"> </textarea></th>
                     <th colspan="2">
                         <button onclick="insertReview();">평점 및 리뷰작성</button>
@@ -16,6 +16,7 @@
             <tbody>
                 <c:forEach var="review" items="${reviewList.content}">
                     <tr id="reviewItem">
+                        <td>${review.reviewId}</td>
                         <td>${review.reviewWriter}</td>
                         <td>${review.reviewContent}</td>
                         <td>${fn:substringBefore(review.createReviewDate.toString(), 'T')}</td>
@@ -34,6 +35,7 @@
  <script>
        var movieId = ${movie.movieId};
        var loginUsername = "<c:out value='${loginUser.username}'/>";
+       var currentPage = 0;
 
       $(document).ready(function() {
              updateReviewList(movieId);
@@ -76,11 +78,11 @@
          });
      }
 
-    function updateReviewList(movieId, page) {
+    function updateReviewList(movieId, currentPage) {
         $.ajax({
             url: "reviewList",
             data: { movieNo: movieId,
-                    page: page
+                    page: currentPage
                   },
             type: "get",
             dataType: "json",
@@ -89,10 +91,13 @@
                 if (response.content && Array.isArray(response.content)) {
                     response.content.forEach(function(review) {
                         reviewsHtml += '<tr><td>'
+                                    + review.reviewId + '</td><td>'
                                     + review.reviewWriter + '</td><td>'
                                     + review.reviewContent + '</td><td>'
                                     + review.createReviewDate.substring(0, 10) + '</td><td>'
-                                    + '<a>[수정]  </a>' + '<a>  [삭제]</a>'+ '</td></tr>';
+                                    + '<a href="javascript:void(0);" onclick="editReview(' + review.reviewId + ');">[수정]</a>'
+                                    + '<a href="javascript:void(0);" class="delete-review" reviewNo="' + review.reviewId + '">[삭제]</a>'
+                                    + '</td></tr>';
                     });
 
                     var paginationHtml = '';
@@ -118,6 +123,29 @@
             }
         });
     }
+
+    $(".reviewList").on("click", ".delete-review", function(event) {
+            const reviewNo = $(this).attr("reviewNo");
+            const yn = confirm(reviewNo + "번 댓글을 삭제할까요?");
+            if(yn) {
+                $.ajax({
+                    url: "deleteReview",
+                    data: {
+                        reviewId: reviewNo
+                    },
+                    type: "get",
+                    success: function(result) {
+                      if(result === "success") {
+                          updateReviewList(movieId,currentPage);
+                      }
+                    },
+                    error: function() {
+                        console.log("댓글 삭제 실패")
+                    },
+                })
+            }
+    });
+
  </script>
 
     <jsp:include page="../layouts/footer.jsp"/>
