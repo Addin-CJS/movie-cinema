@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,12 +24,13 @@ public class MovieService {
     }
 
     public Page<Movie> movieList(Pageable pageable) {
+
+        System.out.println( movieRepository.findAll(pageable));
         return  movieRepository.findAll(pageable);
     }
 
 
-
-
-
-
+    public Page<Movie> findMoviesByKeyword(String searchKeyword, Pageable pageable) {
+        return movieRepository.findByMvTitleContaining(searchKeyword, pageable);
+    }
 }

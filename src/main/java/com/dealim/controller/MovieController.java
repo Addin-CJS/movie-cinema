@@ -22,14 +22,14 @@ public class MovieController {
     @Autowired
     MovieService movieService;
 
-    @RequestMapping("/")
-    public String index(Model model,
+    @RequestMapping("/movieHome")
+    public String movieHome(Model model,
                         @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
                         String searchKeyword) {
-        Page<Movie> movieList = null;
+      Page<Movie> movieList = null;
 
         if(searchKeyword == null) {
-            movieList = movieService.movieList(pageable);
+          movieList = movieService.movieList(pageable);
         }
 
         int nowPage = movieList.getPageable().getPageNumber();
@@ -40,12 +40,12 @@ public class MovieController {
         int endPage = Math.min(startPage + pageGroupSize - 1, movieList.getTotalPages()); // 현재 페이지 그룹의 마지막 페이지
 
 
-        model.addAttribute("movieList", movieList);
+     model.addAttribute("movieList", movieList);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
 
-        return "index";
+        return "movieHome";
     }
 
     @GetMapping("/showDetail")
@@ -95,5 +95,22 @@ public class MovieController {
         }
         return "movieSeats";
     }
+
+//    @GetMapping("/moviesList")
+//    @ResponseBody
+//    public ResponseEntity<Page<Movie>> getMovies(
+//            @PageableDefault(page = 0, size = 8, sort = "movieId", direction = Sort.Direction.DESC) Pageable pageable,
+//            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
+//
+//        Page<Movie> movieList;
+//        if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
+//            movieList = movieService.findMoviesByKeyword(searchKeyword, pageable);
+//        } else {
+//            movieList = movieService.movieList(pageable);
+//        }
+//
+//        return ResponseEntity.ok(movieList);
+//    }
+
 
 }

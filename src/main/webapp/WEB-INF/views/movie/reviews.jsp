@@ -7,8 +7,8 @@
             <thead>
                 <tr id="reviewTitle">
                     <th>영화후기</th>
-                    <th><textarea cols="120" rows="4" id="reviewContent"> </textarea></th>
-                    <th>
+                    <th><textarea cols="100" rows="4" id="reviewContent"> </textarea></th>
+                    <th colspan="2">
                         <button onclick="insertReview();">평점 및 리뷰작성</button>
                     </th>
                 </tr>
@@ -19,6 +19,10 @@
                         <td>${review.reviewWriter}</td>
                         <td>${review.reviewContent}</td>
                         <td>${fn:substringBefore(review.createReviewDate.toString(), 'T')}</td>
+                        <td>
+                            <button onclick="editReview(${review.reviewId});">수정</button>
+                            <button onclick="deleteReview(${review.reviewId});">삭제</button>
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -39,6 +43,10 @@
         var reviewContent =  $("#reviewContent").val();
         if (!reviewContent.trim()) {
                 alert('리뷰 내용 작성은 필수입니다.');
+                $("#reviewContent").focus();
+                return;
+            } else if (reviewContent.trim().length < 10) {
+                alert('리뷰는 최소 10글자 이상 작성해야 합니다.');
                 $("#reviewContent").focus();
                 return;
             }
@@ -83,7 +91,8 @@
                         reviewsHtml += '<tr><td>'
                                     + review.reviewWriter + '</td><td>'
                                     + review.reviewContent + '</td><td>'
-                                    + review.createReviewDate.substring(0, 10) + '</td></tr>';
+                                    + review.createReviewDate.substring(0, 10) + '</td><td>'
+                                    + '<a>[수정]  </a>' + '<a>  [삭제]</a>'+ '</td></tr>';
                     });
 
                     var paginationHtml = '';
