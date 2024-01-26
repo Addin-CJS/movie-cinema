@@ -56,6 +56,13 @@ public class ReviewController {
         return ResponseEntity.ok(reviewList);
     }
 
+    @PostMapping("/updateReview")
+    @ResponseBody
+    public String updateReview(Review review) {
+        reviewService.updateReview(review);
+        return "success";
+    }
+
     @GetMapping("/deleteReview")
     @ResponseBody
     public String deleteReview(Long reviewId) {

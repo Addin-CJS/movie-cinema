@@ -29,27 +29,29 @@ public class MovieController {
     @RequestMapping("/movieHome")
     public String movieHome(Model model,
                         @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
-                            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
+                        @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
       Page<Movie> movieList = null;
 
-        if(searchKeyword == null) {
-          movieList = movieService.movieList(pageable);
+        if (searchKeyword == null || searchKeyword.trim().isEmpty()) {
+            movieList = movieService.movieList(pageable);
+        } else {
+            movieList = movieService.findMoviesByKeyword(searchKeyword, pageable);
         }
 
         int nowPage = movieList.getPageable().getPageNumber();
         int pageGroupSize = 5;  // 한 페이지 그룹에서 보여줄 페이지 수
         int totalPageGroups = (int)Math.ceil((double)movieList .getTotalPages() / pageGroupSize);    // 전체 페이지 그룹 수
-        int currentPageGroup = (nowPage -1) / pageGroupSize;    // 현재 페이지가 속한 페이지 그룹
+        int currentPageGroup = (nowPage-1) / pageGroupSize;    // 현재 페이지가 속한 페이지 그룹
         int startPage = currentPageGroup * pageGroupSize + 1; // 현재 페이지
-        int endPage = Math.min(startPage + pageGroupSize - 1, movieList.getTotalPages()); // 현재 페이지 그룹의 마지막 페이지
+        int endPage = Math.min(startPage + pageGroupSize - 1, movieList.getTotalPages() - 1);// 현재 페이지 그룹의 마지막 페이지
 
 
         model.addAttribute("movieList", movieList);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-
-
+        model.addAttribute("totalPages", movieList.getTotalPages());
+        model.addAttribute("searchKeyword", searchKeyword);
 
         return "movie/movieHome";
     }
@@ -83,8 +85,6 @@ public class MovieController {
 
         model.addAttribute("movieRating", finalRating);
         //영화 평점  end
-
-
 
         return "movie/detail";
     }
