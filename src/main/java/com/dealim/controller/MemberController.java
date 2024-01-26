@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MemberController {
-@Autowired
- MemberService memberService;
+    @Autowired
+    MemberService memberService;
 
-@Autowired
-PasswordEncoder pEncoder;
-
+    @Autowired
+    PasswordEncoder pEncoder;
 
     @GetMapping("/member/login")
     public String loginForm() {
@@ -29,7 +28,7 @@ PasswordEncoder pEncoder;
     @PostMapping("/member/login")
     public String login(Member member, HttpSession session) {
         Member loginUser = memberService.selectMemberByUsername(member).get();
-        if(loginUser != null && pEncoder.matches(member.getPassword(), loginUser.getPassword())) {
+        if (loginUser != null && pEncoder.matches(member.getPassword(), loginUser.getPassword())) {
             session.setAttribute("loginUser", loginUser);
         }
         return "redirect:/";
@@ -37,22 +36,22 @@ PasswordEncoder pEncoder;
 
     @GetMapping("/member/register")
     public String registerForm() {
-
         return "member/register";
     }
 
     @PostMapping("/member/register")
-    public  String insertMember(Member member){
+    public String insertMember(Member member) {
 
-        String enPass = pEncoder.encode(member.getPassword());	// 사용자가 입력한 패스워드 암호화해서 변수에 넣기
+        String enPass = pEncoder.encode(member.getPassword());    // 사용자가 입력한 패스워드 암호화해서 변수에 넣기
         member.setPassword(enPass);
 
         Member insert = memberService.insertMember(member);
         return "redirect:login";
     }
+
     @GetMapping("/member/idCheck")
     @ResponseBody
-    public boolean checkId(@RequestParam("id") String username){
+    public boolean checkId(@RequestParam("id") String username) {
         boolean checkId = memberService.idCheck(username);
 
         return checkId;

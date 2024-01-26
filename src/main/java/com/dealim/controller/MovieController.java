@@ -2,6 +2,7 @@ package com.dealim.controller;
 
 import com.dealim.domain.Movie;
 import com.dealim.service.MovieService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import java.text.DecimalFormat;
 import java.util.Optional;
 
 @Controller
+@Slf4j
 public class MovieController {
 
     @Autowired
@@ -112,13 +114,16 @@ public class MovieController {
         } else {
             movieList = movieService.movieList(pageable);
         }
-
         return ResponseEntity.ok(movieList);
     }
 
     @GetMapping("/ticketing")
-    public String ticketing () {
+    public String ticketing ((@RequestParam("movieId") Long movieId, Model model) {
+        Movie ticketingMovie = movieService.selectMovieDetailById(movieId).orElseThrow(()-> new RuntimeException("해당 id를 가진 영화가 없습니다"));
+        model.asMap().forEach((key, value) -> log.info(key +": "+value));
         return "movie/ticketing";
     }
+
+    // @ExceptionHandler or @ControllerAdvice를 통해 오류 처리할것
 
 }

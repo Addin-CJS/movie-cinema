@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="../layouts/header.jsp"/>
+<%
 
+%>
 <section id="section">
     <div id="test"></div>
     <div class="container">
@@ -31,7 +33,7 @@
                     </div>
                     <div class="seatCont" id="seatCont">
                         <div class="seatRowCont1 seatRowCont">
-                            <div class="row">
+                            <div class="col">
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
@@ -41,9 +43,9 @@
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                             </div>
-                            <div class="row">
+                            <div class="col">
                                 <div class="seat"></div>
-                                <div class="seat occupied"></div>
+                                <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
@@ -53,19 +55,9 @@
                             </div>
                         </div>
                         <div class="seatRowCont2 seatRowCont">
-                            <div class="row">
-                                <div class="seat"></div>
-                                <div class="seat occupied"></div>
+                            <div class="col">
                                 <div class="seat"></div>
                                 <div class="seat"></div>
-                                <div class="seat"></div>
-                                <div class="seat"></div>
-                                <div class="seat"></div>
-                                <div class="seat"></div>
-                            </div>
-                            <div class="row">
-                                <div class="seat"></div>
-                                <div class="seat occupied"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
@@ -73,9 +65,9 @@
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                             </div>
-                            <div class="row">
+                            <div class="col">
                                 <div class="seat"></div>
-                                <div class="seat occupied"></div>
+                                <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
@@ -83,9 +75,19 @@
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                             </div>
-                            <div class="row">
+                            <div class="col">
                                 <div class="seat"></div>
-                                <div class="seat occupied"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                            </div>
+                            <div class="col">
+                                <div class="seat"></div>
+                                <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
@@ -95,9 +97,9 @@
                             </div>
                         </div>
                         <div class="seatRowCont3 seatRowCont">
-                            <div class="row">
+                            <div class="col">
                                 <div class="seat"></div>
-                                <div class="seat occupied"></div>
+                                <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
@@ -105,9 +107,9 @@
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                             </div>
-                            <div class="row">
+                            <div class="col">
                                 <div class="seat"></div>
-                                <div class="seat occupied"></div>
+                                <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
@@ -133,7 +135,7 @@
                         </div>
                         <div class="moviePrice">
                             <p>MOVIE PRICE</p>
-                            <h1 id="moviePrice">15,000</h1>
+                            <h1 id="moviePrice">1,300원</h1>
                         </div>
                         <div class="dateCont">
                             <p>Date</p>
@@ -180,18 +182,13 @@
     $(() => {
 
         const allSeatCont = $("#seatCont .seat");
-
+        const allSeatRows = $("#seatCont .row")
         const selectedSeatsHolderEl = $("#selectedSeatsHolder");
-
         const moviePriceEl = $("#moviePrice");
-
         const cancelBtnEL = $("#cancelBtn");
-
         const proceedBtnEl = $("#proceedBtn");
-
         const seatContEl = $("#seatCont .seat:not(.occupied)");
-
-        let moviePrice = 1300;
+        const moviePrice = 1300;
 
         // 각 좌석에 번호 매기기
         let initialSeatValue = 0;
@@ -217,7 +214,6 @@
                         return id !== seatId;
                     }); // 클릭된 좌석을 list에서 빼기
                 };
-
                 updateSeats();
                 updatePrice(moviePrice, takenSeats.length);
             });
@@ -228,7 +224,7 @@
             $(selectedSeatsHolderEl).empty();
 
             if(takenSeats.length > 0) {
-                $(takenSeats).each((seat) => {
+                $(takenSeats).each((idx, seat) => {
                     $('<div></div>')
                         .addClass("selectedSeat")
                         .text(seat)
