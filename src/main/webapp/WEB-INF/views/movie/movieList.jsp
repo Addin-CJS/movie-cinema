@@ -26,98 +26,39 @@
 
 
 
-<%--<script>--%>
-<%--    document.getElementById("search-icon").addEventListener("click", function() {--%>
-
-<%--        console.log("검색 버튼이 클릭되었습니다.");--%>
 
 
-<%--    });--%>
-
-<%--    document.addEventListener("DOMContentLoaded", function() {--%>
-<%--        fetchMovies(); // 페이지 로딩 시 영화 목록 불러오기--%>
-<%--    });--%>
-
-<%--    function fetchMovies() {--%>
-<%--        $.ajax({--%>
-<%--            url: 'moviesList', // 서버 엔드포인트 주소--%>
-<%--            type: 'GET', // HTTP 메소드--%>
-<%--            dataType: 'json', // 응답 데이터 타입--%>
-<%--            success: function(data) {--%>
-<%--                console.log(data);--%>
-<%--                updateMovieList(data);--%>
-<%--            },--%>
-<%--            error: function(error) {--%>
-<%--                console.error('Error:', error);--%>
-<%--            }--%>
-<%--        });--%>
-<%--    }--%>
-
-<%--    function updateMovieList(data) {--%>
-<%--        var movieListSection = document.querySelector('.movie-card-section');--%>
-
-<%--        while (movieListSection.firstChild) {--%>
-<%--            movieListSection.removeChild(movieListSection.firstChild);--%>
-<%--        }--%>
-
-<%--        data.content.forEach(movie => {--%>
-<%--            // 각 영화 정보에 대한 card 요소 생성--%>
-<%--            var card = document.createElement('div');--%>
-<%--            card.className = 'card';--%>
-
-<%--            // 영화 이미지--%>
-<%--            var img = document.createElement('img');--%>
-<%--            img.src = movie.mvImg;--%>
-<%--            card.appendChild(img);--%>
-
-<%--            // 콘텐츠 영역--%>
-<%--            var content = document.createElement('div');--%>
-<%--            content.className = 'card-content';--%>
-
-<%--            // 영화 제목--%>
-<%--            var title = document.createElement('p');--%>
-<%--            title.className = 'movie-name';--%>
-
-<%--            var link = document.createElement('a');--%>
-<%--            link.href = `/showDetail?movieId=${"${movie.movieId}"}`;--%>
-
-<%--            console.log("Movie ID:", movie.movieId);--%>
-<%--            link.textContent = movie.mvTitle;--%>
-<%--            title.appendChild(link);--%>
-
-
-<%--            var info = document.createElement('div');--%>
-<%--            info.className = 'movie-info';--%>
-
-
-
-<%--            content.appendChild(title);--%>
-<%--            content.appendChild(info);--%>
-<%--            card.appendChild(content);--%>
-
-<%--            movieListSection.appendChild(card);--%>
-<%--        });--%>
-<%--    }--%>
-<%--</script>--%>
 
 <script>
     $(document).ready(function() {
-        // 검색 버튼 클릭 이벤트
+
+        // 검색 아이콘 클릭 이벤트 바인딩
         $("#search-icon").click(function() {
-            var searchKeyword = $("#search-input").val(); // 검색어 입력값 가져오기
-            fetchMovies(searchKeyword); // 검색어를 인자로 넘겨 영화 목록 가져오기
+            var searchKeyword = $("#search-input").val();
+            fetchMovies(searchKeyword, 0);
+        });
+
+
+        $(document).on('click', '.page-num', function(e) {
+            e.preventDefault();
+            var page = parseInt($(this).data('page'));
+            fetchMovies(currentSearchKeyword, page);
+
+            window.scrollTo(0, 0);
         });
     });
 
-    function fetchMovies(searchKeyword) {
+    // AJAX를 통해 영화 데이터를 가져오는 함수
+    function fetchMovies(searchKeyword, page) {
+        currentSearchKeyword = searchKeyword; // 현재 검색어를 전역 변수에 저장
         $.ajax({
             url: 'moviesList',
             type: 'GET',
-            data: { searchKeyword: searchKeyword },
+            data: { searchKeyword: searchKeyword, page: page },
             dataType: 'json',
             success: function(data) {
-                console.log("통신성공")
-                searchMovieList(data); // 영화 목록 업데이트
+                console.log("통신성공", data);
+                searchMovieList(data, page);
             },
             error: function(error) {
                 console.error('Error:', error);
@@ -125,20 +66,73 @@
         });
     }
 
-    function searchMovieList(data) {
+    // 영화 목록과 페이지네이션을 화면에 표시하는 함수
+    function searchMovieList(data, currentPage) {
         var movieListSection = $('.movie-card-section').empty();
+        var paginationSection = $('.pagination').empty();
 
         data.content.forEach(function(movie) {
-            // 각 영화 정보에 대한 card 요소 생성 및 추가
             var cardHtml = '<div class="card">' +
                 '<img src="' + movie.mvImg + '">' +
                 '<div class="card-content">' +
                 '<p class="movie-name">' +
                 '<a href="/showDetail?movieId=' + movie.movieId + '">' + movie.mvTitle + '</a>' +
                 '</p></div></div>';
-
             movieListSection.append(cardHtml);
         });
+
+        addPagination(paginationSection, currentPage, data.totalPages);
+    }
+
+    // 페이지네이션을 생성하는 함수
+    function addPagination(paginationSection, currentPage, totalPages) {
+        paginationSection.empty();
+
+
+
+        //처음페이지 하는 부분
+        if (currentPage > 0) {
+            paginationSection.append('<a href="#" class="page-num" data-page="0">ajax 처음으로</a>');
+        } else {
+            paginationSection.append('<a href="#" class="page-num" data-page="0">ajax 처음으로</a>');
+        }
+
+
+        //이전페이지 하는부분
+        if (currentPage > 0) {
+            paginationSection.append('<a href="#" class="page-num" data-page="' + (currentPage - 1) + '">Prev</a>');
+        }
+
+        var pageGroupSize = 5;
+        var currentPageGroup = Math.floor(currentPage / pageGroupSize);
+        var startPage = currentPageGroup * pageGroupSize;
+        var endPage = Math.min(startPage + pageGroupSize, totalPages);
+
+
+
+        //페이지 결과에 따라 페이지 블럭 추가
+        for (let i = startPage; i < endPage; i++) {
+            var activeClass = currentPage === i ? 'active' : '';
+            paginationSection.append(`<a href="#" class="page-num ${"${activeClass}"}" data-page="${"${i}"}">${"${i + 1}"}</a>`);
+        }
+
+        // 다음 추가 버튼
+        if (currentPage + 1 < totalPages) {
+            paginationSection.append('<a href="#" class="page-num" data-page="' + (currentPage + 1) + '">Next</a>');
+        } else {
+            paginationSection.append('<span class="disabled">Next</span>');
+        }
+
+        //마지막으로 버튼
+        if (currentPage + 1 < totalPages) {
+            paginationSection.append('<a href="#" class="page-num" data-page="' + (totalPages - 1) + '">ajax 마지막으로</a>');
+        } else {
+            paginationSection.append('<a href="#" class="page-num" data-page="' + (totalPages - 1) + '">ajax 마지막으로</a>');
+        }
+
+
+
     }
 </script>
+
 
