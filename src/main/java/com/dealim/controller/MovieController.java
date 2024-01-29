@@ -34,6 +34,7 @@ public class MovieController {
             movieList = movieService.findMoviesByKeyword(searchKeyword, pageable);
         }
 
+        
         int nowPage = movieList.getPageable().getPageNumber();
         int pageGroupSize = 5;  // 한 페이지 그룹에서 보여줄 페이지 수
         int totalPageGroups = (int)Math.ceil((double)movieList .getTotalPages() / pageGroupSize);    // 전체 페이지 그룹 수
