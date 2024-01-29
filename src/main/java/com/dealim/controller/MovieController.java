@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.DecimalFormat;
 import java.util.Optional;
 
 @Controller
@@ -33,54 +32,22 @@ public class MovieController {
         Page<Movie> movieList;
 
        //페이징, 검색, 전체목록 , 카테고리 별
-        movieList = movieService.getFilteredMovieList(pageable, searchKeyword, category);
-
-        movieService.addMovieListAttributesToModel(model, movieList, searchKeyword, category);
-
+        movieService.getMovieHome(pageable, searchKeyword, category, model);
 
         return "movie/movieHome";
     }
 
 
 
-
-
-
     @GetMapping("/showDetail")
     public String showDetail(@RequestParam("movieId") Long movieId, Model model) {
-        Optional <Movie> movie = movieService.selectMovieDetailById(movieId);
-
-        if(movie.isPresent()) {
-            model.addAttribute("movie", movie.get());
-        } else {
-            model.addAttribute("movie", null);
-        }
-
-        //영화 평점 start
-        Float popularityValue = movie.get().getMvPopularity();
-        Float minPopularity = 0.0f;
-        Float maxPopularity = 10.0f;
-        Float minRating = 0.0f;
-        Float maxRating = 5.0f;
-
-        if (popularityValue == null) {
-            popularityValue = 0.0f;
-        }
-        Float rating = ((popularityValue - minPopularity) / (maxPopularity - minPopularity)) * (maxRating - minRating) + minRating;
-
-        DecimalFormat df = new DecimalFormat("0.0");
-        String formattedRating = df.format(rating);
-
-        String finalRating = formattedRating + "/100";
-
-        model.addAttribute("movieRating", finalRating);
-        //영화 평점  end
-
-
+        movieService.getShowDetail(movieId, model);
 
         return "movie/detail";
     }
-//
+
+
+
     @GetMapping("/movieSeats")
     public String movieSeats(@RequestParam("movieId") Long movieId, Model model) {
 
