@@ -22,6 +22,8 @@ public class MovieController {
     @Autowired
     MovieService movieService;
 
+
+
     @RequestMapping("/movieHome")
     public String movieHome(Model model,
                             @PageableDefault(page = 0, size = 8, sort = "movieId", direction = Sort.Direction.DESC) Pageable pageable,
@@ -30,30 +32,11 @@ public class MovieController {
 
         Page<Movie> movieList;
 
-        // 영화 목록 조회 로직
-        if (category != null && !category.trim().isEmpty()) {
-            movieList = movieService.findMoviesByGenre(category, pageable);
-        } else if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
-            movieList = movieService.findMoviesByKeyword(searchKeyword, pageable);
-        } else {
-            movieList = movieService.movieList(pageable);
-        }
+       //페이징, 검색, 전체목록 , 카테고리 별
+        movieList = movieService.getFilteredMovieList(pageable, searchKeyword, category);
 
-        int nowPage = movieList.getPageable().getPageNumber();
-        int totalPages = movieList.getTotalPages();
-        int pageGroupSize = 5;
-        int currentPageGroup = nowPage / pageGroupSize;
-        int startPage = currentPageGroup * pageGroupSize;
-        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages - 1);
+        movieService.addMovieListAttributesToModel(model, movieList, searchKeyword, category);
 
-        // 모델에 데이터 추가
-        model.addAttribute("movieList", movieList);
-        model.addAttribute("nowPage", nowPage);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-        model.addAttribute("totalPages", totalPages);
-        model.addAttribute("searchKeyword", searchKeyword);
-        model.addAttribute("selectedCategory", category);
 
         return "movie/movieHome";
     }

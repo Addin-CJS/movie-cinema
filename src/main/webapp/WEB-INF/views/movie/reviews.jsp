@@ -101,7 +101,7 @@
             dataType: "json",
             success: function (response) {
                 reviews = response.content;
-               
+
                  reviews.sort(function (a, b) {
                     return b.reviewId - a.reviewId;
                  });
