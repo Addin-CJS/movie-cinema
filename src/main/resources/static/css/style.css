@@ -1528,3 +1528,32 @@ section .slider-wrap {
 section .slider-wrap img {
     height: 500px;
 }
+
+/*카테고리 css*/
+.category-filters {
+    position: relative;
+}
+
+#genre-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    list-style-type: none;
+    padding: 5px;
+    margin: 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#genre-list li {
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+#genre-list li:hover {
+    background-color: #444;
+}
+/*end of 카테고리 css*/

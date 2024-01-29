@@ -16,6 +16,22 @@
 
             <div class="category-filters filters">
                 By category <i class="fa fa-angle-down"></i>
+                <ul id="genre-list" style="display: none;">
+                    <li><a href="/movieHome?category=Action">Action</a></li>
+                    <li><a href="/movieHome?category=Adventure">Adventure</a></li>
+                    <li><a href="/movieHome?category=Animation">Animation</a></li>
+                    <li><a href="/movieHome?category=Comedy">Comedy</a></li>
+                    <li><a href="/movieHome?category=Crime">Crime</a></li>
+                    <li><a href="/movieHome?category=Documentary">Documentary</a></li>
+                    <li><a href="/movieHome?category=Drama">Drama</a></li>
+                    <li><a href="/movieHome?category=Fantasy">Fantasy</a></li>
+                    <li><a href="/movieHome?category=History">History</a></li>
+                    <li><a href="/movieHome?category=Horror">Horror</a></li>
+                    <li><a href="/movieHome?category=Romance">Romance</a></li>
+                    <li><a href="/movieHome?category=Science Fiction">Science Fiction</a></li>
+                    <li><a href="/movieHome?category=Thriller">Thriller</a></li>
+                    <li><a href="/movieHome?category=Thriller">Western</a></li>
+                </ul>
             </div>
 
             <div class="category-filters filters">
@@ -62,26 +78,42 @@
 
     <div class="pagination">
         <c:choose>
-            <c:when test="${empty searchKeyword}">
-                   <a href="${pageContext.request.contextPath}/movieHome?page=0">처음으로</a>
-                   <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage - 1}" ${nowPage <= 1 ? 'style="display:none;"' : ''}>이전</a>
-                   <c:forEach begin="${startPage-1}" end="${endPage}" var="pageNum">
-                       <a href="${pageContext.request.contextPath}/movieHome?page=${pageNum}" ${pageNum == nowPage ? 'class="active"' : ''}>${pageNum+1}</a>
-                   </c:forEach>
-                   <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage + 1}" ${nowPage >= movieList.getTotalPages()-1 ? 'style="display:none;"' : ''}>다음</a>
-                   <a href="${pageContext.request.contextPath}/movieHome?page=${totalPages-1}">마지막으로</a>
-            </c:when>
-            <c:otherwise>
+
+            <c:when test="${not empty searchKeyword}">
                 <a href="${pageContext.request.contextPath}/movieHome?page=0&searchKeyword=${fn:escapeXml(searchKeyword)}">처음으로</a>
-                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage}&searchKeyword=${fn:escapeXml(searchKeyword)}" ${nowPage <= 1 ? 'style="display:none;"' : ''}>이전</a>
-                <c:forEach begin="${startPage-1}" end="${endPage}" var="pageNum">
-                    <a href="${pageContext.request.contextPath}/movieHome?page=${pageNum}&searchKeyword=${fn:escapeXml(searchKeyword)}" ${pageNum == nowPage ? 'class="active"' : ''}>${pageNum+1}</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage - 1}&searchKeyword=${fn:escapeXml(searchKeyword)}" ${nowPage <= 0 ? 'style="display:none;"' : ''}>이전</a>
+                <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
+                    <a href="${pageContext.request.contextPath}/movieHome?page=${pageNum}&searchKeyword=${fn:escapeXml(searchKeyword)}" ${pageNum == nowPage ? 'class="active"' : ''}>${pageNum + 1}</a>
                 </c:forEach>
-                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage + 1}&searchKeyword=${fn:escapeXml(searchKeyword)}" ${nowPage >= movieList.getTotalPages() ? 'style="display:none;"' : ''}>다음</a>
-                <a href="${pageContext.request.contextPath}/movieHome?page=${totalPages}&searchKeyword=${fn:escapeXml(searchKeyword)}" ${not empty searchKeyword ? 'style="display:none;"' : ''}>마지막으로</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage + 1}&searchKeyword=${fn:escapeXml(searchKeyword)}" ${nowPage >= totalPages - 1 ? 'style="display:none;"' : ''}>다음</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${totalPages - 1}&searchKeyword=${fn:escapeXml(searchKeyword)}">마지막으로</a>
+            </c:when>
+
+
+            <c:when test="${not empty selectedCategory}">
+                <a href="${pageContext.request.contextPath}/movieHome?page=0&category=${fn:escapeXml(selectedCategory)}">처음으로</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage - 1}&category=${fn:escapeXml(selectedCategory)}" ${nowPage <= 0 ? 'style="display:none;"' : ''}>이전</a>
+                <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
+                    <a href="${pageContext.request.contextPath}/movieHome?page=${pageNum}&category=${fn:escapeXml(selectedCategory)}" ${pageNum == nowPage ? 'class="active"' : ''}>${pageNum + 1}</a>
+                </c:forEach>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage + 1}&category=${fn:escapeXml(selectedCategory)}" ${nowPage >= totalPages - 1 ? 'style="display:none;"' : ''}>다음</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${totalPages - 1}&category=${fn:escapeXml(selectedCategory)}">마지막으로</a>
+            </c:when>
+
+
+            <c:otherwise>
+                <a href="${pageContext.request.contextPath}/movieHome?page=0">처음으로</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage - 1}" ${nowPage <= 0 ? 'style="display:none;"' : ''}>이전</a>
+                <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
+                    <a href="${pageContext.request.contextPath}/movieHome?page=${pageNum}" ${pageNum == nowPage ? 'class="active"' : ''}>${pageNum + 1}</a>
+                </c:forEach>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage + 1}" ${nowPage >= totalPages - 1 ? 'style="display:none;"' : ''}>다음</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${totalPages - 1}">마지막으로</a>
             </c:otherwise>
         </c:choose>
     </div>
+
+
     <!---- pagination ---->
 </section>
 
@@ -89,6 +121,20 @@
      function submitSearchForm() {
         document.searchForm.submit();
      }
+
+     document.querySelector('.category-filters').addEventListener('click', function() {
+         var genreList = document.getElementById('genre-list');
+         if(genreList.style.display === 'none') {
+             genreList.style.display = 'block';
+         } else {
+             genreList.style.display = 'none';
+         }
+     });
+     function filterByCategory(category) {
+         window.location.href = '/movieHome?category=' + category;
+     }
+
+
 </script>
 
 <jsp:include page="../layouts/footer.jsp"/>

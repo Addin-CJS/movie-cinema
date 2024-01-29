@@ -36,4 +36,10 @@ public class MovieService {
         return movieRepository.findByMvTitleIgnoreCase(searchKeyword, pageable);
 
     }
+
+    public Page<Movie> findMoviesByGenre(String mvGenre, Pageable pageable) {
+        return movieRepository.findByMvGenre(mvGenre, pageable);
+
+    }
+
 }

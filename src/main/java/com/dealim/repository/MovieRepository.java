@@ -14,4 +14,9 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     @Query("SELECT m FROM Movie m WHERE LOWER(m.mvTitle) LIKE LOWER(CONCAT('%', :searchKeyword, '%'))")
     Page<Movie> findByMvTitleIgnoreCase(@Param("searchKeyword") String searchKeyword, Pageable pageable);
 
+
+    Page<Movie> findByMvGenre(String mvGenre, Pageable pageable);
+
+
+
 }
