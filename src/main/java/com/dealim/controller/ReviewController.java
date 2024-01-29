@@ -41,17 +41,6 @@ public class ReviewController {
 
         Page<Review> reviewList = reviewService.selectReviewListByMovieNo(movieId, pageable);
 
-        int nowPage = reviewList.getPageable().getPageNumber();
-        int pageGroupSize = 5;
-        int totalPageGroups = (int)Math.ceil((double)reviewList.getTotalPages() / pageGroupSize);
-        int currentPageGroup = (nowPage-1) / pageGroupSize;
-        int startPage = currentPageGroup * pageGroupSize + 1;
-        int endPage = Math.min(startPage + pageGroupSize -1, reviewList.getTotalPages());
-
-
-        model.addAttribute("nowPage", nowPage);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
 
         return ResponseEntity.ok(reviewList);
     }

@@ -46,7 +46,7 @@
        var currentPage = 0;
 
       $(document).ready(function() {
-             updateReviewList(movieId);
+             updateReviewList(movieId,0);
          });
 
      function insertReview() {
@@ -87,6 +87,11 @@
      }
 
     function updateReviewList(movieId, currentPage) {
+
+        if (currentPage === undefined || currentPage === null) {
+            currentPage = 0;
+        }
+
         $.ajax({
             url: "reviewList",
             data: { movieNo: movieId,
@@ -96,45 +101,70 @@
             dataType: "json",
             success: function (response) {
                 reviews = response.content;
-
+               
                  reviews.sort(function (a, b) {
                     return b.reviewId - a.reviewId;
                  });
 
                 var reviewsHtml = '';
                 if (response.content && Array.isArray(response.content)) {
-                    response.content.forEach(function(review) {
+                    response.content.forEach(function (review) {
                         var displayDate = review.updateReviewDate ? review.updateReviewDate : review.createReviewDate;
                         reviewsHtml += '<tr><td>'
-                                    + review.reviewId + '</td><td>'
-                                    + review.reviewWriter + '</td><td>'
-                                    + review.reviewContent + '</td><td>'
-                                    + displayDate.substring(0, 10) + '</td><td>'
+                            + review.reviewId + '</td><td>'
+                            + review.reviewWriter + '</td><td>'
+                            + review.reviewContent + '</td><td>'
+                            + displayDate.substring(0, 10) + '</td><td>'
 
-                                    if(loginUsername === review.reviewWriter) {
-                                        reviewsHtml += '<a href="javascript:void(0);" onclick="editReview('+ review.reviewId +')">[수정]</a>'
-                                        reviewsHtml += '<a href="javascript:void(0);" class="delete-review" reviewNo="' + review.reviewId + '">[삭제]</a>'
-                                    }
-                                    reviewsHtml += '</td></tr>';
+                        if (loginUsername === review.reviewWriter) {
+                            reviewsHtml += '<a href="javascript:void(0);" onclick="editReview(' + review.reviewId + ')">[수정]</a>'
+                            reviewsHtml += '<a href="javascript:void(0);" class="delete-review" reviewNo="' + review.reviewId + '">[삭제]</a>'
+                        }
+                        reviewsHtml += '</td></tr>';
                     });
 
+                    var totalPages = response.totalPages;
+                    var pageGroupSize = 5;
+                    var currentPageGroup = Math.floor(currentPage / pageGroupSize);
+                    var startPage = currentPageGroup * pageGroupSize;
+                    var endPage = Math.min(startPage + pageGroupSize - 1, totalPages - 1);
+
+                    console.log("currentPage:", currentPage, "totalPages:", totalPages, "startPage:", startPage, "endPage:", endPage);
+
                     var paginationHtml = '';
-                    if (response.totalPages > 1) {
-                        if (response.number > 0) {
-                            paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (response.number - 1) + ');">이전</a>';
+                    if (totalPages > 1) {
+                        console.log("생성 시작: 페이지네이션 링크");
+
+                        if (currentPage > 0) {
+                            paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',0);">처음</a> ';
                         }
 
-                        for (var pageNum = 0; pageNum < response.totalPages; pageNum++) {
-                            paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + pageNum + ');" ' + (pageNum === response.number ? 'class="active"' : '') + '>' + (pageNum + 1) + '</a>';
+
+                        if (currentPage > 0) {
+                            paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (currentPage - 1) + ');">이전</a> ';
                         }
 
-                        if (response.number + 1 < response.totalPages) { // 현재 페이지가 총 페이지 수보다 작으면 "다음" 링크 생성
-                            paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (response.number + 1) + ');">다음</a>';
+                        for (var pageNum = startPage; pageNum <= endPage; pageNum++) {
+                            paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + pageNum + ');" ' + (pageNum === currentPage ? 'class="active"' : '') + '>' + (pageNum + 1) + '</a>';
+                            console.log("페이지 링크 추가됨:", pageNum + 1);
+                        }
+
+                        if (currentPage < totalPages - 1) {
+                            paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (currentPage + 1) + ');">다음</a> ';
+                        }
+
+
+                        if (currentPage < totalPages - 1) {
+                            paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (totalPages - 1) + ');">마지막</a>';
                         }
                     }
                 }
+
+
+
+
                  $('.pagination').html(paginationHtml);
-                $('.reviewList tbody').html(reviewsHtml); // 후기 목록 업데이트
+                $('.reviewList tbody').html(reviewsHtml);
             },
             error: function() {
                 console.log("리뷰 목록 불러오기 실패");
