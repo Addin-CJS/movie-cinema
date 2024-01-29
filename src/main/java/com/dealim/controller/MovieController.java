@@ -7,11 +7,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.DecimalFormat;
 import java.util.Optional;
@@ -24,44 +26,42 @@ public class MovieController {
 
     @RequestMapping("/movieHome")
     public String movieHome(Model model,
-                        @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
-                        @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
-      Page<Movie> movieList = null;
+                            @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
+                            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
+        Page<Movie> movieList = null;
 
-        if (searchKeyword == null || searchKeyword.trim().isEmpty()) {
+        if(searchKeyword == null) {
             movieList = movieService.movieList(pageable);
-        } else {
-            movieList = movieService.findMoviesByKeyword(searchKeyword, pageable);
         }
 
         
         int nowPage = movieList.getPageable().getPageNumber();
         int pageGroupSize = 5;  // 한 페이지 그룹에서 보여줄 페이지 수
         int totalPageGroups = (int)Math.ceil((double)movieList .getTotalPages() / pageGroupSize);    // 전체 페이지 그룹 수
-        int currentPageGroup = (nowPage-1) / pageGroupSize;    // 현재 페이지가 속한 페이지 그룹
+        int currentPageGroup = (nowPage -1) / pageGroupSize;    // 현재 페이지가 속한 페이지 그룹
         int startPage = currentPageGroup * pageGroupSize + 1; // 현재 페이지
-        int endPage = Math.min(startPage + pageGroupSize - 1, movieList.getTotalPages() - 1);// 현재 페이지 그룹의 마지막 페이지
+        int endPage = Math.min(startPage + pageGroupSize - 1, movieList.getTotalPages()); // 현재 페이지 그룹의 마지막 페이지
 
 
         model.addAttribute("movieList", movieList);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-        model.addAttribute("totalPages", movieList.getTotalPages());
-        model.addAttribute("searchKeyword", searchKeyword);
+
+
 
         return "movie/movieHome";
     }
 
     @GetMapping("/showDetail")
     public String showDetail(@RequestParam("movieId") Long movieId, Model model) {
-           Optional <Movie> movie = movieService.selectMovieDetailById(movieId);
+        Optional <Movie> movie = movieService.selectMovieDetailById(movieId);
 
-           if(movie.isPresent()) {
-               model.addAttribute("movie", movie.get());
-           } else {
-               model.addAttribute("movie", null);
-           }
+        if(movie.isPresent()) {
+            model.addAttribute("movie", movie.get());
+        } else {
+            model.addAttribute("movie", null);
+        }
 
         //영화 평점 start
         Float popularityValue = movie.get().getMvPopularity();
@@ -83,6 +83,8 @@ public class MovieController {
         model.addAttribute("movieRating", finalRating);
         //영화 평점  end
 
+
+
         return "movie/detail";
     }
 
@@ -99,6 +101,21 @@ public class MovieController {
         return "movie/movieSeats";
     }
 
+    @GetMapping("/moviesList")
+    @ResponseBody
+    public ResponseEntity<Page<Movie>> getMovies(
+            @PageableDefault(page = 0, size = 8, sort = "movieId", direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
+
+        Page<Movie> movieList;
+        if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
+            movieList = movieService.findMoviesByKeyword(searchKeyword, pageable);
+        } else {
+            movieList = movieService.movieList(pageable);
+        }
+
+        return ResponseEntity.ok(movieList);
+    }
 
     @GetMapping("/ticketing")
     public String ticketing () {
