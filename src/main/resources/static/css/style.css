@@ -606,6 +606,9 @@ footer .socail-box .fa:hover {
     color: #DB0000;
 }
 
+.numberOfSeatEl {
+    color: #414141;
+}
 
 .leftCont {
     width: 100%;
@@ -614,6 +617,11 @@ footer .socail-box .fa:hover {
 
 .leftMainCont {
     width: 100%;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
 }
 
 .container .legendContainer {
@@ -659,7 +667,12 @@ footer .socail-box .fa:hover {
     background-color: #fff;
     transition: 0.3s ease background-color;
 }
-
+.container .leftMainCont .seat:nth-child(2){
+    margin-right: 1.5em;
+}
+.container .leftMainCont .seat:nth-last-child(2){
+    margin-left: 1.5em;
+}
 .container .leftMainCont .seat::after {
     content: "";
     height: 23px;
@@ -711,17 +724,14 @@ footer .socail-box .fa:hover {
 }
 
 .container .mainSeatCont .seatCont {
-    display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .container .mainSeatCont .seatCont .seatRowCont {
-    display: flex;
 }
 
 .container .mainSeatCont .seatCont .seatRowCont2 {
-    margin: 0 1.5rem;
 }
 
 .container .leftMainCont .screen {
@@ -1188,6 +1198,10 @@ section .slider-wrap img {
 }
 
 @media (min-width: 720px) and (max-width: 1023px) {
+
+    section .movie-card-section {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 
     header nav ul {
         display: none;

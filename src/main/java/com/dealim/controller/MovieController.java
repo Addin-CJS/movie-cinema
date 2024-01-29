@@ -110,11 +110,11 @@ public class MovieController {
         }
         return "movie/movieSeats";
     }
-    //TODO:영화 예매해야지
+
     @GetMapping("/ticketing")
     public String ticketing (@RequestParam("movieId") Long movieId, Model model) {
-        Movie ticketingMovie = movieService.selectMovieDetailById(movieId).orElseThrow(()-> new RuntimeException("해당 id를 가진 영화가 없습니다"));
-        model.asMap().forEach((key, value) -> log.info(key +": "+value));
+        Movie selectedMovie = movieService.selectMovieDetailById(movieId).orElseThrow(()-> new RuntimeException("해당 id를 가진 영화가 없습니다"));
+        model.addAttribute("movie", selectedMovie);
         return "movie/ticketing";
     }
 

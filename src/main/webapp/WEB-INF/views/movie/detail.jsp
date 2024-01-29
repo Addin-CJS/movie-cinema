@@ -11,7 +11,7 @@
         <div class="popular-movie-slider-content">
             <p class="release">${movie.mvReleaseDate}</p>
             <h2 class="movie-name">${movie.mvTitle}</h2>
-            <ul class="category">
+            <ul class="category선택된 좌석 수 : ">
                 <p>${movie.mvGenre}</p>
             </ul>
             <p class="desc">${movie.mvDescription}</p>
@@ -22,11 +22,9 @@
                 <i class="fa fa-circle"> &nbsp;&nbsp;&nbsp;<span>Imdb: <b>${movieRating}</b></span></i>
             </div>
 
-
             <div class="movie-btns">
                 <button onclick="window.open('${movie.mvVideo}', '_blank');">▶ 예고편 보기</button>
             </div>
-
 
         </div>
     </div>
@@ -37,7 +35,6 @@
             </p>
             <div class="wrapper">
                 <div class="carousel owl-carousel">
-
                     <div class="card card-1">
                         <p>JUN 1t</p>
                         <p>MON</p>

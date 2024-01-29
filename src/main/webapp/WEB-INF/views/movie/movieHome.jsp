@@ -58,7 +58,7 @@
     <div class="movie-card-section">
         <c:forEach var="movie" items="${movieList.content}">
             <div class="card">
-                <img src="${movie.mvImg}">
+                <img src="${movie.mvImg}" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
                 <div class="card-content">
                     <p class="movie-name">
                         <a href="/showDetail?movieId=${movie.movieId}"> ${movie.mvTitle}</a>
