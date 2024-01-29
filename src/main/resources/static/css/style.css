@@ -1528,3 +1528,53 @@ section .slider-wrap {
 section .slider-wrap img {
     height: 500px;
 }
+
+// 마이페이지
+
+#myPageForm {
+    align: center;
+}
+section .myPage {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 70px;
+    height: 100%;
+}
+
+section .myPage h4 {
+    text-align: center;
+}
+
+section .myPage table {
+    margin: 30 430;
+    align: center;
+}
+
+section .myPage th {
+    color: white;
+    width: 100px;
+}
+
+section .myPage td {
+    color: white;
+    width: 300px;
+}
+
+section .myPage td input{
+    width: 300px;
+}
+
+
+section .myPage button {
+    margin-top: 10px;
+    margin-left: 50px
+    outline: none;
+    height: 50px;
+    background: #DB0000;
+    color: #fff;
+    border-radius: 50px;
+    padding: 10px 50px;
+    cursor: pointer;
+
+}

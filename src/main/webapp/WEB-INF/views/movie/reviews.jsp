@@ -142,7 +142,6 @@
         });
     }
 
-
     function editReview(reviewId) {
         const yn = confirm(reviewId + "번 리뷰를 수정하시겠습니까?");
 

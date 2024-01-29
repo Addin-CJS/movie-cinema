@@ -42,7 +42,9 @@
 
             if (loginOk) {
                 $("#menu-box li:contains('로그인')").hide();
-                $("#menu-box").append("<h4>${sessionScope.loginUser.username}님 환영합니다! </h4> <li>마이페이지</li> <li>로그아웃</li>");
+                $("#menu-box").append("<h4>${sessionScope.loginUser.username}님 환영합니다!</h4>")
+                              .append("<li><a href='/member/myPage'>마이페이지</a></li>")
+                              .append("<li><a href='/logout'>로그아웃</a></li>");
             }
         });
 </script>

@@ -45,17 +45,32 @@ PasswordEncoder pEncoder;
     public  String insertMember(Member member){
 
         String enPass = pEncoder.encode(member.getPassword());	// 사용자가 입력한 패스워드 암호화해서 변수에 넣기
-        member.setPassword(enPass);
+        member.setPassword(pEncoder.encode(member.getPassword()));
 
         Member insert = memberService.insertMember(member);
         return "redirect:login";
     }
+
     @GetMapping("/member/idCheck")
     @ResponseBody
-    public boolean checkId(@RequestParam("id") String username){
+    public String checkId(@RequestParam("id") String username){
         boolean checkId = memberService.idCheck(username);
 
-        return checkId;
+        return String.valueOf(checkId);
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/member/login";
+    }
+
+    @GetMapping("/member/myPage")
+    public String showMyPage(HttpSession session) {
+
+        Member loginUser = (Member)session.getAttribute("loginUser");
+
+        return "member/myPage";
     }
 
 }

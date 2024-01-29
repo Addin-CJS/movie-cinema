@@ -13,7 +13,7 @@
                     <td>
                         <div class="mb-3">
                             <input type="text" name="username" class="form-control" id="username"
-                                   placeholder="영문 6글자 이상">
+                                   placeholder="영문과 숫자를 조합해 6~10글자" maxlength="10">
                             <div id="checkResult" style="font-size: 0.8em; display: none;"></div>
                         </div>
                     </td>
@@ -73,66 +73,90 @@
         </form>
     </div>
 </section>
+
 <script>
     $(() => {
         const $idInput = $("#username");
-        $idInput.keyup(function () {
-            if ($idInput.val().length >= 5) {
+        const getIdCheck = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]{5,10}$/;
+        const $checkResult = $("#checkResult");
+        const $enrollFormSubmit = $("#enrollForm :submit");
+
+        $idInput.keyup(function() {
+            const id = $idInput.val();
+            let isValidId = false;
+
+            if (!id) {
+                $checkResult.show().css("color", "red").text('아이디를 입력해주세요.');
+                $enrollFormSubmit.attr("disabled", true);
+                return;
+            } else if (!getIdCheck.test(id)) {
+                $checkResult.show().css("color", "red").text('아이디는 영문과 숫자를 포함해 6~10자 입니다.');
+                $enrollFormSubmit.attr("disabled", true);
+                return;
+            } else {
+             isValidId = true;
+            }
+
+            console.log("isValidId  " +  isValidId);
+
+            // 유효성 검사를 통과한 경우에만 AJAX 요청 실행
+            if(isValidId) {
                 $.ajax({
                     url: "idCheck",
-                    data: {id: $idInput.val()},
+                    data: {id: id},
                     success: function (result) {
-                        console.log(result);
-                        if (result) {
-                            $("#checkResult").show();
-                            $("#checkResult").css("color", "red").text("이미 사용중인 ID입니다.");
-                            $("#enrollForm :submit").attr("disabled", true);
+                        if (result === "true") {
+                            $checkResult.show().css("color", "red").text("이미 사용중이거나 사용불가한 ID입니다.");
+                            $enrollFormSubmit.attr("disabled", true);
+                        } else if (result === "false") {
+                            $checkResult.show().css("color", "green").text("사용가능한 ID입니다.");
+                            $enrollFormSubmit.attr("disabled", false);
                         } else {
-                            $("#checkResult").show();
-                            $("#checkResult").css("color", "green").text("사용가능한 ID입니다.");
-                            $("#enrollForm :submit").attr("disabled", false);
+                            $checkResult.show().css("color", "red").text("ID 중복 체크 중 오류가 발생했습니다.");
+                            $enrollFormSubmit.attr("disabled", true);
                         }
                     },
                     error: function () {
                         console.log("아이디 중복체크용 ajax통신 실패");
                     }
-                })
-            } else {
-                $("#checkResult").hide();
-                $("#enrollForm :submit").attr("disabled", true);
+                });
             }
         })
-    })
-// 카카오 주소
- function findAddr() {
-        new daum.Postcode({
-            oncomplete: function (data) {
-                $("#kakaoAddress").val(data.address);
-            }
-        }).open();
-    }
+    });
 
-// 이메일 주소 가져오기
-$("#emailId, #emailAddress, #emailOption").on('blur change', function() {
-    email();
-});
 
-function email() {
-    const emailId = $("#emailId").val();
-    const middle = $("#middle").text();
-    const emailAddress = $("#emailAddress").val();
-    if(emailId != null && emailAddress != null) {
-        $("#totalEmail").val(emailId+middle+emailAddress);
-    }
-}
-function handleEmailOption() {
-     var emailOption = $("#emailOption").val();
-        if (emailOption === "input") {
-            $("#emailAddress").val("").attr("disabled", false);
-        } else {
-            $("#emailAddress").val(emailOption.replace("@", "")).attr("disabled", true);
+
+    // 카카오 주소
+     function findAddr() {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    $("#kakaoAddress").val(data.address);
+                }
+            }).open();
+        }
+
+    // 이메일 주소 가져오기
+    $("#emailId, #emailAddress, #emailOption").on('blur change', function() {
+        email();
+    });
+
+    function email() {
+        const emailId = $("#emailId").val();
+        const middle = $("#middle").text();
+        const emailAddress = $("#emailAddress").val();
+        if(emailId != null && emailAddress != null) {
+            $("#totalEmail").val(emailId+middle+emailAddress);
         }
     }
+    function handleEmailOption() {
+         var emailOption = $("#emailOption").val();
+            if (emailOption === "input") {
+                $("#emailAddress").val("").attr("disabled", false);
+            } else {
+                $("#emailAddress").val(emailOption.replace("@", "")).attr("disabled", true);
+            }
+        }
 
 </script>
+
 <jsp:include page="../layouts/footer.jsp"/>

@@ -83,6 +83,8 @@ public class MovieController {
         model.addAttribute("movieRating", finalRating);
         //영화 평점  end
 
+        // TODO: 이거 나중에 ~해야지
+
 
 
         return "movie/detail";
