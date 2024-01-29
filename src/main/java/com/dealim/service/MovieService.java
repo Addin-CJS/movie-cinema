@@ -31,10 +31,9 @@ public class MovieService {
 
 
     public Page<Movie> findMoviesByKeyword(String searchKeyword, Pageable pageable) {
-        // 서비스 레이어에서 검색 키워드에 와일드카드 추가
-        String keywordWithWildcard = "%" + searchKeyword + "%";
-        return movieRepository.findByMvTitleIgnoreCase(keywordWithWildcard, pageable);
 
+        System.out.println(movieRepository.findByMvTitleIgnoreCase(searchKeyword, pageable));
+        return movieRepository.findByMvTitleIgnoreCase(searchKeyword, pageable);
 
     }
 }
