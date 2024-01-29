@@ -27,4 +27,8 @@ public class ReviewService {
     public void deleteReview(Long reviewId) {
         reviewRepository.deleteById(reviewId);
     }
+
+    public Review updateReview(Review review) {
+       return reviewRepository.save(review);
+    }
 }

@@ -90,7 +90,7 @@
 
 
 
-        //처음페이지 하는 부분
+        //처음페이지
         if (currentPage > 0) {
             paginationSection.append('<a href="#" class="page-num" data-page="0">ajax 처음으로</a>');
         } else {
@@ -98,7 +98,7 @@
         }
 
 
-        //이전페이지 하는부분
+
         if (currentPage > 0) {
             paginationSection.append('<a href="#" class="page-num" data-page="' + (currentPage - 1) + '">Prev</a>');
         }
@@ -110,20 +110,17 @@
 
 
 
-        //페이지 결과에 따라 페이지 블럭 추가
+
         for (let i = startPage; i < endPage; i++) {
             var activeClass = currentPage === i ? 'active' : '';
             paginationSection.append(`<a href="#" class="page-num ${"${activeClass}"}" data-page="${"${i}"}">${"${i + 1}"}</a>`);
         }
 
-        // 다음 추가 버튼
         if (currentPage + 1 < totalPages) {
             paginationSection.append('<a href="#" class="page-num" data-page="' + (currentPage + 1) + '">Next</a>');
         } else {
             paginationSection.append('<span class="disabled">Next</span>');
         }
-
-        //마지막으로 버튼
         if (currentPage + 1 < totalPages) {
             paginationSection.append('<a href="#" class="page-num" data-page="' + (totalPages - 1) + '">ajax 마지막으로</a>');
         } else {

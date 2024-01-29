@@ -21,15 +21,15 @@
             </div>
         </div>
 
-            <div class="search-filters">
-                <input type="text" id="search-input" name="movieTitle" placeholder="Search by name...">
-                <i class="fa fa-search" id="search-icon"></i>
-            </div>
+        <div class="search-filters">
+            <input type="text" id="search-input" name="movieTitle" placeholder="Search by name...">
+            <i class="fa fa-search" id="search-icon"></i>
+        </div>
 
 
 
         <div class="search-bar">
-          <div class="bar"></div>
+            <div class="bar"></div>
         </div>
     </div>
 

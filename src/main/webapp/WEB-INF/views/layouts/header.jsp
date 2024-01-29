@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <html>
 <head>
@@ -28,7 +30,7 @@
         <ul id="menu-box">
             <div class="marker"></div>
             <li onclick="location.href='/'">메인</li>
-            <li onclick="location.href='/movieHome'">영화</li>
+            <li onclick="location.href='/movieHome?page=0'">영화</li>
             <li>예매</li>
             <li onclick="location.href='/member/login'">로그인</li>
         </ul>

@@ -32,7 +32,7 @@ public class MovieService {
 
     public Page<Movie> findMoviesByKeyword(String searchKeyword, Pageable pageable) {
 
-
+        System.out.println(movieRepository.findByMvTitleIgnoreCase(searchKeyword, pageable));
         return movieRepository.findByMvTitleIgnoreCase(searchKeyword, pageable);
 
 

@@ -26,12 +26,12 @@ public class MovieController {
 
     @RequestMapping("/movieHome")
     public String movieHome(Model model,
-                        @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
+                            @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
                             @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
-      Page<Movie> movieList = null;
+        Page<Movie> movieList = null;
 
         if(searchKeyword == null) {
-          movieList = movieService.movieList(pageable);
+            movieList = movieService.movieList(pageable);
         }
 
         int nowPage = movieList.getPageable().getPageNumber();
@@ -54,13 +54,13 @@ public class MovieController {
 
     @GetMapping("/showDetail")
     public String showDetail(@RequestParam("movieId") Long movieId, Model model) {
-           Optional <Movie> movie = movieService.selectMovieDetailById(movieId);
+        Optional <Movie> movie = movieService.selectMovieDetailById(movieId);
 
-           if(movie.isPresent()) {
-               model.addAttribute("movie", movie.get());
-           } else {
-               model.addAttribute("movie", null);
-           }
+        if(movie.isPresent()) {
+            model.addAttribute("movie", movie.get());
+        } else {
+            model.addAttribute("movie", null);
+        }
 
         //영화 평점 start
         Float popularityValue = movie.get().getMvPopularity();
