@@ -129,7 +129,7 @@
                     var startPage = currentPageGroup * pageGroupSize;
                     var endPage = Math.min(startPage + pageGroupSize - 1, totalPages - 1);
 
-                    console.log("currentPage:", currentPage, "totalPages:", totalPages, "startPage:", startPage, "endPage:", endPage);
+
 
                     var paginationHtml = '';
                     if (totalPages > 1) {

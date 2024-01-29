@@ -63,7 +63,7 @@ public class MovieService {
         int pageGroupSize = 5;
         int currentPageGroup = nowPage / pageGroupSize;
         int startPage = currentPageGroup * pageGroupSize;
-        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages - 1);
+        int endPage = (totalPages > 0) ? Math.min(startPage + pageGroupSize - 1, totalPages - 1) : 0;
 
         model.addAttribute("movieList", movieList);
         model.addAttribute("nowPage", nowPage);
