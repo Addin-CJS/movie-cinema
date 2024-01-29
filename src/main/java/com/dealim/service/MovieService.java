@@ -35,6 +35,5 @@ public class MovieService {
         System.out.println(movieRepository.findByMvTitleIgnoreCase(searchKeyword, pageable));
         return movieRepository.findByMvTitleIgnoreCase(searchKeyword, pageable);
 
-
     }
 }
