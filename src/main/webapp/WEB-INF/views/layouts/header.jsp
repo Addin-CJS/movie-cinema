@@ -29,11 +29,12 @@
 
         <ul id="menu-box">
             <div class="marker"></div>
-            <li onclick="location.href='/'">메인</li>
-            <li onclick="location.href='/movieHome?page=0'">영화</li>
-            <li>예매</li>
-            <li onclick="location.href='/member/login'">로그인</li>
+            <li data-path="/" onclick="location.href='/'">메인</li>
+            <li data-path="/movieHome" onclick="location.href='/movieHome?page=0'">영화</li>
+            <li data-path="/ticketing">예매</li>
+            <li data-path="/member/login" onclick="location.href='/member/login'">로그인</li>
         </ul>
+
     </nav>
 </header>
 <script>

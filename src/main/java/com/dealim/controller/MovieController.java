@@ -109,6 +109,7 @@ public class MovieController {
             @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
 
         Page<Movie> movieList;
+
         if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
             movieList = movieService.findMoviesByKeyword(searchKeyword, pageable);
         } else {
