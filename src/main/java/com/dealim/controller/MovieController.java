@@ -87,7 +87,7 @@ public class MovieController {
 
         return "movie/detail";
     }
-
+//
     @GetMapping("/movieSeats")
     public String movieSeats(@RequestParam("movieId") Long movieId, Model model) {
 
