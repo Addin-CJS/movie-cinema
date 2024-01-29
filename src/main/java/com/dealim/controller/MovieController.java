@@ -26,34 +26,44 @@ public class MovieController {
 
     @RequestMapping("/movieHome")
     public String movieHome(Model model,
-                            @PageableDefault(page=0, size=8, sort="movieId", direction= Sort.Direction.DESC) Pageable pageable,
-                            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
-        Page<Movie> movieList = null;
+                            @PageableDefault(page = 0, size = 8, sort = "movieId", direction = Sort.Direction.DESC) Pageable pageable,
+                            @RequestParam(value = "searchKeyword", required = false) String searchKeyword,
+                            @RequestParam(value = "category", required = false) String category) {
 
-        if (searchKeyword == null || searchKeyword.trim().isEmpty()) {
-            movieList = movieService.movieList(pageable);
-        } else {
+        Page<Movie> movieList;
+
+        // 영화 목록 조회 로직
+        if (category != null && !category.trim().isEmpty()) {
+            movieList = movieService.findMoviesByGenre(category, pageable);
+        } else if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
             movieList = movieService.findMoviesByKeyword(searchKeyword, pageable);
+        } else {
+            movieList = movieService.movieList(pageable);
         }
 
-
         int nowPage = movieList.getPageable().getPageNumber();
-        int pageGroupSize = 5;  // 한 페이지 그룹에서 보여줄 페이지 수
-        int totalPageGroups = (int)Math.ceil((double)movieList .getTotalPages() / pageGroupSize);    // 전체 페이지 그룹 수
-        int currentPageGroup = (nowPage-1) / pageGroupSize;    // 현재 페이지가 속한 페이지 그룹
-        int startPage = currentPageGroup * pageGroupSize + 1; // 현재 페이지
-        int endPage = Math.min(startPage + pageGroupSize - 1, movieList.getTotalPages() - 1);// 현재 페이지 그룹의 마지막 페이지
+        int totalPages = movieList.getTotalPages();
+        int pageGroupSize = 5;
+        int currentPageGroup = nowPage / pageGroupSize;
+        int startPage = currentPageGroup * pageGroupSize;
+        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages - 1);
 
-
+        // 모델에 데이터 추가
         model.addAttribute("movieList", movieList);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-        model.addAttribute("totalPages", movieList.getTotalPages());
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("searchKeyword", searchKeyword);
+        model.addAttribute("selectedCategory", category);
 
         return "movie/movieHome";
     }
+
+
+
+
+
 
     @GetMapping("/showDetail")
     public String showDetail(@RequestParam("movieId") Long movieId, Model model) {
@@ -100,7 +110,7 @@ public class MovieController {
         }
         return "movie/movieSeats";
     }
-
+    //TODO:영화 예매해야지
     @GetMapping("/ticketing")
     public String ticketing (@RequestParam("movieId") Long movieId, Model model) {
         Movie ticketingMovie = movieService.selectMovieDetailById(movieId).orElseThrow(()-> new RuntimeException("해당 id를 가진 영화가 없습니다"));
