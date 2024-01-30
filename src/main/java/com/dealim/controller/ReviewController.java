@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Controller
 public class ReviewController {
     @Autowired
@@ -67,17 +70,27 @@ public class ReviewController {
             return "fail";
         }
 
-
-        if ("like".equals(likeAction)) {
-            reviewService.updateLikeCount(reviewId, true);
-        } else if ("unlike".equals(likeAction)) {
-            reviewService.updateLikeCount(reviewId, false);
+        Set<Long> likedReviews = (Set<Long>) session.getAttribute("likedReviews");
+        if (likedReviews == null) {
+            likedReviews = new HashSet<>();
         }
+
+        reviewService.changeLikeStatus(reviewId, likeAction, likedReviews);
+
+        session.setAttribute("likedReviews", likedReviews);
         return "success";
     }
 
 
-
+    @GetMapping("/getUserLikes")
+    @ResponseBody
+    public ResponseEntity<Set<Long>> getUserLikes(HttpSession session) {
+        Set<Long> likedReviews = (Set<Long>) session.getAttribute("likedReviews");
+        if (likedReviews == null) {
+            likedReviews = new HashSet<>();
+        }
+        return ResponseEntity.ok(likedReviews);
+    }
 
 
 
