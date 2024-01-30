@@ -28,12 +28,11 @@ public class MemberService {
     }
 
     public Optional<Member> selectMemberByUsername(Member member) {
-        Optional<Member> loginUser = memberRepository.findByUsername(member.getUsername());
 
-        if (loginUser.isPresent()) {
-            return loginUser;
-        } else {
-            return null;
-        }
+        return memberRepository.findByUsername(member.getUsername());
+    }
+
+    public Member updateMember(Member member) {
+        return memberRepository.save(member);
     }
 }

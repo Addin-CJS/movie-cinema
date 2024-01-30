@@ -45,7 +45,7 @@
                     </td>
                 </tr>
             </table>
-            <button type="submit">내정보 수정하기</button>
+            <button><a href="/member/myPageEdit">내정보 수정하기</a></button>
         </form>
     </div>
 </section>

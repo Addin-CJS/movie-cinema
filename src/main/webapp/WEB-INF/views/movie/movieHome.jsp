@@ -78,7 +78,6 @@
 
     <div class="pagination">
         <c:choose>
-
             <c:when test="${not empty searchKeyword}">
                 <a href="${pageContext.request.contextPath}/movieHome?page=0&searchKeyword=${fn:escapeXml(searchKeyword)}">처음으로</a>
                 <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage - 1}&searchKeyword=${fn:escapeXml(searchKeyword)}" ${nowPage <= 0 ? 'style="display:none;"' : ''}>이전</a>
