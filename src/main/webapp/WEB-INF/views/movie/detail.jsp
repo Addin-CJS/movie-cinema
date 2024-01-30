@@ -39,7 +39,7 @@
                 </ul>
             </div>
         </div>
-        <button class="movie-btns" type="button" onclick="location.href='movieSeats?movieId=${movie.movieId}'">좌석선택하기</button>
+        <button class="movie-btns" type="button" onclick="selectSeat()">좌석선택하기</button>
     </div>
 </section>
 
@@ -131,7 +131,6 @@
                 $slickTimeDiv.append($timeLi);
             });
         }
-
     });
 
     //스와이퍼 설정
@@ -200,6 +199,18 @@
             })
         }, 200);
     };
+
+    function selectSeat() {
+        if (!localStorage.getItem("selectedTime")) {
+            alert("시간을 선택해주세요");
+            return;
+        }
+        if (!localStorage.getItem("selectedDate")) {
+            alert("일자를 선택해주세요");
+            return;
+        }
+        location.href = 'movieSeats?movieId=${movie.movieId}';
+    }
 </script>
 
 <jsp:include page="../movie/reviews.jsp"/>

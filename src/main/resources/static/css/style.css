@@ -325,7 +325,7 @@ section .movie-ticket-book {
     color: #fff;
     display: grid;
     grid-template-columns: auto auto;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 30px 100px;
 }
@@ -875,7 +875,7 @@ footer .socail-box .fa:hover {
 
 .container .confirmCont .movieInfo .dateOn {
     color: #414141;
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 0.4rem;
 }
 
@@ -1774,7 +1774,6 @@ section .myPage button {
 
 .swiper-container {
     height: 100px;
-    width: 700px;
     overflow: hidden;
 }
 

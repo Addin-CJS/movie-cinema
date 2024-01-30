@@ -163,10 +163,10 @@
 
                     <div class="buttonCont">
                         <div class="cancelBtn">
-                            <button id="cancelBtn">Cancel</button>
+                            <button id="cancelBtn">선택취소</button>
                         </div>
                         <div class="proceedBtnEl">
-                            <button id="proceedBtn">Continue</button>
+                            <button id="proceedBtn">결제하기</button>
                         </div>
                     </div>
                 </div>
@@ -178,7 +178,6 @@
 
 <script>
     $(() => {
-
         const allSeatCont = $("#seatCont .seat");
         const allSeatRows = $("#seatCont .row")
         const selectedSeatsHolderEl = $("#selectedSeatsHolder");
@@ -285,8 +284,7 @@
         $(proceedBtnEl).click(()=>{
             localStorage.setItem('takenSeats', JSON.stringify(takenSeats));
             var url = "ticketing?movieId=" + ${movie.movieId};
-            var windowFeatures = "width=800,height=600,resizable=yes,scrollbars=yes,status=yes";
-            console.log(takenSeats);
+            var windowFeatures = "width=800,height=516,resizable=no,status=yes";
 
             // 좌석 선택 안할시 alert
             if(takenSeats.length === 0){
@@ -294,18 +292,15 @@
                 return;
             }
 
-            window.open(url, "_blank", windowFeatures);
+            window.open(url, "ticketingWindow", windowFeatures);
         });
 
         // 일자 업데이트
-        // TODO: 일자 업데이트 구현
         let dateOn = $("#dateOn");
         function updateDate(){
-
+            dateOn.text(localStorage.getItem("selectedDate")+" "+localStorage.getItem("selectedTime"));
         };
-
         updateDate();
-
     });
 
 </script>

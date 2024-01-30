@@ -105,19 +105,34 @@
             window.close();
         });
 
-        // 제출 버튼 이벤트
+        // 결제하기
         $("#proceedBtn").click(() => {
             $.ajax({
-                url: "test",
-                type: "GET",
+                url: "ticketing",
+                type: "POST",
+                data: {
+                    takenSeats: localStorage.getItem("takenSeats"),
+                    selectedTime: localStorage.getItem("selectedTime"),
+                    selectedDate: localStorage.getItem("selectedDate"),
+                    loginUser: ${loginUser}
+                },
                 success: function (response) {
+                    alert("성공");
 
                 },
                 error: function (xhr, status, error) {
-
+                    alert(status, error, xhr);
                 }
             });
         });
+
+        // 일자 업데이트
+        let dateOn = $("#dateOn");
+        function updateDate(){
+            dateOn.text(localStorage.getItem("selectedDate")+" "+localStorage.getItem("selectedTime"));
+        };
+        updateDate();
+
     });
 </script>
 </html>

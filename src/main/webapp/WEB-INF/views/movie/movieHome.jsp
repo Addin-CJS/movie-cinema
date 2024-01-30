@@ -39,15 +39,16 @@
             </div>
         </div>
 
-       <form name="searchForm" method="get" action="${pageContext.request.contextPath}/movieHome">
-           <div class="search-filters">
-               <input type="text" id="search-input" name="searchKeyword" placeholder="검색어를 입력해주세요" value="${fn:escapeXml(searchKeyword)}">
-               <i class="fa fa-search" id="search-icon" onclick="submitSearchForm()"></i>
-           </div>
-       </form>
+        <form name="searchForm" method="get" action="${pageContext.request.contextPath}/movieHome">
+            <div class="search-filters">
+                <input type="text" id="search-input" name="searchKeyword" placeholder="검색어를 입력해주세요"
+                       value="${fn:escapeXml(searchKeyword)}">
+                <i class="fa fa-search" id="search-icon" onclick="submitSearchForm()"></i>
+            </div>
+        </form>
 
         <div class="search-bar">
-          <div class="bar"></div>
+            <div class="bar"></div>
         </div>
     </div>
 
@@ -58,7 +59,8 @@
     <div class="movie-card-section">
         <c:forEach var="movie" items="${movieList.content}">
             <div class="card">
-                <img src="${movie.mvImg}" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
+                <img src="${movie.mvImg}"
+                     onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
                 <div class="card-content">
                     <p class="movie-name">
                         <a href="/showDetail?movieId=${movie.movieId}"> ${movie.mvTitle}</a>
@@ -117,19 +119,18 @@
 </section>
 
 <script>
-     function submitSearchForm() {
+    function submitSearchForm() {
         document.searchForm.submit();
-     }
+    }
 
-     document.querySelector('.category-filters').addEventListener('click', function() {
-         var genreList = document.getElementById('genre-list');
-         if(genreList.style.display === 'none') {
-             genreList.style.display = 'block';
-         } else {
-             genreList.style.display = 'none';
-         }
-     });
-
+    document.querySelector('.category-filters').addEventListener('click', function () {
+        var genreList = document.getElementById('genre-list');
+        if (genreList.style.display === 'none') {
+            genreList.style.display = 'block';
+        } else {
+            genreList.style.display = 'none';
+        }
+    });
 
 
 </script>

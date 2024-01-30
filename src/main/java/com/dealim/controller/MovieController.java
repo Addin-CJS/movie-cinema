@@ -1,6 +1,8 @@
 package com.dealim.controller;
 
+import com.dealim.domain.Member;
 import com.dealim.domain.Movie;
+import com.dealim.dto.PaidTicket;
 import com.dealim.service.MovieService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,6 +33,7 @@ public class MovieController {
                             @RequestParam(value = "category", required = false) String category) {
 
         Page<Movie> movieList;
+        Optional<?> asd;
 
        //페이징, 검색, 전체목록 , 카테고리 별
         movieService.getMovieHome(pageable, searchKeyword, category, model);
@@ -63,5 +67,12 @@ public class MovieController {
         return "movie/ticketing";
     }
 
+    @PostMapping("/ticketing")
+    public String payTicket(PaidTicket paidTicket, Member loginUser) {
+        log.warn(paidTicket.toString());
+        log.warn(loginUser.toString());
+
+        return "movie/ticketing";
+    }
     // TODO: @ExceptionHandler or @ControllerAdvice를 통해 오류 처리할것
 }
