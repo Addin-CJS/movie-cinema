@@ -19,6 +19,10 @@ public class Review {
     private String reviewContent;
     private int movieNo;
     private String reviewWriter;
+
+    @Column(nullable = true, columnDefinition = "integer default 0")
+    private Integer likeCount;
+
     @CreatedDate
     @Column(name="createDate")
     private LocalDateTime createReviewDate;
