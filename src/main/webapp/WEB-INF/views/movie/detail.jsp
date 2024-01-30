@@ -5,7 +5,6 @@
 
 <section>
     <div class="popular-movie-slider">
-
         <img src="${movie.mvImg}" alt="영화 이미지" class="poster">
 
         <div class="popular-movie-slider-content">
@@ -23,83 +22,31 @@
             <div class="movie-btns">
                 <button onclick="window.open('${movie.mvVideo}', '_blank');">▶ 예고편 보기</button>
             </div>
+        </div>
+    </div>
 
+    <div class="choose-date">
+        <p>상영 일자</p>
+        <div class="swiper-date sw_con swiper-container snbSwiper">
+            <ul class="swtab conlist swiper-wrapper">
+            </ul>
         </div>
     </div>
-    <div class="movie-ticket-book">
-        <div class="choose-date">
-            <p>상영 일자</p>
-            <div class="slick-date">
-            </div>
+    <div class="choose-time">
+        <p>상영 시간</p>
+        <div class="swiper-time sw_con swiper-container snbSwiper">
+            <ul class="swtab conlist swiper-wrapper">
+            </ul>
         </div>
-        <div class="choose-time">
-            <p>상영 시간</p>
-            <div class="slick-time">
-            </div>
-        </div>
-        <button type="button" onclick="location.href='movieSeats?movieId=${movie.movieId}'">좌석선택하기</button>
     </div>
+    <button class="movie-btns" type="button" onclick="location.href='movieSeats?movieId=${movie.movieId}'">좌석선택하기</button>
+</section>
+
     <!---movie-ticket-book-->
-
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             addDatesToSlick();
             addTimeToSlick();
-            $('.slick-date').slick({
-                centerPadding: '30px',
-                slidesToShow: 5,
-                arrows: true,
-                prevArrow: '<button type="button" class="slick-prev"><</button>',
-                nextArrow: '<button type="button" class="slick-next">></button>',
-                responsive: [
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            arrows: false,
-                            centerMode: true,
-                            centerPadding: '40px',
-                            slidesToShow: 3
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            arrows: false,
-                            centerMode: true,
-                            centerPadding: '40px',
-                            slidesToShow: 1
-                        }
-                    }
-                ]
-            });
-
-            $('.slick-time').slick({
-                centerPadding: '30px',
-                slidesToShow: 5,
-                arrows: true,
-                prevArrow: '<button type="button" class="slick-prev"><</button>',
-                nextArrow: '<button type="button" class="slick-next">></button>',
-                responsive: [
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            arrows: false,
-                            centerMode: true,
-                            centerPadding: '40px',
-                            slidesToShow: 3
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            arrows: false,
-                            centerMode: true,
-                            centerPadding: '40px',
-                            slidesToShow: 1
-                        }
-                    }
-                ]
-            });
 
             // 날짜 생성
             function createDateList() {
@@ -108,35 +55,33 @@
                 const dates = [];
                 const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
 
-                for (let i = 0; i < 15; i++) {
+                for (let i = 0; i < 30; i++) {
                     const futureDate = new Date(today);
                     futureDate.setDate(futureDate.getDate() + i);
                     const dayOfWeek = weekDays[futureDate.getDay()];
                     const formattedDate = `${"${futureDate.getMonth() + 1}"}월 ${"${futureDate.getDate()}일"}`;
 
                     // 오늘 날짜와 비교
-                    let label = "("+dayOfWeek+")";
+                    let label = "(" + dayOfWeek + ")";
                     if (futureDate.getTime() === today.getTime()) {
                         label = "(오늘)";
                     }
 
-                    dates.push({ date: formattedDate, day: label });
+                    dates.push({date: formattedDate, day: label});
                 }
                 return dates;
             }
 
-            // 날짜 목록 추가
+            // 날짜 생성 및 목록 추가
             function addDatesToSlick() {
                 const dates = createDateList();
-                const $slickDateDiv = $('.slick-date');
+                const $slickDateDiv = $('.swiper-date ul');
 
-                dates.forEach(({ date, day }) => {
-                    const $dateContainer = $('<div>').addClass('date-container');
-                    const $dateDiv = $('<div>').text(date).addClass('date');
-                    const $dayDiv = $('<div>').text(day).addClass('day');
-
-                    $dateContainer.append($dateDiv).append($dayDiv);
-                    $slickDateDiv.append($dateContainer);
+                dates.forEach(({date, day}) => {
+                    const $dateLi = $('<li>').addClass('swiper-slide');
+                    const $dateLink = $('<a>').attr('href', 'javascript:void(0)').text(date + ' ' + day);
+                    $dateLi.append($dateLink);
+                    $slickDateDiv.append($dateLi);
                 });
             }
 
@@ -173,18 +118,86 @@
                 return times;
             }
 
-            // 시간대 목록 추가
+            // 시간대 생성 및 목록 추가
             function addTimeToSlick() {
                 const times = createTimeList();
-                const $slickTimeDiv = $('.slick-time');
+                const $slickTimeDiv = $('.swiper-time ul');
 
                 times.forEach(time => {
-                    const $timeDiv = $('<div>').text(time).addClass("time");
-                    $slickTimeDiv.append($timeDiv);
+                    const $timeLi = $('<li>').addClass('swiper-slide');
+                    const $timeLink = $('<a>').attr('href', 'javascript:void(0)').text(time);
+                    $timeLi.append($timeLink);
+                    $slickTimeDiv.append($timeLi);
                 });
             }
+
         });
 
+        //스와이퍼 설정
+        $(function () {
+            var swiper = new Swiper('.snbSwiper', {
+                slidesPerView: 5,
+                preventClicks: true,
+                preventClicksPropagation: false,
+                observer: true,
+                observeParents: true
+            });
+            var snbSwiperDateItem = $('.choose-date .snbSwiper .swiper-wrapper .swiper-slide a');
+            var snbSwiperTimeItem = $('.choose-time .snbSwiper .swiper-wrapper .swiper-slide a');
+
+            $('.choose-date .snbSwiper .swiper-wrapper .swiper-slide a, .choose-time .snbSwiper .swiper-wrapper .swiper-slide a').on("click",function () {
+                var target = $(this).parent(); // a위의 li 선택
+
+                if(target.closest('.snbSwiper').hasClass('swiper-date')){
+                    snbSwiperDateItem.parent().removeClass('on');
+                    target.addClass('on');
+                    muCenter(target);
+                    localStorage.setItem("selectedDate",target.text());
+                }
+
+                if(target.closest('.snbSwiper').hasClass('swiper-time')){
+                    snbSwiperTimeItem.parent().removeClass('on');
+                    target.addClass('on');
+                    muCenter(target);
+                    localStorage.setItem("selectedTime",target.text());
+                }
+            });
+        });
+        // 중앙에 위치 시키기
+        function muCenter(target) {
+            if(target.closest('.snbSwiper').hasClass('swiper-date')){
+                var snbwrap = $('.choose-date .snbSwiper .swiper-wrapper');
+            }
+            if(target.closest('.snbSwiper').hasClass('swiper-time')){
+                var snbwrap = $('.choose-time .snbSwiper .swiper-wrapper');
+            }
+            var targetPos = target.position();
+            var box = $('.snbSwiper');
+            var boxHarf = box.width() / 2;
+            var pos;
+            var listWidth = 0;
+
+            snbwrap.find('.swiper-slide').each(function () {
+                listWidth += $(this).outerWidth();
+            })
+
+            var selectTargetPos = targetPos.left + target.outerWidth() / 2;
+
+            if (selectTargetPos <= boxHarf) { // left
+                pos = 0;
+            } else if ((listWidth - selectTargetPos) <= boxHarf) {     //right
+                pos = listWidth - box.width();
+            } else {
+                pos = selectTargetPos - boxHarf;
+            }
+
+            setTimeout(function () {
+                snbwrap.css({
+                    "transform": "translate3d(" + (pos * -1) + "px, 0, 0)",
+                    "transition-duration": "500ms"
+                })
+            }, 200);
+        };
     </script>
 
 <jsp:include page="../movie/reviews.jsp"/>

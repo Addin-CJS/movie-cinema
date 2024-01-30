@@ -157,6 +157,7 @@ header nav ul li img {
     border-radius: 50%;
     object-fit: cover;
 }
+
 .movie-btns {
     width: 200px;
     border: none;
@@ -175,6 +176,7 @@ header nav ul li img {
 .reviewList .movie-btns {
     width: 250px;
 }
+
 .slick-slide {
     height: auto;
 }
@@ -195,7 +197,7 @@ header nav ul li img {
     z-index: 1;
 }
 
-.slick-date, .slick-time {
+.swiper-date, .swiper-time {
     padding: 0 30px 0 30px;
 }
 
@@ -216,10 +218,12 @@ header nav ul li img {
     font-size: 1.2em;
     font-weight: bold;
 }
+
 .movie-ticket-book .date,
-.movie-ticket-book .day{
+.movie-ticket-book .day {
     display: inline-block;
 }
+
 .time {
     font-size: 1.2em;
 }
@@ -329,6 +333,7 @@ section .movie-ticket-book {
 section .choose-time {
     grid-row: 2;
 }
+
 .choose-time button,
 .choose-date button {
     font-weight: 700;
@@ -403,7 +408,7 @@ section .movie-ticket-book .choose-time .wrapper .marker {
 }
 
 
-section .movie-ticket-book>button {
+section .movie-ticket-book > button {
     font-size: 1em;
     width: 200px;
     grid-row: 1 / span 2;
@@ -747,12 +752,15 @@ footer .socail-box .fa:hover {
     background-color: #fff;
     transition: 0.3s ease background-color;
 }
-.container .leftMainCont .seat:nth-child(2){
+
+.container .leftMainCont .seat:nth-child(2) {
     margin-right: 1.5em;
 }
-.container .leftMainCont .seat:nth-last-child(2){
+
+.container .leftMainCont .seat:nth-last-child(2) {
     margin-left: 1.5em;
 }
+
 .container .leftMainCont .seat::after {
     content: "";
     height: 23px;
@@ -1436,7 +1444,7 @@ section .slider-wrap img {
     }
 
 
-    section .movie-ticket-book>button {
+    section .movie-ticket-book > button {
         grid-row: inherit;
         margin-top: 20px;
         position: relative;
@@ -1494,7 +1502,7 @@ section .slider-wrap img {
         justify-content: center;
     }
 
-    section .movie-ticket-book>button {
+    section .movie-ticket-book > button {
         grid-row: inherit;
     }
 
@@ -1630,6 +1638,7 @@ section .slider-wrap img {
 #genre-list li:hover {
     background-color: #444;
 }
+
 /*end of 카테고리 css*/
 
 /*// 마이페이지*/
@@ -1637,6 +1646,7 @@ section .slider-wrap img {
 #myPageForm {
     align: center;
 }
+
 section .myPage {
     background-color: black;
     color: white;
@@ -1664,7 +1674,7 @@ section .myPage td {
     width: 300px;
 }
 
-section .myPage td input{
+section .myPage td input {
     width: 300px;
 }
 
@@ -1680,4 +1690,66 @@ section .myPage button {
     padding: 10px 50px;
     cursor: pointer;
 
+}
+
+/*스와이프*/
+
+.swiper-container {
+    height: 100px;
+    width: 700px;
+    overflow: hidden;
+}
+
+.conlist {
+    padding: 20px 0;
+    margin: 0 -10px;
+}
+
+.conlist:after {
+    content: "";
+    display: block;
+    clear: both
+}
+
+.conlist li {
+    float: left;
+}
+
+.conlist li a {
+    padding: 0 10px;
+    font-size: 16px;
+    color: #767676;
+    font-weight: 500;
+}
+
+.conlist li.on a {
+    color: #19aae1;
+}
+
+.conlist li:after {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 8px;
+    background: #dedede;
+    vertical-align: middle;
+    margin-left: 5px
+}
+
+.conlist li:last-child:after {
+    display: none;
+}
+
+
+.swtab.conlist {
+    max-width: 940px;
+    margin: 0
+}
+
+.swtab.conlist li a {
+    padding: 0 5px;
+}
+
+.swtab.conlist li:after {
+    margin-right: 5px
 }
