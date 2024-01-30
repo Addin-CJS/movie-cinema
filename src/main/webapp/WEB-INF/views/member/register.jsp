@@ -54,7 +54,6 @@
                         </div>
                     </td>
                 </tr>
-
                 <tr>
                     <th><label for="phoneNumber">PHONE</label></th>
                     <td>

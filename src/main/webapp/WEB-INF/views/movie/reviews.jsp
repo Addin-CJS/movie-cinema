@@ -2,19 +2,38 @@
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
+
     <div class="review">
         <table class="reviewList">
             <thead>
                 <tr id="reviewTitle">
                     <th colspan="2">영화후기</th>
-                    <th><textarea cols="100" rows="4" id="reviewContent"> </textarea></th>
+                    <th>별점
+                        <form name="stars" id="starForm" method="post">
+                        	<fieldset>
+                        		<span class="text-bold"></span>
+                        		<input type="radio" name="reviewStar" value="5" id="rate1"><label
+                        			for="rate1">★</label>
+                        		<input type="radio" name="reviewStar" value="4" id="rate2"><label
+                        			for="rate2">★</label>
+                        		<input type="radio" name="reviewStar" value="3" id="rate3"><label
+                        			for="rate3">★</label>
+                        		<input type="radio" name="reviewStar" value="2" id="rate4"><label
+                        			for="rate4">★</label>
+                        		<input type="radio" name="reviewStar" value="1" id="rate5"><label
+                        			for="rate5">★</label>
+                        	</fieldset>
+                        </form>
+                    </th>
+                    <th><textarea cols="80" rows="4" id="reviewContent"> </textarea></th>
                     <th colspan="2">
                         <button onclick="insertReview();">평점 및 리뷰작성</button>
                     </th>
                 </tr>
                 <tr id="reviewEditForm" style="display : none;">
                     <th colspan="2">영화후기 수정</th>
-                    <th><textarea cols="100" rows="4" id="editReviewContent"> </textarea></th>
+                    <th>별점</th>
+                    <th><textarea cols="80" rows="4" id="editReviewContent"> </textarea></th>
                     <th colspan="2">
                         <button onclick="updateReview();">수정 완료</button>
                         <button onclick="cancelEdit();">수정 취소</button>
@@ -26,6 +45,7 @@
                     <tr id="reviewItem">
                         <td>${review.reviewId}</td>
                         <td>${review.reviewWriter}</td>
+                        <td>별점</td>
                         <td>${review.reviewContent}</td>
                         <td>${fn:substringBefore(review.createReviewDate.toString(), 'T')}</td>
 
@@ -113,6 +133,7 @@
                         var displayDate = review.updateReviewDate ? review.updateReviewDate : review.createReviewDate;
                         reviewsHtml += '<tr><td>'
                             + review.reviewId + '</td><td>'
+                            + review.reviewWriter + '</td><td>'
                             + review.reviewWriter + '</td><td>'
                             + review.reviewContent + '</td><td>'
                             + '<a href="javascript:void(0);" onclick="likeReview(' + review.reviewId + ');" id="heart-' + review.reviewId + '">♡</a>'
