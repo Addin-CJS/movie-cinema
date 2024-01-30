@@ -115,9 +115,9 @@
                     const formattedDate = `${"${futureDate.getMonth() + 1}"}월 ${"${futureDate.getDate()}일"}`;
 
                     // 오늘 날짜와 비교
-                    let label = dayOfWeek;
+                    let label = "("+dayOfWeek+")";
                     if (futureDate.getTime() === today.getTime()) {
-                        label = "오늘";
+                        label = "(오늘)";
                     }
 
                     dates.push({ date: formattedDate, day: label });

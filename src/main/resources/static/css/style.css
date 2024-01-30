@@ -216,6 +216,10 @@ header nav ul li img {
     font-size: 1.2em;
     font-weight: bold;
 }
+.movie-ticket-book .date,
+.movie-ticket-book .day{
+    display: inline-block;
+}
 .time {
     font-size: 1.2em;
 }
