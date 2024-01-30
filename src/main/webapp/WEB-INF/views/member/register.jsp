@@ -4,7 +4,7 @@
 
 <section>
     <div class="register">
-        <h4>회원가입</h4>
+        <h3>회원가입</h3>
 
         <form action="register" method="post" id="enrollForm">
             <table>
@@ -39,7 +39,7 @@
                 <tr>
                     <th><label for="email">EMAIL</label></th>
                     <td>
-                        <div>
+                        <div id="emailField">
                             <input id="emailId" required><span id="middle">@</span><input id="emailAddress">
                             <select class="form-select" aria-label="Default select example" id="emailOption"
                                     onchange="handleEmailOption()" required>
@@ -59,7 +59,7 @@
                     <th><label for="phoneNumber">PHONE</label></th>
                     <td>
                         <div class="mb-3">
-                            <input name="phoneNumber" id="phoneNumber" placeholder="-빼고 입력해주세요"  maxlength="11" required>
+                            <input name="phoneNumber" id="phoneNumber" placeholder="- 빼고 입력해주세요"  maxlength="11" required>
                             <div id="checkPhoneResult" style="font-size: 0.8em; display: none;"></div>
                         </div>
                     </td>
@@ -67,14 +67,20 @@
                 <tr>
                     <th><label for="kakaoAddress">ADDRESS</label></th>
                     <td>
-                        <input type="text" name="homeAddress" id="kakaoAddress" readonly>
-                        <input type="button" value="주소 검색" onclick="findAddr();">
-                        <div id="checkAddressResult" style="font-size: 0.8em; display: none;"></div>
+                        <div id="addressField">
+                            <input type="text" name="homeAddress" id="kakaoAddress" readonly>
+                            <input type="button" value="주소 검색" onclick="findAddr();">
+                            <div id="checkAddressResult" style="font-size: 0.8em; display: none;"></div>
+                        </div>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">회원가입</button>
+                        <button type="reset">초기화</button>
+                    <td>
+                <tr>
             </table>
-            <button type="submit">회원가입</button>&emsp;
-            <button type="reset">초기화</button>
         </form>
     </div>
 </section>

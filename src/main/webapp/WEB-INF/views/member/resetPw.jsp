@@ -3,7 +3,7 @@
 
 <section>
         <div class="resetPw">
-            <h4>비밀번호 재설정</h4>
+            <h3>비밀번호 재설정</h3>
             <form action="checkForResetPw" method="post" id="checkForResetPwForm">
                 <table>
                     <tr>
@@ -28,8 +28,12 @@
                             <input name="phoneNumber" id="phoneNumber" class="form-control" placeholder="전화번호" type="text" maxlength="11">
                          </td>
                      </tr>
+                     <tr>
+                        <td colspan="2">
+                            <button type="submit">계정 확인</button>
+                        </td>
+                     </tr>
                 </table>
-                <button type="submit">계정 확인</button>
             </form>
                 <div id="findIdResult"></div>
             <form action="resetPw" method="post" id="resetPwForm" style="display:none;">
@@ -63,8 +67,12 @@
                               <input type="hidden" name="homeAddress" id="hiddenHomeAddress">
                            </td>
                       </tr>
+                      <tr>
+                        <td colspan="2">
+                             <button type="submit">비밀번호 재설정</button>
+                        </td>
+                      </tr>
                 </table>
-                <button type="submit">재설정</button>
             </form>
         </div>
 </section>

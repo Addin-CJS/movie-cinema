@@ -1109,15 +1109,18 @@ body.modal-active .overlay {
 /* 로그인 */
 
 section .login {
-    background-color: black;
-    color: white;
     text-align: center;
-    padding: 70px;
+    padding: 20px;
     height: 100%;
+}
+
+section .login h3 {
+    margin: 30px;
 }
 
 section .login table {
     margin: 0 auto;
+    width: 300px;
 }
 
 section .login th {
@@ -1127,40 +1130,60 @@ section .login th {
 
 section .login td {
     color: white;
-    width: 300px;
+}
+
+section .login td input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
 }
 
 section .login button {
     margin-top: 10px;
-    outline: none;
-    height: 50px;
-    background: #DB0000;
+    width: 145px;
+    height: 40px;
+    background: #FF7012;
     color: #fff;
-    border-radius: 50px;
-    padding: 10px 50px;
-    cursor: pointer;
+    border-radius: 30px;
+    padding: 0 30px;
     cursor: pointer;
 }
 
-.error-text {
-    color:red;
-    font-size:0.8em;
+
+#findIdAndPw {
+    text-align: center;
+    margin-top: 10px;
+    padding: 20px;
+    height: 100%;
 }
 
 #findIdAndPw a {
-    font-size:0.8em;
+    font-size: 0.8em;
+    text-align: center;
 }
 
-section .findId {
-    background-color: black;
-    color: white;
+.error-text {
+    margin-top: 5px;
     text-align: center;
-    padding: 70px;
+    color: red;
+    font-size: 0.8em;
+}
+
+/* 아이디 찾기 */
+section .findId {
+    text-align: center;
+    padding: 20px;
     height: 100%;
+}
+
+section .findId h3 {
+    margin: 30px;
 }
 
 section .findId table {
     margin: 0 auto;
+    width: 300px;
 }
 
 section .findId th {
@@ -1170,53 +1193,71 @@ section .findId th {
 
 section .findId td {
     color: white;
-    width: 300px;
+}
+
+section .findId td input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
 }
 
 section .findId button {
     margin-top: 10px;
-    outline: none;
-    height: 50px;
-    background: #DB0000;
+    width: 100%;
+    height: 40px;
+    background: #FF7012;
     color: #fff;
-    border-radius: 50px;
-    padding: 10px 50px;
-    cursor: pointer;
+    border-radius: 30px;
+    padding: 0 30px;
     cursor: pointer;
 }
 
+#findIdResult {
+    font-size: 0.8em;
+    padding: 10px;
+}
 
+/* 비밀번호 재생성 */
 section .resetPw {
-    background-color: black;
-    color: white;
     text-align: center;
-    padding: 70px;
+    padding: 20px;
     height: 100%;
+}
+
+section .resetPw h3 {
+    margin: 30px;
 }
 
 section .resetPw table {
     margin: 0 auto;
+    width: 300px;
 }
 
 section .resetPw th {
     color: white;
-    width: 100px;
+    width: 70px;
 }
 
 section .resetPw td {
     color: white;
-    width: 500px;
+}
+
+section .resetPw td input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
 }
 
 section .resetPw button {
     margin-top: 10px;
-    outline: none;
-    height: 50px;
-    background: #DB0000;
+    width: 100%;
+    height: 40px;
+    background: #FF7012;
     color: #fff;
-    border-radius: 50px;
-    padding: 10px 50px;
-    cursor: pointer;
+    border-radius: 30px;
+    padding: 0 30px;
     cursor: pointer;
 }
 
@@ -1224,37 +1265,88 @@ section .resetPw button {
 /* 회원가입 */
 
 section .register {
-    background-color: black;
-    color: white;
     text-align: center;
-    padding: 70px;
+    padding: 20px;
     height: 100%;
+}
+
+section .register h3 {
+    margin: 30px;
 }
 
 section .register table {
     margin: 0 auto;
+    width: 500px;
 }
 
 section .register th {
     color: white;
-    width: 100px;
 }
 
 section .register td {
     color: white;
-    width: 500px;
+    width: 100%;
+}
+
+section .register td input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+
+section .register #emailField,
+section .register #addressField {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+section .register #emailField select {
+    border-radius: 5px;
+    height: 40px;
+}
+
+section .register #emailField option {
+    border-radius: 5px;
+}
+
+
+section .register #emailId,
+section .register #emailAddress,
+section .register #kakaoAddress {
+    flex-grow: 1;
+}
+
+
+section .register #emailOption {
+    flex-shrink: 0;
+    min-width: 100px;
+}
+
+section .register #emailAddress:disabled {
+    color: black;
+    background-color: white;
+}
+
+
+section .register #addressField input[type="button"] {
+    width: 130px;
+    padding-right: 10px;
 }
 
 section .register button {
     margin-top: 10px;
-    outline: none;
-    height: 50px;
-    background: #DB0000;
+    width: 243px;
+    height: 40px;
+    background: #FF7012;
     color: #fff;
-    border-radius: 50px;
-    padding: 10px 50px;
+    border-radius: 30px;
+    padding: 0 30px;
     cursor: pointer;
-
+    text-align: center;
 }
 
 /* 리뷰 */
@@ -1720,54 +1812,56 @@ section .slider-wrap img {
 
 /*end of 카테고리 css*/
 
-/*// 마이페이지*/
-
-#myPageForm {
-    align: center;
-}
+/*마이페이지*/
 
 section .myPage {
-    background-color: black;
-    color: white;
     text-align: center;
-    padding: 70px;
     height: 100%;
+    padding: 20px;
 }
 
-section .myPage h4 {
-    text-align: center;
+section .myPage h3 {
+    margin: 30px;
 }
 
 section .myPage table {
-    align: center;
+    margin: 0 auto;
+    width: 500px;
 }
 
 section .myPage th {
     color: white;
-    width: 100px;
 }
 
 section .myPage td {
     color: white;
-    width: 300px;
+    width: 100%;
 }
 
 section .myPage td input {
-    width: 300px;
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
 }
-
 
 section .myPage button {
     margin-top: 10px;
-    margin-left: 50px;
-    outline: none;
-    height: 50px;
-    background: #DB0000;
+    width: 100%;
+    height: 40px;
+    background: #FF7012;
     color: #fff;
-    border-radius: 50px;
-    padding: 10px 50px;
+    border-radius: 30px;
+    padding: 0 30px;
     cursor: pointer;
+    text-align: center;
+}
 
+/*마이페이지*/
+section .myPageEdit {
+    text-align: center;
+    padding: 20px;
+    height: 100%;
 }
 
 /*스와이프*/
@@ -1834,6 +1928,7 @@ section .myPage button {
 #myPageEditForm {
     align: center;
 }
+
 section .myPageEdit {
     background-color: black;
     color: white;
@@ -1842,39 +1937,91 @@ section .myPageEdit {
     height: 100%;
 }
 
-section .myPageEdit h4 {
-    text-align: center;
+section .myPageEdit h3 {
+    margin: 30px;
 }
 
 section .myPageEdit table {
-    margin: 30 430;
-    align: center;
+    margin: 0 auto;
+    width: 500px;
 }
 
 section .myPageEdit th {
     color: white;
-    width: 100px;
 }
 
 section .myPageEdit td {
     color: white;
-    width: 300px;
+    width: 100%;
 }
 
-section .myPageEdit td input{
-    width: 300px;
+section .myPageEdit td input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+section .myPageEdit td #btnField {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 
 section .myPageEdit button {
+    flex-grow: 1;
     margin-top: 10px;
-    margin-left: 50px;
-    outline: none;
-    height: 50px;
-    background: #DB0000;
+    height: 40px;
+    background: #FF7012;
     color: #fff;
-    border-radius: 50px;
-    padding: 10px 50px;
+    border-radius: 30px;
+    padding: 0 30px;
     cursor: pointer;
+    text-align: center;
+}
 
+section .myPageEdit #emailField,
+section .myPageEdit #addressField {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+section .myPageEdit #emailField select {
+    border-radius: 5px;
+    height: 40px;
+}
+
+section .myPageEdit #emailField option {
+    border-radius: 5px;
+}
+
+section .myPageEdit #emailId,
+section .myPageEdit #emailAddress,
+section .myPageEdit #kakaoAddress {
+    flex-grow: 1;
+}
+
+
+section .myPageEdit #emailOption {
+    flex-shrink: 0;
+    min-width: 100px;
+}
+
+section .myPageEdit #emailAddress:disabled {
+    color: black;
+    background-color: white;
+}
+
+
+section .myPageEdit #addressField input[type="text"] {
+    flex-grow: 1;
+}
+
+section .myPageEdit #addressField input[type="button"] {
+    flex-shrink: 0;
+    width: 120px;
+    padding-right: 10px;
 }

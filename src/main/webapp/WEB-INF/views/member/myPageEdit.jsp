@@ -8,7 +8,7 @@
 
 <section>
     <div class="myPageEdit">
-        <h4>내 정보 수정</h4>
+        <h3>내 정보 수정</h3>
         <c:set var="me" value="${loginUser}" />
 
         <form action="myPageEdit" method="post" id="myPageEditForm">
@@ -35,7 +35,7 @@
                 <tr>
                     <th><label for="email">EMAIL</label></th>
                     <td>
-                        <div>
+                        <div id="emailField">
                             <input id="emailId" required><span id="middle">@</span><input id="emailAddress">
                             <select class="form-select" aria-label="Default select example" id="emailOption"
                                     onchange="handleEmailOption()" required>
@@ -60,15 +60,23 @@
                 <tr>
                     <th><label for="kakaoAddress">ADDRESS</label></th>
                     <td>
-                        <input type="text" name="homeAddress" id="kakaoAddress" value="${me.homeAddress}" >
-                        <input type="button" value="주소 검색" onclick="findAddr();">
-                        <div id="checkAddressResult" style="font-size: 0.8em; display: none;"></div>
+                        <div id=addressField>
+                            <input type="text" name="homeAddress" id="kakaoAddress" value="${me.homeAddress}" >
+                            <input type="button" value="주소 검색" onclick="findAddr();">
+                            <div id="checkAddressResult" style="font-size: 0.8em; display: none;"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div id=btnField>
+                            <button type="submit">수정</button>
+                            <button type="button" onclick="goBack()">뒤로</button>
+                            <button>회원탈퇴</button>
+                        </div>
                     </td>
                 </tr>
             </table>
-            <button type="submit">수정</button>
-            <button type="button" onclick="goBack()">뒤로</button>
-            <button>회원탈퇴</button>
         </form>
     </div>
 </section>
