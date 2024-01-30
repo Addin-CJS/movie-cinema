@@ -18,5 +18,4 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     Page<Movie> findByMvGenre(String mvGenre, Pageable pageable);
 
 
-
 }

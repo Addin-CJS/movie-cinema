@@ -1,8 +1,6 @@
 package com.dealim.controller;
 
-import com.dealim.domain.Member;
 import com.dealim.domain.Movie;
-import com.dealim.dto.PaidTicket;
 import com.dealim.service.MovieService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,7 +21,7 @@ import java.util.Optional;
 public class MovieController {
 
     @Autowired
-    MovieService movieService;
+    private MovieService movieService;
 
     @RequestMapping("/movieHome")
     public String movieHome(Model model,
@@ -60,19 +57,5 @@ public class MovieController {
         return "movie/movieSeats";
     }
 
-    @GetMapping("/ticketing")
-    public String ticketing (@RequestParam("movieId") Long movieId, Model model) {
-        Movie selectedMovie = movieService.selectMovieDetailById(movieId).orElseThrow(()-> new RuntimeException("해당 id를 가진 영화가 없습니다"));
-        model.addAttribute("movie", selectedMovie);
-        return "movie/ticketing";
-    }
 
-    @PostMapping("/ticketing")
-    public String payTicket(PaidTicket paidTicket, Member loginUser) {
-        log.warn(paidTicket.toString());
-        log.warn(loginUser.toString());
-
-        return "movie/ticketing";
-    }
-    // TODO: @ExceptionHandler or @ControllerAdvice를 통해 오류 처리할것
 }

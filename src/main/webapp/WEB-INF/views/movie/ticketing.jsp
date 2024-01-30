@@ -87,6 +87,7 @@
         function updatePrice(price, seats) {
             const totalPriceEl = $("#totalPrice");
             let total = seats * price;
+            localStorage.setItem("ticketedPrice",total);
             total = AddComma(total);
             price = AddComma(price);
             totalPriceEl.html(`${"${total}"}원`);
@@ -114,7 +115,8 @@
                     takenSeats: localStorage.getItem("takenSeats"),
                     selectedTime: localStorage.getItem("selectedTime"),
                     selectedDate: localStorage.getItem("selectedDate"),
-                    loginUser: ${loginUser}
+                    ticketPrice: localStorage.getItem("ticketedPrice"),
+                    movieId: ${movie.movieId}
                 },
                 success: function (response) {
                     alert("성공");
