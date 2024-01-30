@@ -8,7 +8,7 @@
 
 <section>
     <div class="myPage">
-        <h4>마이페이지</h4>
+        <h3>마이페이지</h3>
         <c:set var="me" value="${loginUser}" />
 
         <form action="myPage" id="myPageForm">
@@ -44,8 +44,12 @@
                         <input type="text" name="homeAddress" id="kakaoAddress" value="${me.homeAddress}" readonly>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <button><a href="/member/myPageEdit">내정보 수정하기</a></button>
+                    </td>
+                </tr>
             </table>
-            <button><a href="/member/myPageEdit">내정보 수정하기</a></button>
         </form>
     </div>
 </section>

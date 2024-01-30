@@ -36,8 +36,9 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    public String findIdByNameAndPhoneNumber(String name, String phoneNumber) {
-        return memberRepository.findByNameAndPhoneNumber(name, phoneNumber);
+    public Member findIdByNameAndPhoneNumber(String name, String phoneNumber) {
+        Member findId = memberRepository.findByNameAndPhoneNumber(name, phoneNumber);
+        return findId;
     }
 
     public Member findIdByUserNameAndNameAndPhoneNumber(String username, String name, String phoneNumber) {
