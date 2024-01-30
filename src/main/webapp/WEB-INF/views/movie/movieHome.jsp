@@ -30,7 +30,7 @@
                     <li><a href="/movieHome?category=Romance">Romance</a></li>
                     <li><a href="/movieHome?category=Science Fiction">Science Fiction</a></li>
                     <li><a href="/movieHome?category=Thriller">Thriller</a></li>
-                    <li><a href="/movieHome?category=Thriller">Western</a></li>
+                    <li><a href="/movieHome?category=Western">Western</a></li>
                 </ul>
             </div>
 
@@ -130,9 +130,7 @@
              genreList.style.display = 'none';
          }
      });
-     function filterByCategory(category) {
-         window.location.href = '/movieHome?category=' + category;
-     }
+
 
 
 </script>

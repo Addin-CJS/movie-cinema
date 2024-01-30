@@ -36,22 +36,10 @@ public class ReviewController {
     @ResponseBody
     public ResponseEntity<Page<Review>> getReviewsByMovieId
                         (@RequestParam("movieNo") Long movieId,
-                         @PageableDefault(page=0, size=10, sort="reviewId", direction= Sort.Direction.DESC) Pageable pageable,
+                         @PageableDefault(page=0, size=15, sort="reviewId", direction= Sort.Direction.DESC) Pageable pageable,
                          Model model) {
 
         Page<Review> reviewList = reviewService.selectReviewListByMovieNo(movieId, pageable);
-
-        int nowPage = reviewList.getPageable().getPageNumber();
-        int pageGroupSize = 5;
-        int totalPageGroups = (int)Math.ceil((double)reviewList.getTotalPages() / pageGroupSize);
-        int currentPageGroup = (nowPage-1) / pageGroupSize;
-        int startPage = currentPageGroup * pageGroupSize + 1;
-        int endPage = Math.min(startPage + pageGroupSize -1, reviewList.getTotalPages());
-
-
-        model.addAttribute("nowPage", nowPage);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
 
         return ResponseEntity.ok(reviewList);
     }
