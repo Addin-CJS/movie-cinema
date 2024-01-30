@@ -28,6 +28,7 @@
                         <td>${review.reviewWriter}</td>
                         <td>${review.reviewContent}</td>
                         <td>${fn:substringBefore(review.createReviewDate.toString(), 'T')}</td>
+
                         <td>
                             <button onclick="updateReview(${review.reviewId});">수정</button>
                             <button onclick="deleteReview(${review.reviewId});">삭제</button>
@@ -114,7 +115,14 @@
                             + review.reviewId + '</td><td>'
                             + review.reviewWriter + '</td><td>'
                             + review.reviewContent + '</td><td>'
-                            + displayDate.substring(0, 10) + '</td><td>'
+                            + '<a href="javascript:void(0);" onclick="likeReview(' + review.reviewId + ');" id="heart-' + review.reviewId + '">♡</a>'
+
+                            + '<span id="like-count-' + review.reviewId + '">'
+                            + (review.likeCount !== null ? review.likeCount : 0)
+                            + '</span></td><td>'
+                           + displayDate.substring(0, 10) + '</td><td>'
+
+
 
                         if (loginUsername === review.reviewWriter) {
                             reviewsHtml += '<a href="javascript:void(0);" onclick="editReview(' + review.reviewId + ')">[수정]</a>'
@@ -240,7 +248,39 @@
                     },
                 })
             }
-    })
+         })
+
+
+
+       function likeReview(reviewId) {
+           var likeCountElementId = "like-count-" + reviewId;
+           var heartElementId = "heart-" + reviewId;
+           var isLiked = $("#" + heartElementId).hasClass('liked');
+
+           $.ajax({
+               url: "like",
+               type: 'POST',
+               data: { reviewId: reviewId, likeAction: isLiked ? 'unlike' : 'like' },
+               success: function (response) {
+                   if (response === "success") {
+                       var currentLikeCount = parseInt($("#" + likeCountElementId).text());
+                       if (isLiked) {
+                           $("#" + heartElementId).html('♡').removeClass('liked');
+                           $("#" + likeCountElementId).text(currentLikeCount - 1);
+                       } else {
+                           $("#" + heartElementId).html('♥︎').addClass('liked');
+                           $("#" + likeCountElementId).text(currentLikeCount + 1);
+                       }
+                   } else if (response === "fail") {
+                       alert('로그인해주세여~');
+                   }
+               },
+               error: function () {
+                   alert('좋아요 처리 중 오류 발생');
+               }
+           });
+       }
+
  </script>
 
  <jsp:include page="../layouts/footer.jsp"/>

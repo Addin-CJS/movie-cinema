@@ -2,6 +2,7 @@ package com.dealim.service;
 
 import com.dealim.domain.Review;
 import com.dealim.repository.ReviewRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,4 +32,23 @@ public class ReviewService {
     public Review updateReview(Review review) {
        return reviewRepository.save(review);
     }
+
+
+
+
+
+    @Transactional
+    public void updateLikeCount(Long reviewId, boolean isLike) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new RuntimeException("Review not found"));
+
+        Integer currentLikeCount = review.getLikeCount();
+        if (currentLikeCount == null) {
+            currentLikeCount = 0;
+        }
+
+        review.setLikeCount(isLike ? currentLikeCount + 1 : Math.max(0, currentLikeCount - 1));
+        reviewRepository.save(review);
+    }
+
 }
