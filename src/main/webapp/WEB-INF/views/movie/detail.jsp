@@ -24,180 +24,182 @@
             </div>
         </div>
     </div>
-
-    <div class="choose-date">
-        <p>상영 일자</p>
-        <div class="swiper-date sw_con swiper-container snbSwiper">
-            <ul class="swtab conlist swiper-wrapper">
-            </ul>
+    <div class="movie-ticket-book">
+        <div class="choose-date">
+            <p>상영 일자</p>
+            <div class="swiper-date sw_con swiper-container snbSwiper">
+                <ul class="swtab conlist swiper-wrapper">
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="choose-time">
-        <p>상영 시간</p>
-        <div class="swiper-time sw_con swiper-container snbSwiper">
-            <ul class="swtab conlist swiper-wrapper">
-            </ul>
+        <div class="choose-time">
+            <p>상영 시간</p>
+            <div class="swiper-time sw_con swiper-container snbSwiper">
+                <ul class="swtab conlist swiper-wrapper">
+                </ul>
+            </div>
         </div>
+        <button class="movie-btns" type="button" onclick="location.href='movieSeats?movieId=${movie.movieId}'">좌석선택하기</button>
     </div>
-    <button class="movie-btns" type="button" onclick="location.href='movieSeats?movieId=${movie.movieId}'">좌석선택하기</button>
 </section>
 
-    <!---movie-ticket-book-->
-    <script>
-        $(document).ready(function () {
-            addDatesToSlick();
-            addTimeToSlick();
+<!---movie-ticket-book-->
+<script>
+    $(document).ready(function () {
+        addDatesToSlick();
+        addTimeToSlick();
 
-            // 날짜 생성
-            function createDateList() {
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-                const dates = [];
-                const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
+        // 날짜 생성
+        function createDateList() {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const dates = [];
+            const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
 
-                for (let i = 0; i < 30; i++) {
-                    const futureDate = new Date(today);
-                    futureDate.setDate(futureDate.getDate() + i);
-                    const dayOfWeek = weekDays[futureDate.getDay()];
-                    const formattedDate = `${"${futureDate.getMonth() + 1}"}월 ${"${futureDate.getDate()}일"}`;
+            for (let i = 0; i < 30; i++) {
+                const futureDate = new Date(today);
+                futureDate.setDate(futureDate.getDate() + i);
+                const dayOfWeek = weekDays[futureDate.getDay()];
+                const formattedDate = `${"${futureDate.getMonth() + 1}"}월 ${"${futureDate.getDate()}일"}`;
 
-                    // 오늘 날짜와 비교
-                    let label = "(" + dayOfWeek + ")";
-                    if (futureDate.getTime() === today.getTime()) {
-                        label = "(오늘)";
-                    }
-
-                    dates.push({date: formattedDate, day: label});
-                }
-                return dates;
-            }
-
-            // 날짜 생성 및 목록 추가
-            function addDatesToSlick() {
-                const dates = createDateList();
-                const $slickDateDiv = $('.swiper-date ul');
-
-                dates.forEach(({date, day}) => {
-                    const $dateLi = $('<li>').addClass('swiper-slide');
-                    const $dateLink = $('<a>').attr('href', 'javascript:void(0)').text(date + ' ' + day);
-                    $dateLi.append($dateLink);
-                    $slickDateDiv.append($dateLi);
-                });
-            }
-
-            // 시간대 생성
-            function createTimeList() {
-                const times = [];
-                const now = new Date();
-                let currentHour = now.getHours();
-                let currentMinutes = now.getMinutes();
-
-                if (currentMinutes >= 30) {
-                    currentMinutes = 30;
-                } else {
-                    currentMinutes = 0;
+                // 오늘 날짜와 비교
+                let label = "(" + dayOfWeek + ")";
+                if (futureDate.getTime() === today.getTime()) {
+                    label = "(오늘)";
                 }
 
-                // 30분 단위로 24시간을 배열
-                for (let i = 0; i < 48; i++) {
-                    const formattedTime = `${"${currentHour.toString().padStart(2, '0')}"}:${"${currentMinutes.toString().padStart(2, '0')}"}`;
-                    times.push(formattedTime);
-
-                    if (currentMinutes === 30) {
-                        currentHour++;
-                        currentMinutes = 0;
-                    } else {
-                        currentMinutes = 30;
-                    }
-
-                    // 24시간을 초과하는 경우에 대한 처리
-                    if (currentHour >= 24) {
-                        currentHour -= 24;
-                    }
-                }
-                return times;
+                dates.push({date: formattedDate, day: label});
             }
+            return dates;
+        }
 
-            // 시간대 생성 및 목록 추가
-            function addTimeToSlick() {
-                const times = createTimeList();
-                const $slickTimeDiv = $('.swiper-time ul');
+        // 날짜 생성 및 목록 추가
+        function addDatesToSlick() {
+            const dates = createDateList();
+            const $slickDateDiv = $('.swiper-date ul');
 
-                times.forEach(time => {
-                    const $timeLi = $('<li>').addClass('swiper-slide');
-                    const $timeLink = $('<a>').attr('href', 'javascript:void(0)').text(time);
-                    $timeLi.append($timeLink);
-                    $slickTimeDiv.append($timeLi);
-                });
-            }
-
-        });
-
-        //스와이퍼 설정
-        $(function () {
-            var swiper = new Swiper('.snbSwiper', {
-                slidesPerView: 5,
-                preventClicks: true,
-                preventClicksPropagation: false,
-                observer: true,
-                observeParents: true
+            dates.forEach(({date, day}) => {
+                const $dateLi = $('<li>').addClass('swiper-slide');
+                const $dateLink = $('<a>').attr('href', 'javascript:void(0)').text(date + ' ' + day);
+                $dateLi.append($dateLink);
+                $slickDateDiv.append($dateLi);
             });
-            var snbSwiperDateItem = $('.choose-date .snbSwiper .swiper-wrapper .swiper-slide a');
-            var snbSwiperTimeItem = $('.choose-time .snbSwiper .swiper-wrapper .swiper-slide a');
+        }
 
-            $('.choose-date .snbSwiper .swiper-wrapper .swiper-slide a, .choose-time .snbSwiper .swiper-wrapper .swiper-slide a').on("click",function () {
-                var target = $(this).parent(); // a위의 li 선택
+        // 시간대 생성
+        function createTimeList() {
+            const times = [];
+            const now = new Date();
+            let currentHour = now.getHours();
+            let currentMinutes = now.getMinutes();
 
-                if(target.closest('.snbSwiper').hasClass('swiper-date')){
-                    snbSwiperDateItem.parent().removeClass('on');
-                    target.addClass('on');
-                    muCenter(target);
-                    localStorage.setItem("selectedDate",target.text());
-                }
-
-                if(target.closest('.snbSwiper').hasClass('swiper-time')){
-                    snbSwiperTimeItem.parent().removeClass('on');
-                    target.addClass('on');
-                    muCenter(target);
-                    localStorage.setItem("selectedTime",target.text());
-                }
-            });
-        });
-        // 중앙에 위치 시키기
-        function muCenter(target) {
-            if(target.closest('.snbSwiper').hasClass('swiper-date')){
-                var snbwrap = $('.choose-date .snbSwiper .swiper-wrapper');
-            }
-            if(target.closest('.snbSwiper').hasClass('swiper-time')){
-                var snbwrap = $('.choose-time .snbSwiper .swiper-wrapper');
-            }
-            var targetPos = target.position();
-            var box = $('.snbSwiper');
-            var boxHarf = box.width() / 2;
-            var pos;
-            var listWidth = 0;
-
-            snbwrap.find('.swiper-slide').each(function () {
-                listWidth += $(this).outerWidth();
-            })
-
-            var selectTargetPos = targetPos.left + target.outerWidth() / 2;
-
-            if (selectTargetPos <= boxHarf) { // left
-                pos = 0;
-            } else if ((listWidth - selectTargetPos) <= boxHarf) {     //right
-                pos = listWidth - box.width();
+            if (currentMinutes >= 30) {
+                currentMinutes = 30;
             } else {
-                pos = selectTargetPos - boxHarf;
+                currentMinutes = 0;
             }
 
-            setTimeout(function () {
-                snbwrap.css({
-                    "transform": "translate3d(" + (pos * -1) + "px, 0, 0)",
-                    "transition-duration": "500ms"
-                })
-            }, 200);
-        };
-    </script>
+            // 30분 단위로 24시간을 배열
+            for (let i = 0; i < 48; i++) {
+                const formattedTime = `${"${currentHour.toString().padStart(2, '0')}"}:${"${currentMinutes.toString().padStart(2, '0')}"}`;
+                times.push(formattedTime);
+
+                if (currentMinutes === 30) {
+                    currentHour++;
+                    currentMinutes = 0;
+                } else {
+                    currentMinutes = 30;
+                }
+
+                // 24시간을 초과하는 경우에 대한 처리
+                if (currentHour >= 24) {
+                    currentHour -= 24;
+                }
+            }
+            return times;
+        }
+
+        // 시간대 생성 및 목록 추가
+        function addTimeToSlick() {
+            const times = createTimeList();
+            const $slickTimeDiv = $('.swiper-time ul');
+
+            times.forEach(time => {
+                const $timeLi = $('<li>').addClass('swiper-slide');
+                const $timeLink = $('<a>').attr('href', 'javascript:void(0)').text(time);
+                $timeLi.append($timeLink);
+                $slickTimeDiv.append($timeLi);
+            });
+        }
+
+    });
+
+    //스와이퍼 설정
+    $(function () {
+        var swiper = new Swiper('.snbSwiper', {
+            slidesPerView: 5,
+            preventClicks: true,
+            preventClicksPropagation: false,
+            observer: true,
+            observeParents: true
+        });
+        var snbSwiperDateItem = $('.choose-date .snbSwiper .swiper-wrapper .swiper-slide a');
+        var snbSwiperTimeItem = $('.choose-time .snbSwiper .swiper-wrapper .swiper-slide a');
+
+        $('.choose-date .snbSwiper .swiper-wrapper .swiper-slide a, .choose-time .snbSwiper .swiper-wrapper .swiper-slide a').on("click", function () {
+            var target = $(this).parent(); // a위의 li 선택
+
+            if (target.closest('.snbSwiper').hasClass('swiper-date')) {
+                snbSwiperDateItem.parent().removeClass('on');
+                target.addClass('on');
+                muCenter(target);
+                localStorage.setItem("selectedDate", target.text());
+            }
+
+            if (target.closest('.snbSwiper').hasClass('swiper-time')) {
+                snbSwiperTimeItem.parent().removeClass('on');
+                target.addClass('on');
+                muCenter(target);
+                localStorage.setItem("selectedTime", target.text());
+            }
+        });
+    });
+
+    // 중앙에 위치 시키기
+    function muCenter(target) {
+        if (target.closest('.snbSwiper').hasClass('swiper-date')) {
+            var snbwrap = $('.choose-date .snbSwiper .swiper-wrapper');
+        }
+        if (target.closest('.snbSwiper').hasClass('swiper-time')) {
+            var snbwrap = $('.choose-time .snbSwiper .swiper-wrapper');
+        }
+        var targetPos = target.position();
+        var box = $('.snbSwiper');
+        var boxHarf = box.width() / 2;
+        var pos;
+        var listWidth = 0;
+
+        snbwrap.find('.swiper-slide').each(function () {
+            listWidth += $(this).outerWidth();
+        })
+
+        var selectTargetPos = targetPos.left + target.outerWidth() / 2;
+
+        if (selectTargetPos <= boxHarf) { // left
+            pos = 0;
+        } else if ((listWidth - selectTargetPos) <= boxHarf) {     //right
+            pos = listWidth - box.width();
+        } else {
+            pos = selectTargetPos - boxHarf;
+        }
+
+        setTimeout(function () {
+            snbwrap.css({
+                "transform": "translate3d(" + (pos * -1) + "px, 0, 0)",
+                "transition-duration": "500ms"
+            })
+        }, 200);
+    };
+</script>
 
 <jsp:include page="../movie/reviews.jsp"/>
