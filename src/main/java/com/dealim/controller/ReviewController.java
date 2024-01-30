@@ -57,4 +57,30 @@ public class ReviewController {
         reviewService.deleteReview(reviewId);
         return "success";
     }
-}
+
+
+    @PostMapping("/like")
+    @ResponseBody
+    public String likeReview(@RequestParam Long reviewId, @RequestParam String likeAction ,HttpSession session) {
+        // 로그인 상태 확인
+        if (session.getAttribute("loginUser") == null) {
+            return "fail";
+        }
+
+
+        if ("like".equals(likeAction)) {
+            reviewService.updateLikeCount(reviewId, true);
+        } else if ("unlike".equals(likeAction)) {
+            reviewService.updateLikeCount(reviewId, false);
+        }
+        return "success";
+    }
+
+
+
+
+
+
+
+
+    }

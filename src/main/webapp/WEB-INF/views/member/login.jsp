@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../layouts/header.jsp"/>
 <section>
     <div class="login">
@@ -22,9 +23,19 @@
                         </div>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <c:if test="${not empty loginError}">
+                            <div class="error-text">${loginError}</div>
+                        </c:if>
+                    </td>
+                </tr>
             </table>
-            <button type="button" onclick="location.href='/member/register'">회원가입</button>&emsp;
             <button type="submit">로그인</button>
+            <button type="button" onclick="location.href='/member/register'">회원가입</button>&emsp;
+            <div id="findIdAndPw">
+                <a href="/member/findId">아이디 찾기 |</a><a href="/member/resetPw"> 비밀번호 재설정</a>
+            <div>
         </form>
     </div>
 </section>

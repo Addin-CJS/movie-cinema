@@ -28,12 +28,21 @@ public class MemberService {
     }
 
     public Optional<Member> selectMemberByUsername(Member member) {
-        Optional<Member> loginUser = memberRepository.findByUsername(member.getUsername());
 
-        if (loginUser.isPresent()) {
-            return loginUser;
-        } else {
-            return null;
-        }
+        return memberRepository.findByUsername(member.getUsername());
     }
+
+    public Member updateMember(Member member) {
+        return memberRepository.save(member);
+    }
+
+    public String findIdByNameAndPhoneNumber(String name, String phoneNumber) {
+        return memberRepository.findByNameAndPhoneNumber(name, phoneNumber);
+    }
+
+    public Member findIdByUserNameAndNameAndPhoneNumber(String username, String name, String phoneNumber) {
+        Member findMemberForRestPw = memberRepository.findByUserNameAndNameAndPhoneNumber(username, name, phoneNumber);
+        return findMemberForRestPw;
+    }
+
 }

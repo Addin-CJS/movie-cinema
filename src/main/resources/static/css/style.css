@@ -1142,6 +1142,85 @@ section .login button {
     cursor: pointer;
 }
 
+.error-text {
+    color:red;
+    font-size:0.8em;
+}
+
+#findIdAndPw a {
+    font-size:0.8em;
+}
+
+section .findId {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 70px;
+    height: 100%;
+}
+
+section .findId table {
+    margin: 0 auto;
+}
+
+section .findId th {
+    color: white;
+    width: 50px;
+}
+
+section .findId td {
+    color: white;
+    width: 300px;
+}
+
+section .findId button {
+    margin-top: 10px;
+    outline: none;
+    height: 50px;
+    background: #DB0000;
+    color: #fff;
+    border-radius: 50px;
+    padding: 10px 50px;
+    cursor: pointer;
+    cursor: pointer;
+}
+
+
+section .resetPw {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 70px;
+    height: 100%;
+}
+
+section .resetPw table {
+    margin: 0 auto;
+}
+
+section .resetPw th {
+    color: white;
+    width: 100px;
+}
+
+section .resetPw td {
+    color: white;
+    width: 500px;
+}
+
+section .resetPw button {
+    margin-top: 10px;
+    outline: none;
+    height: 50px;
+    background: #DB0000;
+    color: #fff;
+    border-radius: 50px;
+    padding: 10px 50px;
+    cursor: pointer;
+    cursor: pointer;
+}
+
+
 /* 회원가입 */
 
 section .register {
@@ -1660,7 +1739,6 @@ section .myPage h4 {
 }
 
 section .myPage table {
-    margin: 30 430;
     align: center;
 }
 
@@ -1752,4 +1830,52 @@ section .myPage button {
 
 .swtab.conlist li:after {
     margin-right: 5px
+}
+
+#myPageEditForm {
+    align: center;
+}
+section .myPageEdit {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 70px;
+    height: 100%;
+}
+
+section .myPageEdit h4 {
+    text-align: center;
+}
+
+section .myPageEdit table {
+    margin: 30 430;
+    align: center;
+}
+
+section .myPageEdit th {
+    color: white;
+    width: 100px;
+}
+
+section .myPageEdit td {
+    color: white;
+    width: 300px;
+}
+
+section .myPageEdit td input{
+    width: 300px;
+}
+
+
+section .myPageEdit button {
+    margin-top: 10px;
+    margin-left: 50px;
+    outline: none;
+    height: 50px;
+    background: #DB0000;
+    color: #fff;
+    border-radius: 50px;
+    padding: 10px 50px;
+    cursor: pointer;
+
 }

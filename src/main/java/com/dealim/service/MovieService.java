@@ -27,8 +27,6 @@ public class MovieService {
 
 
     public Page<Movie> movieList(Pageable pageable) {
-
-        System.out.println( movieRepository.findAll(pageable));
         return  movieRepository.findAll(pageable);
     }
 
