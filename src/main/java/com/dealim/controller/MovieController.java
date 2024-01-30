@@ -2,6 +2,7 @@ package com.dealim.controller;
 
 import com.dealim.domain.Movie;
 import com.dealim.service.MovieService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Optional;
 
 @Controller
+@Slf4j
 public class MovieController {
 
     @Autowired
-    MovieService movieService;
-
-
+    private MovieService movieService;
 
     @RequestMapping("/movieHome")
     public String movieHome(Model model,
@@ -30,6 +30,7 @@ public class MovieController {
                             @RequestParam(value = "category", required = false) String category) {
 
         Page<Movie> movieList;
+        Optional<?> asd;
 
        //페이징, 검색, 전체목록 , 카테고리 별
         movieService.getMovieHome(pageable, searchKeyword, category, model);
@@ -37,18 +38,11 @@ public class MovieController {
         return "movie/movieHome";
     }
 
-
-
     @GetMapping("/showDetail")
     public String showDetail(@RequestParam("movieId") Long movieId, Model model) {
-
         movieService.getShowDetail(movieId, model);
-
-
         return "movie/detail";
     }
-
-
 
     @GetMapping("/movieSeats")
     public String movieSeats(@RequestParam("movieId") Long movieId, Model model) {
@@ -62,10 +56,6 @@ public class MovieController {
         }
         return "movie/movieSeats";
     }
-    //TODO:영화 예매해야지
-    @GetMapping("/ticketing")
-    public String ticketing () {
-        return "movie/ticketing";
-    }
+
 
 }

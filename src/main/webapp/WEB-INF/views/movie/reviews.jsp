@@ -27,7 +27,7 @@
                     </th>
                     <th><textarea cols="80" rows="4" id="reviewContent"> </textarea></th>
                     <th colspan="2">
-                        <button onclick="insertReview();">평점 및 리뷰작성</button>
+                        <button class="movie-btns" onclick="insertReview();">평점 및 리뷰작성</button>
                     </th>
                 </tr>
                 <tr id="reviewEditForm" style="display : none;">
@@ -68,7 +68,9 @@
 
       $(document).ready(function() {
              updateReviewList(movieId,0);
-         });
+
+
+       });
 
      function insertReview() {
         var reviewContent =  $("#reviewContent").val();
@@ -115,17 +117,18 @@
 
         $.ajax({
             url: "reviewList",
-            data: { movieNo: movieId,
-                    page: currentPage
-                  },
+            data: {
+                movieNo: movieId,
+                page: currentPage
+            },
             type: "get",
             dataType: "json",
             success: function (response) {
                 reviews = response.content;
 
-                 reviews.sort(function (a, b) {
+                reviews.sort(function (a, b) {
                     return b.reviewId - a.reviewId;
-                 });
+                });
 
                 var reviewsHtml = '';
                 if (response.content && Array.isArray(response.content)) {
@@ -141,8 +144,7 @@
                             + '<span id="like-count-' + review.reviewId + '">'
                             + (review.likeCount !== null ? review.likeCount : 0)
                             + '</span></td><td>'
-                           + displayDate.substring(0, 10) + '</td><td>'
-
+                            + displayDate.substring(0, 10) + '</td><td>'
 
 
                         if (loginUsername === review.reviewWriter) {
@@ -157,7 +159,6 @@
                     var currentPageGroup = Math.floor(currentPage / pageGroupSize);
                     var startPage = currentPageGroup * pageGroupSize;
                     var endPage = Math.min(startPage + pageGroupSize - 1, totalPages - 1);
-
 
 
                     var paginationHtml = '';
@@ -190,16 +191,34 @@
                 }
 
 
-
-
-                 $('.pagination').html(paginationHtml);
+                $('.pagination').html(paginationHtml);
                 $('.reviewList tbody').html(reviewsHtml);
+
+                loadUserLikes(); //좋아요 세션에 담아서
             },
-            error: function() {
+            error: function () {
                 console.log("리뷰 목록 불러오기 실패");
             }
         });
     }
+        function loadUserLikes() {
+            $.ajax({
+                url: "/getUserLikes",
+                type: "GET",
+                success: function(likedReviews) {
+                    likedReviews.forEach(function(reviewId) {
+                        $("#heart-" + reviewId).addClass('liked').html('♥︎');
+                    });
+                },
+                error: function(error) {
+                    console.error("에러다", error);
+                }
+            });
+        }
+
+
+
+
 
     function editReview(reviewId) {
         const yn = confirm(reviewId + "번 리뷰를 수정하시겠습니까?");
@@ -278,10 +297,16 @@
            var heartElementId = "heart-" + reviewId;
            var isLiked = $("#" + heartElementId).hasClass('liked');
 
+           var confirmMessage = isLiked ? '좋아요를 취소하시겠습니까?' : '좋아요를 하시겠습니까?';
+           if (!confirm(confirmMessage)) {
+               return; 
+           }
+
+
            $.ajax({
                url: "like",
                type: 'POST',
-               data: { reviewId: reviewId, likeAction: isLiked ? 'unlike' : 'like' },
+               data: {reviewId: reviewId, likeAction: isLiked ? 'unlike' : 'like'},
                success: function (response) {
                    if (response === "success") {
                        var currentLikeCount = parseInt($("#" + likeCountElementId).text());
@@ -300,7 +325,8 @@
                    alert('좋아요 처리 중 오류 발생');
                }
            });
-       }
+
+     }
 
  </script>
 

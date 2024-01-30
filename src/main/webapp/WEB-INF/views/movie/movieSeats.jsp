@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="../layouts/header.jsp"/>
+<%
 
+%>
 <section id="section">
     <div id="test"></div>
     <div class="container">
@@ -12,15 +14,15 @@
                     <ul>
                         <li>
                             <div class="seat legend"></div>
-                            <small>Available</small>
+                            <small>선택가능</small>
                         </li>
                         <li>
                             <div class="seat legend selected"></div>
-                            <small>Selected</small>
+                            <small>선택좌석</small>
                         </li>
                         <li>
                             <div class="seat legend occupied"></div>
-                            <small>Occupied</small>
+                            <small>예매완료</small>
                         </li>
                     </ul>
                 </div>
@@ -43,7 +45,7 @@
                             </div>
                             <div class="row">
                                 <div class="seat"></div>
-                                <div class="seat occupied"></div>
+                                <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
@@ -55,17 +57,7 @@
                         <div class="seatRowCont2 seatRowCont">
                             <div class="row">
                                 <div class="seat"></div>
-                                <div class="seat occupied"></div>
                                 <div class="seat"></div>
-                                <div class="seat"></div>
-                                <div class="seat"></div>
-                                <div class="seat"></div>
-                                <div class="seat"></div>
-                                <div class="seat"></div>
-                            </div>
-                            <div class="row">
-                                <div class="seat"></div>
-                                <div class="seat occupied"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
@@ -75,7 +67,7 @@
                             </div>
                             <div class="row">
                                 <div class="seat"></div>
-                                <div class="seat occupied"></div>
+                                <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
@@ -85,7 +77,17 @@
                             </div>
                             <div class="row">
                                 <div class="seat"></div>
-                                <div class="seat occupied"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                                <div class="seat"></div>
+                            </div>
+                            <div class="row">
+                                <div class="seat"></div>
+                                <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
@@ -97,7 +99,7 @@
                         <div class="seatRowCont3 seatRowCont">
                             <div class="row">
                                 <div class="seat"></div>
-                                <div class="seat occupied"></div>
+                                <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
@@ -107,7 +109,7 @@
                             </div>
                             <div class="row">
                                 <div class="seat"></div>
-                                <div class="seat occupied"></div>
+                                <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
                                 <div class="seat"></div>
@@ -125,26 +127,24 @@
             <div class="confirmCont">
                 <div class="rightTopCont">
                     <!-- moviename -->
-
                     <div class="movieInfo">
                         <div class="movieName">
-                            <p>MOVIE NAME</p>
+                            <p>영화 제목</p>
                             <h1 id="movieName">${movie.mvTitle}</h1>
                         </div>
                         <div class="moviePrice">
-                            <p>MOVIE PRICE</p>
-                            <h1 id="moviePrice">15,000</h1>
+                            <p>영화 가격</p>
+                            <h1 id="moviePrice">1,300원</h1>
                         </div>
                         <div class="dateCont">
-                            <p>Date</p>
-                            <p class="dateOn">Wed , 31th march</p>
-
+                            <p>상영 일자</p>
+                            <p id="dateOn" class="dateOn"></p>
                         </div>
                     </div>
                 </div>
                 <div class="rightBottomCont">
                     <div class="selectedSeatCont">
-                        <p>SELECTED SEATS</p>
+                        <p>선택 좌석</p>
                         <div class="selectedSeatsHolder" id="selectedSeatsHolder">
                             <span class="noSelected">No Seat Selected</span>
                         </div>
@@ -153,20 +153,20 @@
 
                     <div class="numberOfSeatsCont">
                         <div class="numberOfSeatEl">
-                            <p><span id="numberOfSeat">0</span> Seats(s)</p>
+                            <p>선택 좌석 수 : <span id="numberOfSeat">0</span></p>
                         </div>
                         <div class="priceCont">
-                            <p id="totalPrice">$ 0</p>
+                            <p id="totalPrice">0 원</p>
                         </div>
                     </div>
                     <!-- button Cont -->
 
                     <div class="buttonCont">
                         <div class="cancelBtn">
-                            <button id="cancelBtn">Cancel</button>
+                            <button id="cancelBtn">선택취소</button>
                         </div>
                         <div class="proceedBtnEl">
-                            <button id="proceedBtn">Continue</button>
+                            <button id="proceedBtn">결제하기</button>
                         </div>
                     </div>
                 </div>
@@ -178,20 +178,14 @@
 
 <script>
     $(() => {
-
         const allSeatCont = $("#seatCont .seat");
-
+        const allSeatRows = $("#seatCont .row")
         const selectedSeatsHolderEl = $("#selectedSeatsHolder");
-
         const moviePriceEl = $("#moviePrice");
-
         const cancelBtnEL = $("#cancelBtn");
-
         const proceedBtnEl = $("#proceedBtn");
-
         const seatContEl = $("#seatCont .seat:not(.occupied)");
-
-        let moviePrice = 1300;
+        const moviePrice = 1300;
 
         // 각 좌석에 번호 매기기
         let initialSeatValue = 0;
@@ -217,7 +211,6 @@
                         return id !== seatId;
                     }); // 클릭된 좌석을 list에서 빼기
                 };
-
                 updateSeats();
                 updatePrice(moviePrice, takenSeats.length);
             });
@@ -228,7 +221,7 @@
             $(selectedSeatsHolderEl).empty();
 
             if(takenSeats.length > 0) {
-                $(takenSeats).each((seat) => {
+                $(takenSeats).each((idx, seat) => {
                     $('<div></div>')
                         .addClass("selectedSeat")
                         .text(seat)
@@ -287,15 +280,27 @@
             updateSeats();
         };
 
-        // 성공 하면 티켓 발행하는 ajax 구현
+        // 제출 버튼 이벤트
         $(proceedBtnEl).click(()=>{
-            var url = "ticketing";
-            var windowFeatures = "width=800,height=600,resizable=yes,scrollbars=yes,status=yes";
+            localStorage.setItem('takenSeats', JSON.stringify(takenSeats));
+            var url = "ticketing?movieId=" + ${movie.movieId};
+            var windowFeatures = "width=800,height=516,resizable=no,status=yes";
 
-            window.open(url, "_blank", windowFeatures);
+            // 좌석 선택 안할시 alert
+            if(takenSeats.length === 0){
+                alert("좌석을 선택해주세요");
+                return;
+            }
 
+            window.open(url, "ticketingWindow", windowFeatures);
         });
 
+        // 일자 업데이트
+        let dateOn = $("#dateOn");
+        function updateDate(){
+            dateOn.text(localStorage.getItem("selectedDate")+" "+localStorage.getItem("selectedTime"));
+        };
+        updateDate();
     });
 
 </script>

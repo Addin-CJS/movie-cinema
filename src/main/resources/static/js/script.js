@@ -1,20 +1,27 @@
-$(() => {
+$(document).ready(function(){
     //indicator
     let marker = $('.marker');
-    let items = $('nav ul li');
+    let items = $('#menu-box li');
+    let currentPath = window.location.pathname;
 
-    function indicator(e) {
-        marker.css('left', e.offsetLeft + 'px');
-        marker.css('width', e.offsetWidth + 'px');
+    function initializeIndicator() {
+        items.each(function() {
+            let path = $(this).data("path");
+            if (path && currentPath.includes(path)) {
+                updateIndicator(this);
+            }
+        });
     }
 
-    items.each(function () {
-        $(this).click(function (e) {
-            indicator(e.target);
-        });
-    });
+    function updateIndicator(element) {
+        marker.css('left', element.offsetLeft + 'px');
+        marker.css('width', element.offsetWidth + 'px');
+    }
 
-//scroll
+    initializeIndicator();
+
+
+    //scroll
     let nav = $('nav');
 
     $(window).scroll(function () {
@@ -31,7 +38,8 @@ $(() => {
         }
     });
 
-//menu
+
+    //menu
     let menuBx = $('#menu-box');
     let a = true;
 
@@ -47,29 +55,5 @@ $(() => {
             a = true;
         }
     });
-
-
-    $(".carousel").owlCarousel({
-        margin: 20,
-        loop: true,
-        autoplay: true,
-        autoplayTimeout: 5000,
-        autoplayHoverPause: true,
-        responsive: {
-            0: {
-                items: 3,
-                nav: true
-            },
-            600: {
-                items: 3,
-                nav: true
-            },
-            1000: {
-                items: 3,
-                nav: true
-            }
-        }
-    });
-
 });
 

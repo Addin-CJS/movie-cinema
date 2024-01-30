@@ -6,28 +6,31 @@
     box-sizing: border-box;
     transition: all .2s;
 }
-h1,h2,h3,h4,h5,h6{
-    font-weight:500;
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
 }
-ul,li,dl,dt,dd,ol{
-    list-style:none;
+
+ul, li, dl, dt, dd, ol {
+    list-style: none;
 }
-a{
-    text-decoration:none;
+
+a {
+    text-decoration: none;
 }
 
 body {
     width: 100%;
     overflow-x: hidden;
-    background-color:#111;
+    background-color: #111;
 }
 
-body,a{
-    font-size:16px;
-    font-weight:400;
+body, a {
+    font-size: 16px;
+    font-weight: 400;
     /*letter-spacing: 0.03em;*/
     font-style: normal;
-    color:#fff;
+    color: #fff;
 }
 
 header {
@@ -92,7 +95,7 @@ header nav .fa:hover {
     transition: background .5s;
 }
 
-.nav .logo a{
+.nav .logo a {
     color: #000;
 }
 
@@ -106,12 +109,12 @@ header nav .fa:hover {
     color: #fff;
 }
 
-header nav .logo a{
+header nav .logo a {
     font-weight: 700;
     font-size: 1em;
 }
 
-header nav .logo span{
+header nav .logo span {
     color: #DB0000;
 }
 
@@ -155,6 +158,75 @@ header nav ul li img {
     object-fit: cover;
 }
 
+.movie-btns {
+    width: 200px;
+    border: none;
+    outline: none;
+    border-radius: 100px;
+    font-size: 1em;
+    background: #DB0000;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+.reviewList .movie-btns {
+    width: 250px;
+}
+
+.slick-slide {
+    height: auto;
+}
+
+.slick-slider .slick-prev {
+    position: absolute;
+    top: 50%;
+    left: 1px;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.slick-slider .slick-next {
+    position: absolute;
+    top: 50%;
+    right: 1px;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.swiper-date, .swiper-time {
+    padding: 0 30px 0 30px;
+}
+
+.movie-ticket-book p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.movie-ticket-book .date-container {
+    text-align: center;
+}
+
+.movie-ticket-book .time {
+    text-align: center;
+}
+
+.date-container .date {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.movie-ticket-book .date,
+.movie-ticket-book .day {
+    display: inline-block;
+}
+
+.time {
+    font-size: 1.2em;
+}
 
 section .popular-movie-slider {
     background-color: black;
@@ -228,6 +300,7 @@ section .popular-movie-slider .popular-movie-slider-content .movie-btns button {
     border-radius: 100px;
     font-size: 1em;
     background: #DB0000;
+    color: white;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -247,19 +320,32 @@ section .popular-movie-slider .popular-movie-slider-content .movie-btns button:h
 
 
 section .movie-ticket-book {
+    grid-gap: 30px;
     background: #222;
     color: #fff;
     display: grid;
-    grid-template-columns: auto auto auto;
-    justify-content: space-between;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
     align-items: center;
     padding: 30px 100px;
 }
 
+section .choose-time {
+    grid-row: 2;
+}
+
+.choose-time button,
+.choose-date button {
+    font-weight: 700;
+    color: #DB0000;
+    border: none;
+    background: none;
+}
 
 section .movie-ticket-book .choose-date,
 section .movie-ticket-book .choose-time {
-    position: relative
+    position: relative;
+    overflow: hidden;
 }
 
 section .movie-ticket-book .choose-date .heading,
@@ -296,7 +382,6 @@ section .movie-ticket-book .choose-time .carousel
     justify-content: space-between;
 }
 
-
 section .movie-ticket-book .choose-date .carousel .card p:nth-child(1),
 section .movie-ticket-book .choose-time .carousel .card p:nth-child(1) {
     color: #888;
@@ -323,7 +408,10 @@ section .movie-ticket-book .choose-time .wrapper .marker {
 }
 
 
-section .movie-ticket-book button {
+section .movie-ticket-book > button {
+    font-size: 1em;
+    width: 200px;
+    grid-row: 1 / span 2;
     border: none;
     outline: none;
     height: 50px;
@@ -406,20 +494,14 @@ section .filter-search-box .search-filters input {
 }
 
 
-
-
-
-
-
-
 section .movie-card-section {
     background: #111;
     padding: 20px 100px;
     width: 100%;
     display: grid;
     grid-template-columns:1fr 1fr 1fr 1fr;
-    gap:18px;
-    padding-top:50px;
+    gap: 18px;
+    padding-top: 50px;
 }
 
 
@@ -466,8 +548,8 @@ section .pagination {
     width: 100%;
     text-align: center;
     background: #111;
-    margin-top:50px;
-    margin-bottom:50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 section .pagination a {
@@ -489,7 +571,6 @@ section .pagination .active {
     background-color: #FFA500;
     font-weight: bold;
 }
-
 
 
 section .show {
@@ -610,351 +691,9 @@ footer .socail-box .fa:hover {
     color: #DB0000;
 }
 
-
-@media (min-width: 1024px) and (max-width: 1080px) {
-
-    section .movie-card-section {
-        grid-template-columns:auto auto auto;
-        gap: 15px;
-    }
-
-
+.numberOfSeatEl {
+    color: #414141;
 }
-
-
-@media (min-width: 720px) and (max-width: 1023px) {
-
-    header nav ul {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 40px;
-        color: #fff;
-        background: #000;
-        width: 100%;
-        height: 100vh;
-        padding: 20px 30px;
-    }
-
-    header nav .fa {
-        cursor: pointer;
-        display: block;
-    }
-
-
-    section .popular-movie-slider {
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: start;
-        gap: 35px;
-        padding: 10px 100px;
-        position: relative;
-    }
-
-    section .popular-movie-slider .poster {
-        width: 300px;
-        height: 400px;
-        object-fit: cover;
-        border-radius: 10px;
-    }
-
-
-    section .popular-movie-slider .popular-movie-slider-content {
-        line-height: 25px;
-    }
-
-    section .popular-movie-slider .popular-movie-slider-content .movie-name {
-        font-size: 1.8em;
-    }
-
-
-    section .popular-movie-slider .popular-movie-slider-content .category {
-        display: flex;
-        gap: 30px;
-        text-transform: capitalize;
-        margin: 10px 0;
-    }
-
-    section .popular-movie-slider .popular-movie-slider-content .desc {
-        font-size: .90em;
-    }
-
-    section .popular-movie-slider .popular-movie-slider-content .movie-info {
-        display: flex;
-        gap: 30px;
-        margin: 25px 0;
-    }
-
-    section .popular-movie-slider .popular-movie-slider-content .movie-info .fa span {
-        font-family: 'Roboto', sans-serif;
-        color: #fff;
-        font-size: 15px;
-    }
-
-
-    section .popular-movie-slider .popular-movie-slider-content .movie-btns {
-        display: flex;
-        gap: 10px;
-    }
-
-
-    section .popular-movie-slider .popular-movie-slider-content .movie-btns button {
-        width: 200px;
-        border: none;
-        outline: none;
-        padding: 15px 0;
-        border-radius: 100px;
-        font-size: 1em;
-        background: #DB0000;
-        color: #fff;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 2px;
-    }
-
-    section .popular-movie-slider .popular-movie-slider-content .movie-btns button .fa {
-        font-size: .65em;
-        color: #fff;
-    }
-
-
-    section .popular-movie-slider .popular-movie-slider-content .movie-btns button:hover {
-        background: white;
-        color: black;
-    }
-
-
-    section .movie-ticket-book {
-        grid-template-columns: auto;
-        justify-content: center;
-        align-items: center;
-        padding: 30px 50px;
-    }
-
-
-    section .movie-ticket-book .choose-date .wrapper,
-    section .movie-ticket-book .choose-time .wrapper {
-        width: 30%;
-        position: relative;
-        left: 50%;
-        transform: translate(-50%, 0);
-    }
-
-    section .movie-ticket-book .choose-date .carousel,
-    section .movie-ticket-book .choose-time .carousel {
-        margin-top: 15px;
-        display: flex;
-        justify-content: center;
-        align-item: center;
-        padding: 10px 0;
-    }
-
-    section .movie-ticket-book .choose-date .carousel .owl-nav,
-    section .movie-ticket-book .choose-time .carousel
-    .owl-nav {
-        color: #DB0000;
-        position: absolute;
-        width: 110%;
-        top: 50%;
-        left: -50%;
-        transform: translate(0%, -50%);
-        font-size: 1.5em;
-        display: flex;
-        justify-content: space-between;
-    }
-
-
-    section .movie-ticket-book .choose-date .wrapper .marker,
-    section .movie-ticket-book .choose-time .wrapper .marker {
-        width: 60px;
-        height: 2px;
-        background: #DB0000;
-        position: absolute;
-        left: 45%;
-        transform: translate(-50%, 0);
-    }
-
-
-    section .movie-ticket-book button {
-        width: 20%;
-        margin-top: 20px;
-        position: relative;
-        left: 50%;
-        transform: translate(-50%, 0);
-    }
-
-
-    section .filter-search-box {
-        padding: 20px 50px;
-    }
-
-
-    section .filter-search-box .filters-box {
-        gap: 10px;
-    }
-
-
-    section .filter-search-box .search-bar {
-        left: 50px;
-        width: 85%;
-    }
-
-
-    section .movie-card-section {
-        padding: 20px 50px;
-        grid-template-columns:auto auto auto;
-    }
-
-
-    section .movie-card-section .card img {
-        width: 100%;
-        height: 300px;
-    }
-
-
-    section .show {
-        padding: 10px 50px;
-        padding-bottom: 40px;
-    }
-
-
-    footer {
-        padding: 40px 50px;
-        grid-template-columns:auto;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-    }
-
-
-}
-
-
-@media (min-width: 0px) and (max-width: 719px) {
-
-
-    header {
-        height: auto;
-        padding-bottom: 30px;
-    }
-
-    header nav {
-        padding: 10px 20px;
-    }
-
-
-    header nav ul {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 40px;
-        color: #fff;
-        background: #000;
-        width: 100%;
-        height: 100vh;
-        padding: 20px 30px;
-    }
-
-    header nav .fa {
-        cursor: pointer;
-        display: block;
-    }
-
-
-    header .popular-movie-slider {
-        padding: 10px 20px;
-        display: block;
-    }
-
-    header .popular-movie-slider .poster {
-        width: 100%;
-        height: 300px;
-        margin-bottom: 20px;
-    }
-
-
-    section .movie-ticket-book {
-        grid-template-columns: auto;
-        justify-content: center;
-        align-items: center;
-        padding: 30px 20px;
-    }
-
-
-    section .filter-search-box {
-        padding: 20px 20px;
-    }
-
-
-    section .filter-search-box .filters-box {
-        gap: 10px;
-    }
-
-
-    section .filter-search-box .search-bar {
-        left: 20px;
-        width: 90%;
-    }
-
-
-    section .movie-card-section {
-        padding: 20px 20px;
-        grid-template-columns:auto auto;
-    }
-
-
-    section .movie-card-section .card img {
-        width: 100%;
-        height: 300px;
-    }
-
-
-    section .show {
-        padding: 10px 20px;
-        padding-bottom: 40px;
-    }
-
-
-    footer {
-        padding: 40px 20px;
-        grid-template-columns:auto;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-        font-size: .85em;
-    }
-
-
-    section .filter-search-box {
-        gap: 20px;
-        overflow-x: scroll;
-    }
-
-
-    section .filter-search-box::-webkit-scrollbar {
-        display: none;
-    }
-
-
-    section .filter-search-box .search-filters input {
-        width: 50px;
-        padding: 5px 10px;
-    }
-
-
-    section .movie-ticket-book {
-        padding: 30px 0px;
-    }
-
-    section .movie-ticket-book button {
-        margin-top: 10px;
-    }
-
-}
-
 
 .leftCont {
     width: 100%;
@@ -963,6 +702,11 @@ footer .socail-box .fa:hover {
 
 .leftMainCont {
     width: 100%;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
 }
 
 .container .legendContainer {
@@ -1007,6 +751,14 @@ footer .socail-box .fa:hover {
     cursor: pointer;
     background-color: #fff;
     transition: 0.3s ease background-color;
+}
+
+.container .leftMainCont .seat:nth-child(2) {
+    margin-right: 1.5em;
+}
+
+.container .leftMainCont .seat:nth-last-child(2) {
+    margin-left: 1.5em;
 }
 
 .container .leftMainCont .seat::after {
@@ -1060,17 +812,14 @@ footer .socail-box .fa:hover {
 }
 
 .container .mainSeatCont .seatCont {
-    display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .container .mainSeatCont .seatCont .seatRowCont {
-    display: flex;
 }
 
 .container .mainSeatCont .seatCont .seatRowCont2 {
-    margin: 0 1.5rem;
 }
 
 .container .leftMainCont .screen {
@@ -1126,7 +875,7 @@ footer .socail-box .fa:hover {
 
 .container .confirmCont .movieInfo .dateOn {
     color: #414141;
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 0.4rem;
 }
 
@@ -1347,7 +1096,291 @@ body.modal-active .overlay {
     background-color: rgba(84, 216, 84, 0.808);
 }
 
-/* Desktop */
+
+@keyframes modalAnimation {
+    0% {
+        margin-top: -5px;
+    }
+    100% {
+        margin-top: 0px;
+    }
+}
+
+/* 로그인 */
+
+section .login {
+    text-align: center;
+    padding: 20px;
+    height: 100%;
+}
+
+section .login h3 {
+    margin: 30px;
+}
+
+section .login table {
+    margin: 0 auto;
+    width: 300px;
+}
+
+section .login th {
+    color: white;
+    width: 50px;
+}
+
+section .login td {
+    color: white;
+}
+
+section .login td input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+section .login button {
+    margin-top: 10px;
+    width: 145px;
+    height: 40px;
+    background: #FF7012;
+    color: #fff;
+    border-radius: 30px;
+    padding: 0 30px;
+    cursor: pointer;
+}
+
+
+#findIdAndPw {
+    text-align: center;
+    margin-top: 10px;
+    padding: 20px;
+    height: 100%;
+}
+
+#findIdAndPw a {
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.error-text {
+    margin-top: 5px;
+    text-align: center;
+    color: red;
+    font-size: 0.8em;
+}
+
+/* 아이디 찾기 */
+section .findId {
+    text-align: center;
+    padding: 20px;
+    height: 100%;
+}
+
+section .findId h3 {
+    margin: 30px;
+}
+
+section .findId table {
+    margin: 0 auto;
+    width: 300px;
+}
+
+section .findId th {
+    color: white;
+    width: 50px;
+}
+
+section .findId td {
+    color: white;
+}
+
+section .findId td input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+section .findId button {
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
+    background: #FF7012;
+    color: #fff;
+    border-radius: 30px;
+    padding: 0 30px;
+    cursor: pointer;
+}
+
+#findIdResult {
+    font-size: 0.8em;
+    padding: 10px;
+}
+
+/* 비밀번호 재생성 */
+section .resetPw {
+    text-align: center;
+    padding: 20px;
+    height: 100%;
+}
+
+section .resetPw h3 {
+    margin: 30px;
+}
+
+section .resetPw table {
+    margin: 0 auto;
+    width: 300px;
+}
+
+section .resetPw th {
+    color: white;
+    width: 70px;
+}
+
+section .resetPw td {
+    color: white;
+}
+
+section .resetPw td input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+section .resetPw button {
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
+    background: #FF7012;
+    color: #fff;
+    border-radius: 30px;
+    padding: 0 30px;
+    cursor: pointer;
+}
+
+
+/* 회원가입 */
+
+section .register {
+    text-align: center;
+    padding: 20px;
+    height: 100%;
+}
+
+section .register h3 {
+    margin: 30px;
+}
+
+section .register table {
+    margin: 0 auto;
+    width: 500px;
+}
+
+section .register th {
+    color: white;
+}
+
+section .register td {
+    color: white;
+    width: 100%;
+}
+
+section .register td input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+
+section .register #emailField,
+section .register #addressField {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+section .register #emailField select {
+    border-radius: 5px;
+    height: 40px;
+}
+
+section .register #emailField option {
+    border-radius: 5px;
+}
+
+
+section .register #emailId,
+section .register #emailAddress,
+section .register #kakaoAddress {
+    flex-grow: 1;
+}
+
+
+section .register #emailOption {
+    flex-shrink: 0;
+    min-width: 100px;
+}
+
+section .register #emailAddress:disabled {
+    color: black;
+    background-color: white;
+}
+
+
+section .register #addressField input[type="button"] {
+    width: 130px;
+    padding-right: 10px;
+}
+
+section .register button {
+    margin-top: 10px;
+    width: 243px;
+    height: 40px;
+    background: #FF7012;
+    color: #fff;
+    border-radius: 30px;
+    padding: 0 30px;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* 리뷰 */
+.reviewList {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 70px;
+    width: 100%;
+}
+
+.reviewList textarea {
+    border-radius: 10px;
+}
+
+
+.reviewList button {
+    /* border: none; */
+    outline: none;
+    height: 50px;
+    background: #DB0000;
+    color: #fff;
+    border-radius: 50px;
+    padding: 10px 50px;
+    cursor: pointer;
+}
+
+section .slider-wrap {
+    background-color: black;
+}
+
+section .slider-wrap img {
+    height: 500px;
+}
 
 @media (min-width: 800px) {
     .container {
@@ -1415,291 +1448,339 @@ body.modal-active .overlay {
     }
 }
 
-@keyframes modalAnimation {
-    0% {
-        margin-top: -5px;
+@media (min-width: 1024px) and (max-width: 1080px) {
+
+    section .movie-card-section {
+        gap: 15px;
     }
-    100% {
-        margin-top: 0px;
+
+}
+
+@media (min-width: 720px) and (max-width: 1023px) {
+
+    section .movie-card-section {
+        grid-template-columns: 1fr 1fr 1fr;
     }
+
+    header nav ul {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 40px;
+        color: #fff;
+        background: #000;
+        width: 100%;
+        height: 100vh;
+        padding: 20px 30px;
+    }
+
+    header nav .fa {
+        cursor: pointer;
+        display: block;
+    }
+
+
+    section .popular-movie-slider {
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        gap: 35px;
+        padding: 10px 100px;
+        position: relative;
+    }
+
+    section .popular-movie-slider .poster {
+        width: 300px;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+
+    section .popular-movie-slider .popular-movie-slider-content {
+        line-height: 25px;
+    }
+
+    section .popular-movie-slider .popular-movie-slider-content .movie-name {
+        font-size: 1.8em;
+    }
+
+
+    section .popular-movie-slider .popular-movie-slider-content .category {
+        display: flex;
+        gap: 30px;
+        text-transform: capitalize;
+        margin: 10px 0;
+    }
+
+    section .popular-movie-slider .popular-movie-slider-content .desc {
+        font-size: .90em;
+    }
+
+    section .popular-movie-slider .popular-movie-slider-content .movie-info {
+        display: flex;
+        gap: 30px;
+        margin: 25px 0;
+    }
+
+    section .popular-movie-slider .popular-movie-slider-content .movie-info .fa span {
+        font-family: 'Roboto', sans-serif;
+        color: #fff;
+        font-size: 15px;
+    }
+
+
+    section .popular-movie-slider .popular-movie-slider-content .movie-btns {
+        display: flex;
+        gap: 10px;
+    }
+
+
+    section .popular-movie-slider .popular-movie-slider-content .movie-btns button {
+        width: 200px;
+        border: none;
+        outline: none;
+        padding: 15px 0;
+        border-radius: 100px;
+        font-size: 1em;
+        background: #DB0000;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2px;
+    }
+
+    section .popular-movie-slider .popular-movie-slider-content .movie-btns button .fa {
+        font-size: .65em;
+        color: #fff;
+    }
+
+
+    section .popular-movie-slider .popular-movie-slider-content .movie-btns button:hover {
+        background: white;
+        color: black;
+    }
+
+
+    section .movie-ticket-book {
+        grid-template-columns: auto;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 50px;
+    }
+
+
+    section .movie-ticket-book .choose-date .wrapper,
+    section .movie-ticket-book .choose-time .wrapper {
+        width: 30%;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+    section .movie-ticket-book .choose-date .carousel,
+    section .movie-ticket-book .choose-time .carousel {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        align-item: center;
+        padding: 10px 0;
+    }
+
+    section .movie-ticket-book .choose-date .carousel .owl-nav,
+    section .movie-ticket-book .choose-time .carousel
+    .owl-nav {
+        color: #DB0000;
+        position: absolute;
+        width: 110%;
+        top: 50%;
+        left: -50%;
+        transform: translate(0%, -50%);
+        font-size: 1.5em;
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+    section .movie-ticket-book .choose-date .wrapper .marker,
+    section .movie-ticket-book .choose-time .wrapper .marker {
+        width: 60px;
+        height: 2px;
+        background: #DB0000;
+        position: absolute;
+        left: 45%;
+        transform: translate(-50%, 0);
+    }
+
+
+    section .movie-ticket-book > button {
+        grid-row: inherit;
+        margin-top: 20px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+
+    section .filter-search-box {
+        padding: 20px 50px;
+    }
+
+
+    section .filter-search-box .filters-box {
+        gap: 10px;
+    }
+
+
+    section .filter-search-box .search-bar {
+        left: 50px;
+        width: 85%;
+    }
+
+
+    section .movie-card-section {
+        padding: 20px 50px;
+    }
+
+
+    section .movie-card-section .card img {
+        width: 100%;
+        height: 300px;
+    }
+
+
+    section .show {
+        padding: 10px 50px;
+        padding-bottom: 40px;
+    }
+
+
+    footer {
+        padding: 40px 50px;
+        grid-template-columns:auto;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+
+
 }
 
-/* 로그인 */
+@media (min-width: 0px) and (max-width: 719px) {
+    section .movie-ticket-book {
+        justify-content: center;
+    }
 
-        section .login {
-            text-align: center;
-            padding: 20px;
-            height: 100%;
-        }
+    section .movie-ticket-book > button {
+        grid-row: inherit;
+    }
 
-        section .login h3 {
-            margin: 30px;
-        }
+    header {
+        height: auto;
+        padding-bottom: 30px;
+    }
 
-        section .login table {
-            margin: 0 auto;
-            width: 300px;
-        }
+    header nav {
+        padding: 10px 20px;
+    }
 
-        section .login th {
-            color: white;
-            width: 50px;
-        }
+    header nav ul {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 40px;
+        color: #fff;
+        background: #000;
+        width: 100%;
+        height: 100vh;
+        padding: 20px 30px;
+    }
 
-        section .login td {
-            color: white;
-        }
+    header nav .fa {
+        cursor: pointer;
+        display: block;
+    }
 
-        section .login td input {
-            width: 100%;
-            height: 40px;
-            border-radius: 10px;
-            padding-left:10px;
-        }
+    header .popular-movie-slider {
+        padding: 10px 20px;
+        display: block;
+    }
 
-        section .login button {
-            margin-top: 10px;
-            width: 145px;
-            height: 40px;
-            background: #FF7012;
-            color: #fff;
-            border-radius: 30px;
-            padding: 0 30px;
-            cursor: pointer;
-        }
+    header .popular-movie-slider .poster {
+        width: 100%;
+        height: 300px;
+        margin-bottom: 20px;
+    }
 
+    section .movie-ticket-book {
+        grid-template-columns: auto;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 20px;
+    }
 
-        #findIdAndPw {
-            text-align: center;
-            margin-top: 10px;
-            padding: 20px;
-            height: 100%;
-        }
+    section .filter-search-box {
+        padding: 20px 20px;
+    }
 
-        #findIdAndPw a {
-            font-size: 0.8em;
-            text-align: center;
-        }
+    section .filter-search-box .filters-box {
+        gap: 10px;
+    }
 
-        .error-text {
-            margin-top: 5px;
-            text-align: center;
-            color: red;
-            font-size: 0.8em;
-        }
+    section .filter-search-box .search-bar {
+        left: 20px;
+        width: 90%;
+    }
 
-/* 아이디 찾기 */
-        section .findId {
-            text-align: center;
-            padding: 20px;
-            height: 100%;
-        }
+    section .movie-card-section {
+        padding: 20px 20px;
+        grid-template-columns:auto auto;
+    }
 
-        section .findId h3 {
-            margin: 30px;
-        }
+    section .movie-card-section .card img {
+        width: 100%;
+        height: 300px;
+    }
 
-        section .findId table {
-            margin: 0 auto;
-            width: 300px;
-        }
+    section .show {
+        padding: 10px 20px;
+        padding-bottom: 40px;
+    }
 
-        section .findId th {
-            color: white;
-            width: 50px;
-        }
+    footer {
+        padding: 40px 20px;
+        grid-template-columns:auto;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        font-size: .85em;
+    }
 
-        section .findId td {
-            color: white;
-        }
+    section .filter-search-box {
+        gap: 20px;
+        overflow-x: scroll;
+    }
 
-        section .findId td input {
-            width: 100%;
-            height: 40px;
-            border-radius: 10px;
-            padding-left:10px;
-        }
+    section .filter-search-box::-webkit-scrollbar {
+        display: none;
+    }
 
-        section .findId button {
-            margin-top: 10px;
-            width: 100%;
-            height: 40px;
-            background: #FF7012;
-            color: #fff;
-            border-radius: 30px;
-            padding: 0 30px;
-            cursor: pointer;
-        }
+    section .filter-search-box .search-filters input {
+        width: 50px;
+        padding: 5px 10px;
+    }
 
-        #findIdResult {
-             font-size: 0.8em;
-             padding: 10px;
-        }
+    section .movie-ticket-book {
+        padding: 30px 0px;
+    }
 
-/* 비밀번호 재생성 */
-         section .resetPw {
-            text-align: center;
-            padding: 20px;
-            height: 100%;
-        }
+    section .movie-ticket-book button {
+        margin-top: 20px;
+    }
 
-        section .resetPw h3 {
-            margin: 30px;
-        }
-
-        section .resetPw table {
-            margin: 0 auto;
-            width: 300px;
-        }
-
-        section .resetPw th {
-            color: white;
-            width: 70px;
-        }
-
-        section .resetPw td {
-            color: white;
-        }
-
-        section .resetPw td input {
-            width: 100%;
-            height: 40px;
-            border-radius: 10px;
-            padding-left:10px;
-        }
-
-        section .resetPw button {
-            margin-top: 10px;
-            width: 100%;
-            height: 40px;
-            background: #FF7012;
-            color: #fff;
-            border-radius: 30px;
-            padding: 0 30px;
-            cursor: pointer;
-        }
-
-
-/* 회원가입 */
-
-         section .register {
-            text-align: center;
-            padding: 20px;
-            height: 100%;
-        }
-
-        section .register h3 {
-            margin: 30px;
-        }
-
-        section .register table {
-            margin: 0 auto;
-            width: 500px;
-        }
-
-        section .register th {
-            color: white;
-        }
-
-        section .register td {
-            color: white;
-            width: 100%;
-        }
-
-        section .register td input {
-            width: 100%;
-            height: 40px;
-            border-radius: 10px;
-            padding-left: 10px;
-        }
-
-
-        section .register #emailField,
-        section .register #addressField {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 10px;
-        }
-
-        section .register #emailField select{
-            border-radius:5px;
-            height: 40px;
-        }
-
-        section .register #emailField option {
-            border-radius:5px;
-        }
-
-
-        section .register #emailId,
-        section .register #emailAddress,
-        section .register #kakaoAddress {
-            flex-grow: 1;
-        }
-
-
-        section .register #emailOption {
-            flex-shrink: 0;
-            min-width: 100px;
-        }
-
-        section .register #emailAddress:disabled {
-            color: black;
-            background-color: white;
-        }
-
-
-        section .register #addressField input[type="button"] {
-             width: 130px;
-             padding-right:10px;
-        }
-
-        section .register button {
-            margin-top: 10px;
-            width: 243px;
-            height: 40px;
-            background: #FF7012;
-            color: #fff;
-            border-radius: 30px;
-            padding: 0 30px;
-            cursor: pointer;
-            text-align:center;
-        }
-
-/* 리뷰 */
-.reviewList {
-    background-color: black;
-    color: white;
-    text-align: center;
-    padding: 70px;
-    width: 100%;
 }
-
-.reviewList textarea {
-    border-radius: 10px;
-}
-
-
-.reviewList button {
-    /* border: none; */
-    outline: none;
-    height: 50px;
-    background: #DB0000;
-    color: #fff;
-    border-radius: 50px;
-    padding: 10px 50px;
-    cursor: pointer;
-}
-
-section .slider-wrap {
-    background-color: black;
-}
-
-section .slider-wrap img {
-    height: 500px;
-}
-
 
 /*카테고리 css*/
 .category-filters {
@@ -1728,146 +1809,216 @@ section .slider-wrap img {
 #genre-list li:hover {
     background-color: #444;
 }
+
 /*end of 카테고리 css*/
 
 /*마이페이지*/
 
-        section .myPage {
-            text-align: center;
-            height: 100%;
-            padding: 20px;
-        }
+section .myPage {
+    text-align: center;
+    height: 100%;
+    padding: 20px;
+}
 
-        section .myPage h3 {
-            margin: 30px;
-        }
+section .myPage h3 {
+    margin: 30px;
+}
 
-        section .myPage table {
-            margin: 0 auto;
-            width:500px;
-        }
+section .myPage table {
+    margin: 0 auto;
+    width: 500px;
+}
 
-        section .myPage th {
-            color: white;
-        }
+section .myPage th {
+    color: white;
+}
 
-        section .myPage td {
-            color: white;
-            width: 100%;
-        }
+section .myPage td {
+    color: white;
+    width: 100%;
+}
 
-        section .myPage td input{
-            width: 100%;
-            height: 40px;
-            border-radius: 10px;
-            padding-left: 10px;
-        }
+section .myPage td input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
 
-
-        section .myPage button {
-            margin-top: 10px;
-            width: 100%;
-            height: 40px;
-            background: #FF7012;
-            color: #fff;
-            border-radius: 30px;
-            padding: 0 30px;
-            cursor: pointer;
-            text-align:center;
-        }
+section .myPage button {
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
+    background: #FF7012;
+    color: #fff;
+    border-radius: 30px;
+    padding: 0 30px;
+    cursor: pointer;
+    text-align: center;
+}
 
 /*마이페이지*/
-        section .myPageEdit {
-            text-align: center;
-            padding: 20px;
-            height: 100%;
-        }
+section .myPageEdit {
+    text-align: center;
+    padding: 20px;
+    height: 100%;
+}
 
-        section .myPageEdit h3 {
-            margin: 30px;
-        }
+/*스와이프*/
 
-        section .myPageEdit table {
-            margin: 0 auto;
-            width: 500px;
-        }
+.swiper-container {
+    height: 100px;
+    overflow: hidden;
+}
 
-        section .myPageEdit th {
-            color: white;
-        }
+.conlist {
+    padding: 20px 0;
+    margin: 0 -10px;
+}
 
-        section .myPageEdit td {
-            color: white;
-            width: 100%;
-        }
+.conlist:after {
+    content: "";
+    display: block;
+    clear: both
+}
 
-        section .myPageEdit td input{
-            width: 100%;
-            height: 40px;
-            border-radius: 10px;
-            padding-left: 10px;
-        }
+.conlist li {
+    float: left;
+}
 
-        section .myPageEdit td #btnField{
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
+.conlist li a {
+    padding: 0 10px;
+    font-size: 16px;
+    color: #767676;
+    font-weight: 500;
+}
 
+.conlist li.on a {
+    color: #19aae1;
+}
 
-        section .myPageEdit button {
-            flex-grow: 1;
-            margin-top: 10px;
-            height: 40px;
-            background: #FF7012;
-            color: #fff;
-            border-radius: 30px;
-            padding: 0 30px;
-            cursor: pointer;
-            text-align:center;
+.conlist li:after {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 8px;
+    background: #dedede;
+    vertical-align: middle;
+    margin-left: 5px
+}
 
-        }
-
-        section .myPageEdit #emailField,
-        section .myPageEdit #addressField {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 10px;
-        }
-
-        section .myPageEdit #emailField select{
-            border-radius:5px;
-            height: 40px;
-        }
-
-        section .myPageEdit #emailField option {
-            border-radius:5px;
-        }
+.conlist li:last-child:after {
+    display: none;
+}
 
 
-        section .myPageEdit #emailId,
-        section .myPageEdit #emailAddress,
-        section .myPageEdit #kakaoAddress {
-            flex-grow: 1;
-        }
+.swtab.conlist {
+    max-width: 940px;
+    margin: 0
+}
+
+.swtab.conlist li a {
+    padding: 0 5px;
+}
+
+.swtab.conlist li:after {
+    margin-right: 5px
+}
+
+#myPageEditForm {
+    align: center;
+}
+
+section .myPageEdit {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 70px;
+    height: 100%;
+}
+
+section .myPageEdit h3 {
+    margin: 30px;
+}
+
+section .myPageEdit table {
+    margin: 0 auto;
+    width: 500px;
+}
+
+section .myPageEdit th {
+    color: white;
+}
+
+section .myPageEdit td {
+    color: white;
+    width: 100%;
+}
+
+section .myPageEdit td input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+section .myPageEdit td #btnField {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
 
 
-        section .myPageEdit #emailOption {
-            flex-shrink: 0;
-            min-width: 100px;
-        }
+section .myPageEdit button {
+    flex-grow: 1;
+    margin-top: 10px;
+    height: 40px;
+    background: #FF7012;
+    color: #fff;
+    border-radius: 30px;
+    padding: 0 30px;
+    cursor: pointer;
+    text-align: center;
+}
 
-        section .myPageEdit #emailAddress:disabled {
-            color: black;
-            background-color: white;
-        }
+section .myPageEdit #emailField,
+section .myPageEdit #addressField {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+section .myPageEdit #emailField select {
+    border-radius: 5px;
+    height: 40px;
+}
+
+section .myPageEdit #emailField option {
+    border-radius: 5px;
+}
+
+section .myPageEdit #emailId,
+section .myPageEdit #emailAddress,
+section .myPageEdit #kakaoAddress {
+    flex-grow: 1;
+}
 
 
-        section .myPageEdit #addressField input[type="text"] {
-            flex-grow: 1;
-        }
+section .myPageEdit #emailOption {
+    flex-shrink: 0;
+    min-width: 100px;
+}
 
+section .myPageEdit #emailAddress:disabled {
+    color: black;
+    background-color: white;
+}
+
+
+section .myPageEdit #addressField input[type="text"] {
+    flex-grow: 1;
+}
         section .myPageEdit #addressField input[type="button"] {
             flex-shrink: 0;
             width: 120px;
@@ -1900,3 +2051,4 @@ section .slider-wrap img {
         #starForm input[type=radio]:checked ~ label{
             text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
         }
+
