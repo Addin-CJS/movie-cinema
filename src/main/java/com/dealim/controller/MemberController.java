@@ -31,11 +31,6 @@ PasswordEncoder pEncoder;
 
     @PostMapping("/member/login")
     public String login(Member member, HttpSession session, Model model) {
-
-      /*  Member loginUser = memberService.selectMemberByUsername(member).get();
-        if(loginUser != null && pEncoder.matches(member.getPassword(), loginUser.getPassword())) {
-            session.setAttribute("loginUser", loginUser);
-        }*/
         Optional<Member> optionalLoginUser = memberService.selectMemberByUsername(member);
 
         if (optionalLoginUser.isPresent()) {
@@ -109,4 +104,41 @@ PasswordEncoder pEncoder;
 
     }
 
+    @GetMapping("member/findId")
+    public String findId() {
+        return "member/findId";
+    }
+
+    @PostMapping("member/findId")
+    @ResponseBody
+    public String findUserID(@RequestParam("name") String name, @RequestParam("phoneNumber") String phoneNumber) {
+            String findId = memberService.findIdByNameAndPhoneNumber(name, phoneNumber);
+        System.out.println("Found Member: " + findId);
+        return String.valueOf(findId);
+    }
+
+    @GetMapping("member/resetPw")
+    public String resetPw() {
+        return "member/resetPw";
+    }
+
+    @PostMapping("member/checkForResetPw")
+    @ResponseBody
+    public Member checkForResetPw(@RequestParam("username") String username,
+                                  @RequestParam("name") String name,
+                                  @RequestParam("phoneNumber") String phoneNumber) {
+        Member findMemberForPw = memberService.findIdByUserNameAndNameAndPhoneNumber(username,name, phoneNumber);
+        System.out.println("Found Member: " + findMemberForPw);
+        return findMemberForPw;
+    }
+
+    @PostMapping("member/resetPw")
+    public String resetPw(Member member) {
+        String enPass = pEncoder.encode(member.getPassword());	// 사용자가 입력한 패스워드 암호화해서 변수에 넣기
+        member.setPassword(pEncoder.encode(member.getPassword()));
+
+        Member resetPw = memberService.insertMember(member);
+        System.out.println("UPDATE Member: " + memberService.insertMember(member));
+        return "redirect:login";
+    }
 }

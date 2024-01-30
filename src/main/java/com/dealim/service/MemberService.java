@@ -35,4 +35,14 @@ public class MemberService {
     public Member updateMember(Member member) {
         return memberRepository.save(member);
     }
+
+    public String findIdByNameAndPhoneNumber(String name, String phoneNumber) {
+        return memberRepository.findByNameAndPhoneNumber(name, phoneNumber);
+    }
+
+    public Member findIdByUserNameAndNameAndPhoneNumber(String username, String name, String phoneNumber) {
+        Member findMemberForRestPw = memberRepository.findByUserNameAndNameAndPhoneNumber(username, name, phoneNumber);
+        return findMemberForRestPw;
+    }
+
 }
