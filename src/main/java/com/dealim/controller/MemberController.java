@@ -16,12 +16,11 @@ import java.util.Optional;
 
 @Controller
 public class MemberController {
-@Autowired
- MemberService memberService;
+    @Autowired
+    MemberService memberService;
 
-@Autowired
-PasswordEncoder pEncoder;
-
+    @Autowired
+    PasswordEncoder pEncoder;
 
     @GetMapping("/member/login")
     public String loginForm() {
@@ -49,16 +48,13 @@ PasswordEncoder pEncoder;
 
     @GetMapping("/member/register")
     public String registerForm() {
-
         return "member/register";
     }
 
     @PostMapping("/member/register")
-    public  String insertMember(Member member){
-
-        String enPass = pEncoder.encode(member.getPassword());	// 사용자가 입력한 패스워드 암호화해서 변수에 넣기
-        member.setPassword(pEncoder.encode(member.getPassword()));
-
+    public String insertMember(Member member) {
+        String enPass = pEncoder.encode(member.getPassword());    // 사용자가 입력한 패스워드 암호화해서 변수에 넣기
+        member.setPassword(enPass);
         Member insert = memberService.insertMember(member);
         return "redirect:login";
     }

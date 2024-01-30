@@ -23,5 +23,6 @@ public class Theater {
     @LastModifiedDate
     private LocalDateTime modifiedAt;
     private LocalDateTime withdrawnAt;
+    @Column(columnDefinition = "CHAR(1) default 'N'")
     private Character isWithdrawn;
 }
