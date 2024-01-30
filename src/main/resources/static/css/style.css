@@ -1871,4 +1871,5 @@ section .slider-wrap img {
         section .myPageEdit #addressField input[type="button"] {
             flex-shrink: 0;
             width: 120px;
-            padding-right: 10px;
+            padding-right: 10px
+        }

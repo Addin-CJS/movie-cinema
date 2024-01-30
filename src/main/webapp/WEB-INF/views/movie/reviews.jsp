@@ -197,8 +197,6 @@
 
 
 
-
-
     function editReview(reviewId) {
         const yn = confirm(reviewId + "번 리뷰를 수정하시겠습니까?");
 
@@ -280,8 +278,6 @@
            if (!confirm(confirmMessage)) {
                return; 
            }
-
-
            $.ajax({
                url: "like",
                type: 'POST',
