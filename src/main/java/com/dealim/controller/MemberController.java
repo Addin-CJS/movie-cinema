@@ -111,10 +111,10 @@ PasswordEncoder pEncoder;
 
     @PostMapping("member/findId")
     @ResponseBody
-    public String findUserID(@RequestParam("name") String name, @RequestParam("phoneNumber") String phoneNumber) {
-            String findId = memberService.findIdByNameAndPhoneNumber(name, phoneNumber);
+    public Member findUserID(@RequestParam("name") String name, @RequestParam("phoneNumber") String phoneNumber) {
+            Member findId = memberService.findIdByNameAndPhoneNumber(name, phoneNumber);
         System.out.println("Found Member: " + findId);
-        return String.valueOf(findId);
+        return findId;
     }
 
     @GetMapping("member/resetPw")

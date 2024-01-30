@@ -3,7 +3,7 @@
 
 <section>
         <div class="findId">
-            <h4>아이디 찾기</h4>
+            <h3>아이디 찾기</h3>
             <form action="findId" method="post" id="findIdForm">
                 <table>
                     <tr>
@@ -20,8 +20,13 @@
                             <input name="phoneNumber" id="phoneNumber" class="form-control" placeholder="전화번호" type="text" maxlength="11">
                          </td>
                      </tr>
+                     <tr>
+                         <td colspan="2">
+                            <button type="submit">아이디 찾기</button>
+                         </td>
+                     </tr>
                 </table>
-                <button type="submit">아이디 찾기</button>
+
             </form>
                  <div id="findIdResult"></div>
         </div>
@@ -35,6 +40,11 @@
             const name = $("#name").val();
             const phoneNumber = $("#phoneNumber").val();
 
+            if (!name || !phoneNumber) {
+                $("#findIdResult").html("모든 필드를 입력해주세요.");
+                return;
+            }
+
             $.ajax({
                 url: "findId",
                 type: "post",
@@ -45,8 +55,8 @@
                 success: function (result) {
                     console.log(result);
                     if(result) {
-                        $("#findIdResult").html("찾으시는 아이디는 `" + name + "` 입니다.");
-                        $("#findIdResult").append('<div><a href="/member/login">로그인으로 돌아가기</a></div>');
+                        $("#findIdResult").html("찾으시는 아이디는 `" + result.username + "` 입니다.");
+                        $("#findIdResult").append('<div><a href="/member/login">[로그인으로 돌아가기]</a></div>');
                     } else {
                         $("#findIdResult").html("아이디를 찾을 수 없습니다.");
                     }

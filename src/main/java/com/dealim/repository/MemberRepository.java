@@ -14,8 +14,8 @@ public interface MemberRepository  extends JpaRepository<Member, Long>{
     boolean existsByUsername(@Param("username") String username);
     Optional<Member> findByUsername(String username);
 
-    @Query("SELECT m.username FROM Member m WHERE m.name = :name AND m.phoneNumber = :phoneNumber")
-    String findByNameAndPhoneNumber(@Param("name") String name, @Param("phoneNumber") String phoneNumber);
+    @Query("SELECT m FROM Member m WHERE m.name = :name AND m.phoneNumber = :phoneNumber")
+    Member findByNameAndPhoneNumber(@Param("name") String name, @Param("phoneNumber") String phoneNumber);
 
     @Query("SELECT m FROM Member m WHERE m.username = :username AND m.name = :name AND m.phoneNumber = :phoneNumber")
     Member findByUserNameAndNameAndPhoneNumber(String username, String name, String phoneNumber);
