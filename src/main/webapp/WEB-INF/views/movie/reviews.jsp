@@ -9,7 +9,7 @@
                     <th colspan="2">영화후기</th>
                     <th><textarea cols="100" rows="4" id="reviewContent"> </textarea></th>
                     <th colspan="2">
-                        <button onclick="insertReview();">평점 및 리뷰작성</button>
+                        <button class="movie-btns" onclick="insertReview();">평점 및 리뷰작성</button>
                     </th>
                 </tr>
                 <tr id="reviewEditForm" style="display : none;">

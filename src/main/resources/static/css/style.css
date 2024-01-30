@@ -157,7 +157,68 @@ header nav ul li img {
     border-radius: 50%;
     object-fit: cover;
 }
+.movie-btns {
+    width: 200px;
+    border: none;
+    outline: none;
+    border-radius: 100px;
+    font-size: 1em;
+    background: #DB0000;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
 
+.reviewList .movie-btns {
+    width: 250px;
+}
+.slick-slide {
+    height: auto;
+}
+
+.slick-slider .slick-prev {
+    position: absolute;
+    top: 50%;
+    left: 1px;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.slick-slider .slick-next {
+    position: absolute;
+    top: 50%;
+    right: 1px;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.slick-date, .slick-time {
+    padding: 0 30px 0 30px;
+}
+
+.movie-ticket-book p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.movie-ticket-book .date-container {
+    text-align: center;
+}
+
+.movie-ticket-book .time {
+    text-align: center;
+}
+
+.date-container .date {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.time {
+    font-size: 1.2em;
+}
 
 section .popular-movie-slider {
     background-color: black;
@@ -231,6 +292,7 @@ section .popular-movie-slider .popular-movie-slider-content .movie-btns button {
     border-radius: 100px;
     font-size: 1em;
     background: #DB0000;
+    color: white;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -250,19 +312,31 @@ section .popular-movie-slider .popular-movie-slider-content .movie-btns button:h
 
 
 section .movie-ticket-book {
+    grid-gap: 30px;
     background: #222;
     color: #fff;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto;
     justify-content: space-between;
     align-items: center;
     padding: 30px 100px;
 }
 
+section .choose-time {
+    grid-row: 2;
+}
+.choose-time button,
+.choose-date button {
+    font-weight: 700;
+    color: #DB0000;
+    border: none;
+    background: none;
+}
 
 section .movie-ticket-book .choose-date,
 section .movie-ticket-book .choose-time {
-    position: relative
+    position: relative;
+    overflow: hidden;
 }
 
 section .movie-ticket-book .choose-date .heading,
@@ -299,7 +373,6 @@ section .movie-ticket-book .choose-time .carousel
     justify-content: space-between;
 }
 
-
 section .movie-ticket-book .choose-date .carousel .card p:nth-child(1),
 section .movie-ticket-book .choose-time .carousel .card p:nth-child(1) {
     color: #888;
@@ -326,7 +399,10 @@ section .movie-ticket-book .choose-time .wrapper .marker {
 }
 
 
-section .movie-ticket-book button {
+section .movie-ticket-book>button {
+    font-size: 1em;
+    width: 200px;
+    grid-row: 1 / span 2;
     border: none;
     outline: none;
     height: 50px;
@@ -1286,7 +1362,6 @@ section .slider-wrap img {
         border-radius: 100px;
         font-size: 1em;
         background: #DB0000;
-        color: #fff;
         cursor: pointer;
         display: flex;
         justify-content: center;
@@ -1357,8 +1432,8 @@ section .slider-wrap img {
     }
 
 
-    section .movie-ticket-book button {
-        width: 20%;
+    section .movie-ticket-book>button {
+        grid-row: inherit;
         margin-top: 20px;
         position: relative;
         left: 50%;
@@ -1411,6 +1486,13 @@ section .slider-wrap img {
 }
 
 @media (min-width: 0px) and (max-width: 719px) {
+    section .movie-ticket-book {
+        justify-content: center;
+    }
+
+    section .movie-ticket-book>button {
+        grid-row: inherit;
+    }
 
     header {
         height: auto;
@@ -1512,7 +1594,7 @@ section .slider-wrap img {
     }
 
     section .movie-ticket-book button {
-        margin-top: 10px;
+        margin-top: 20px;
     }
 
 }

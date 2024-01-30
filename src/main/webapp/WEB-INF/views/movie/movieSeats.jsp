@@ -298,6 +298,7 @@
         });
 
         // 일자 업데이트
+        // TODO: 일자 업데이트 구현
         let dateOn = $("#dateOn");
         function updateDate(){
 
