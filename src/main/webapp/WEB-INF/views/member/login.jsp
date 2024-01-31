@@ -36,11 +36,6 @@
                         <button type="button" onclick="location.href='/member/register'">회원가입</button>
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="hidden" name="returnUrl" value="${returnUrl}">
-                    </td>
-                </tr>
             </table>
             ${returnUrl}
             <div id="findIdAndPw">

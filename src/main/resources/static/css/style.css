@@ -1267,6 +1267,48 @@ section .resetPw button {
     padding: 0 30px;
     cursor: pointer;
 }
+/*회원 비밀번호 재설정*/
+section .resetMyPw {
+    text-align: center;
+    padding: 20px;
+    height: 100%;
+}
+
+section .resetMyPw h3 {
+    margin: 30px;
+}
+
+section .resetMyPw table {
+    margin: 0 auto;
+    width: 300px;
+}
+
+section .resetMyPw th {
+    color: white;
+    width: 70px;
+}
+
+section .resetMyPw td {
+    color: white;
+}
+
+section .resetMyPw td input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+section .resetMyPw button {
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
+    background: #FF7012;
+    color: #fff;
+    border-radius: 30px;
+    padding: 0 30px;
+    cursor: pointer;
+}
 
 
 /* 회원가입 */
@@ -1417,6 +1459,12 @@ section .register button {
     cursor: pointer;
     text-align: center;
 }
+
+.review-content {
+    word-wrap: break-word;
+    max-width: 400px;
+}
+
 
 div.review .pagination {
     width: 100%;
@@ -2110,4 +2158,55 @@ section .myPageEdit #addressField input[type="button"] {
 
 #starForm input[type=radio]:checked ~ label {
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+
+.yellow-star {
+    color: yellow;
+}
+
+.gray-star {
+    color: gray;
+}
+
+
+section.showMyPage {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+section.showMyPage h3{
+    margin: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+section.showMyPage ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+section.showMyPage .myPage-navbar {
+    width: 20%;
+    background: #767676;
+    margin: 0 auto;
+    text-align: left;
+}
+
+section.showMyPage .myPage-navbar #myInfo {
+    background: #19aae1;
+}
+
+section.showMyPage .myPage-navbar li{
+    margin: 20px;
+}
+
+section.showMyPage .myPage-navbar a:hover span {
+    color: rebeccapurple;
+}
+
+section.showMyPage .showPage {
+    width: 80%;
 }

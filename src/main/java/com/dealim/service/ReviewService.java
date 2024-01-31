@@ -63,10 +63,7 @@ public class ReviewService {
             likedReviews.remove(reviewId);
         }
     }
-
-
-
-
-
-
+    public Page<Review> selectReviewListByMemberId(Long memberId, Pageable pageable) {
+        return reviewRepository.findAllByMemberId(memberId, pageable);
+    }
 }

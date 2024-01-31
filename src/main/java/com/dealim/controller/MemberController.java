@@ -1,9 +1,18 @@
 package com.dealim.controller;
 
 import com.dealim.domain.Member;
+import com.dealim.domain.Review;
+import com.dealim.dto.MyPageMember;
 import com.dealim.service.MemberService;
+import com.dealim.service.ReviewService;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +24,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Optional;
 
 @Controller
+@Slf4j
 public class MemberController {
     @Autowired
     MemberService memberService;
+
+    @Autowired
+    ReviewService reviewService;
 
     @Autowired
     PasswordEncoder pEncoder;
@@ -29,29 +42,20 @@ public class MemberController {
     }
 
     @PostMapping("/member/login")
-    public String login(Member member, HttpSession session, Model model,
-                        @RequestParam(required = false) String returnUrl) {
+    public String login(Member member, HttpSession session, Model model) {
         Optional<Member> optionalLoginUser = memberService.selectMemberByUsername(member);
 
         if (optionalLoginUser.isPresent()) {
             Member loginUser = optionalLoginUser.get();
             if (pEncoder.matches(member.getPassword(), loginUser.getPassword())) {
                 session.setAttribute("loginUser", loginUser);
-                System.out.println("returnUrl =" + returnUrl);
-                if (returnUrl != null && !returnUrl.isEmpty()) {
-                    return "redirect:" + returnUrl;
-                } else {
-                    return "redirect:/";
-                }
+                return "redirect:/";
             }else {
                 model.addAttribute("loginError", "로그인 정보가 올바르지 않습니다.");
                 return "member/login";
             }
         }
-
         model.addAttribute("loginError", "로그인 정보가 올바르지 않습니다.");
-
-
         return "member/login";
     }
 
@@ -85,29 +89,61 @@ public class MemberController {
     @GetMapping("/member/myPage")
     public String showMyPage(HttpSession session) {
 
-        Member loginUser = (Member)session.getAttribute("loginUser");
-
+        if (session.getAttribute("loginUser") instanceof Member) {
+            Member loginUser = (Member) session.getAttribute("loginUser");
+        }
         return "member/myPage";
+    }
+    @GetMapping("/member/myInfo")
+    public String showMyPageInfo(HttpSession session, Model model) {
+        if (session.getAttribute("loginUser") instanceof Member) {
+            Member loginUser = (Member) session.getAttribute("loginUser");
+            model.addAttribute("loginUser", loginUser);
+        }
+        return "member/myInfo";
     }
 
     @GetMapping("/member/myPageEdit")
-    public String MyPageEdit(HttpSession session) {
-
-        Member loginUser = (Member)session.getAttribute("loginUser");
-
+    public String myPageEdit(HttpSession session, Model model) {
+        if (session.getAttribute("loginUser") instanceof Member) {
+            Member loginUser = (Member) session.getAttribute("loginUser");
+            model.addAttribute("loginUser", loginUser);
+        }
         return "member/myPageEdit";
     }
 
     @PostMapping("member/myPageEdit")
-    public String EditMyPage(Member member, HttpSession session) {
-        String enPass = pEncoder.encode(member.getPassword());	// 사용자가 입력한 패스워드 암호화해서 변수에 넣기
+    public String EditMyPage(MyPageMember myPageMember, HttpSession session) {
+
+        String enPass = pEncoder.encode(myPageMember.getPassword());
+        myPageMember.setPassword(pEncoder.encode(myPageMember.getPassword()));
+
+        Member loginUser = (Member)session.getAttribute("loginUser");
+        Member updatedMember = memberService.updateMember(myPageMember, loginUser);
+
+        session.setAttribute("loginUser", updatedMember);
+
+        return "member/myPage";
+    }
+
+    @GetMapping("/member/resetMyPw")
+    public String resetMyPw(HttpSession session, Model model) {
+        if (session.getAttribute("loginUser") instanceof Member) {
+            Member loginUser = (Member) session.getAttribute("loginUser");
+            model.addAttribute("loginUser", loginUser);
+        }
+        return "member/resetMyPw";
+    }
+
+    @PostMapping("member/resetMyPw")
+    public String resetMyPw(Member member) {
+        String enPass = pEncoder.encode(member.getPassword());
         member.setPassword(pEncoder.encode(member.getPassword()));
 
-        session.setAttribute("loginUser", memberService.updateMember(member));
-
-        return "redirect:myPage";
-
+        Member resetPw = memberService.insertMember(member);
+        return "member/myPage";
     }
+
 
     @GetMapping("member/findId")
     public String findId() {
@@ -145,5 +181,17 @@ public class MemberController {
         Member resetPw = memberService.insertMember(member);
         System.out.println("UPDATE Member: " + memberService.insertMember(member));
         return "redirect:login";
+    }
+
+    @GetMapping("member/myReviews")
+    @ResponseBody
+    public ResponseEntity<Page<Review>> getMyReviewsByMemberId
+            (@RequestParam("memberId") Long memberId,
+             @PageableDefault(page=0, size=10, sort="reviewId", direction= Sort.Direction.DESC) Pageable pageable,
+             Model model) {
+
+        Page<Review> reviewList = reviewService.selectReviewListByMemberId(memberId, pageable);
+
+        return ResponseEntity.ok(reviewList);
     }
 }
