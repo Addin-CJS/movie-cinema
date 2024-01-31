@@ -39,7 +39,7 @@ public class ReviewController {
     @ResponseBody
     public ResponseEntity<Page<Review>> getReviewsByMovieId
                         (@RequestParam("movieNo") Long movieId,
-                         @PageableDefault(page=0, size=15, sort="reviewId", direction= Sort.Direction.DESC) Pageable pageable,
+                         @PageableDefault(page=0, size=10, sort="reviewId", direction= Sort.Direction.DESC) Pageable pageable,
                          Model model) {
 
         Page<Review> reviewList = reviewService.selectReviewListByMovieNo(movieId, pageable);

@@ -26,7 +26,7 @@
                         </form>
                     </th>
                     <th><textarea cols="80" rows="4" id="reviewContent"> </textarea></th>
-                    <th colspan="2">
+                    <th colspan="3">
                         <button class="movie-btns" onclick="insertReview();">평점 및 리뷰작성</button>
                     </th>
                 </tr>
