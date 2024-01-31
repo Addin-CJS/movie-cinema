@@ -8,14 +8,19 @@
                     <th colspan="2">영화후기</th>
                     <th>별점
                         <form name="stars" id="starForm" method="post">
-                            <fieldset>
-                                <span class="text-bold"></span>
-                                <input type="radio" name="reviewStar" value="5" id="rate5"><label for="rate5">★</label>
-                                <input type="radio" name="reviewStar" value="4" id="rate4"><label for="rate4">★</label>
-                                <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
-                                <input type="radio" name="reviewStar" value="2" id="rate2"><label for="rate2">★</label>
-                                <input type="radio" name="reviewStar" value="1" id="rate1"><label for="rate1">★</label>
-                            </fieldset>
+                        	<fieldset>
+                        		<span class="text-bold"></span>
+                        		<input type="radio" name="reviewStar" value="1" id="rate1"><label
+                        			for="rate1">★</label>
+                        		<input type="radio" name="reviewStar" value="2" id="rate2"><label
+                        			for="rate2">★</label>
+                        		<input type="radio" name="reviewStar" value="3" id="rate3"><label
+                        			for="rate3">★</label>
+                        		<input type="radio" name="reviewStar" value="4" id="rate4"><label
+                        			for="rate4">★</label>
+                        		<input type="radio" name="reviewStar" value="5" id="rate5"><label
+                        			for="rate5">★</label>
+                        	</fieldset>
                         </form>
                     </th>
                     <th><textarea cols="80" rows="4" id="reviewContent"> </textarea></th>
@@ -94,10 +99,11 @@
              success: function (result) {
                 if(result === "fail") {
                     const yn = confirm('로그인 후에 리뷰 작성 가능합니다. 로그인 창으로 이동할까요 ?');
-                    if (yn) {
-                        returnUrl = '/showDetail?movieId=${movie.movieId}'
-                        location.href = '/member/login?returnUrl=' + returnUrl;
-                    }
+                        if(yn) {
+                            returnUrl = window.location.href;
+                            location.href='/member/login?returnUrl=' + encodeURIComponent(returnUrl);
+                        }
+
                 } else {
                     updateReviewList(movieId);
                     $("#reviewContent").val("");
@@ -213,24 +219,6 @@
             }
         });
     }
-<<<<<<< HEAD
-=======
-        function loadUserLikes() {
-            $.ajax({
-                url: "/getUserLikes",
-                type: "GET",
-                success: function(likedReviews) {
-                    likedReviews.forEach(function(reviewId) {
-                        $("#heart-" + reviewId).addClass('liked').html('🩷');
-                    });
-                },
-                error: function(error) {
-                    console.error("에러다", error);
-                }
-            });
-        }
->>>>>>> d627d5b610bc1f2d56bb6456535238d7f0bb7c84
-
     function loadUserLikes() {
         $.ajax({
             url: "/getUserLikes",

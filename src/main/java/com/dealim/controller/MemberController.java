@@ -29,14 +29,20 @@ public class MemberController {
     }
 
     @PostMapping("/member/login")
-    public String login(Member member, HttpSession session, Model model) {
+    public String login(Member member, HttpSession session, Model model,
+                        @RequestParam(required = false) String returnUrl) {
         Optional<Member> optionalLoginUser = memberService.selectMemberByUsername(member);
 
         if (optionalLoginUser.isPresent()) {
             Member loginUser = optionalLoginUser.get();
             if (pEncoder.matches(member.getPassword(), loginUser.getPassword())) {
                 session.setAttribute("loginUser", loginUser);
-                return "redirect:/";
+                System.out.println("returnUrl =" + returnUrl);
+                if (returnUrl != null && !returnUrl.isEmpty()) {
+                    return "redirect:" + returnUrl;
+                } else {
+                    return "redirect:/";
+                }
             }else {
                 model.addAttribute("loginError", "로그인 정보가 올바르지 않습니다.");
                 return "member/login";
@@ -44,6 +50,8 @@ public class MemberController {
         }
 
         model.addAttribute("loginError", "로그인 정보가 올바르지 않습니다.");
+
+
         return "member/login";
     }
 
