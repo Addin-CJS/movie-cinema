@@ -158,6 +158,14 @@ header nav ul li img {
     object-fit: cover;
 }
 
+section .movie-ticket-book .off-btns {
+    background: grey;
+}
+section .movie-ticket-book .off-btns:hover {
+    background: #000000;
+    color: white;
+}
+
 .movie-btns {
     width: 200px;
     border: none;
@@ -173,9 +181,7 @@ header nav ul li img {
     gap: 2px;
 }
 
-.reviewList .movie-btns {
-    width: 250px;
-}
+
 
 .slick-slide {
     height: auto;
@@ -202,7 +208,7 @@ header nav ul li img {
 }
 
 .movie-ticket-book p {
-    font-size: 1.1em;
+    font-size: 1.2em;
     margin-bottom: 20px;
 }
 
@@ -316,6 +322,7 @@ section .popular-movie-slider .popular-movie-slider-content .movie-btns button .
 
 section .popular-movie-slider .popular-movie-slider-content .movie-btns button:hover {
     background: white;
+    color: black;
 }
 
 
@@ -418,12 +425,13 @@ section .movie-ticket-book > button {
     background: #DB0000;
     color: #fff;
     border-radius: 50px;
-    padding: 10px 50px;
+    padding: 10px 10px;
     cursor: pointer;
 }
 
 section .movie-ticket-book button:hover {
-    background: #000;
+    background: #fff;
+    color: #000000;
 }
 
 
@@ -1354,24 +1362,39 @@ section .register button {
     background-color: black;
     color: white;
     text-align: center;
-    padding: 70px;
+    padding: 20px;
     width: 100%;
 }
 
 .reviewList textarea {
-    border-radius: 10px;
+    width: 100%;
+    min-width: 200px;
+    min-height: 100px;
 }
 
+.reviewList textarea {
+    border-radius: 5px;
+}
 
 .reviewList button {
-    /* border: none; */
+    width: 200px;
+    border: none;
     outline: none;
-    height: 50px;
-    background: #DB0000;
-    color: #fff;
     border-radius: 50px;
-    padding: 10px 50px;
+    font-size: 1em;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding: 10px 10px;
+}
+
+.reviewList button:hover {
+    background: white;
+    color: black;
 }
 
 section .slider-wrap {
@@ -1778,6 +1801,7 @@ section .slider-wrap img {
 
     section .movie-ticket-book button {
         margin-top: 20px;
+        justify-self: center;
     }
 
 }
@@ -1867,6 +1891,7 @@ section .myPageEdit {
 /*스와이프*/
 
 .swiper-container {
+    text-align: center;
     height: 100px;
     overflow: hidden;
 }
@@ -1896,21 +1921,6 @@ section .myPageEdit {
 .conlist li.on a {
     color: #19aae1;
 }
-
-.conlist li:after {
-    content: "";
-    display: inline-block;
-    width: 1px;
-    height: 8px;
-    background: #dedede;
-    vertical-align: middle;
-    margin-left: 5px
-}
-
-.conlist li:last-child:after {
-    display: none;
-}
-
 
 .swtab.conlist {
     max-width: 940px;

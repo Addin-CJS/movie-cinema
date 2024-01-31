@@ -42,6 +42,7 @@ public class MemberController {
                 return "member/login";
             }
         }
+
         model.addAttribute("loginError", "로그인 정보가 올바르지 않습니다.");
         return "member/login";
     }

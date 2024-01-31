@@ -39,7 +39,15 @@
                 </ul>
             </div>
         </div>
-        <button class="movie-btns" type="button" onclick="selectSeat()">좌석선택하기</button>
+<%--        TODO: EL 구문 안먹음--%>
+        <c:choose>
+            <c:when test="${not empty loginUser}">
+                <button class="movie-btns" type="button" onclick="selectSeat()">좌석선택</button>
+            </c:when>
+            <c:otherwise>
+                <button class="off-btns" type="button" onclick="location.href='/member/login'">로그인 해주세요</button>
+            </c:otherwise>
+        </c:choose>
     </div>
 </section>
 
@@ -136,11 +144,21 @@
     //스와이퍼 설정
     $(function () {
         var swiper = new Swiper('.snbSwiper', {
-            slidesPerView: 5,
+            slidesPerView: 2,
             preventClicks: true,
             preventClicksPropagation: false,
             observer: true,
-            observeParents: true
+            observeParents: true,
+            breakpoints: {
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 40,
+                },
+                1024: {
+                    slidesPerView: 5,
+                    spaceBetween: 50
+                }
+            }
         });
         var snbSwiperDateItem = $('.choose-date .snbSwiper .swiper-wrapper .swiper-slide a');
         var snbSwiperTimeItem = $('.choose-time .snbSwiper .swiper-wrapper .swiper-slide a');
@@ -211,6 +229,7 @@
         }
         location.href = 'movieSeats?movieId=${movie.movieId}';
     }
+
 </script>
 
 <jsp:include page="../movie/reviews.jsp"/>
