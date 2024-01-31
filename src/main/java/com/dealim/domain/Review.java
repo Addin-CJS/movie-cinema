@@ -23,6 +23,9 @@ public class Review {
     @Column(nullable = true, columnDefinition = "integer default 0")
     private Integer likeCount;
 
+    @Column(nullable = false, columnDefinition = "NUMBER(1) default 0")
+    private int starRating;
+
     @CreatedDate
     @Column(name="createDate")
     private LocalDateTime createReviewDate;
