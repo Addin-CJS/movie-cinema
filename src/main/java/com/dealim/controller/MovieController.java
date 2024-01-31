@@ -41,6 +41,7 @@ public class MovieController {
     @GetMapping("/showDetail")
     public String showDetail(@RequestParam("movieId") Long movieId, Model model) {
         movieService.getShowDetail(movieId, model);
+        movieService.getTheaterListByMovieId(movieId, model);
         return "movie/detail";
     }
 

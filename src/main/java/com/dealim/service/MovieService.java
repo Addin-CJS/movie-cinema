@@ -1,7 +1,10 @@
 package com.dealim.service;
 
 import com.dealim.domain.Movie;
+import com.dealim.domain.Theater;
 import com.dealim.repository.MovieRepository;
+import com.dealim.repository.MovieTheaterRepository;
+import com.dealim.repository.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,13 +12,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MovieService {
 
     @Autowired
-    MovieRepository movieRepository;
+    private MovieRepository movieRepository;
+    @Autowired
+    private MovieTheaterRepository movieTheaterRepository;
+    @Autowired
+    private TheaterRepository theaterRepository;
     /*public List<Movie> selectNowMovie() {
 
         return movieRepository.findAll();
@@ -95,5 +103,11 @@ public class MovieService {
         } else {
             model.addAttribute("movieRating", null);
         }
+    }
+
+    public void getTheaterListByMovieId(Long movieId, Model model) {
+        List<Long> theaterIdList = movieTheaterRepository.findTheaterIdByMovieId(movieId);
+        List<Theater> theaterList = theaterRepository.findByTheaterIdIn(theaterIdList);
+        model.addAttribute("theaterList", theaterList);
     }
 }

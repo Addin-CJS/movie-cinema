@@ -17,6 +17,7 @@ public class Theater {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "theater_SEQ")
     private Long theaterId;
     private Long regionId;
+    private String theaterName;
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate
