@@ -8,19 +8,14 @@
                     <th colspan="2">영화후기</th>
                     <th>별점
                         <form name="stars" id="starForm" method="post">
-                        	<fieldset>
-                        		<span class="text-bold"></span>
-                        		<input type="radio" name="reviewStar" value="5" id="rate1"><label
-                        			for="rate1">★</label>
-                        		<input type="radio" name="reviewStar" value="4" id="rate2"><label
-                        			for="rate2">★</label>
-                        		<input type="radio" name="reviewStar" value="3" id="rate3"><label
-                        			for="rate3">★</label>
-                        		<input type="radio" name="reviewStar" value="2" id="rate4"><label
-                        			for="rate4">★</label>
-                        		<input type="radio" name="reviewStar" value="1" id="rate5"><label
-                        			for="rate5">★</label>
-                        	</fieldset>
+                            <fieldset>
+                                <span class="text-bold"></span>
+                                <input type="radio" name="reviewStar" value="5" id="rate5"><label for="rate5">★</label>
+                                <input type="radio" name="reviewStar" value="4" id="rate4"><label for="rate4">★</label>
+                                <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
+                                <input type="radio" name="reviewStar" value="2" id="rate2"><label for="rate2">★</label>
+                                <input type="radio" name="reviewStar" value="1" id="rate1"><label for="rate1">★</label>
+                            </fieldset>
                         </form>
                     </th>
                     <th><textarea cols="80" rows="4" id="reviewContent"> </textarea></th>
@@ -68,28 +63,36 @@
 
 
     });
+     function insertReview() {
+        var reviewContent =  $("#reviewContent").val();
+         var starRating = $('input[name="reviewStar"]:checked').val();
 
-    function insertReview() {
-        var reviewContent = $("#reviewContent").val();
-        if (!reviewContent.trim()) {
-            alert('리뷰 내용 작성은 필수입니다.');
-            $("#reviewContent").focus();
-            return;
-        } else if (reviewContent.trim().length < 10) {
-            alert('리뷰는 최소 10글자 이상 작성해야 합니다.');
-            $("#reviewContent").focus();
-            return;
-        }
-        $.ajax({
-            url: "reviewInsert",
-            data: {
-                movieNo: movieId,
-                reviewWriter: loginUsername,
-                reviewContent: $("#reviewContent").val()
-            },
-            type: "post",
-            success: function (result) {
-                if (result === "fail") {
+
+         if (!reviewContent.trim()) {
+                alert('리뷰 내용 작성은 필수입니다.');
+                $("#reviewContent").focus();
+                return;
+            } else if (reviewContent.trim().length < 10) {
+                alert('리뷰는 최소 10글자 이상 작성해야 합니다.');
+                $("#reviewContent").focus();
+                return;
+            }
+         if (!starRating) {
+             alert('별점을 선택해주세요.');
+             return;
+         }
+
+         $.ajax({
+             url: "reviewInsert",
+             data: {
+                 movieNo: movieId,
+                 reviewWriter: loginUsername,
+                 reviewContent: $("#reviewContent").val(),
+                 starRating: starRating
+             },
+             type: "post",
+             success: function (result) {
+                if(result === "fail") {
                     const yn = confirm('로그인 후에 리뷰 작성 가능합니다. 로그인 창으로 이동할까요 ?');
                     if (yn) {
                         returnUrl = '/showDetail?movieId=${movie.movieId}'
@@ -131,13 +134,25 @@
                 if (response.content && Array.isArray(response.content)) {
                     response.content.forEach(function (review) {
                         var displayDate = review.updateReviewDate ? review.updateReviewDate : review.createReviewDate;
+
+                        var stars = '';
+
+                        // 노란색 별 모양 생성
+                        for (var i = 0; i < review.starRating; i++) {
+                            stars += '<span class="yellow-star">★</span>';
+                        }
+
+                        // 회색 별 모양 생성 (총 5개 별 중에서 남은 별)
+                        for (var i = review.starRating; i < 5; i++) {
+                            stars += '<span class="gray-star">★</span>';
+                        }
+
                         reviewsHtml += '<tr><td>'
                             + review.reviewId + '</td><td>'
                             + review.reviewWriter + '</td><td>'
-                            + review.reviewWriter + '</td><td>'
+                            + stars + '</td><td>'
                             + review.reviewContent + '</td><td>'
-                            + '<a href="javascript:void(0);" onclick="likeReview(' + review.reviewId + ');" id="heart-' + review.reviewId + '">♡</a>'
-
+                            + '<a href="javascript:void(0);" onclick="likeReview(' + review.reviewId + ');" id="heart-' + review.reviewId + '">🩶</a>'
                             + '<span id="like-count-' + review.reviewId + '">'
                             + (review.likeCount !== null ? review.likeCount : 0)
                             + '</span></td><td>'
@@ -198,6 +213,23 @@
             }
         });
     }
+<<<<<<< HEAD
+=======
+        function loadUserLikes() {
+            $.ajax({
+                url: "/getUserLikes",
+                type: "GET",
+                success: function(likedReviews) {
+                    likedReviews.forEach(function(reviewId) {
+                        $("#heart-" + reviewId).addClass('liked').html('🩷');
+                    });
+                },
+                error: function(error) {
+                    console.error("에러다", error);
+                }
+            });
+        }
+>>>>>>> d627d5b610bc1f2d56bb6456535238d7f0bb7c84
 
     function loadUserLikes() {
         $.ajax({
@@ -322,4 +354,44 @@
 
 </script>
 
+<<<<<<< HEAD
 <jsp:include page="../layouts/footer.jsp"/>
+=======
+       function likeReview(reviewId) {
+           var likeCountElementId = "like-count-" + reviewId;
+           var heartElementId = "heart-" + reviewId;
+           var isLiked = $("#" + heartElementId).hasClass('liked');
+
+           var confirmMessage = isLiked ? '좋아요를 취소하시겠습니까?' : '좋아요를 하시겠습니까?';
+           if (!confirm(confirmMessage)) {
+               return; 
+           }
+           $.ajax({
+               url: "like",
+               type: 'POST',
+               data: {reviewId: reviewId, likeAction: isLiked ? 'unlike' : 'like'},
+               success: function (response) {
+                   if (response === "success") {
+                       var currentLikeCount = parseInt($("#" + likeCountElementId).text());
+                       if (isLiked) {
+                           $("#" + heartElementId).html('🩶').removeClass('liked');
+                           $("#" + likeCountElementId).text(currentLikeCount - 1);
+                       } else {
+                           $("#" + heartElementId).html('🩷').addClass('liked');
+                           $("#" + likeCountElementId).text(currentLikeCount + 1);
+                       }
+                   } else if (response === "fail") {
+                       alert('로그인해주세여~');
+                   }
+               },
+               error: function () {
+                   alert('좋아요 처리 중 오류 발생');
+               }
+           });
+
+     }
+
+ </script>
+
+ <jsp:include page="../layouts/footer.jsp"/>
+>>>>>>> d627d5b610bc1f2d56bb6456535238d7f0bb7c84
