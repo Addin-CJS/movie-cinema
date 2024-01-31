@@ -1349,7 +1349,7 @@ section .register button {
 /* 리뷰 */
 .reviewList {
     text-align: center;
-    padding: 50px;
+    padding: 55px;
     width: 100%;
 }
 
