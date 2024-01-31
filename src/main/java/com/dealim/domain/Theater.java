@@ -16,7 +16,6 @@ public class Theater {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "theater_SEQ")
     private Long theaterId;
-    private int theaterSeats;
     private Long regionId;
     @CreatedDate
     private LocalDateTime createdAt;

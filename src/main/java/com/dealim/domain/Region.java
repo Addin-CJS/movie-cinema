@@ -1,27 +1,36 @@
 package com.dealim.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Data
-@SequenceGenerator(name = "region_SEQ", sequenceName = "region_SEQ", allocationSize = 1)
-@EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Region {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "region_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "region_seq_generator")
+    @SequenceGenerator(name = "region_seq_generator", sequenceName = "REGION_SEQ", allocationSize = 1)
     private Long regionId;
+
+    @Column(length = 255)
     private String regionName;
-    @CreatedDate
+
+    @Column(columnDefinition = "CHAR")
+    private char isWithdrawn;
+
+    @Column
     private LocalDateTime createdAt;
-    @LastModifiedDate
+
+    @Column
     private LocalDateTime modifiedAt;
+
+    @Column
     private LocalDateTime withdrawnAt;
-    @Column(columnDefinition = "CHAR(1) default 'N'")
-    private Character isWithdrawn;
 }
