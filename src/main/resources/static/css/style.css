@@ -161,6 +161,7 @@ header nav ul li img {
 section .movie-ticket-book .off-btns {
     background: grey;
 }
+
 section .movie-ticket-book .off-btns:hover {
     background: #000000;
     color: white;
@@ -180,8 +181,6 @@ section .movie-ticket-book .off-btns:hover {
     align-items: center;
     gap: 2px;
 }
-
-
 
 .slick-slide {
     height: auto;
@@ -1359,10 +1358,8 @@ section .register button {
 
 /* 리뷰 */
 .reviewList {
-    background-color: black;
-    color: white;
     text-align: center;
-    padding: 20px;
+    padding: 30px;
     width: 100%;
 }
 
@@ -1396,6 +1393,59 @@ section .register button {
     background: white;
     color: black;
 }
+
+.reviewList #reviewTitle {
+    margin-bottom: 30px;
+}
+
+.reviewList th, .reviewList td {
+    padding: 10px;
+}
+
+.reviewList th {
+}
+
+
+.reviewList button {
+    flex-grow: 1;
+    margin-top: 10px;
+    height: 40px;
+    background: #FF7012;
+    color: #fff;
+    border-radius: 30px;
+    padding: 0 30px;
+    cursor: pointer;
+    text-align: center;
+}
+
+div.review .pagination {
+    width: 100%;
+    text-align: center;
+    background: #111;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+div.review .pagination a {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #DB0000;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+div.review .pagination a:hover {
+    background-color: #FFA500;
+}
+
+div.review .pagination .active {
+    background-color: #FFA500;
+    font-weight: bold;
+}
+
 
 section .slider-wrap {
     background-color: black;
@@ -1807,6 +1857,7 @@ section .slider-wrap img {
 }
 
 /*카테고리 css*/
+
 .category-filters {
     position: relative;
 }
@@ -1881,13 +1932,6 @@ section .myPage button {
     text-align: center;
 }
 
-/*마이페이지*/
-section .myPageEdit {
-    text-align: center;
-    padding: 20px;
-    height: 100%;
-}
-
 /*스와이프*/
 
 .swiper-container {
@@ -1935,9 +1979,7 @@ section .myPageEdit {
     margin-right: 5px
 }
 
-#myPageEditForm {
-    align: center;
-}
+/* 마이페이지 수정 */
 
 section .myPageEdit {
     background-color: black;
@@ -2037,6 +2079,7 @@ section .myPageEdit #addressField input[type="button"] {
 }
 
 /*별점*/
+
 #starForm fieldset {
     display: inline-block;
     direction: rtl;
@@ -2067,10 +2110,4 @@ section .myPageEdit #addressField input[type="button"] {
 
 #starForm input[type=radio]:checked ~ label {
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-
-section .myPageEdit #addressField input[type="button"] {
-    flex-shrink: 0;
-    width: 120px;
-    padding-right: 10px;
 }
