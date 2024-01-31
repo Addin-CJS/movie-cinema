@@ -11,6 +11,8 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(){
+
+//        이걸 수정했다구요~~
         return "index";
     }
 
