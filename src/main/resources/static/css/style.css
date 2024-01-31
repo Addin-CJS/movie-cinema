@@ -158,6 +158,15 @@ header nav ul li img {
     object-fit: cover;
 }
 
+section .movie-ticket-book .off-btns {
+    background: grey;
+}
+
+section .movie-ticket-book .off-btns:hover {
+    background: #000000;
+    color: white;
+}
+
 .movie-btns {
     width: 200px;
     border: none;
@@ -172,7 +181,6 @@ header nav ul li img {
     align-items: center;
     gap: 2px;
 }
-
 
 .slick-slide {
     height: auto;
@@ -199,7 +207,7 @@ header nav ul li img {
 }
 
 .movie-ticket-book p {
-    font-size: 1.1em;
+    font-size: 1.2em;
     margin-bottom: 20px;
 }
 
@@ -313,6 +321,7 @@ section .popular-movie-slider .popular-movie-slider-content .movie-btns button .
 
 section .popular-movie-slider .popular-movie-slider-content .movie-btns button:hover {
     background: white;
+    color: black;
 }
 
 
@@ -415,12 +424,13 @@ section .movie-ticket-book > button {
     background: #DB0000;
     color: #fff;
     border-radius: 50px;
-    padding: 10px 50px;
+    padding: 10px 10px;
     cursor: pointer;
 }
 
 section .movie-ticket-book button:hover {
-    background: #000;
+    background: #fff;
+    color: #000000;
 }
 
 
@@ -1349,16 +1359,43 @@ section .register button {
 /* 리뷰 */
 .reviewList {
     text-align: center;
-    padding: 55px;
+    padding: 30px;
     width: 100%;
 }
 
 .reviewList textarea {
-    border-radius: 10px;
+    width: 100%;
+    min-width: 200px;
+    min-height: 100px;
+}
+
+.reviewList textarea {
+    border-radius: 5px;
+}
+
+.reviewList button {
+    width: 200px;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    font-size: 1em;
+    background: #DB0000;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding: 10px 10px;
+}
+
+.reviewList button:hover {
+    background: white;
+    color: black;
 }
 
 .reviewList #reviewTitle {
-    margin-bottom:30px;
+    margin-bottom: 30px;
 }
 
 .reviewList th, .reviewList td {
@@ -1408,9 +1445,6 @@ div.review .pagination .active {
     background-color: #FFA500;
     font-weight: bold;
 }
-
-
-
 
 
 section .slider-wrap {
@@ -1817,11 +1851,13 @@ section .slider-wrap img {
 
     section .movie-ticket-book button {
         margin-top: 20px;
+        justify-self: center;
     }
 
 }
 
 /*카테고리 css*/
+
 .category-filters {
     position: relative;
 }
@@ -1899,6 +1935,7 @@ section .myPage button {
 /*스와이프*/
 
 .swiper-container {
+    text-align: center;
     height: 100px;
     overflow: hidden;
 }
@@ -1929,21 +1966,6 @@ section .myPage button {
     color: #19aae1;
 }
 
-.conlist li:after {
-    content: "";
-    display: inline-block;
-    width: 1px;
-    height: 8px;
-    background: #dedede;
-    vertical-align: middle;
-    margin-left: 5px
-}
-
-.conlist li:last-child:after {
-    display: none;
-}
-
-
 .swtab.conlist {
     max-width: 940px;
     margin: 0
@@ -1958,6 +1980,7 @@ section .myPage button {
 }
 
 /* 마이페이지 수정 */
+
 section .myPageEdit {
     background-color: black;
     color: white;
@@ -2048,36 +2071,43 @@ section .myPageEdit #emailAddress:disabled {
 section .myPageEdit #addressField input[type="text"] {
     flex-grow: 1;
 }
-        section .myPageEdit #addressField input[type="button"] {
-            flex-shrink: 0;
-            width: 120px;
-            padding-right: 10px;
-        }
+
+section .myPageEdit #addressField input[type="button"] {
+    flex-shrink: 0;
+    width: 120px;
+    padding-right: 10px;
+}
 
 /*별점*/
-#starForm fieldset{
+
+#starForm fieldset {
     display: inline-block;
     direction: rtl;
-    border:0;
+    border: 0;
 }
-#starForm fieldset legend{
+
+#starForm fieldset legend {
     text-align: right;
 }
-#starForm input[type=radio]{
+
+#starForm input[type=radio] {
     display: none;
 }
-#starForm label{
+
+#starForm label {
     font-size: 1.2em;
     color: transparent;
     text-shadow: 0 0 0 #f0f0f0;
 }
-#starForm label:hover{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-#starForm label:hover ~ label{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-#starForm input[type=radio]:checked ~ label{
+
+#starForm label:hover {
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 }
 
+#starForm label:hover ~ label {
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+
+#starForm input[type=radio]:checked ~ label {
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}

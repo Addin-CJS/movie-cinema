@@ -1,8 +1,6 @@
- <%@ page contentType="text/html;charset=UTF-8" language="java" %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
     <div class="review">
         <table class="reviewList">
             <thead>
@@ -48,51 +46,50 @@
                         <td>별점</td>
                         <td>${review.reviewContent}</td>
                         <td>${fn:substringBefore(review.createReviewDate.toString(), 'T')}</td>
+                <td>
+                    <button onclick="updateReview(${review.reviewId});">수정</button>
+                    <button onclick="deleteReview(${review.reviewId});">삭제</button>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+    <div class="pagination"></div>
+</div>
+</section>
 
-                        <td>
-                            <button onclick="updateReview(${review.reviewId});">수정</button>
-                            <button onclick="deleteReview(${review.reviewId});">삭제</button>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        <div class="pagination"></div>
-    </div>
-    </section>
+<script>
+    var movieId = ${movie.movieId};
+    var loginUsername = "<c:out value='${loginUser.username}'/>";
+    var currentPage = 0;
 
- <script>
-       var movieId = ${movie.movieId};
-       var loginUsername = "<c:out value='${loginUser.username}'/>";
-       var currentPage = 0;
-
-      $(document).ready(function() {
-             updateReviewList(movieId,0);
+    $(document).ready(function () {
+        updateReviewList(movieId, 0);
 
 
-       });
+    });
 
-     function insertReview() {
-        var reviewContent =  $("#reviewContent").val();
+    function insertReview() {
+        var reviewContent = $("#reviewContent").val();
         if (!reviewContent.trim()) {
-                alert('리뷰 내용 작성은 필수입니다.');
-                $("#reviewContent").focus();
-                return;
-            } else if (reviewContent.trim().length < 10) {
-                alert('리뷰는 최소 10글자 이상 작성해야 합니다.');
-                $("#reviewContent").focus();
-                return;
-            }
-         $.ajax({
-             url: "reviewInsert",
-             data: {
-                 movieNo: movieId,
-                 reviewWriter: loginUsername,
-                 reviewContent: $("#reviewContent").val()
-             },
-             type: "post",
-             success: function (result) {
-                if(result === "fail") {
+            alert('리뷰 내용 작성은 필수입니다.');
+            $("#reviewContent").focus();
+            return;
+        } else if (reviewContent.trim().length < 10) {
+            alert('리뷰는 최소 10글자 이상 작성해야 합니다.');
+            $("#reviewContent").focus();
+            return;
+        }
+        $.ajax({
+            url: "reviewInsert",
+            data: {
+                movieNo: movieId,
+                reviewWriter: loginUsername,
+                reviewContent: $("#reviewContent").val()
+            },
+            type: "post",
+            success: function (result) {
+                if (result === "fail") {
                     const yn = confirm('로그인 후에 리뷰 작성 가능합니다. 로그인 창으로 이동할까요 ?');
                         if(yn) {
                             returnUrl = window.location.href;
@@ -100,15 +97,15 @@
                         }
 
                 } else {
-                     updateReviewList(movieId);
-                     $("#reviewContent").val("");
+                    updateReviewList(movieId);
+                    $("#reviewContent").val("");
                 }
-             },
-             error: function () {
-                 console.log("리뷰 등록 ajax통신 실패");
-             }
-         });
-     }
+            },
+            error: function () {
+                console.log("리뷰 등록 ajax통신 실패");
+            }
+        });
+    }
 
     function updateReviewList(movieId, currentPage) {
 
@@ -202,29 +199,27 @@
             }
         });
     }
-        function loadUserLikes() {
-            $.ajax({
-                url: "/getUserLikes",
-                type: "GET",
-                success: function(likedReviews) {
-                    likedReviews.forEach(function(reviewId) {
-                        $("#heart-" + reviewId).addClass('liked').html('♥︎');
-                    });
-                },
-                error: function(error) {
-                    console.error("에러다", error);
-                }
-            });
-        }
 
-
-
+    function loadUserLikes() {
+        $.ajax({
+            url: "/getUserLikes",
+            type: "GET",
+            success: function (likedReviews) {
+                likedReviews.forEach(function (reviewId) {
+                    $("#heart-" + reviewId).addClass('liked').html('♥︎');
+                });
+            },
+            error: function (error) {
+                console.error("에러다", error);
+            }
+        });
+    }
 
 
     function editReview(reviewId) {
         const yn = confirm(reviewId + "번 리뷰를 수정하시겠습니까?");
 
-        if(yn) {
+        if (yn) {
             var review = reviews.find(review => review.reviewId == reviewId);
             if (review) {
                 $("#editReviewContent").val(review.reviewContent);
@@ -236,99 +231,96 @@
     }
 
     function cancelEdit() {
-          $(".reviewList").show();
-          $("#reviewEditForm").hide();
+        $(".reviewList").show();
+        $("#reviewEditForm").hide();
     }
 
-     function updateReview() {
-         var reviewId = $("#reviewEditForm").data("reviewId"); // 수정 중인 리뷰 ID 저장 필요
-         var reviewContent = $("#editReviewContent").val();
-            $.ajax({
-                url: "updateReview",
-                data: {
-                    movieNo: movieId,
-                    reviewId: reviewId,
-                    reviewWriter: loginUsername,
-                    reviewContent: reviewContent
-                },
-                type: "post",
-                success: function(result) {
-                  if(result === "success") {
-                      alert('리뷰가 수정되었습니다!');
-                      $("#reviewTitle").show();
-                      $("#reviewEditForm").hide();
+    function updateReview() {
+        var reviewId = $("#reviewEditForm").data("reviewId"); // 수정 중인 리뷰 ID 저장 필요
+        var reviewContent = $("#editReviewContent").val();
+        $.ajax({
+            url: "updateReview",
+            data: {
+                movieNo: movieId,
+                reviewId: reviewId,
+                reviewWriter: loginUsername,
+                reviewContent: reviewContent
+            },
+            type: "post",
+            success: function (result) {
+                if (result === "success") {
+                    alert('리뷰가 수정되었습니다!');
+                    $("#reviewTitle").show();
+                    $("#reviewEditForm").hide();
 
-                      updateReviewList(movieId,currentPage);
-                  }else{
-                        alert('리뷰 수정 실패!');
-                  }
+                    updateReviewList(movieId, currentPage);
+                } else {
+                    alert('리뷰 수정 실패!');
+                }
+            },
+            error: function () {
+                console.log("댓글 수정 실패")
+            },
+        })
+    }
+
+    $(".reviewList").on("click", ".delete-review", function (event) {
+        const reviewNo = $(this).attr("reviewNo");
+        const yn = confirm(reviewNo + "번 댓글을 삭제할까요?");
+        if (yn) {
+            $.ajax({
+                url: "deleteReview",
+                data: {
+                    reviewId: reviewNo
                 },
-                error: function() {
-                    console.log("댓글 수정 실패")
+                type: "get",
+                success: function (result) {
+                    if (result === "success") {
+                        updateReviewList(movieId, currentPage);
+                    }
+                },
+                error: function () {
+                    console.log("댓글 삭제 실패")
                 },
             })
-     }
+        }
+    })
 
-    $(".reviewList").on("click", ".delete-review", function(event) {
-            const reviewNo = $(this).attr("reviewNo");
-            const yn = confirm(reviewNo + "번 댓글을 삭제할까요?");
-            if(yn) {
-                $.ajax({
-                    url: "deleteReview",
-                    data: {
-                        reviewId: reviewNo
-                    },
-                    type: "get",
-                    success: function(result) {
-                      if(result === "success") {
-                          updateReviewList(movieId,currentPage);
-                      }
-                    },
-                    error: function() {
-                        console.log("댓글 삭제 실패")
-                    },
-                })
+
+    function likeReview(reviewId) {
+        var likeCountElementId = "like-count-" + reviewId;
+        var heartElementId = "heart-" + reviewId;
+        var isLiked = $("#" + heartElementId).hasClass('liked');
+
+        var confirmMessage = isLiked ? '좋아요를 취소하시겠습니까?' : '좋아요를 하시겠습니까?';
+        if (!confirm(confirmMessage)) {
+            return;
+        }
+        $.ajax({
+            url: "like",
+            type: 'POST',
+            data: {reviewId: reviewId, likeAction: isLiked ? 'unlike' : 'like'},
+            success: function (response) {
+                if (response === "success") {
+                    var currentLikeCount = parseInt($("#" + likeCountElementId).text());
+                    if (isLiked) {
+                        $("#" + heartElementId).html('♡').removeClass('liked');
+                        $("#" + likeCountElementId).text(currentLikeCount - 1);
+                    } else {
+                        $("#" + heartElementId).html('♥︎').addClass('liked');
+                        $("#" + likeCountElementId).text(currentLikeCount + 1);
+                    }
+                } else if (response === "fail") {
+                    alert('로그인해주세여~');
+                }
+            },
+            error: function () {
+                alert('좋아요 처리 중 오류 발생');
             }
-         })
+        });
 
+    }
 
+</script>
 
-       function likeReview(reviewId) {
-           var likeCountElementId = "like-count-" + reviewId;
-           var heartElementId = "heart-" + reviewId;
-           var isLiked = $("#" + heartElementId).hasClass('liked');
-
-           var confirmMessage = isLiked ? '좋아요를 취소하시겠습니까?' : '좋아요를 하시겠습니까?';
-           if (!confirm(confirmMessage)) {
-               return; 
-           }
-
-
-           $.ajax({
-               url: "like",
-               type: 'POST',
-               data: {reviewId: reviewId, likeAction: isLiked ? 'unlike' : 'like'},
-               success: function (response) {
-                   if (response === "success") {
-                       var currentLikeCount = parseInt($("#" + likeCountElementId).text());
-                       if (isLiked) {
-                           $("#" + heartElementId).html('♡').removeClass('liked');
-                           $("#" + likeCountElementId).text(currentLikeCount - 1);
-                       } else {
-                           $("#" + heartElementId).html('♥︎').addClass('liked');
-                           $("#" + likeCountElementId).text(currentLikeCount + 1);
-                       }
-                   } else if (response === "fail") {
-                       alert('로그인해주세여~');
-                   }
-               },
-               error: function () {
-                   alert('좋아요 처리 중 오류 발생');
-               }
-           });
-
-     }
-
- </script>
-
- <jsp:include page="../layouts/footer.jsp"/>
+<jsp:include page="../layouts/footer.jsp"/>
