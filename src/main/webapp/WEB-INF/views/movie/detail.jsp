@@ -39,7 +39,6 @@
                 </ul>
             </div>
         </div>
-<%--        TODO: EL 구문 안먹음--%>
         <c:choose>
             <c:when test="${not empty loginUser}">
                 <button class="movie-btns" type="button" onclick="selectSeat()">좌석선택</button>

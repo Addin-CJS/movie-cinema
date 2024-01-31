@@ -39,6 +39,7 @@ public class TicketService {
             // 문자열을 LocalDateTime 객체로 파싱
             dateTime = LocalDateTime.parse(dateTimeStr, formatter);
         }
+
         Ticket ticket = Ticket.builder()
                 .memberId(loginUser.getMemberId())
                 .movieId(paidTicket.getMovieId())

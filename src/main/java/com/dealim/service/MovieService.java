@@ -32,8 +32,6 @@ public class MovieService {
 
 
     public Page<Movie> findMoviesByKeyword(String searchKeyword, Pageable pageable) {
-
-
         return movieRepository.findByMvTitleIgnoreCase(searchKeyword, pageable);
 
     }
@@ -98,9 +96,4 @@ public class MovieService {
             model.addAttribute("movieRating", null);
         }
     }
-
-
-
-
-
 }
