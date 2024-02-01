@@ -187,7 +187,7 @@
                             + review.reviewWriter + '</td><td>'
                             + stars + '</td><td>'
                             + review.reviewContent + '</td><td>'
-                            + '<a href="javascript:void(0);" onclick="likeReview(' + review.reviewId + ');" id="heart-' + review.reviewId + '">🩷</a>'
+                            + '<a href="javascript:void(0);" onclick="likeReview(' + review.reviewId + ');" id="heart-' + review.reviewId + '">🩵</a>'
                             + '<span id="like-count-' + review.reviewId + '">'
                             + (review.likeCount !== null ? review.likeCount : 0)
                             + '</span></td><td>'
@@ -357,7 +357,7 @@
                    if (response === "success") {
                        var currentLikeCount = parseInt($("#" + likeCountElementId).text());
                        if (isLiked) {
-                           $("#" + heartElementId).html('🩶').removeClass('liked');
+                           $("#" + heartElementId).html('🩵').removeClass('liked');
                            $("#" + likeCountElementId).text(currentLikeCount - 1);
                        } else {
                            $("#" + heartElementId).html('🩷').addClass('liked');
