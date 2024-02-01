@@ -4,7 +4,6 @@ import com.dealim.domain.Movie;
 import com.dealim.service.MovieService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -29,10 +28,6 @@ public class MovieController {
                             @RequestParam(value = "searchKeyword", required = false) String searchKeyword,
                             @RequestParam(value = "category", required = false) String category) {
 
-        Page<Movie> movieList;
-        Optional<?> asd;
-
-       //페이징, 검색, 전체목록 , 카테고리 별
         movieService.getMovieHome(pageable, searchKeyword, category, model);
 
         return "movie/movieHome";

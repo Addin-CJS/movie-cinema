@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.Set;
 
@@ -64,9 +65,23 @@ public class ReviewService {
         }
     }
 
+    public Page<Review> getMyReviews(String username, Pageable pageable, Model model) {
+        Page<Review> myReviewList = reviewRepository.findAllByUsername(username, pageable);
 
+        int nowPage = myReviewList.getPageable().getPageNumber();
+        int totalPages = myReviewList.getTotalPages();
+        int pageGroupSize = 5;
+        int currentPageGroup = nowPage / pageGroupSize;
+        int startPage = currentPageGroup * pageGroupSize;
+        int endPage = (totalPages > 0) ? Math.min(startPage + pageGroupSize - 1, totalPages - 1) : 0;
 
+        model.addAttribute("myReviewList", myReviewList.getContent());
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("totalPages", totalPages);
 
-
+        return myReviewList;
+    }
 
 }

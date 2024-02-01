@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="../layouts/header.jsp"/>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -17,13 +16,6 @@
                     <th><label for="username">ID</label></th>
                     <td>
                         <input name="username" id="username" value="${me.username}" readonly>
-                    </td>
-                </tr>
-                 <tr>
-                    <th><label for="password">PW</label></th>
-                    <td>
-                        <input type="password" name="password" id="password" value="${me.password}" mexlength:"12">
-                        <div id="checkPwResult" style="font-size: 0.8em; display: none;"></div>
                     </td>
                 </tr>
                 <tr>
@@ -71,12 +63,11 @@
                     <td colspan="2">
                         <div id=btnField>
                             <button type="submit">수정</button>
-                            <button type="button" onclick="goBack()">뒤로</button>
-                            <button>회원탈퇴</button>
                         </div>
                     </td>
                 </tr>
             </table>
+            <input type="hidden" name="password" value="${me.password}">
         </form>
     </div>
 </section>
@@ -140,33 +131,4 @@
                 $("#emailAddress").val(emailOption.replace("@", "")).attr("disabled", true);
             }
         }
-
-
-     $(() => {
-         const $pwInput = $("#password");
-         var getPwCheck = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$!%])[A-Za-z\d@#$!%]{8,12}$/;
-         const $checkPwResult = $("#checkPwResult");
-         const $enrollFormSubmit = $("#myPageEditForm :submit");
-
-         $pwInput.on('input', function() {
-             const pw = $pwInput.val();
-
-             if(!pw) {
-                 $checkPwResult.show().css("color", "red").text('비밀번호를 입력해주세요.');
-                 $enrollFormSubmit.attr("disabled", true);
-                 return;
-             } else if (!getPwCheck.test(pw)) {
-                  $checkPwResult.show().css("color", "red").text('비밀번호는 영문과 숫자, 특수기호를 포함해 8~12자 입니다.');
-                  $enrollFormSubmit.attr("disabled", true);
-                  return;
-             } else {
-                 $checkPwResult.show().css("color", "green").text('사용가능한 비밀번호입니다.');
-                 $enrollFormSubmit.attr("disabled", false);
-             }
-         })
-     });
-
-
 </script>
-
-<jsp:include page="../layouts/footer.jsp"/>
