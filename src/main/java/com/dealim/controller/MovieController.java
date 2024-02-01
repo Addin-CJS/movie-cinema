@@ -56,6 +56,16 @@ public class MovieController {
         }
         return "movie/movieSeats";
     }
+//
+//    @PostMapping("/interestMovie")
+//    public String interestMovie(){
+//
+//
+//        return null;
+//
+//    }
+
+
 
 
 }
