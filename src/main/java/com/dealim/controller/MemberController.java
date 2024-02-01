@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -184,14 +183,16 @@ public class MemberController {
     }
 
     @GetMapping("member/myReviews")
-    @ResponseBody
-    public ResponseEntity<Page<Review>> getMyReviewsByMemberId
-            (@RequestParam("memberId") Long memberId,
-             @PageableDefault(page=0, size=10, sort="reviewId", direction= Sort.Direction.DESC) Pageable pageable,
-             Model model) {
+    public String getMyReviews(HttpSession session, Model model,
+                                @PageableDefault(page = 0, size = 10, sort = "createReviewDate",
+                                        direction = Sort.Direction.DESC) Pageable pageable) {
 
-        Page<Review> reviewList = reviewService.selectReviewListByMemberId(memberId, pageable);
-
-        return ResponseEntity.ok(reviewList);
+        Member loginUser = (Member) session.getAttribute("loginUser");
+        if (loginUser != null) {
+            Page<Review> myReviews = reviewService.getMyReviews(loginUser.getUsername(),pageable, model);
+            return "member/myReviews";
+        } else {
+            return "redirect:/login";
+        }
     }
 }

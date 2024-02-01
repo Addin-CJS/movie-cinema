@@ -58,6 +58,19 @@
         }
     }
 
+    function loadPage(pageNumber) {
+        $.ajax({
+            url: '/member/myReviews?page=' + pageNumber,
+            type: 'GET',
+            data: {
+                page: pageNumber
+            },
+            success: function(data) {
+                $('.showPage').html(data);
+            }
+        });
+    }
+
 
     $(document).ready(function() {
         $("#showMyInfo").click(function(e) {
@@ -75,7 +88,7 @@
             e.preventDefault();
             $.ajax({
                 url: '/member/myPageEdit',
-                type: 'GET', // 요청 방식
+                type: 'GET',
                 success: function(data) {
                     $('.showPage').html(data);
                 }
@@ -86,7 +99,7 @@
             e.preventDefault();
             $.ajax({
                 url: '/member/resetMyPw',
-                type: 'GET', // 요청 방식
+                type: 'GET',
                 success: function(data) {
                     $('.showPage').html(data);
                 }
@@ -95,16 +108,8 @@
 
         $("#showMyReviews").click(function(e) {
             e.preventDefault();
-            $.ajax({
-                url: '/member/myReviews',
-                type: 'GET', // 요청 방식
-                success: function(data) {
-                    $('.showPage').html(data);
-                }
-            });
+            loadPage(0);
         });
-
-
     });
 </script>
 <jsp:include page="../layouts/footer.jsp"/>

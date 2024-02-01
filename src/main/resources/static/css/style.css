@@ -1444,9 +1444,6 @@ section .register button {
     padding: 10px;
 }
 
-.reviewList th {
-}
-
 
 .reviewList button {
     flex-grow: 1;
@@ -2203,10 +2200,50 @@ section.showMyPage .myPage-navbar li{
     margin: 20px;
 }
 
-section.showMyPage .myPage-navbar a:hover span {
+section.showMyPage .myPage-navbar span:hover  {
     color: rebeccapurple;
 }
 
 section.showMyPage .showPage {
     width: 80%;
+}
+
+/* 나의 리뷰 */
+.myReviewList {
+    text-align: center;
+    padding: 30px;
+    width: 100%;
+}
+
+
+.reviewList #myReviewTitle {
+    margin-bottom: 30px;
+}
+
+#myReviewContent {
+    max-width: 300px;
+}
+
+.myReviewList th, .reviewList td {
+    padding: 10px;
+}
+
+div.myReview .myReviewPagination {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+div.myReview .myReviewPagination a {
+    margin: 0 5px;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+
+div.myReview .myReviewPagination .active {
+    font-weight: bold;
 }
