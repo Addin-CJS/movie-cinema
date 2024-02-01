@@ -36,8 +36,6 @@ public class TicketController {
 
     @PostMapping("")
     public String payTicket(PaidTicket paidTicket, HttpSession session) {
-        log.warn(paidTicket.toString());
-
         Member loginUser = (Member) session.getAttribute("loginUser");
         ticketService.saveTicket(paidTicket, loginUser);
 

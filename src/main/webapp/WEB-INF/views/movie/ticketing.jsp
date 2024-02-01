@@ -116,7 +116,8 @@
                     selectedDate: localStorage.getItem("selectedDate"),
                     ticketPrice: localStorage.getItem("ticketedPrice"),
                     movieId: ${movie.movieId},
-                    theaterId: localStorage.getItem("theaterId")
+                    theaterId: localStorage.getItem("theaterId"),
+                    memberId: ${loginUser.memberId}
                 },
                 success: function (response) {
                     window.opener.location.href = "/ticketing/success";

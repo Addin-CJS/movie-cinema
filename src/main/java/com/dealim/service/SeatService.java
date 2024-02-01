@@ -9,6 +9,8 @@ import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class SeatService {
@@ -25,11 +27,16 @@ public class SeatService {
                     .seatNumber(seat)
                     .theaterId(Long.valueOf(paidTicket.getTheaterId()))
                     .movieId(paidTicket.getMovieId())
+                    .memberId(Long.parseLong(paidTicket.getMemberId()))
                     .build());
         }
     }
 
     public Boolean isTakenSeats(Long movieId, Long theaterId, Integer seatNumber) {
         return seatRepository.existsByMovieIdAndTheaterIdAndSeatNumber(movieId, theaterId, seatNumber);
+    }
+
+    public List<Integer> getTakenSeats(Long movieId, Long theaterId) {
+        return seatRepository.getTakenSeats(movieId, theaterId);
     }
 }
