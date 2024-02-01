@@ -37,15 +37,18 @@ public class ReviewController {
 
     @GetMapping("/reviewList")
     @ResponseBody
-    public ResponseEntity<Page<Review>> getReviewsByMovieId
-                        (@RequestParam("movieNo") Long movieId,
-                         @PageableDefault(page=0, size=10, sort="reviewId", direction= Sort.Direction.DESC) Pageable pageable,
-                         Model model) {
+    public ResponseEntity<Page<Review>> getReviewsByMovieId(
+            @RequestParam("movieNo") Long movieId,
+            @RequestParam(value = "sortType", defaultValue = "latest") String sortType,
+            @PageableDefault(page = 0, size = 10, sort = "reviewId", direction = Sort.Direction.DESC) Pageable pageable,
+            Model model) {
+        System.out.println("솔트타입"+sortType);
 
-        Page<Review> reviewList = reviewService.selectReviewListByMovieNo(movieId, pageable);
-
+        Page<Review> reviewList = reviewService.selectReviewListByMovieNo(movieId, pageable, sortType);
+        System.out.println("컨트롤러~~~~~"+reviewList.getContent());
         return ResponseEntity.ok(reviewList);
     }
+
 
     @PostMapping("/updateReview")
     @ResponseBody

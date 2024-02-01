@@ -4,10 +4,32 @@
 
 
     <div class="review">
+
+
+
         <table class="reviewList">
             <thead>
+
+                <tr id="latest-likes">
+                    <th>
+                        <div class="sort-options">
+                            <a href="#" onclick="updateReviewList(movieId, 0, 'latest'); return false;">최신순</a>
+                        </div>
+
+                    </th>
+
+                    <th>
+                        <div>
+                            <a href="#" onclick="updateReviewList(movieId, 0, 'likes'); return false;">좋아요순</a>
+                        </div>
+                    </th>
+
+                </tr>
+
                 <tr id="reviewTitle">
-                    <th colspan="2">영화후기</th>
+
+                   <th colspan="2">영화후기</th>
+
                     <th>별점
                         <form name="stars" id="starForm" method="post">
                             <fieldset>
@@ -20,10 +42,16 @@
                             </fieldset>
                         </form>
                     </th>
+
+
+
                     <th><textarea cols="80" rows="4" id="reviewContent"> </textarea></th>
                     <th colspan="3">
                         <button class="movie-btns" onclick="insertReview();">평점 및 리뷰작성</button>
                     </th>
+
+
+
                 </tr>
                 <tr id="reviewEditForm" style="display : none;">
                     <th colspan="2">영화후기 수정</th>
@@ -60,9 +88,9 @@
        var movieId = ${movie.movieId};
        var loginUsername = "<c:out value='${loginUser.username}'/>";
        var currentPage = 0;
-
+       var currentSortType = 'latest';
       $(document).ready(function() {
-             updateReviewList(movieId,0);
+          updateReviewList(movieId, 0, currentSortType);
 
 
        });
@@ -113,8 +141,9 @@
          });
      }
 
-    function updateReviewList(movieId, currentPage) {
-
+       function updateReviewList(movieId, currentPage, sortType = currentSortType) {
+        currentSortType = sortType;
+           console.log("movieId:", movieId, "currentPage:", currentPage, "sortType:", sortType);
         if (currentPage === undefined || currentPage === null) {
             currentPage = 0;
         }
@@ -123,16 +152,18 @@
             url: "reviewList",
             data: {
                 movieNo: movieId,
-                page: currentPage
+                page: currentPage,
+                sortType: sortType
             },
             type: "get",
             dataType: "json",
             success: function (response) {
                 reviews = response.content;
 
-                reviews.sort(function (a, b) {
-                    return b.reviewId - a.reviewId;
-                });
+                console.log("Sorted by:", sortType, "First item:", response.content[0]);
+
+                console.log("Received response:", response);
+
 
                 var reviewsHtml = '';
                 if (response.content && Array.isArray(response.content)) {
@@ -141,12 +172,12 @@
 
                         var stars = '';
 
-                        // 노란색 별 모양 생성
+
                         for (var i = 0; i < review.starRating; i++) {
                             stars += '<span class="yellow-star">★</span>';
                         }
 
-                        // 회색 별 모양 생성 (총 5개 별 중에서 남은 별)
+
                         for (var i = review.starRating; i < 5; i++) {
                             stars += '<span class="gray-star">★</span>';
                         }
@@ -156,7 +187,7 @@
                             + review.reviewWriter + '</td><td>'
                             + stars + '</td><td>'
                             + review.reviewContent + '</td><td>'
-                            + '<a href="javascript:void(0);" onclick="likeReview(' + review.reviewId + ');" id="heart-' + review.reviewId + '">🩶</a>'
+                            + '<a href="javascript:void(0);" onclick="likeReview(' + review.reviewId + ');" id="heart-' + review.reviewId + '">🩷</a>'
                             + '<span id="like-count-' + review.reviewId + '">'
                             + (review.likeCount !== null ? review.likeCount : 0)
                             + '</span></td><td>'
@@ -179,7 +210,7 @@
 
                     var paginationHtml = '';
                     if (totalPages > 1) {
-                        console.log("생성 시작: 페이지네이션 링크");
+
 
                         if (currentPage > 0) {
                             paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',0);">처음</a> ';
@@ -192,7 +223,7 @@
 
                         for (var pageNum = startPage; pageNum <= endPage; pageNum++) {
                             paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + pageNum + ');" ' + (pageNum === currentPage ? 'class="active"' : '') + '>' + (pageNum + 1) + '</a>';
-                            console.log("페이지 링크 추가됨:", pageNum + 1);
+
                         }
 
                         if (currentPage < totalPages - 1) {
@@ -217,6 +248,9 @@
             }
         });
     }
+
+
+
         function loadUserLikes() {
             $.ajax({
                 url: "/getUserLikes",
@@ -313,7 +347,7 @@
 
            var confirmMessage = isLiked ? '좋아요를 취소하시겠습니까?' : '좋아요를 하시겠습니까?';
            if (!confirm(confirmMessage)) {
-               return; 
+               return;
            }
            $.ajax({
                url: "like",
