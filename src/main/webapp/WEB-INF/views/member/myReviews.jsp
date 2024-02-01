@@ -6,7 +6,7 @@
         <table class="myReviewList">
             <thead>
                 <tr id="myReviewTitle">
-                    <th colspan="7">나의 영화 후기 목록</th>
+                    <th colspan="7">나의 영화 리뷰 리스트</th>
                 </tr>
             </thead>
             <tbody>

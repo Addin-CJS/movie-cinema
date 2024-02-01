@@ -22,10 +22,11 @@
                     <th><label for="name">NAME</label></th>
                     <td>
                         <input name="name" id="name" value="${me.name}">
+                        <div id="checkNameResult" style="font-size: 0.8em; display: none;"></div>
                     </td>
                 </tr>
                 <tr>
-                    <th><label for="email">EMAIL</label></th>
+                    <th><label>EMAIL</label></th>
                     <td>
                         <div id="emailField">
                             <input id="emailId" required><span id="middle">@</span><input id="emailAddress">
@@ -47,13 +48,14 @@
                     <th><label for="phoneNumber">PHONE</label></th>
                     <td>
                         <input name="phoneNumber" id="phoneNumber" value="${me.phoneNumber}" >
+                        <div id="checkPhoneResult" style="font-size: 0.8em; display: none;"></div>
                     </td>
                 </tr>
                 <tr>
                     <th><label for="kakaoAddress">ADDRESS</label></th>
                     <td>
                         <div id=addressField>
-                            <input type="text" name="homeAddress" id="kakaoAddress" value="${me.homeAddress}" >
+                            <input type="text" name="homeAddress" id="kakaoAddress" value="${me.homeAddress}">
                             <input type="button" value="주소 검색" onclick="findAddr();">
                             <div id="checkAddressResult" style="font-size: 0.8em; display: none;"></div>
                         </div>
@@ -124,11 +126,55 @@
             }
         }
         function handleEmailOption() {
-         var emailOption = $("#emailOption").val();
+         let emailOption = $("#emailOption").val();
             if (emailOption === "input") {
                 $("#emailAddress").val("").attr("disabled", false);
             } else {
                 $("#emailAddress").val(emailOption.replace("@", "")).attr("disabled", true);
             }
         }
+
+    let validationResults = {
+        name: false,
+        phoneNumber: false
+    }
+    const validateInput = (input, regex, errorMsg, resultElement, fieldName) => {
+        const value = input.val().trim();
+        if(!value) {
+            resultElement.show().css("color", "red").text('필수 입력 값 입니다.');
+            validationResults[fieldName] = false;
+            return false;
+        } else if (!regex.test(value)) {
+            resultElement.show().css("color", "red").text(errorMsg);
+            validationResults[fieldName] = false;
+            return false;
+        } else {
+            resultElement.show().css("color", "green").text('유효한 값 입니다.');
+            validationResults[fieldName] = true;
+            return true;
+        }
+    }
+
+    $(document).ready(() => {
+        $("#name").on('input', function () {
+            validateInput($(this), /^[a-zA-Z가-힣]+$/,
+                '이름을 입력해주세요.', $("#checkNameResult"), "name");
+        });
+        $("#phoneNumber").on('input', function () {
+            validateInput($(this), /^[0-9]{11}$/,
+                '숫자만 입력해주세요. 전화번호는 11자리입니다.', $("#checkPhoneResult"), "phoneNumber");
+        });
+    });
+
+    $("#myPageEditForm").submit(function (event) {
+        const allValidOk = Object.values(validationResults).every(result => result);
+        if (!allValidOk) {
+            event.preventDefault();
+            alert("모든 필드를 정확히 입력해주세요.");
+            return false;
+        }
+    });
+
+
+
 </script>

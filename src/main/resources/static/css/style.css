@@ -1460,6 +1460,7 @@ section .register button {
 .review-content {
     word-wrap: break-word;
     max-width: 400px;
+    text-align: left;
 }
 
 
@@ -2222,6 +2223,7 @@ section.showMyPage .showPage {
 
 #myReviewContent {
     max-width: 300px;
+    text-align: left;
 }
 
 .myReviewList th, .reviewList td {

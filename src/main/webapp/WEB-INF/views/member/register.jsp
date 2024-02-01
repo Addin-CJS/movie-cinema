@@ -11,7 +11,7 @@
                 <tr>
                     <th><label for="username">ID</label></th>
                     <td>
-                        <div">
+                        <div>
                             <input type="text" name="username" class="form-control" id="username"
                                    placeholder="영문과 숫자를 조합해 6~10글자" maxlength="10">
                             <div id="checkIdResult" style="font-size: 0.8em; display: none;"></div>
@@ -37,7 +37,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th><label for="email">EMAIL</label></th>
+                    <th><label>EMAIL</label></th>
                     <td>
                         <div id="emailField">
                             <input id="emailId" required><span id="middle">@</span><input id="emailAddress">
@@ -85,142 +85,89 @@
 </section>
 
 <script>
-    $(() => {
-        const $idInput = $("#username");
-        const getIdCheck = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]{5,10}$/;
-        const $checkIdResult = $("#checkIdResult");
-        const $enrollFormSubmit = $("#enrollForm :submit");
+  // 전체 필드 유효성 검사 통과 확인-1
+  let validationResults = {
+      username: false,
+      password: false,
+      name: false,
+      phoneNumber: false,
+      email: false
+  }
+  // 유효성 검사
+  const validateInput = (input, regex, errorMsg, resultElement, fieldName) => {
+      const value = input.val().trim();
+      if(!value) {
+          resultElement.show().css("color", "red").text('필수 입력 값 입니다.');
+          validationResults[fieldName] = false;
+          return false;
+      } else if (!regex.test(value)) {
+          resultElement.show().css("color", "red").text(errorMsg);
+          validationResults[fieldName] = false;
+          return false;
+      } else {
+          resultElement.show().css("color", "green").text('유효한 값 입니다.');
+          validationResults[fieldName] = true;
+          return true;
+      }
+  }
 
-        $idInput.focus();
+  $(document).ready(() => {
+      const $enrollForm = $("#enrollForm");
+      // 아이디 유효성 검사 및 중복 체크
+      $("#username").on('blur keyup', function () {
+          const idValidOk = validateInput($(this), /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]{5,10}$/,
+          '아이디는 영문과 숫자를 포함해 6~10자 입니다.', $("#checkIdResult"));
+          if(idValidOk) {
+              checkIdDuplication($(this).val());
+          }
+      });
+      // 비밀번호 유효성 검사
+      $("#password").on('input', function () {
+          validateInput($(this), /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$!%])[A-Za-z\d@#$!%]{8,12}$/,
+          '비밀번호는 영문과 숫자, 특수기호를 포함해 8~12자 입니다.', $("#checkPwResult"));
+      });
+      // 이름 유효성 검사
+      $("#name").on('input', function () {
+          validateInput($(this), /^[a-zA-Z가-힣]+$/,
+          '이름을 입력해주세요', $("#checkNameResult"));
+      });
+      // 전화번호 유효성 검사
+      $("#phoneNumber").on('input', function () {
+          validateInput($(this), /^[0-9]{11}$/,
+          '숫자만 입력해주세요. 전화번호는 11자리 입니다.', $("#checkPhoneResult"));
+      });
+  })
 
-
-        $idInput.on('blur keyup', function() {
-            const id = $idInput.val();
-            let isValidId = false;
-
-            if (event.type === 'blur' && !id) {
-                $checkIdResult.show().css("color", "red").text('아이디를 입력해주세요.');
-                $enrollFormSubmit.attr("disabled", true);
-                return;
-            } else if (!getIdCheck.test(id)) {
-                $checkIdResult.show().css("color", "red").text('아이디는 영문과 숫자를 포함해 6~10자 입니다.');
-                $enrollFormSubmit.attr("disabled", true);
-                return;
-            } else {
-             isValidId = true;
-            }
-
-            console.log("isValidId  " +  isValidId);
-
-            // 유효성 검사를 통과한 경우에만 AJAX 요청 실행
-            if(isValidId) {
-                $.ajax({
-                    url: "idCheck",
-                    data: {id: id},
-                    success: function (result) {
-                        if (result === "true") {
-                            $checkIdResult.show().css("color", "red").text("이미 사용중 ID입니다.");
-                            $enrollFormSubmit.attr("disabled", true);
-                        } else if (result === "false") {
-                            $checkIdResult.show().css("color", "green").text("사용가능한 ID입니다.");
-                            $enrollFormSubmit.attr("disabled", false);
-                        } else {
-                            $checkIdResult.show().css("color", "red").text("ID 중복 체크 중 오류가 발생했습니다.");
-                            $enrollFormSubmit.attr("disabled", true);
-                        }
-                    },
-                    error: function () {
-                        console.log("아이디 중복체크용 ajax통신 실패");
-                    }
-                });
-            }
-        })
-    });
-
-   // 비밀번호
-   $(() => {
-        const $pwInput = $("#password");
-        var getPwCheck = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$!%])[A-Za-z\d@#$!%]{8,12}$/;
-        const $checkPwResult = $("#checkPwResult");
-        const $enrollFormSubmit = $("#enrollForm :submit");
-
-        $pwInput.on('input', function() {
-            const pw = $pwInput.val();
-
-            if(!pw) {
-                $checkPwResult.show().css("color", "red").text('비밀번호를 입력해주세요.');
-                $enrollFormSubmit.attr("disabled", true);
-                return;
-            } else if (!getPwCheck.test(pw)) {
-                 $checkPwResult.show().css("color", "red").text('비밀번호는 영문과 숫자, 특수기호를 포함해 8~12자 입니다.');
-                 $enrollFormSubmit.attr("disabled", true);
-                 return;
-            } else {
-                $checkPwResult.show().css("color", "green").text('사용가능한 비밀번호입니다.');
-                $enrollFormSubmit.attr("disabled", false);
-            }
-        })
-   });
-
-   // 이름
-   $(() => {
-        const $nameInput = $("#name");
-        var getNameCheck = /^[a-zA-Z가-힣]+$/;
-        const $checkNameResult = $("#checkNameResult");
-        const $enrollFormSubmit = $("#enrollForm :submit");
-
-        $nameInput.on('input', function() {
-            const name = $nameInput.val();
-
-            if(!name){
-                 $checkNameResult.show().css("color", "red").text('이름을 입력해주세요.');
-                 $enrollFormSubmit.attr("disabled", true);
-            } else {
-                $checkNameResult.hide();
-            }
-        })
-   });
-
-    // 전화번호
-    $(() => {
-        const $phoneInput = $("#phoneNumber");
-        var getPhoneCheck = /^[0-9]{11}$/;
-        const $checkPhoneResult = $("#checkPhoneResult");
-        const $enrollFormSubmit = $("#enrollForm :submit");
-
-        $phoneInput.on('input', function() {
-            const phone = $phoneInput.val();
-
-            if(!phone) {
-            $checkPhoneResult.show().css("color", "red").text('휴대폰 번호를 입력해주세요.');
-            $enrollFormSubmit.attr("disabled", true);
-             return;
-            } else if (!getPhoneCheck.test(phone)) {
-                 $checkPhoneResult.show().css("color", "red").text('전화번호에는 숫자만 넣어주세요. 전화번호는 11자리 입니다.');
-                 $enrollFormSubmit.attr("disabled", true);
-                 return;
-            } else {
-                $checkPhoneResult.show().css("color", "green").text('유효한 전화번호입니다.');
-                $enrollFormSubmit.attr("disabled", false);
-            }
-        })
-   });
-
-    $("#enrollForm").submit(function(event) {
-        const username = $("#username").val().trim();
-        const name = $("#name").val().trim();
-        const password = $("#password").val().trim();
-        const emailId = $("#emailId").val().trim();
-        const emailAddress = $("#emailAddress").val().trim();
-        const phoneNumber = $("#phoneNumber").val().trim();
-        const kakaoAddress = $("#kakaoAddress").val().trim();
-
-        if (!username || !name || !password || !emailId || !emailAddress || !phoneNumber || !kakaoAddress) {
-            alert("필수 입력 값을 모두 입력해주세요.");
-            event.preventDefault(); // 폼 제출 방지
+    function checkIdDuplication(id) {
+      $.ajax({
+          url: "idCheck",
+          data: { id: id },
+          success: function(result) {
+              const $checkIdResult = $("checkIdResult");
+              if(result === "true") {
+                  $checkIdResult.show().css("color", "red").text("이미 사용 중인 아이디 입니다.")
+              } else if (result === "false") {
+                  $checkIdResult.show().css("color", "green").text("사용 가능한 아이디 입니다.");
+              } else {
+                  $checkIdResult.show().css("color", "red").text("아이디 중복 체크 오류 발생");
+              }
+          },
+          error: function () {
+              console.log("아이디 중복 체크 ajax 통신 실패");
+          }
+      });
+    }
+    // 모든 필드 유효성 검사 통과 확인-2
+    $("#enrollForm").submit(function (event) {
+        const allValidOk = Object.values(validationResults).every(result => result);
+        if(!allValidOk) {
+            event.preventDefault();
+            alert("모든 필드를 정확히 입력해주세요.");
             return false;
         }
-    });
+  })
+
+
 
 
     // 카카오 주소
@@ -232,7 +179,7 @@
             }).open();
         }
 
-    // 이메일 주소 가져오기
+    // 이메일 주소 DB에 저장
     $("#emailId, #emailAddress, #emailOption").on('blur change', function() {
         email();
     });
@@ -246,13 +193,13 @@
         }
     }
     function handleEmailOption() {
-         var emailOption = $("#emailOption").val();
-            if (emailOption === "input") {
-                $("#emailAddress").val("").attr("disabled", false);
-            } else {
-                $("#emailAddress").val(emailOption.replace("@", "")).attr("disabled", true);
-            }
+        const emailOption = $("#emailOption").val();
+        if (emailOption === "input") {
+            $("#emailAddress").val("").attr("disabled", false);
+        } else {
+            $("#emailAddress").val(emailOption.replace("@", "")).attr("disabled", true);
         }
+    }
 
 </script>
 
