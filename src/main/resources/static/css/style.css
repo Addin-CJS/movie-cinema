@@ -2113,3 +2113,52 @@ section .myPageEdit #addressField input[type="button"] {
 .gray-star {
     color: gray;
 }
+
+.successWrapper {
+    background: #f1f1f1;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.successInfo {
+    color: #555555;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    background: #fff;
+    padding: 20px;
+    margin: 20px;
+    width: 700px;
+    text-align: center;
+}
+
+.successInfo .successMsg {
+    margin-bottom: 20px;
+}
+
+.successInfo .successMsg h1{
+    margin-bottom: 20px;
+}
+
+.successInfo .info .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.successInfo .info .row span:first-child {
+    font-weight: bold;
+}
+
+.successInfo .successBtn button{
+    background-color: #DB0000;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    transition: 0.3s ease background-color;
+    width: 150px;
+    padding: 0.8rem 0.75rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 4px;
+}

@@ -101,13 +101,13 @@
 
                     res.forEach(theater => {
                         const $theaterLi = $('<li>').addClass('swiper-slide');
-                        const $theaterLink = $('<a>').attr('href', 'javascript:void(0)').text(theater.theaterName);
+                        const $theaterLink = $('<a>').attr('href', 'javascript:void(0)').text(theater.theaterName).data('theaterId', theater.theaterId);
                         $theaterLi.append($theaterLink);
                         $swiperTheaterDiv.append($theaterLi);
-
-                        // AJAX 실행후 이벤트 추가
-                        updateSwiperEvent();
                     });
+
+                    // AJAX 실행후 이벤트 추가
+                    updateSwiperEvent();
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
                     console.log("통신 실패.");
@@ -142,6 +142,7 @@
                     target.addClass('on');
                     muCenter(target);
                     localStorage.setItem("selectedTheater", target.text());
+                    localStorage.setItem("theaterId", target.find('a').data('theaterId'));
                 }
             });
         }
