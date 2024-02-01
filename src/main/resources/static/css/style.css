@@ -278,6 +278,10 @@ section .popular-movie-slider .popular-movie-slider-content .movie-info {
     margin: 25px 0;
 }
 
+section .movie-info .fa {
+    min-width: 110px;
+}
+
 section .popular-movie-slider .popular-movie-slider-content .movie-info .fa-circle {
     color: #DB0000;
     font-size: .85em;
@@ -416,7 +420,7 @@ section .movie-ticket-book .choose-time .wrapper .marker {
 section .movie-ticket-book > button {
     font-size: 1em;
     width: 200px;
-    grid-row: 1 / span 2;
+    grid-row: 1 / span 3;
     border: none;
     outline: none;
     height: 50px;
@@ -1935,7 +1939,7 @@ section .myPage button {
 
 .swiper-container {
     text-align: center;
-    height: 100px;
+    height: 50px;
     overflow: hidden;
 }
 
@@ -1956,7 +1960,7 @@ section .myPage button {
 
 .conlist li a {
     padding: 0 10px;
-    font-size: 16px;
+    font-size: 1.1em;
     color: #767676;
     font-weight: 500;
 }

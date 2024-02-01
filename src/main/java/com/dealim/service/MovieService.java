@@ -105,9 +105,9 @@ public class MovieService {
         }
     }
 
-    public void getTheaterListByMovieId(Long movieId, Model model) {
+    public List<Theater> getTheaterListByMovieId(Long movieId) {
         List<Long> theaterIdList = movieTheaterRepository.findTheaterIdByMovieId(movieId);
         List<Theater> theaterList = theaterRepository.findByTheaterIdIn(theaterIdList);
-        model.addAttribute("theaterList", theaterList);
+        return theaterList;
     }
 }
