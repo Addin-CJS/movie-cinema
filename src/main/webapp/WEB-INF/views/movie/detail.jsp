@@ -21,6 +21,37 @@
             <div class="movie-btns">
                 <button onclick="window.open('${movie.mvVideo}', '_blank');">▶ 예고편 보기</button>
             </div>
+
+
+            <c:choose>
+                <c:when test="${isInterested}">
+                    <!-- 관심 영화 취소 버튼 -->
+                    <form action="/removeInterestMovie" method="post">
+                        <input type="hidden" name="movieId" value="${movie.movieId}">
+                        <button type="button" onclick="handleInterestMovieAction(true)">관심 영화 취소</button>
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <!-- 관심 영화 추가 버튼 -->
+                    <form action="/interestMovie" method="post">
+                        <input type="hidden" name="movieId" value="${movie.movieId}">
+                        <button type="button" onclick="handleInterestMovieAction(false)">👀 관심 영화 추가</button>
+                    </form>
+                </c:otherwise>
+            </c:choose>
+
+
+            <c:if test="${not empty successMessage}">
+                <div class="alert alert-success">${successMessage}</div>
+            </c:if>
+            <c:if test="${not empty errorMessage}">
+                <div class="alert alert-danger">${errorMessage}</div>
+            </c:if>
+
+
+
+
+
         </div>
     </div>
     <div class="movie-ticket-book">
@@ -278,6 +309,26 @@
         }
         return times;
     }
+
+
+    function handleInterestMovieAction(isInterested) {
+        var isLoggedIn = ${not empty loginUser};
+
+        if (!isLoggedIn) {
+            if (confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")) {
+                window.location.href = "/member/login";
+            }
+        } else {
+
+            var formAction = isInterested ? '/removeInterestMovie' : '/interestMovie';
+            var form = document.querySelector("form[action='" + formAction + "']");
+            if (form) {
+                form.submit();
+            }
+        }
+    }
+
+
 
 </script>
 

@@ -15,10 +15,10 @@ public class InterestMovie {
     private Long interestMovieId;
 
 
-    @Column(name = "movie_no")
-    private Long movieNo;
+    @Column(name = "movie_id")
+    private Long movieId;
 
     @Column(name = "user_name")
-    private String username;
+    private String userName;
 
 }

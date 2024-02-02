@@ -2310,3 +2310,20 @@ div.myReview .myReviewPagination a {
 div.myReview .myReviewPagination .active {
     font-weight: bold;
 }
+/*#interestMovieIcon {*/
+/*    width: 70px;*/
+/*    height: 30px;*/
+/*    background-color: palevioletred;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*    font-size: 12px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    border-radius: 15px;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*#interestMovieIcon:hover {*/
+/*    background-color: #e0e0e0; */
+/*}*/
