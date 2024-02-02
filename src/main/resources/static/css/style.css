@@ -2249,7 +2249,6 @@ div.myReview .myReviewPagination .active {
 div.myTicket .myTicketPagination {
     width: 100%;
     text-align: center;
-    margin-bottom: 50px;
 }
 
 div.myTicket .myTicketPagination a {
@@ -2303,19 +2302,33 @@ div.myTicket .myTicketPagination .active {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.ticketContent .ticketedTotalInfo{
+    width: 80%;
+}
+
+.ticketContent #moviePrice{
+    width: 10%;
 }
 
 .ticketContent .ticketInfo{
-    display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
+    display: flex;
 }
+
 
 .ticketContent .ticketInfo .movieTitle {
     font-size: 1.5rem;
     font-weight: bold;
+    display: flex;
+    color: black;
 }
+
+
 
 .ticketContent .ticketInfo .ticketDetailInfo{
     font-size: 1.2rem;
@@ -2328,4 +2341,17 @@ div.myTicket .myTicketPagination .active {
 .ticketContent .ticketInfo .moviePrice {
     font-size: 1.25rem;
 }
+
+.ticketContent .tickedMvImg{
+    margin-right: 20px;
+}
+
+.ticketContent .tickedMvImg .movieImg img {
+    width: 100%;
+    height: 100px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+
 
