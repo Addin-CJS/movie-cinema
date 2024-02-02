@@ -2,9 +2,11 @@ package com.dealim.controller;
 
 import com.dealim.domain.Member;
 import com.dealim.domain.Review;
+import com.dealim.domain.Ticket;
 import com.dealim.dto.MyPageMember;
 import com.dealim.service.MemberService;
 import com.dealim.service.ReviewService;
+import com.dealim.service.TicketService;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class MemberController {
 
     @Autowired
     ReviewService reviewService;
+
+    @Autowired
+    TicketService ticketService;
 
     @Autowired
     PasswordEncoder pEncoder;
@@ -191,6 +196,20 @@ public class MemberController {
         if (loginUser != null) {
             Page<Review> myReviews = reviewService.getMyReviews(loginUser.getUsername(),pageable, model);
             return "member/myReviews";
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+    @GetMapping("member/myTickets")
+    public String getMyTickets(HttpSession session, Model model,
+                               @PageableDefault(page = 0, size = 3, sort = "ticketedDate",
+                                       direction = Sort.Direction.DESC) Pageable pageable) {
+
+        Member loginUser = (Member) session.getAttribute("loginUser");
+        if (loginUser != null) {
+            Page<Ticket> myTickets = ticketService.getMyTickets(loginUser.getMemberId(),pageable, model);
+            return "member/myTickets";
         } else {
             return "redirect:/login";
         }
