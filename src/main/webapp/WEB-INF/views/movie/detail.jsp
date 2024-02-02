@@ -61,6 +61,7 @@
         addDatesToSlick();
         addTimeToSlick();
         addTheaterToSlick();
+        updateSelectState();
 
         // 날짜 생성 및 목록 추가
         function addDatesToSlick() {
@@ -156,15 +157,22 @@
             observeParents: true,
             breakpoints: {
                 768: {
-                    slidesPerView: 4,
-                    spaceBetween: 40,
+                    slidesPerView: 3,
                 },
                 1024: {
                     slidesPerView: 5,
-                    spaceBetween: 50
                 }
             }
         });
+
+        // 선택 상태 업데이트
+        function updateSelectState(){
+            let dateList = $('.choose-date .swiper-slide a');
+            dateList.each((date)=> {
+                console.log(date.text());
+            });
+        };
+
     });
 
     // 중앙에 위치 시키기
