@@ -45,8 +45,9 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
-    // 비밀번호 암호화
-    implementation 'org.springframework.security:spring-security-crypto:6.2.1'
+    // security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-taglibs'
 }
 
 tasks.named('test') {

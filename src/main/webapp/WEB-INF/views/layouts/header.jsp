@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" ></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/js/script.js"></script>
     <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -34,14 +34,12 @@
     </nav>
 </header>
 <script>
-        $(document).ready(function () {
-            var loginOk = ${not empty sessionScope.loginUser};
-
-            if (loginOk) {
-                $("#menu-box li:contains('로그인')").hide();
-                $("#menu-box").append("<h4>${sessionScope.loginUser.username}님 환영합니다!</h4>")
-                              .append("<li><a href='/member/myPage'>마이페이지</a></li>")
-                              .append("<li><a href='/logout'>로그아웃</a></li>");
-            }
-        });
+    $(document).ready(function () {
+        <sec:authorize access="isAuthenticated()">
+        $("#menu-box li:contains('로그인')").hide();
+        $("#menu-box").append("<h4><sec:authentication property="principal.member.username"/>님 환영합니다!</h4>")
+            .append("<li><a href='/member/myPage'>마이페이지</a></li>")
+            .append("<li><a href='/logout'>로그아웃</a></li>");
+        </sec:authorize>
+    });
 </script>

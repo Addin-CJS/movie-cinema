@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="layouts/header.jsp"/>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <section>
     <div id="img" class="carousel-slide" data-ride="carousel">
@@ -12,13 +13,9 @@
         </ol>
 
         <div class="carousel-inner text-center">
-
         </div>
     </div>
 
 </section>
 
-
 <jsp:include page="layouts/footer.jsp"/>
-
-
