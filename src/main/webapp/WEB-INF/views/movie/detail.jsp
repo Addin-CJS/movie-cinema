@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="../layouts/header.jsp"/>
-
 <section>
     <div class="popular-movie-slider">
         <img src="${movie.mvImg}" alt="영화 이미지" class="poster">
@@ -39,7 +38,13 @@
                 </ul>
             </div>
         </div>
-<%--        TODO: EL 구문 안먹음--%>
+        <div class="choose-theater">
+            <p>영화관</p>
+            <div class="swiper-theater sw_con swiper-container snbSwiper">
+                <ul class="swtab conlist swiper-wrapper">
+                </ul>
+            </div>
+        </div>
         <c:choose>
             <c:when test="${not empty loginUser}">
                 <button class="movie-btns" type="button" onclick="selectSeat()">좌석선택</button>
@@ -51,35 +56,11 @@
     </div>
 </section>
 
-<!---movie-ticket-book-->
 <script>
     $(document).ready(function () {
         addDatesToSlick();
         addTimeToSlick();
-
-        // 날짜 생성
-        function createDateList() {
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            const dates = [];
-            const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
-
-            for (let i = 0; i < 30; i++) {
-                const futureDate = new Date(today);
-                futureDate.setDate(futureDate.getDate() + i);
-                const dayOfWeek = weekDays[futureDate.getDay()];
-                const formattedDate = `${"${futureDate.getMonth() + 1}"}월 ${"${futureDate.getDate()}일"}`;
-
-                // 오늘 날짜와 비교
-                let label = "(" + dayOfWeek + ")";
-                if (futureDate.getTime() === today.getTime()) {
-                    label = "(오늘)";
-                }
-
-                dates.push({date: formattedDate, day: label});
-            }
-            return dates;
-        }
+        addTheaterToSlick();
 
         // 날짜 생성 및 목록 추가
         function addDatesToSlick() {
@@ -94,39 +75,6 @@
             });
         }
 
-        // 시간대 생성
-        function createTimeList() {
-            const times = [];
-            const now = new Date();
-            let currentHour = now.getHours();
-            let currentMinutes = now.getMinutes();
-
-            if (currentMinutes >= 30) {
-                currentMinutes = 30;
-            } else {
-                currentMinutes = 0;
-            }
-
-            // 30분 단위로 24시간을 배열
-            for (let i = 0; i < 48; i++) {
-                const formattedTime = `${"${currentHour.toString().padStart(2, '0')}"}:${"${currentMinutes.toString().padStart(2, '0')}"}`;
-                times.push(formattedTime);
-
-                if (currentMinutes === 30) {
-                    currentHour++;
-                    currentMinutes = 0;
-                } else {
-                    currentMinutes = 30;
-                }
-
-                // 24시간을 초과하는 경우에 대한 처리
-                if (currentHour >= 24) {
-                    currentHour -= 24;
-                }
-            }
-            return times;
-        }
-
         // 시간대 생성 및 목록 추가
         function addTimeToSlick() {
             const times = createTimeList();
@@ -139,10 +87,67 @@
                 $slickTimeDiv.append($timeLi);
             });
         }
-    });
 
-    //스와이퍼 설정
-    $(function () {
+        // 영화관 목록 추가
+        function addTheaterToSlick() {
+            $.ajax({
+                type: "POST",
+                url: "/api/theaters",
+                data: {
+                    movieId: ${movie.movieId}
+                },
+                success: function (res) {
+                    const $swiperTheaterDiv = $('.swiper-theater ul');
+
+                    res.forEach(theater => {
+                        const $theaterLi = $('<li>').addClass('swiper-slide');
+                        const $theaterLink = $('<a>').attr('href', 'javascript:void(0)').text(theater.theaterName).data('theaterId', theater.theaterId);
+                        $theaterLi.append($theaterLink);
+                        $swiperTheaterDiv.append($theaterLi);
+                    });
+
+                    // AJAX 실행후 이벤트 추가
+                    updateSwiperEvent();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                    console.log("통신 실패.");
+                }
+            });
+        };
+
+        function updateSwiperEvent() {
+            var snbSwiperDateItem = $('.choose-date .snbSwiper .swiper-wrapper .swiper-slide a');
+            var snbSwiperTimeItem = $('.choose-time .snbSwiper .swiper-wrapper .swiper-slide a');
+            var snbSwiperTheaterItem = $('.choose-theater .snbSwiper .swiper-wrapper .swiper-slide a');
+
+            $('.movie-ticket-book .snbSwiper .swiper-wrapper .swiper-slide a').on("click", function () {
+                var target = $(this).parent(); // a위의 li 선택
+
+                if (target.closest('.snbSwiper').hasClass('swiper-date')) {
+                    snbSwiperDateItem.parent().removeClass('on');
+                    target.addClass('on');
+                    muCenter(target);
+                    localStorage.setItem("selectedDate", target.text());
+                }
+
+                if (target.closest('.snbSwiper').hasClass('swiper-time')) {
+                    snbSwiperTimeItem.parent().removeClass('on');
+                    target.addClass('on');
+                    muCenter(target);
+                    localStorage.setItem("selectedTime", target.text());
+                }
+
+                if (target.closest('.snbSwiper').hasClass('swiper-theater')) {
+                    snbSwiperTheaterItem.parent().removeClass('on');
+                    target.addClass('on');
+                    muCenter(target);
+                    localStorage.setItem("selectedTheater", target.text());
+                    localStorage.setItem("theaterId", target.find('a').data('theaterId'));
+                }
+            });
+        }
+
+        //스와이퍼 설정
         var swiper = new Swiper('.snbSwiper', {
             slidesPerView: 2,
             preventClicks: true,
@@ -151,33 +156,13 @@
             observeParents: true,
             breakpoints: {
                 768: {
-                    slidesPerView: 3,
+                    slidesPerView: 4,
                     spaceBetween: 40,
                 },
                 1024: {
                     slidesPerView: 5,
                     spaceBetween: 50
                 }
-            }
-        });
-        var snbSwiperDateItem = $('.choose-date .snbSwiper .swiper-wrapper .swiper-slide a');
-        var snbSwiperTimeItem = $('.choose-time .snbSwiper .swiper-wrapper .swiper-slide a');
-
-        $('.choose-date .snbSwiper .swiper-wrapper .swiper-slide a, .choose-time .snbSwiper .swiper-wrapper .swiper-slide a').on("click", function () {
-            var target = $(this).parent(); // a위의 li 선택
-
-            if (target.closest('.snbSwiper').hasClass('swiper-date')) {
-                snbSwiperDateItem.parent().removeClass('on');
-                target.addClass('on');
-                muCenter(target);
-                localStorage.setItem("selectedDate", target.text());
-            }
-
-            if (target.closest('.snbSwiper').hasClass('swiper-time')) {
-                snbSwiperTimeItem.parent().removeClass('on');
-                target.addClass('on');
-                muCenter(target);
-                localStorage.setItem("selectedTime", target.text());
             }
         });
     });
@@ -189,6 +174,9 @@
         }
         if (target.closest('.snbSwiper').hasClass('swiper-time')) {
             var snbwrap = $('.choose-time .snbSwiper .swiper-wrapper');
+        }
+        if (target.closest('.snbSwiper').hasClass('swiper-theater')) {
+            var snbwrap = $('.choose-theater .snbSwiper .swiper-wrapper');
         }
         var targetPos = target.position();
         var box = $('.snbSwiper');
@@ -227,7 +215,68 @@
             alert("일자를 선택해주세요");
             return;
         }
+        if (!localStorage.getItem("selectedTheater")) {
+            alert("영화관을 선택해주세요");
+            return;
+        }
         location.href = 'movieSeats?movieId=${movie.movieId}';
+    }
+
+    // 날짜 생성
+    function createDateList() {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const dates = [];
+        const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
+
+        for (let i = 0; i < 30; i++) {
+            const futureDate = new Date(today);
+            futureDate.setDate(futureDate.getDate() + i);
+            const dayOfWeek = weekDays[futureDate.getDay()];
+            const formattedDate = `${"${futureDate.getMonth() + 1}"}월 ${"${futureDate.getDate()}일"}`;
+
+            // 오늘 날짜와 비교
+            let label = "(" + dayOfWeek + ")";
+            if (futureDate.getTime() === today.getTime()) {
+                label = "(오늘)";
+            }
+
+            dates.push({date: formattedDate, day: label});
+        }
+        return dates;
+    }
+
+    // 시간대 생성
+    function createTimeList() {
+        const times = [];
+        const now = new Date();
+        let currentHour = now.getHours();
+        let currentMinutes = now.getMinutes();
+
+        if (currentMinutes >= 30) {
+            currentMinutes = 30;
+        } else {
+            currentMinutes = 0;
+        }
+
+        // 30분 단위로 24시간을 배열
+        for (let i = 0; i < 48; i++) {
+            const formattedTime = `${"${currentHour.toString().padStart(2, '0')}"}:${"${currentMinutes.toString().padStart(2, '0')}"}`;
+            times.push(formattedTime);
+
+            if (currentMinutes === 30) {
+                currentHour++;
+                currentMinutes = 0;
+            } else {
+                currentMinutes = 30;
+            }
+
+            // 24시간을 초과하는 경우에 대한 처리
+            if (currentHour >= 24) {
+                currentHour -= 24;
+            }
+        }
+        return times;
     }
 
 </script>

@@ -20,8 +20,9 @@ public class Review {
     private int movieNo;
     private String reviewWriter;
 
-    @Column(nullable = true, columnDefinition = "integer default 0")
-    private Integer likeCount;
+
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    private Integer likeCount=0;
 
     @Column(nullable = false, columnDefinition = "NUMBER(1) default 0")
     private int starRating;

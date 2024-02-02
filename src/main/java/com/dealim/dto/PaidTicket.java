@@ -9,4 +9,6 @@ public class PaidTicket {
     private String selectedDate;
     private String selectedTime;
     private String takenSeats;
+    private String theaterId;
+    private String memberId;
 }

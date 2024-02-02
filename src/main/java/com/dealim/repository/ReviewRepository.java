@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     /*@Query("SELECT r FROM Review r WHERE r.movieNo = :movieId ORDER BY r.createReviewDate DESC")
     List<Review> findAllByMovieNo(@Param("movieId") Long movieId);*/
-    @Query("SELECT r FROM Review r WHERE r.movieNo = :movieId ORDER BY r.createReviewDate DESC")
+    @Query("SELECT r FROM Review r WHERE r.movieNo = :movieId")
     Page<Review> findAllByMovieId(@Param("movieId") Long movieId, Pageable pageable);
     @Query("SELECT r FROM Review r WHERE r.reviewWriter = :username ORDER BY r.createReviewDate DESC")
     Page<Review> findAllByUsername(@Param("username") String username, Pageable pageable);

@@ -5,7 +5,9 @@ import com.dealim.repository.ReviewRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -24,9 +26,27 @@ public class ReviewService {
         return reviewRepository.findAllByMovieNo(movieId);
     }*/
 
-    public Page<Review> selectReviewListByMovieNo(Long movieId, Pageable pageable) {
+
+
+//
+//    public Page<Review> selectReviewListByMovieNo(Long movieId, Pageable pageable) {
+//        return reviewRepository.findAllByMovieId(movieId, pageable);
+//    }
+
+    public Page<Review> selectReviewListByMovieNo(Long movieId, Pageable pageable, String sortType) {
+        Sort sort;
+        if ("likes".equals(sortType)) {
+            sort = Sort.by(Sort.Direction.DESC, "likeCount");
+        } else {
+            sort = Sort.by(Sort.Direction.DESC, "reviewId");
+        }
+
+        pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+        System.out.println("Pageable Sort: " + pageable.getSort().toString());
         return reviewRepository.findAllByMovieId(movieId, pageable);
     }
+
+
 
     public void deleteReview(Long reviewId) {
         reviewRepository.deleteById(reviewId);
@@ -40,7 +60,7 @@ public class ReviewService {
 
 
     //좋아요 증가 or 감소 시키는 메서드
-    @Transactional
+
     public void updateLikeCount(Long reviewId, boolean isLike) {
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new RuntimeException("리뷰를 찾지못했습니다"));
@@ -55,6 +75,7 @@ public class ReviewService {
     }
 
         //좋아요 상태를 바꾸는 메서드 (컨트롤러에서 사용)
+        @Transactional
     public void  changeLikeStatus(Long reviewId, String likeAction, Set<Long> likedReviews) {
         if ("like".equals(likeAction)) {
             updateLikeCount(reviewId, true);//참이면 +1 증가

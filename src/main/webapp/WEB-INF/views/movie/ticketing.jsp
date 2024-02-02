@@ -89,7 +89,6 @@
             let total = seats * price;
             localStorage.setItem("ticketedPrice", total);
             total = AddComma(total);
-            price = AddComma(price);
             totalPriceEl.html(`${"${total}"}원`);
         }
 
@@ -116,10 +115,12 @@
                     selectedTime: localStorage.getItem("selectedTime"),
                     selectedDate: localStorage.getItem("selectedDate"),
                     ticketPrice: localStorage.getItem("ticketedPrice"),
-                    movieId: ${movie.movieId}
+                    movieId: ${movie.movieId},
+                    theaterId: localStorage.getItem("theaterId"),
+                    memberId: ${loginUser.memberId}
                 },
                 success: function (response) {
-                    window.opener.location.href = "/movieHome";
+                    window.opener.location.href = "/ticketing/success";
                     window.close();
                 },
                 error: function (xhr, status, error) {

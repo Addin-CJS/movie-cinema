@@ -177,7 +177,8 @@
 <jsp:include page="../layouts/footer.jsp"/>
 
 <script>
-    $(() => {
+
+    $(function (){
         const allSeatCont = $("#seatCont .seat");
         const allSeatRows = $("#seatCont .row")
         const selectedSeatsHolderEl = $("#selectedSeatsHolder");
@@ -189,15 +190,15 @@
 
         // 각 좌석에 번호 매기기
         let initialSeatValue = 0;
-        $(allSeatCont).each(function (){
+        $(allSeatCont).each(function () {
             $(this).attr("data-seatid", ++initialSeatValue)
         });
 
         // 점유된 좌석 리스트에 넣기(좌석 클릭 이벤트)
         let takenSeats = [];
 
-        $(seatContEl).each(function() {
-            $(this).click(function(e) {
+        $(seatContEl).each(function () {
+            $(this).click(function (e) {
                 let isSelected = $(this).hasClass("selected");
                 let seatId = $(this).data("seatid");
 
@@ -207,20 +208,29 @@
                     takenSeats = [...new Set(takenSeats)]; // 중복 제거
                 } else if (isSelected) {
                     $(this).removeClass("selected");
-                    takenSeats = takenSeats.filter(function(id) {
+                    takenSeats = takenSeats.filter(function (id) {
                         return id !== seatId;
                     }); // 클릭된 좌석을 list에서 빼기
-                };
+                }
+                ;
                 updateSeats();
                 updatePrice(moviePrice, takenSeats.length);
             });
         });
 
-        // 좌석 html 업데이트
+        // 일자 업데이트
+        let dateOn = $("#dateOn");
+
+        function updateDate() {
+            dateOn.text(localStorage.getItem("selectedDate") + " " + localStorage.getItem("selectedTime"));
+        };
+        updateDate();
+
+        // 오른쪽 좌석 html 업데이트
         function updateSeats() {
             $(selectedSeatsHolderEl).empty();
 
-            if(takenSeats.length > 0) {
+            if (takenSeats.length > 0) {
                 $(takenSeats).each((idx, seat) => {
                     $('<div></div>')
                         .addClass("selectedSeat")
@@ -247,7 +257,7 @@
             total = AddComma(total);
             price = AddComma(price);
             totalPriceEl.html(`${"${total}"}원`);
-            moviePriceEl.html(`${"${price}"}원`)
+            moviePriceEl.html(`${"${price}"}원`);
         }
 
         function AddComma(num) {
@@ -256,24 +266,24 @@
         }
 
         function removeComma(str) {
-            n = parseInt(str.replace(/,/g,""));
+            n = parseInt(str.replace(/,/g, ""));
             return n;
         }
 
         function numberWithCommas(x) {
-            x = x.replace(/[^0-9]/g,'');   // 입력값이 숫자가 아니면 공백
-            x = x.replace(/,/g,'');          // ,값 공백처리
+            x = x.replace(/[^0-9]/g, '');   // 입력값이 숫자가 아니면 공백
+            x = x.replace(/,/g, '');          // ,값 공백처리
             $('input[name="so_use_point"]').val(x.replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // 정규식을 이용해서 3자리 마다 , 추가
         }
 
         //취소 버튼 구현
-        $(cancelBtnEL).click(()=> {
+        $(cancelBtnEL).click(() => {
             cancelSeats();
         });
 
         function cancelSeats() {
             takenSeats = [];
-            $(seatContEl).each(function (){
+            $(seatContEl).each(function () {
                 $(this).removeClass("selected");
             });
             updatePrice(0, 0);
@@ -281,13 +291,13 @@
         };
 
         // 제출 버튼 이벤트
-        $(proceedBtnEl).click(()=>{
+        $(proceedBtnEl).click(() => {
             localStorage.setItem('takenSeats', JSON.stringify(takenSeats));
             var url = "ticketing?movieId=" + ${movie.movieId};
             var windowFeatures = "width=800,height=516,resizable=no,status=yes";
 
             // 좌석 선택 안할시 alert
-            if(takenSeats.length === 0){
+            if (takenSeats.length === 0) {
                 alert("좌석을 선택해주세요");
                 return;
             }
@@ -295,12 +305,26 @@
             window.open(url, "ticketingWindow", windowFeatures);
         });
 
-        // 일자 업데이트
-        let dateOn = $("#dateOn");
-        function updateDate(){
-            dateOn.text(localStorage.getItem("selectedDate")+" "+localStorage.getItem("selectedTime"));
-        };
-        updateDate();
+        // AJAX로 점유된 좌석 가져오기
+        $.ajax({
+            url: '/api/seats/getTakenSeats',
+            type: 'GET',
+            data: {
+                movieId: ${movie.movieId},
+                theaterId: localStorage.getItem("theaterId")
+            },
+            success: function (reservedSeats) {
+                $(seatContEl).each(function () {
+                    let seatId = $(this).data("seatid");
+                    if (reservedSeats.includes(seatId)) {
+                        $(this).addClass("occupied").off('click');
+                    }
+                });
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
     });
 
 </script>
