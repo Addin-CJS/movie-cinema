@@ -341,6 +341,7 @@ section .movie-ticket-book {
 
 
 section .movie-ticket-book > button {
+    grid-column: 2;
     font-size: 1em;
     width: 200px;
     grid-row: 1 / span 3;
