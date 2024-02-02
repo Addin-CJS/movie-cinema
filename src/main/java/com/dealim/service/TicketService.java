@@ -78,7 +78,7 @@ public class TicketService {
         Map<Long, String> username = memberList.stream()
                                                .collect(Collectors.toMap(Member::getMemberId, Member::getUsername));
 
-        // movieId로 mvTitle가져오기
+        // movieId로 mvTitle 가져오기
         List<Long> movieIdsList = myTicketList.getContent().stream()
                                                            .map(Ticket::getMovieId)
                                                            .collect(Collectors.toList());
@@ -86,8 +86,12 @@ public class TicketService {
         Map<Long, String> movieTitle = movieList.stream()
                                                 .collect(Collectors.toMap(Movie::getMovieId, Movie::getMvTitle));
 
+        // movieId로 runtime 가져오기
         Map<Long, Integer> movieRuntimes = movieList.stream()
-                                            .collect(Collectors.toMap(Movie::getMovieId, Movie::getMvRuntime));
+                                                    .collect(Collectors.toMap(Movie::getMovieId, Movie::getMvRuntime));
+
+        Map<Long, String> movieImgs = movieList.stream()
+                                               .collect(Collectors.toMap(Movie::getMovieId, Movie::getMvImg));
 
         int nowPage = myTicketList.getPageable().getPageNumber();
         int totalPages = myTicketList.getTotalPages();
@@ -98,6 +102,7 @@ public class TicketService {
 
         model.addAttribute("myTicketList", myTicketList.getContent());
         model.addAttribute("username", username);
+        model.addAttribute("movieImgs", movieImgs);
         model.addAttribute("movieTitle", movieTitle);
         model.addAttribute("movieRuntimes", movieRuntimes);
         model.addAttribute("nowPage", nowPage);

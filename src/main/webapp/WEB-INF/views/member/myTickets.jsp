@@ -13,21 +13,38 @@
                     <span class="ticketBuyDate">${fn:substringBefore(myTicket.createdAt.toString(), 'T')}</span>
                 </div>
                 <div class="ticketContent">
-                    <div class="ticketInfo">
-                        <p class="movieTitle">${movieTitle[myTicket.movieId]}</p>
-                        <p class="moviePrice"><fmt:formatNumber value="${myTicket.ticketPrice}" pattern="0원" /></p>
-                    </div>
-                    <div class="TicketDetailInfo">
-                        <p class="movieDetailInfo">
-                            상영일자 : ${fn:substringBefore(myTicket.ticketedDate.toString(), 'T')}
-                            ${fn:substringAfter(myTicket.ticketedDate.toString(), 'T')}~
-                            ${fn:substringAfter(myTicket.ticketedDate.plusMinutes(movieRuntimes[myTicket.movieId]).toString(), 'T')} |
-                            런타임: ${movieRuntimes[myTicket.movieId]} |
-                            상영관: ${myTicket.theaterId} |
-                            좌석번호: ${myTicket.ticketedSeat} |
-                            인원: ${fn:length(fn:split(myTicket.ticketedSeat, ','))}명
+                    <div class="tickedMvImg">
+                        <p class="movieImg">
+                            <a href="/showDetail?movieId=${myTicket.movieId}">
+                                 <img src="${movieImgs[myTicket.movieId]}"
+                                     onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
+                            </a>
                         </p>
                     </div>
+                    <div class="ticketedTotalInfo">
+                        <div class="ticketInfo">
+                            <div id="movieTitle">
+                                <a href="/showDetail?movieId=${myTicket.movieId}">
+                                     <p class="movieTitle">${movieTitle[myTicket.movieId]}</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="TicketDetailInfo">
+                            <p class="movieDetailInfo">
+                                상영일자 : ${fn:substringBefore(myTicket.ticketedDate.toString(), 'T')}
+                                ${fn:substringAfter(myTicket.ticketedDate.toString(), 'T')}~
+                                ${fn:substringAfter(myTicket.ticketedDate.plusMinutes(movieRuntimes[myTicket.movieId]).toString(), 'T')} |
+                                런타임: ${movieRuntimes[myTicket.movieId]} |
+                                상영관: ${myTicket.theaterId} |
+                                좌석번호: ${myTicket.ticketedSeat} |
+                                인원: ${fn:length(fn:split(myTicket.ticketedSeat, ','))}명
+                            </p>
+                        </div>
+                    </div>
+                    <div id="moviePrice">
+                        <p class="moviePrice"><fmt:formatNumber value="${myTicket.ticketPrice}" pattern="#,##0원"/></p>
+                    </div>
+
                 </div>
             </c:forEach>
         </div>
@@ -43,23 +60,6 @@
             </c:if>
         </div>
     </div>
-        <%--<table class="myTicketList">
-                <c:forEach var="myTicket" items="${myTicketList}">
-                    <tr id="myTicketItem">
-                        <td>${myTicket.ticketId}</td>
-                        <td>${username[myTicket.memberId]}</td>
-                        <td>${movieTitle[myTicket.movieId]}</td>
-                        <td>${myTicket.theaterId}</td>
-                        <td><fmt:formatNumber value="${myTicket.ticketPrice}" pattern="0원" /></td>
-                        <td>
-                            ${fn:substringBefore(myTicket.ticketedDate.toString(), 'T')}
-                            ${fn:substringAfter(myTicket.ticketedDate.toString(), 'T')}
-                        </td>
-                        <td>${myTicket.ticketedTheater}</td>
-                        <td>${myTicket.ticketedSeat}</td>
-                        <td>${fn:substringBefore(myTicket.createdAt.toString(), 'T')}</td>
-                   </tr>
-                </c:forEach>
-        </table>--%>
 </section>
+
 
