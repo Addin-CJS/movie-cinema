@@ -134,10 +134,6 @@
             }
         }
 
-    let validationResults = {
-        name: false,
-        phoneNumber: false
-    }
     const validateInput = (input, regex, errorMsg, resultElement, fieldName) => {
         const value = input.val().trim();
         if(!value) {
@@ -164,15 +160,6 @@
             validateInput($(this), /^[0-9]{11}$/,
                 '숫자만 입력해주세요. 전화번호는 11자리입니다.', $("#checkPhoneResult"), "phoneNumber");
         });
-    });
-
-    $("#myPageEditForm").submit(function (event) {
-        const allValidOk = Object.values(validationResults).every(result => result);
-        if (!allValidOk) {
-            event.preventDefault();
-            alert("모든 필드를 정확히 입력해주세요.");
-            return false;
-        }
     });
 
 

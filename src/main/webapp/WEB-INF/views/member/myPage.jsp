@@ -11,32 +11,30 @@
                                 <span>개인 정보</span>
                             <ul id="myInfo" style="display: none">
                                 <li id="myInfoEdit">
-                                    <i><img src="/img/icons/edit.png" alt="people"></i>
+                                    <i><img src="/img/icons/edit.png" alt="edit"></i>
                                     <span>내 정보 수정</span>
                                 </li>
                                 <li id="resetMyPw">
-                                    <i><img src="/img/icons/locked.png" alt="people"></i>
+                                    <i><img src="/img/icons/locked.png" alt="locked"></i>
                                     <span>비밀번호 재설정</span>
                                 </li>
                                 <li>
-                                    <i><img src="/img/icons/out.png" alt="people"></i>
+                                    <i><img src="/img/icons/out.png" alt="out"></i>
                                     <span>회원 탈퇴</span>
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i><img src="/img/icons/tickets.png" alt="people"></i>
+                        <li id="showMyTickets">
+                                <i><img src="/img/icons/tickets.png" alt="tickets"></i>
                                 <span>예매 내역 조회</span>
-                            </a>
                         </li>
                         <li id="showMyReviews">
-                                <i><img src="/img/icons/comments.png" alt="people"></i>
+                                <i><img src="/img/icons/comments.png" alt="comments"></i>
                                 <span>리뷰 보기</span>
                         </li>
                         <li>
                             <a href="#">
-                                <i><img src="/img/icons/film.png" alt="people"></i>
+                                <i><img src="/img/icons/film.png" alt="film"></i>
                                 <span>관심 영화</span>
                             </a>
                         </li>
@@ -58,7 +56,7 @@
         }
     }
 
-    function loadPage(pageNumber) {
+    function loadReviewPage(pageNumber) {
         $.ajax({
             url: '/member/myReviews?page=' + pageNumber,
             type: 'GET',
@@ -71,6 +69,18 @@
         });
     }
 
+    function loadTicketPage(pageNumber) {
+        $.ajax({
+            url: '/member/myTickets?page=' + pageNumber,
+            type: 'GET',
+            data: {
+                page: pageNumber
+            },
+            success: function(data) {
+                $('.showPage').html(data);
+            }
+        });
+    }
 
     $(document).ready(function() {
         $("#showMyInfo").click(function(e) {
@@ -108,7 +118,12 @@
 
         $("#showMyReviews").click(function(e) {
             e.preventDefault();
-            loadPage(0);
+            loadReviewPage(0);
+        });
+
+        $("#showMyTickets").click(function(e) {
+            e.preventDefault();
+            loadTicketPage(0);
         });
     });
 </script>

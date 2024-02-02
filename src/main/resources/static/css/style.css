@@ -2271,13 +2271,11 @@ section.showMyPage .showPage {
 }
 
 /* 나의 리뷰 */
-
 .myReviewList {
     text-align: center;
     padding: 30px;
     width: 100%;
 }
-
 
 .reviewList #myReviewTitle {
     margin-bottom: 30px;
@@ -2310,3 +2308,102 @@ div.myReview .myReviewPagination a {
 div.myReview .myReviewPagination .active {
     font-weight: bold;
 }
+
+/* 나의 예매 내역 */
+.myTicketList {
+    text-align: center;
+    padding: 30px;
+    width: 100%;
+}
+
+.myTicketList #myTicketTitle {
+    margin-bottom: 30px;
+}
+
+.myTicketList th, .reviewList td {
+    padding: 10px;
+}
+
+div.myTicket .myTicketPagination {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+div.myTicket .myTicketPagination a {
+    margin: 0 5px;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+div.myTicket .myTicketPagination .active {
+    font-weight: bold;
+}
+
+/*나의 예매 내역*/
+.myTicket h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.myTicketList {
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 2px solid black;
+}
+
+.ticketHeader {
+    background-color: #b91c1c;
+    color: white;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.ticketHeader .titleAndId{
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.ticketHeader .ticketBuyDate{
+    font-size: 0.875rem;
+}
+
+.ticketContent{
+    padding: 16px;
+    background-color: white;
+    color: black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.ticketContent .ticketInfo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.ticketContent .ticketInfo .movieTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.ticketContent .ticketInfo .ticketDetailInfo{
+    font-size: 1.2rem;
+}
+
+.ticketContent .ticketDetailInfo .movieDetailInfo{
+    text-align: left;
+}
+
+.ticketContent .ticketInfo .moviePrice {
+    font-size: 1.25rem;
+}
+
