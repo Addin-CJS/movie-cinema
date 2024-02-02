@@ -61,7 +61,6 @@
         addDatesToSlick();
         addTimeToSlick();
         addTheaterToSlick();
-        updateSelectState();
 
         // 날짜 생성 및 목록 추가
         function addDatesToSlick() {
@@ -109,6 +108,8 @@
 
                     // AJAX 실행후 이벤트 추가
                     updateSwiperEvent();
+                    // 선택 상태 업데이트
+                    updateSelectState();
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
                     console.log("통신 실패.");
@@ -166,11 +167,29 @@
         });
 
         // 선택 상태 업데이트
-        function updateSelectState(){
+        function updateSelectState() {
             let dateList = $('.choose-date .swiper-slide a');
-            dateList.each((date)=> {
-                console.log(date.text());
+            let timeList = $('.choose-time .swiper-slide a');
+            let theaterList = $('.choose-theater .swiper-slide a');
+
+            dateList.each(function () {
+                if ($(this).text() == localStorage.getItem("selectedDate")) {
+                    $(this).parent().addClass('on');
+                }
             });
+            timeList.each(function () {
+                if($(this).text() == localStorage.getItem("selectedTime")) {
+                    $(this).parent().addClass('on');
+                }
+            });
+            console.log(theaterList);
+            theaterList.each(function () {
+                console.log($(this).text(), localStorage.getItem("selectedTheater"));
+                if($(this).text() == localStorage.getItem("selectedTheater")) {
+                    $(this).parent().addClass('on');
+                }
+            });
+
         };
 
     });
