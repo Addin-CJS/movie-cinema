@@ -33,7 +33,7 @@ public class SecurityConfig {
                         .failureForwardUrl("/")
                         .permitAll())
                 .logout((logout) -> logout
-                        .logoutSuccessUrl("/member/logout").permitAll()
+                        .logoutSuccessUrl("/member/login")
                         .invalidateHttpSession(true));
 
         return http.build();
@@ -44,7 +44,7 @@ public class SecurityConfig {
             (AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
 

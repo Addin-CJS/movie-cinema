@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Optional;
-
 @Controller
 @Slf4j
 public class MemberController {
@@ -45,23 +43,23 @@ public class MemberController {
         return "member/login";
     }
 
-    @PostMapping("/member/login")
-    public String login(Member member, HttpSession session, Model model) {
-        Optional<Member> optionalLoginUser = memberService.selectMemberByUsername(member);
-
-        if (optionalLoginUser.isPresent()) {
-            Member loginUser = optionalLoginUser.get();
-            if (pEncoder.matches(member.getPassword(), loginUser.getPassword())) {
-                session.setAttribute("loginUser", loginUser);
-                return "redirect:/";
-            }else {
-                model.addAttribute("loginError", "로그인 정보가 올바르지 않습니다.");
-                return "member/login";
-            }
-        }
-        model.addAttribute("loginError", "로그인 정보가 올바르지 않습니다.");
-        return "member/login";
-    }
+//    @PostMapping("/member/login")
+//    public String login(Member member, HttpSession session, Model model) {
+//        Optional<Member> optionalLoginUser = memberService.selectMemberByUsername(member);
+//
+//        if (optionalLoginUser.isPresent()) {
+//            Member loginUser = optionalLoginUser.get();
+//            if (pEncoder.matches(member.getPassword(), loginUser.getPassword())) {
+//                session.setAttribute("loginUser", loginUser);
+//                return "redirect:/";
+//            }else {
+//                model.addAttribute("loginError", "로그인 정보가 올바르지 않습니다.");
+//                return "member/login";
+//            }
+//        }
+//        model.addAttribute("loginError", "로그인 정보가 올바르지 않습니다.");
+//        return "member/login";
+//    }
 
     @GetMapping("/member/register")
     public String registerForm() {
@@ -82,12 +80,6 @@ public class MemberController {
         boolean checkId = memberService.idCheck(username);
 
         return String.valueOf(checkId);
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/member/login";
     }
 
     @GetMapping("/member/myPage")
