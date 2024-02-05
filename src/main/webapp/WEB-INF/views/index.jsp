@@ -4,20 +4,18 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <section>
-    <div>
-        <h1>무비차트</h1>
-        <div class="movie-card-section">
+    <div class="movie-chart">
+        <h1>TOP5 관심 영화</h1>
+        <div class="movie-chartList">
             <c:forEach var="topMovie" items="${top5Movies}">
-                <div class="card">
+                <div class="chartList">
                     <c:set var="movie" value="${moviesInfo[topMovie.movieId]}" />
-                    <img src="${movie.mvImg}" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
-                    <div class="card-content">
+                    <a href="/showDetail?movieId=${movie.movieId}">
+                         <img src="${movie.mvImg}" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
+                    </a>
                         <p class="movie-name">
-                            <a href="/showDetail?movieId=${topMovie.movieId}">${movie.mvTitle}</a>
+                            <a href="/showDetail?movieId=${movie.movieId}">${movie.mvTitle}</a>
                         </p>
-                        <div class="movie-info">
-                        </div>
-                    </div>
                 </div>
             </c:forEach>
 
