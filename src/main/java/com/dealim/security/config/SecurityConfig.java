@@ -29,8 +29,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/member/login").permitAll()
-                        .defaultSuccessUrl("/movieHome")
-                        .failureForwardUrl("/")
+                        .failureForwardUrl("/member/login")
                         .permitAll())
                 .logout((logout) -> logout
                         .logoutSuccessUrl("/member/login")

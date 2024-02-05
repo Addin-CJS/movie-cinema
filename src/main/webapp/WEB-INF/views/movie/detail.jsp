@@ -4,7 +4,7 @@
 <jsp:include page="../layouts/header.jsp"/>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <section>
-    <sec:authentication var="me" property="principal" />
+    <sec:authentication var="me" property="principal"/>
 
     <div class="popular-movie-slider">
         <img src="${movie.mvImg}" alt="영화 이미지" class="poster">
@@ -24,7 +24,6 @@
             <div class="movie-btns">
                 <button onclick="window.open('${movie.mvVideo}', '_blank');">▶ 예고편 보기</button>
             </div>
-
 
             <sec:authorize access="isAuthenticated()">
                 <!-- 관심 영화 추가 또는 제거 버튼 -->
@@ -50,17 +49,12 @@
                 <button onclick="location.href='/member/login'">로그인 해주세요</button>
             </sec:authorize>
 
-
             <c:if test="${not empty successMessage}">
                 <div class="alert alert-success">${successMessage}</div>
             </c:if>
             <c:if test="${not empty errorMessage}">
                 <div class="alert alert-danger">${errorMessage}</div>
             </c:if>
-
-
-
-
 
         </div>
     </div>
@@ -99,6 +93,7 @@
 
 <script>
     $(document).ready(function () {
+
         addDatesToSlick();
         addTimeToSlick();
         addTheaterToSlick();
@@ -219,14 +214,14 @@
                 }
             });
             timeList.each(function () {
-                if($(this).text() == localStorage.getItem("selectedTime")) {
+                if ($(this).text() == localStorage.getItem("selectedTime")) {
                     $(this).parent().addClass('on');
                 }
             });
             console.log(theaterList);
             theaterList.each(function () {
                 console.log($(this).text(), localStorage.getItem("selectedTheater"));
-                if($(this).text() == localStorage.getItem("selectedTheater")) {
+                if ($(this).text() == localStorage.getItem("selectedTheater")) {
                     $(this).parent().addClass('on');
                 }
             });
@@ -347,25 +342,22 @@
         return times;
     }
 
-
     function handleInterestMovieAction(isInterested) {
-        var isLoggedIn = ${not empty loginUser};
 
-        if (!isLoggedIn) {
-            if (confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")) {
-                window.location.href = "/member/login";
-            }
-        } else {
-
-            var formAction = isInterested ? '/removeInterestMovie' : '/interestMovie';
-            var form = document.querySelector("form[action='" + formAction + "']");
-            if (form) {
-                form.submit();
-            }
+        <sec:authorize access="isAnonymous()">
+        if (confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")) {
+            window.location.href = "/member/login";
         }
+        </sec:authorize>
+
+        <sec:authorize access="isAuthenticated()">
+        var formAction = isInterested ? '/removeInterestMovie' : '/interestMovie';
+        var form = document.querySelector("form[action='" + formAction + "']");
+        if (form) {
+            form.submit();
+        }
+        </sec:authorize>
     }
-
-
 
 </script>
 
