@@ -9,12 +9,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -65,6 +67,30 @@ public class InterestMovieService {
 
             return false;
         }
+        }
+
+    public void getMyInterestMoviesDetails(String userName, Pageable pageable, Model model) {
+        Page<InterestMovie> interestMoviesPage = interestMovieRepository.findAllByUserName(userName, pageable);
+        List<Long> movieIds = interestMoviesPage.getContent().stream()
+                .map(InterestMovie::getMovieId)
+                .collect(Collectors.toList());
+
+        List<Movie> movies = movieRepository.findByMovieIdIn(movieIds);
+        Map<Long, Movie> moviesInfo = movies.stream()
+                .collect(Collectors.toMap(Movie::getMovieId, Function.identity()));
+
+        int nowPage = interestMoviesPage.getNumber(); // 현재 페이지 (0-index 기준)
+        int totalPages = interestMoviesPage.getTotalPages();
+        int pageGroupSize = 5;
+        int startPage = (nowPage / pageGroupSize) * pageGroupSize + 1;
+        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
+
+        model.addAttribute("interestMoviesPage", interestMoviesPage);
+        model.addAttribute("moviesInfo", moviesInfo);
+        model.addAttribute("nowPage", nowPage + 1);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("totalPages", totalPages);
     }
 
 

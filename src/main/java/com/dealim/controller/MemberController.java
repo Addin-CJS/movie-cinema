@@ -5,6 +5,7 @@ import com.dealim.domain.Review;
 import com.dealim.domain.Ticket;
 import com.dealim.dto.MyPageMember;
 import com.dealim.security.custom.CustomUserDetails;
+import com.dealim.service.InterestMovieService;
 import com.dealim.service.MemberService;
 import com.dealim.service.ReviewService;
 import com.dealim.service.TicketService;
@@ -36,6 +37,9 @@ public class MemberController {
 
     @Autowired
     TicketService ticketService;
+
+    @Autowired
+    InterestMovieService interestMovieService;
 
     @Autowired
     PasswordEncoder pEncoder;
@@ -166,4 +170,20 @@ public class MemberController {
         Member resetPw = memberService.insertMember(member);
         return "redirect:login";
     }
+
+    @GetMapping("member/myInterestMovies")
+    public String getMyInterestMovies(Authentication authentication, Model model,
+                                      @PageableDefault(size = 2, sort = "interestMovieId", direction = Sort.Direction.DESC) Pageable pageable) {
+        if (authentication == null) {
+            return "redirect:/login";
+        }
+
+        String userName = ((CustomUserDetails)authentication.getPrincipal()).getUsername();
+        interestMovieService.getMyInterestMoviesDetails(userName, pageable, model);
+
+        return "member/myInterestMovies";
+    }
+
+
+
 }

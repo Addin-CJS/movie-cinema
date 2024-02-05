@@ -95,6 +95,8 @@ public class MovieController {
         }
         return "redirect:/showDetail?movieId=" + interestMovie.getMovieId();
     }
+
+
     @PostMapping("/removeInterestMovie")
     public String removeInterestMovie(@RequestParam("movieId") Long movieId, Authentication authentication, RedirectAttributes redirectAttributes) {
         if (authentication == null || !authentication.isAuthenticated()) {
