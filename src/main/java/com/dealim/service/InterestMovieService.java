@@ -56,7 +56,6 @@ public class InterestMovieService {
         }
     }
 
-
     public boolean getMovieInterestedByUser(Long movieId, String userName) {
         try {
             return interestMovieRepository.existsByMovieIdAndUserName(movieId, userName);

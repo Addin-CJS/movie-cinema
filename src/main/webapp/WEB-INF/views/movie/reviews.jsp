@@ -81,8 +81,9 @@
 
 <script>
     var movieId = ${movie.movieId};
+    var loginUsername = "";
     <sec:authorize access="isAuthenticated()">
-    var loginUsername = "<c:out value='${me.member.username}'/>";
+    loginUsername = "<c:out value='${me.member.username}'/>";
     </sec:authorize>
     var currentPage = 0;
     var currentSortType = 'latest';

@@ -54,8 +54,7 @@ public class MovieController {
             boolean isInterested = interestMovieService.getMovieInterestedByUser(movieId, member.getUsername());
             model.addAttribute("isInterested", isInterested);//상태를 jsp로 보내주는거
         } else {
-
-            model.addAttribute("isInterestedd", false);
+            model.addAttribute("isInterested", false);
         }
 
 
