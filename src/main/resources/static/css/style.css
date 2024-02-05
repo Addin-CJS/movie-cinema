@@ -2353,6 +2353,23 @@ div.myTicket .myTicketPagination .active {
     margin-right: 10px;
 }
 
+.carousel-wrapper {
+    width: 270px;
+    height: 400px;
+    overflow: hidden;
+}
+
+.carousel-wrapper .carousel {
+    display: flex;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.2s;
+}
+
+.carousel img {
+    width: 270px;
+    height: 400px;
+    border-radius: 10px;
+}
 
 
 
