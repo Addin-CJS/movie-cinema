@@ -16,4 +16,8 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     Page<Review> findAllByMovieId(@Param("movieId") Long movieId, Pageable pageable);
     @Query("SELECT r FROM Review r WHERE r.reviewWriter = :username ORDER BY r.createReviewDate DESC")
     Page<Review> findAllByUsername(@Param("username") String username, Pageable pageable);
+
+    @Query("SELECT r FROM Review r ORDER BY r.likeCount DESC")
+    Page<Review> findByOrderByLikeCountDesc(Pageable pageable);
+
 }

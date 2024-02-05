@@ -2381,7 +2381,61 @@ div.myTicket .myTicketPagination .active {
     width: 80%;
 }
 
+.bottom-section{
+    display: flex;
+    width: 100%;
+    margin: 50px 0px;
+}
 
+.best-review{
+    width: 52%;
+    background-color: aliceblue;
+    color: #007bff;
+    border-radius: 20px;
+}
+.best-review h4{
+    font-weight: bold;
+    text-align: center;
+    margin: 20px;
+
+}
+
+.nothing{
+    width: 52%;
+    background-color: #888888;
+    color: #007bff;
+    border-radius: 20px;
+}
+
+.bestReviewItem {
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+}
+.bestReviewId {
+    width: 5%;
+}
+
+.bestReviewWriter {
+    width: 10%;
+}
+
+.bestReviewContent {
+    width: 80%;
+    white-space: normal;
+}
+
+.bestReviewContent a{
+    color: #007bff;
+    width: 70%;
+}
+
+.bestReviewCreateReviewDate {
+    width: 15%;
+}
 
 
 

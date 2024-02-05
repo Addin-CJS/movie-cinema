@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="layouts/header.jsp"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <section>
@@ -18,7 +19,26 @@
                         </p>
                 </div>
             </c:forEach>
-
+        </div>
+    </div>
+    <div class="bottom-section">
+        <div class="best-review">
+            <h4>베스트 리뷰</h4>
+                <c:forEach var="bestReview" items="${bestReviews}">
+                    <div class="bestReviewItem">
+                        <div class="bestReviewId">${bestReview.reviewId}</div>
+                        <div class="bestReviewWriter">${bestReview.reviewWriter}</div>
+                        <div class="bestReviewContent" id="myReviewContent">
+                            <a href="/showDetail?movieId=${bestReview.movieNo}">${bestReview.reviewContent}</a>
+                        </div>
+                        <div class="bestReviewCreateReviewDate">
+                                ${fn:substringBefore(bestReview.createReviewDate.toString(), 'T')}
+                        </div>
+                    </div>
+                </c:forEach>
+        </div>
+        <div class="nothing">
+            딴거
         </div>
     </div>
 </section>
