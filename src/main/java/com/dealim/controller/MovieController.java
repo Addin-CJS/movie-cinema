@@ -3,14 +3,15 @@ package com.dealim.controller;
 import com.dealim.domain.InterestMovie;
 import com.dealim.domain.Member;
 import com.dealim.domain.Movie;
+import com.dealim.security.custom.CustomUserDetails;
 import com.dealim.service.InterestMovieService;
 import com.dealim.service.MovieService;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,14 +44,20 @@ public class MovieController {
     }
 
     @GetMapping("/showDetail")
-    public String showDetail(@RequestParam("movieId") Long movieId, Model model,HttpSession session) {
+    public String showDetail(@RequestParam("movieId") Long movieId, Model model, Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated() && !(authentication.getPrincipal() instanceof String)) {
 
-        Member member = (Member) session.getAttribute("loginUser");
+            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+            Member member = userDetails.getMember();
 
-        if (member != null) {
+
             boolean isInterested = interestMovieService.getMovieInterestedByUser(movieId, member.getUsername());
-            model.addAttribute("isInterested", isInterested);
+            model.addAttribute("isInterested", isInterested);//상태를 jsp로 보내주는거
+        } else {
+
+            model.addAttribute("isInterestedd", false);
         }
+
 
         movieService.getShowDetail(movieId, model);
         return "movie/detail";
@@ -71,14 +78,16 @@ public class MovieController {
 
 
     @PostMapping("/interestMovie")
-    public String addInterestMovie(HttpSession session, InterestMovie interestMovie, RedirectAttributes redirectAttributes) {
-        Member member = (Member) session.getAttribute("loginUser");
-        if (member == null) {
+    public String addInterestMovie(InterestMovie interestMovie, Authentication authentication, RedirectAttributes redirectAttributes) {
+        if (authentication == null || !authentication.isAuthenticated()) {
             return "redirect:/member/login";
         }
-        interestMovie.setUserName(member.getUsername());
-        boolean added = interestMovieService.addInterestMovie(interestMovie);
 
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Member member = userDetails.getMember();
+        interestMovie.setUserName(member.getUsername());
+
+        boolean added = interestMovieService.addInterestMovie(interestMovie);
         if (added) {
             redirectAttributes.addFlashAttribute("successMessage", "관심 영화가 성공적으로 추가되었습니다.");
         } else {
@@ -86,14 +95,15 @@ public class MovieController {
         }
         return "redirect:/showDetail?movieId=" + interestMovie.getMovieId();
     }
-
     @PostMapping("/removeInterestMovie")
-    public String removeInterestMovie(HttpSession session, @RequestParam("movieId") Long movieId, RedirectAttributes redirectAttributes) {
-        Member member = (Member) session.getAttribute("loginUser");
-        if (member == null) {
-
+    public String removeInterestMovie(@RequestParam("movieId") Long movieId, Authentication authentication, RedirectAttributes redirectAttributes) {
+        if (authentication == null || !authentication.isAuthenticated()) {
             return "redirect:/member/login";
         }
+
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Member member = userDetails.getMember();
+
         boolean removed = interestMovieService.removeInterestMovie(movieId, member.getUsername());
         if (removed) {
             redirectAttributes.addFlashAttribute("successMessage", "관심 영화가 성공적으로 취소되었습니다.");
@@ -102,7 +112,6 @@ public class MovieController {
         }
         return "redirect:/showDetail?movieId=" + movieId;
     }
-
 
 
 

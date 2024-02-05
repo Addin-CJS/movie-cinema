@@ -1,11 +1,11 @@
  <%@ page contentType="text/html;charset=UTF-8" language="java" %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
+ <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
     <div class="review">
-
-
+<%--        <sec:authentication var="me" property="principal.member"/>--%>
+        <sec:authentication var="me" property="principal" />
 
         <table class="reviewList">
             <thead>
@@ -73,8 +73,12 @@
                         <td>${fn:substringBefore(review.createReviewDate.toString(), 'T')}</td>
 
                         <td>
-                            <button onclick="updateReview(${review.reviewId});">수정</button>
-                            <button onclick="deleteReview(${review.reviewId});">삭제</button>
+                            <sec:authorize access="isAuthenticated()">
+                                <c:if test="${me.username == review.reviewWriter}">
+                                    <button onclick="updateReview(${review.reviewId});">수정</button>
+                                    <button onclick="deleteReview(${review.reviewId});">삭제</button>
+                                </c:if>
+                            </sec:authorize>
                         </td>
                     </tr>
                 </c:forEach>
@@ -86,7 +90,7 @@
 
  <script>
        var movieId = ${movie.movieId};
-       var loginUsername = "<c:out value='${loginUser.username}'/>";
+       var loginUsername = "<c:out value='${me.username}'/>";
        var currentPage = 0;
        var currentSortType = 'latest';
       $(document).ready(function() {

@@ -2,7 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="../layouts/header.jsp"/>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <section>
+    <sec:authentication var="me" property="principal" />
+
     <div class="popular-movie-slider">
         <img src="${movie.mvImg}" alt="영화 이미지" class="poster">
 
@@ -23,22 +26,29 @@
             </div>
 
 
-            <c:choose>
-                <c:when test="${isInterested}">
-                    <!-- 관심 영화 취소 버튼 -->
-                    <form action="/removeInterestMovie" method="post">
-                        <input type="hidden" name="movieId" value="${movie.movieId}">
-                        <button type="button" onclick="handleInterestMovieAction(true)">관심 영화 취소</button>
-                    </form>
-                </c:when>
-                <c:otherwise>
-                    <!-- 관심 영화 추가 버튼 -->
-                    <form action="/interestMovie" method="post">
-                        <input type="hidden" name="movieId" value="${movie.movieId}">
-                        <button type="button" onclick="handleInterestMovieAction(false)">👀 관심 영화 추가</button>
-                    </form>
-                </c:otherwise>
-            </c:choose>
+            <sec:authorize access="isAuthenticated()">
+                <!-- 관심 영화 추가 또는 제거 버튼 -->
+                <c:choose>
+                    <c:when test="${isInterested}">
+                        <!-- 관심 영화 취소 버튼 -->
+                        <form action="/removeInterestMovie" method="post">
+                            <input type="hidden" name="movieId" value="${movie.movieId}">
+                            <button type="submit">관심 영화 취소</button>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- 관심 영화 추가 버튼 -->
+                        <form action="/interestMovie" method="post">
+                            <input type="hidden" name="movieId" value="${movie.movieId}">
+                            <button type="submit">👀 관심 영화 추가</button>
+                        </form>
+                    </c:otherwise>
+                </c:choose>
+            </sec:authorize>
+            <sec:authorize access="!isAuthenticated()">
+                <!-- 로그인하지 않은 사용자의 경우 로그인 버튼 표시 -->
+                <button onclick="location.href='/member/login'">로그인 해주세요</button>
+            </sec:authorize>
 
 
             <c:if test="${not empty successMessage}">
