@@ -20,19 +20,6 @@ public class ReviewService {
     public Review reviewInsert(Review review) {
         return reviewRepository.save(review);
     }
-
-    /*public List<Review> selectReviewByMovieNo(Long movieId) {
-
-        return reviewRepository.findAllByMovieNo(movieId);
-    }*/
-
-
-
-//
-//    public Page<Review> selectReviewListByMovieNo(Long movieId, Pageable pageable) {
-//        return reviewRepository.findAllByMovieId(movieId, pageable);
-//    }
-
     public Page<Review> selectReviewListByMovieNo(Long movieId, Pageable pageable, String sortType) {
         Sort sort;
         if ("likes".equals(sortType)) {
@@ -46,8 +33,6 @@ public class ReviewService {
         return reviewRepository.findAllByMovieId(movieId, pageable);
     }
 
-
-
     public void deleteReview(Long reviewId) {
         reviewRepository.deleteById(reviewId);
     }
@@ -57,10 +42,7 @@ public class ReviewService {
     }
 
 
-
-
     //좋아요 증가 or 감소 시키는 메서드
-
     public void updateLikeCount(Long reviewId, boolean isLike) {
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new RuntimeException("리뷰를 찾지못했습니다"));
@@ -69,7 +51,6 @@ public class ReviewService {
         if (currentLikeCount == null) {
             currentLikeCount = 0;
         }
-
         review.setLikeCount(isLike ? currentLikeCount + 1 : Math.max(0, currentLikeCount - 1));
         reviewRepository.save(review);
     }

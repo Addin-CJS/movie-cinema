@@ -4,16 +4,19 @@ import com.dealim.domain.Member;
 import com.dealim.domain.Review;
 import com.dealim.domain.Ticket;
 import com.dealim.dto.MyPageMember;
+import com.dealim.security.custom.CustomUserDetails;
 import com.dealim.service.MemberService;
 import com.dealim.service.ReviewService;
 import com.dealim.service.TicketService;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,24 +46,6 @@ public class MemberController {
         return "member/login";
     }
 
-//    @PostMapping("/member/login")
-//    public String login(Member member, HttpSession session, Model model) {
-//        Optional<Member> optionalLoginUser = memberService.selectMemberByUsername(member);
-//
-//        if (optionalLoginUser.isPresent()) {
-//            Member loginUser = optionalLoginUser.get();
-//            if (pEncoder.matches(member.getPassword(), loginUser.getPassword())) {
-//                session.setAttribute("loginUser", loginUser);
-//                return "redirect:/";
-//            }else {
-//                model.addAttribute("loginError", "로그인 정보가 올바르지 않습니다.");
-//                return "member/login";
-//            }
-//        }
-//        model.addAttribute("loginError", "로그인 정보가 올바르지 않습니다.");
-//        return "member/login";
-//    }
-
     @GetMapping("/member/register")
     public String registerForm() {
         return "member/register";
@@ -78,56 +63,63 @@ public class MemberController {
     @ResponseBody
     public String checkId(@RequestParam("id") String username){
         boolean checkId = memberService.idCheck(username);
-
         return String.valueOf(checkId);
     }
 
     @GetMapping("/member/myPage")
-    public String showMyPage(HttpSession session) {
+    public String showMyPage( ) {
 
-        if (session.getAttribute("loginUser") instanceof Member) {
-            Member loginUser = (Member) session.getAttribute("loginUser");
-        }
         return "member/myPage";
     }
+
     @GetMapping("/member/myInfo")
-    public String showMyPageInfo(HttpSession session, Model model) {
-        if (session.getAttribute("loginUser") instanceof Member) {
-            Member loginUser = (Member) session.getAttribute("loginUser");
-            model.addAttribute("loginUser", loginUser);
-        }
+    public String showMyPageInfo() {
+
         return "member/myInfo";
     }
 
     @GetMapping("/member/myPageEdit")
-    public String myPageEdit(HttpSession session, Model model) {
-        if (session.getAttribute("loginUser") instanceof Member) {
-            Member loginUser = (Member) session.getAttribute("loginUser");
-            model.addAttribute("loginUser", loginUser);
-        }
+    public String myPageEdit() {
+
         return "member/myPageEdit";
     }
 
     @PostMapping("member/myPageEdit")
-    public String EditMyPage(MyPageMember myPageMember, HttpSession session) {
+    public String EditMyPage(MyPageMember myPageMember, Authentication authentication) {
 
         String enPass = pEncoder.encode(myPageMember.getPassword());
         myPageMember.setPassword(pEncoder.encode(myPageMember.getPassword()));
 
-        Member loginUser = (Member)session.getAttribute("loginUser");
+        Member loginUser = ((CustomUserDetails)authentication.getPrincipal()).getMember();
         Member updatedMember = memberService.updateMember(myPageMember, loginUser);
 
-        session.setAttribute("loginUser", updatedMember);
-
+        CustomUserDetails updatedUserDetails = new CustomUserDetails(updatedMember);
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(updatedUserDetails, authentication.getCredentials(), updatedUserDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
         return "member/myPage";
     }
 
+    @GetMapping("member/myReviews")
+    public String getMyReviews(Authentication authentication, Model model,
+                               @PageableDefault(page = 0, size = 10, sort = "createReviewDate",
+                                       direction = Sort.Direction.DESC) Pageable pageable) {
+        Member loginUser = ((CustomUserDetails)authentication.getPrincipal()).getMember();
+
+        Page<Review> myReviews = reviewService.getMyReviews(loginUser.getUsername(),pageable, model);
+        return "member/myReviews";
+    }
+    @GetMapping("member/myTickets")
+    public String getMyTickets(Authentication authentication, Model model,
+                               @PageableDefault(page = 0, size = 3, sort = "ticketedDate",
+                                       direction = Sort.Direction.DESC) Pageable pageable) {
+        Member loginUser = ((CustomUserDetails)authentication.getPrincipal()).getMember();
+
+        Page<Ticket> myTickets = ticketService.getMyTickets(loginUser.getMemberId(),pageable, model);
+        return "member/myTickets";
+    }
+
     @GetMapping("/member/resetMyPw")
-    public String resetMyPw(HttpSession session, Model model) {
-        if (session.getAttribute("loginUser") instanceof Member) {
-            Member loginUser = (Member) session.getAttribute("loginUser");
-            model.addAttribute("loginUser", loginUser);
-        }
+    public String resetMyPw() {
         return "member/resetMyPw";
     }
 
@@ -140,7 +132,6 @@ public class MemberController {
         return "member/myPage";
     }
 
-
     @GetMapping("member/findId")
     public String findId() {
         return "member/findId";
@@ -150,7 +141,6 @@ public class MemberController {
     @ResponseBody
     public Member findUserID(@RequestParam("name") String name, @RequestParam("phoneNumber") String phoneNumber) {
             Member findId = memberService.findIdByNameAndPhoneNumber(name, phoneNumber);
-        System.out.println("Found Member: " + findId);
         return findId;
     }
 
@@ -165,7 +155,6 @@ public class MemberController {
                                   @RequestParam("name") String name,
                                   @RequestParam("phoneNumber") String phoneNumber) {
         Member findMemberForPw = memberService.findIdByUserNameAndNameAndPhoneNumber(username,name, phoneNumber);
-        System.out.println("Found Member: " + findMemberForPw);
         return findMemberForPw;
     }
 
@@ -175,35 +164,6 @@ public class MemberController {
         member.setPassword(pEncoder.encode(member.getPassword()));
 
         Member resetPw = memberService.insertMember(member);
-        System.out.println("UPDATE Member: " + memberService.insertMember(member));
         return "redirect:login";
-    }
-
-    @GetMapping("member/myReviews")
-    public String getMyReviews(HttpSession session, Model model,
-                                @PageableDefault(page = 0, size = 10, sort = "createReviewDate",
-                                        direction = Sort.Direction.DESC) Pageable pageable) {
-
-        Member loginUser = (Member) session.getAttribute("loginUser");
-        if (loginUser != null) {
-            Page<Review> myReviews = reviewService.getMyReviews(loginUser.getUsername(),pageable, model);
-            return "member/myReviews";
-        } else {
-            return "redirect:/login";
-        }
-    }
-
-    @GetMapping("member/myTickets")
-    public String getMyTickets(HttpSession session, Model model,
-                               @PageableDefault(page = 0, size = 3, sort = "ticketedDate",
-                                       direction = Sort.Direction.DESC) Pageable pageable) {
-
-        Member loginUser = (Member) session.getAttribute("loginUser");
-        if (loginUser != null) {
-            Page<Ticket> myTickets = ticketService.getMyTickets(loginUser.getMemberId(),pageable, model);
-            return "member/myTickets";
-        } else {
-            return "redirect:/login";
-        }
     }
 }

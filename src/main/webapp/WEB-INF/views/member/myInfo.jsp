@@ -3,12 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 <section>
     <div class="myPage">
         <h3>내 정보</h3>
-        <c:set var="me" value="${loginUser}" />
+        <sec:authentication var="me" property="principal.member"/>
 
         <form action="myPage" id="myPageForm">
             <table>

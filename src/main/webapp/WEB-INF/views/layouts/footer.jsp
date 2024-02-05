@@ -20,6 +20,7 @@
         <i class="fa fa-twitter"></i>
         <i class="fa fa-instagram"></i>
     </div>
+
 </footer>
 </body>
 </html>

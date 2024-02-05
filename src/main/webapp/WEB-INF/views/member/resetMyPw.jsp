@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <section>
         <div class="resetMyPw">
             <h3>비밀번호 재설정</h3>
+            <sec:authentication var="loginUser" property="principal.member"/>
             <form action="resetMyPw" method="post" id="resetMyPwForm">
                 <table>
                      <tr>
