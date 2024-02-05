@@ -31,13 +31,13 @@
         </table>
         <div class="myReviewPagination">
             <c:if test="${nowPage > 0}">
-                <a href="javascript:loadPage(${nowPage - 1})">이전</a>
+                <a href="javascript:loadReviewPage(${nowPage - 1})">이전</a>
             </c:if>
             <c:forEach begin="${startPage}" end="${endPage}" var="page">
-                <a href="javascript:loadPage(${page})" class="${page == nowPage ? 'active' : ''}">[${page + 1}]</a>
+                <a href="javascript:loadReviewPage(${page})" class="${page == nowPage ? 'active' : ''}">[${page + 1}]</a>
             </c:forEach>
             <c:if test="${nowPage + 1 < totalPages}">
-                <a href="javascript:loadPage(${nowPage + 1})">다음</a>
+                <a href="javascript:loadReviewPage(${nowPage + 1})">다음</a>
             </c:if>
         </div>
 </div>

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,4 +20,6 @@ public interface MemberRepository  extends JpaRepository<Member, Long>{
 
     @Query("SELECT m FROM Member m WHERE m.username = :username AND m.name = :name AND m.phoneNumber = :phoneNumber")
     Member findByUserNameAndNameAndPhoneNumber(String username, String name, String phoneNumber);
+
+    List<Member> findByMemberIdIn(List<Long> memberIdsList);
 }
