@@ -3,37 +3,22 @@
 
 <section>
         <div class="resetPw">
-            <h3>비밀번호 재설정</h3>
+            <h2>비밀번호 재설정</h2>
             <form action="checkForResetPw" method="post" id="checkForResetPwForm">
-                <table>
-                    <tr>
-                        <th><label for="username">ID</label></th>
-                        <td>
-                            <div>
-                                <input name="username" id="username" class="form-control" placeholder="아이디" type="text">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><label for="name">NAME</label></th>
-                        <td>
-                            <div>
-                                <input name="name" id="name" class="form-control" placeholder="이름" type="text">
-                            </div>
-                        </td>
-                    </tr>
-                     <tr>
-                         <th><label for="phoneNumber">PHONE</label></th>
-                         <td>
-                            <input name="phoneNumber" id="phoneNumber" class="form-control" placeholder="전화번호" type="text" maxlength="11">
-                         </td>
-                     </tr>
-                     <tr>
-                        <td colspan="2">
+                <div class="resetPwInfo">
+                    <li class="resetPwInput">
+                        <input name="username" id="username" class="form-control" placeholder="아이디" type="text">
+                    </li>
+                    <li class="resetPwInput">
+                        <input name="name" id="name" class="form-control" placeholder="이름" type="text">
+                    </li>
+                     <li class="resetPwInput">
+                        <input name="phoneNumber" id="phoneNumber" class="form-control" placeholder="전화번호" type="text" maxlength="11">
+                     </li>
+                     <div>
                             <button type="submit">계정 확인</button>
-                        </td>
-                     </tr>
-                </table>
+                     </div>
+                </div>
             </form>
                 <div id="findIdResult"></div>
             <form action="resetPw" method="post" id="resetPwForm" style="display:none;">

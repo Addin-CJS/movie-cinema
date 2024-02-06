@@ -1046,48 +1046,87 @@ section .login {
     height: 100%;
 }
 
-section .login h3 {
-    margin: 30px;
+section .login h2 {
+    margin: 20px;
+}
+.loginInfo{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
-section .login table {
-    margin: 0 auto;
+.login form li{list-style-type: none;}
+
+.login form{
+    width:300px;
+    align-items: center;
+}
+
+.login form .loginInput{
+    width:100%;
+    height:50px;
+    margin:15px 0;
+}
+
+.loginInput input{
+    width:100%;
+    height:100%;
+    background: none;
+    color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding:20px;
+}
+
+.loginInput input::placeholder{
+    color:white;
+    font-size:11px;
+}
+
+
+.loginBtns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginBtn1 {
     width: 300px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
 }
 
-section .login th {
-    color: white;
-    width: 50px;
-}
+.loginBtn2 {
+    width: 300px;
+    display:flex;
+    justify-content: space-evenly;
 
-section .login td {
-    color: white;
-}
-
-section .login td input {
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
-    padding-left: 10px;
 }
 
 section .login button {
-    margin-top: 10px;
-    width: 145px;
-    height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 
 #findIdAndPw {
     text-align: center;
-    margin-top: 10px;
     padding: 20px;
-    height: 100%;
+    height: 50px;
 }
 
 #findIdAndPw a {
@@ -1104,45 +1143,65 @@ section .login button {
 
 /* 아이디 찾기 */
 section .findId {
-    text-align: center;
-    padding: 20px;
+    width:100%;
     height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
-section .findId h3 {
+.findId form{
+    width:300px;
+    margin:15px 0;
+}
+
+section .findId h2 {
     margin: 30px;
 }
 
-section .findId table {
-    margin: 0 auto;
+.findIdInfo{
+    display: flex;
+    flex-direction: column;
     width: 300px;
 }
 
-section .findId th {
-    color: white;
-    width: 50px;
+.findIdInput{
+    width:100%;
+    height:40px;
+    margin-bottom: 20px;
 }
 
-section .findId td {
+section .findIdInput input {
+    width:100%;
+    height:100%;
+    background: none;
     color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding:10px;
 }
 
-section .findId td input {
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
-    padding-left: 10px;
+.findIdInput input::placeholder{
+    color:white;
+    font-size:11px;
 }
 
 section .findId button {
-    margin-top: 10px;
     width: 100%;
-    height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 #findIdResult {
@@ -1150,47 +1209,66 @@ section .findId button {
     padding: 10px;
 }
 
-/* 비밀번호 재생성 */
+/* 비밀번호 재설정 */
 section .resetPw {
-    text-align: center;
-    padding: 20px;
+    width:100%;
     height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
-section .resetPw h3 {
+section .resetPw h2 {
     margin: 30px;
 }
+.resetPw form{
+    width:300px;
+    margin:15px 0;
+}
 
-section .resetPw table {
-    margin: 0 auto;
+.resetPwInfo{
+    display: flex;
+    flex-direction: column;
     width: 300px;
 }
 
-section .resetPw th {
-    color: white;
-    width: 70px;
+.resetPwInput{
+    width:100%;
+    height:40px;
+    margin-bottom: 20px;
 }
 
-section .resetPw td {
+section .resetPwInput input {
+    width:100%;
+    height:100%;
+    background: none;
     color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding:10px;
 }
 
-section .resetPw td input {
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
-    padding-left: 10px;
+.resetPwInput input::placeholder{
+    color:white;
+    font-size:11px;
 }
 
 section .resetPw button {
-    margin-top: 10px;
     width: 100%;
-    height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 /*회원 비밀번호 재설정*/
@@ -1241,35 +1319,45 @@ section .resetMyPw button {
 
 section .register {
     text-align: center;
-    padding: 20px;
     height: 100%;
 }
 
-section .register h3 {
-    margin: 30px;
+section .register h2 {
+    margin: 20px;
 }
 
-section .register table {
-    margin: 0 auto;
-    width: 500px;
+.registerForm {
+    display: flex;
+    justify-content: center;
 }
 
-section .register th {
-    color: white;
+.registerTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100%;
 }
-
-section .register td {
-    color: white;
-    width: 100%;
-}
-
-section .register td input {
-    width: 100%;
+.registerTitle div{
     height: 40px;
-    border-radius: 10px;
-    padding-left: 10px;
+    width: 100px;
+    margin-top: 10px;
+    text-align: left;
 }
 
+
+section .register .registerInfo input {
+    width:100%;
+    background: none;
+    color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size:13px;
+    height: 40px;
+    margin-bottom: 10px;
+}
 
 section .register #emailField,
 section .register #addressField {
@@ -1277,6 +1365,20 @@ section .register #addressField {
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+}
+
+section .register #emailField input,
+section .register #addressField input, #phoneNumber{
+    width:100%;
+    background: none;
+    color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size:13px;
+    height: 40px;
+    margin-bottom: 10px;
 }
 
 section .register #emailField select {
@@ -1308,20 +1410,36 @@ section .register #emailAddress:disabled {
 
 
 section .register #addressField input[type="button"] {
-    width: 130px;
+    width: 120px;
+    height:40px;
+    background-color: white;
+    color:black;
+    align-items: center;
     padding-right: 10px;
+}
+.registerBtn {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
 }
 
 section .register button {
-    margin-top: 10px;
-    width: 243px;
-    height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap:10px;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 /* 리뷰 */
@@ -1341,7 +1459,7 @@ section .register button {
     border-radius: 5px;
 }
 
-.reviewList button {
+.reviewList .review-btn {
     width: 200px;
     border: none;
     outline: none;
@@ -1372,15 +1490,19 @@ section .register button {
 
 
 .reviewList button {
-    flex-grow: 1;
-    margin-top: 10px;
-    height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+    width: 200px;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    font-size: 1em;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding: 10px 10px;
 }
 
 .review-content {
@@ -1402,7 +1524,7 @@ div.review .pagination a {
     display: inline-block;
     padding: 5px 10px;
     margin: 0 5px;
-    background-color: #DB0000;
+    background-color: red;
     color: #fff;
     border-radius: 20px;
     font-size: 16px;
@@ -1410,11 +1532,13 @@ div.review .pagination a {
 }
 
 div.review .pagination a:hover {
-    background-color: #FFA500;
+    background-color: white;
+    color:red;
 }
 
 div.review .pagination .active {
-    background-color: #FFA500;
+    background-color: white;
+    color:red;
     font-weight: bold;
 }
 
@@ -2384,7 +2508,7 @@ div.myTicket .myTicketPagination .active {
 .bottom-section{
     display: flex;
     width: 100%;
-    margin: 30px 0px;
+    margin: 20px 0px;
 }
 
 .best-review{

@@ -1,6 +1,6 @@
 package com.dealim.security.config;
 
-
+import com.dealim.security.config.oauth.OAuth2CustomDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -13,40 +13,45 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
 @Slf4j
 public class SecurityConfig {
 
-    // 특정 HTTP 요청에 대한 웹 기반 보안 구성
+    private final OAuth2CustomDetailsService oAuth2CustomDetailsService;
+    public SecurityConfig(OAuth2CustomDetailsService oAuth2CustomDetailsService) {
+        this.oAuth2CustomDetailsService = oAuth2CustomDetailsService;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-                http
-                .csrf((csrf) -> csrf.disable())
-                .authorizeHttpRequests((authorize) -> authorize
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated())
-                .formLogin((form) -> form
+                .formLogin(form -> form
                         .loginPage("/member/login").permitAll()
-                        .failureForwardUrl("/member/login")
+                        .failureUrl("/member/login")
                         .permitAll())
-                .logout((logout) -> logout
+                .logout(logout -> logout
                         .logoutSuccessUrl("/member/login")
-                        .invalidateHttpSession(true));
-
+                        .invalidateHttpSession(true))
+                .oauth2Login(oauth2 -> oauth2
+                        .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
+                                .userService(oAuth2CustomDetailsService))
+                        .defaultSuccessUrl("/", true));
         return http.build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager
-            (AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-
         return new BCryptPasswordEncoder();
     }
 }

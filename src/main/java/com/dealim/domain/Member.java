@@ -36,4 +36,7 @@ public class Member {
     private LocalDateTime withdrawnAt;
     @Column(columnDefinition = "CHAR(1) default 'N'")
     private Character isWithdrawn;
+
+    private String provider;
+    private String providerId;
 }
