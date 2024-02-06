@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     transition: all .2s;
+    font-family: "Roboto", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -31,6 +32,7 @@ body, a {
     /*letter-spacing: 0.03em;*/
     font-style: normal;
     color: #fff;
+    font-family: "Roboto", sans-serif;
 }
 
 header {
@@ -2359,18 +2361,37 @@ div.myTicket .myTicketPagination .active {
     font-weight: bold;
     text-align: center;
     margin: 20px;
+    font-size: 24px;
+    margin-bottom: 40px;
 }
 
 .movie-chartList {
     display: flex;
-    margin-left: 30px;
+    padding:0 30px;
 }
 .movie-chartList .chartList {
     width: 100%;
+    position: relative;
 }
+.movie-chartList .chartList a {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    padding:0 10px;
+    position: relative;
 
+}
+.movie-chartList .chartList .movierank {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    font-size:42px;
+    font-weight: 500;
+    color: #fff;
+    font-style: italic;
+}
 .movie-chartList .chartList img{
-        width: 80%;
+    width: 100%;
         object-fit: cover;
         border-radius: 10px;
         box-shadow: 0 0 30px #000;
@@ -2378,26 +2399,31 @@ div.myTicket .myTicketPagination .active {
 
 .movie-chartList .chartList p {
     text-align: center;
-    width: 80%;
+    margin-top: 10px;
+    padding: 0 10px;
+    word-break: keep-all;
 }
 
 .bottom-section{
     display: flex;
     width: 100%;
     margin: 30px 0px;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0;
 }
 
 .best-review{
     width: 52%;
-    background-color: aliceblue;
-    color: #007bff;
-    border-radius: 20px;
 }
-.best-review h4{
+.best-review h4 {
     font-weight: bold;
     text-align: center;
-    margin: 20px;
-
+    font-size: 26px;
+    margin-bottom: 40px;
+}
+.best_review_slide {
+    height: 330px;
 }
 
 .nothing{
@@ -2426,11 +2452,14 @@ div.myTicket .myTicketPagination .active {
 .bestReviewContent {
     width: 80%;
     white-space: normal;
+    color: #eee;
 }
-
+.bestReviewItem {
+    color: rgba(255,255,255,0.6);
+}
 .bestReviewContent a{
-    color: #007bff;
     width: 70%;
+    color: #fff;
 }
 
 .bestReviewCreateReviewDate {

@@ -20,7 +20,6 @@ $(document).ready(function(){
 
     initializeIndicator();
 
-
     //scroll
     let nav = $('nav');
 
@@ -38,8 +37,7 @@ $(document).ready(function(){
         }
     });
 
-
-    //menu
+    // 햄버거 메뉴
     let menuBx = $('#menu-box');
     let a = true;
 
