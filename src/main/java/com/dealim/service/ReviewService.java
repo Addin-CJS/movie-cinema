@@ -41,10 +41,7 @@ public class ReviewService {
        return reviewRepository.save(review);
     }
 
-
-
-
-        //좋아요 상태를 바꾸는 메서드 (컨트롤러에서 사용)
+    //좋아요 상태를 바꾸는 메서드 (컨트롤러에서 사용)
         @Transactional
     public void  changeLikeStatus(Long reviewId, String likeAction, Set<Long> likedReviews) {
         if ("like".equals(likeAction)) {
