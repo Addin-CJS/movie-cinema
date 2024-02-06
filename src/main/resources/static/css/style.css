@@ -2490,3 +2490,33 @@ div.myTicket .myTicketPagination .active {
 .page-link:hover {
     background-color: #2d3748;
 }
+
+.interest-button {
+    background-color: transparent;
+    color: #ffffff;
+    padding: 0;
+    border: none;
+    font-size: 0.875rem;
+    font-weight: 400;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease-in-out;
+    margin-top: 8px;
+}
+
+.interest-button .emoji {
+    margin-right: 8px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.interest-button:hover .emoji {
+    transform: scale(1.5);
+}
+
+
+.interest-button:hover {
+    background-color: transparent;
+    box-shadow: none;
+}
