@@ -46,7 +46,6 @@ public class MemberController {
 
     @GetMapping("/member/login")
     public String loginForm() {
-
         return "member/login";
     }
 
@@ -88,7 +87,7 @@ public class MemberController {
         return "member/myPageEdit";
     }
 
-    @PostMapping("member/myPageEdit")
+    @PostMapping("/member/myPageEdit")
     public String EditMyPage(MyPageMember myPageMember, Authentication authentication) {
 
         String enPass = pEncoder.encode(myPageMember.getPassword());
@@ -103,7 +102,7 @@ public class MemberController {
         return "member/myPage";
     }
 
-    @GetMapping("member/myReviews")
+    @GetMapping("/member/myReviews")
     public String getMyReviews(Authentication authentication, Model model,
                                @PageableDefault(page = 0, size = 10, sort = "createReviewDate",
                                        direction = Sort.Direction.DESC) Pageable pageable) {
@@ -112,7 +111,7 @@ public class MemberController {
         Page<Review> myReviews = reviewService.getMyReviews(loginUser.getUsername(),pageable, model);
         return "member/myReviews";
     }
-    @GetMapping("member/myTickets")
+    @GetMapping("/member/myTickets")
     public String getMyTickets(Authentication authentication, Model model,
                                @PageableDefault(page = 0, size = 3, sort = "ticketedDate",
                                        direction = Sort.Direction.DESC) Pageable pageable) {
@@ -127,7 +126,7 @@ public class MemberController {
         return "member/resetMyPw";
     }
 
-    @PostMapping("member/resetMyPw")
+    @PostMapping("/member/resetMyPw")
     public String resetMyPw(Member member) {
         String enPass = pEncoder.encode(member.getPassword());
         member.setPassword(pEncoder.encode(member.getPassword()));
@@ -136,24 +135,24 @@ public class MemberController {
         return "member/myPage";
     }
 
-    @GetMapping("member/findId")
+    @GetMapping("/member/findId")
     public String findId() {
         return "member/findId";
     }
 
-    @PostMapping("member/findId")
+    @PostMapping("/member/findId")
     @ResponseBody
     public Member findUserID(@RequestParam("name") String name, @RequestParam("phoneNumber") String phoneNumber) {
             Member findId = memberService.findIdByNameAndPhoneNumber(name, phoneNumber);
         return findId;
     }
 
-    @GetMapping("member/resetPw")
+    @GetMapping("/member/resetPw")
     public String resetPw() {
         return "member/resetPw";
     }
 
-    @PostMapping("member/checkForResetPw")
+    @PostMapping("/member/checkForResetPw")
     @ResponseBody
     public Member checkForResetPw(@RequestParam("username") String username,
                                   @RequestParam("name") String name,
@@ -162,7 +161,7 @@ public class MemberController {
         return findMemberForPw;
     }
 
-    @PostMapping("member/resetPw")
+    @PostMapping("/member/resetPw")
     public String resetPw(Member member) {
         String enPass = pEncoder.encode(member.getPassword());	// 사용자가 입력한 패스워드 암호화해서 변수에 넣기
         member.setPassword(pEncoder.encode(member.getPassword()));
@@ -171,7 +170,7 @@ public class MemberController {
         return "redirect:login";
     }
 
-    @GetMapping("member/myInterestMovies")
+    @GetMapping("/member/myInterestMovies")
     public String getMyInterestMovies(Authentication authentication, Model model,
                                       @PageableDefault(size = 2, sort = "interestMovieId", direction = Sort.Direction.DESC) Pageable pageable) {
         if (authentication == null) {
@@ -183,7 +182,4 @@ public class MemberController {
 
         return "member/myInterestMovies";
     }
-
-
-
 }

@@ -81,14 +81,12 @@
                 </ul>
             </div>
         </div>
-        <c:choose>
-            <c:when test="${not empty loginUser}">
-                <button class="movie-btns" type="button" onclick="selectSeat()">좌석선택</button>
-            </c:when>
-            <c:otherwise>
-                <button class="off-btns" type="button" onclick="location.href='/member/login'">로그인 해주세요</button>
-            </c:otherwise>
-        </c:choose>
+        <sec:authorize access="isAuthenticated()">
+            <button class="movie-btns" type="button" onclick="selectSeat()">좌석선택</button>
+        </sec:authorize>
+        <sec:authorize access="isAnonymous()">
+            <button class="off-btns" type="button" onclick="location.href='/member/login'">로그인 해주세요</button>
+        </sec:authorize>
     </div>
 </section>
 

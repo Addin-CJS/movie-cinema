@@ -29,10 +29,10 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/member/login").permitAll()
-                        .failureForwardUrl("/member/login")
-                        .permitAll())
+                        .successForwardUrl("/")
+                        .failureUrl("/member/login")
+                )
                 .logout((logout) -> logout
-                        .logoutSuccessUrl("/member/login")
                         .invalidateHttpSession(true));
 
         return http.build();

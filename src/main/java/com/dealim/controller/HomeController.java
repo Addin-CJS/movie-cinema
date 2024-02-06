@@ -20,7 +20,7 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    InterestMovieService interestMovieService;
+    private InterestMovieService interestMovieService;
     @Autowired
     private MovieTheaterRepository movieTheaterRepository;
     @Autowired
