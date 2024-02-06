@@ -2353,22 +2353,88 @@ div.myTicket .myTicketPagination .active {
     margin-right: 10px;
 }
 
-.carousel-wrapper {
-    width: 270px;
-    height: 400px;
-    overflow: hidden;
+/* 메인페이지 TOP5 관심 영화 */
+
+.movie-chart h1 {
+    font-weight: bold;
+    text-align: center;
+    margin: 20px;
 }
 
-.carousel-wrapper .carousel {
+.movie-chartList {
     display: flex;
-    transform: translate3d(0, 0, 0);
-    transition: transform 0.2s;
+    margin-left: 30px;
+}
+.movie-chartList .chartList {
+    width: 100%;
 }
 
-.carousel img {
-    width: 270px;
-    height: 400px;
-    border-radius: 10px;
+.movie-chartList .chartList img{
+        width: 80%;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 0 30px #000;
+}
+
+.movie-chartList .chartList p {
+    text-align: center;
+    width: 80%;
+}
+
+.bottom-section{
+    display: flex;
+    width: 100%;
+    margin: 30px 0px;
+}
+
+.best-review{
+    width: 52%;
+    background-color: aliceblue;
+    color: #007bff;
+    border-radius: 20px;
+}
+.best-review h4{
+    font-weight: bold;
+    text-align: center;
+    margin: 20px;
+
+}
+
+.nothing{
+    width: 52%;
+    background-color: #888888;
+    color: #007bff;
+    border-radius: 20px;
+}
+
+.bestReviewItem {
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+}
+.bestReviewId {
+    width: 5%;
+}
+
+.bestReviewWriter {
+    width: 10%;
+}
+
+.bestReviewContent {
+    width: 80%;
+    white-space: normal;
+}
+
+.bestReviewContent a{
+    color: #007bff;
+    width: 70%;
+}
+
+.bestReviewCreateReviewDate {
+    width: 15%;
 }
 
 #interest-movies-section {

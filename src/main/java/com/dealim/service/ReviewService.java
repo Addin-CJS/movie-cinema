@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -29,7 +30,6 @@ public class ReviewService {
         }
 
         pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
-        System.out.println("Pageable Sort: " + pageable.getSort().toString());
         return reviewRepository.findAllByMovieId(movieId, pageable);
     }
 
@@ -86,4 +86,8 @@ public class ReviewService {
         return myReviewList;
     }
 
+    public List<Review> getBestReviewByLikeCount() {
+        Page<Review> page = reviewRepository.findByOrderByLikeCountDesc(PageRequest.of(0, 10));
+        return page.getContent();
+    }
 }
