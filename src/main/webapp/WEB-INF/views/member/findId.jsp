@@ -3,30 +3,19 @@
 
 <section>
         <div class="findId">
-            <h3>아이디 찾기</h3>
+            <h2>아이디 찾기</h2>
             <form action="findId" method="post" id="findIdForm">
-                <table>
-                    <tr>
-                        <th><label for="name">NAME</label></th>
-                        <td>
-                            <div>
-                                <input name="name" id="name" class="form-control" placeholder="이름" type="text">
-                            </div>
-                        </td>
-                    </tr>
-                     <tr>
-                         <th><label for="phoneNumber">PHONE</label></th>
-                         <td>
-                            <input name="phoneNumber" id="phoneNumber" class="form-control" placeholder="전화번호" type="text" maxlength="11">
-                         </td>
-                     </tr>
-                     <tr>
-                         <td colspan="2">
-                            <button type="submit">아이디 찾기</button>
-                         </td>
-                     </tr>
-                </table>
-
+                <div class="findIdInfo">
+                    <li class="findIdInput">
+                        <input name="name" id="name" class="form-control" placeholder="이름을 입력해주세요" type="text">
+                    </li>
+                    <li class="findIdInput">
+                        <input name="phoneNumber" id="phoneNumber" class="form-control" placeholder="전화번호를 입력해주세요" type="text" maxlength="11">
+                    </li>
+                     <div>
+                        <button type="submit">아이디 찾기</button>
+                     </div>
+                </div>
             </form>
                  <div id="findIdResult"></div>
         </div>
