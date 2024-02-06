@@ -32,22 +32,27 @@
                         <!-- 관심 영화 취소 버튼 -->
                         <form action="/removeInterestMovie" method="post">
                             <input type="hidden" name="movieId" value="${movie.movieId}">
-                            <button type="submit">관심 영화 취소</button>
+                            <button type="submit" class="interest-button">
+                                <span class="emoji">🎬👀</span> 관심 영화 취소
+                            </button>
                         </form>
                     </c:when>
                     <c:otherwise>
                         <!-- 관심 영화 추가 버튼 -->
                         <form action="/interestMovie" method="post">
                             <input type="hidden" name="movieId" value="${movie.movieId}">
-                            <button type="submit">👀 관심 영화 추가</button>
+                            <button type="submit" class="interest-button">
+                                <span class="emoji">🎬👀</span> 관심 영화 추가
+                            </button>
                         </form>
                     </c:otherwise>
                 </c:choose>
             </sec:authorize>
 
             <sec:authorize access="!isAuthenticated()">
-                <!-- 로그인하지 않은 사용자의 경우 로그인 버튼 표시 -->
-                <button onclick="location.href='/member/login'">로그인 해주세요</button>
+                <button type="button"  class="interest-button" onclick="promptLogin()">
+                    <span class="emoji">🎬👀</span> 관심 영화 추가
+                </button>
             </sec:authorize>
 
             <c:if test="${not empty successMessage}">
@@ -343,22 +348,13 @@
         return times;
     }
 
-    function handleInterestMovieAction(isInterested) {
-
-        <sec:authorize access="isAnonymous()">
+    function promptLogin() {
         if (confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")) {
             window.location.href = "/member/login";
         }
-        </sec:authorize>
-
-        <sec:authorize access="isAuthenticated()">
-        var formAction = isInterested ? '/removeInterestMovie' : '/interestMovie';
-        var form = document.querySelector("form[action='" + formAction + "']");
-        if (form) {
-            form.submit();
-        }
-        </sec:authorize>
     }
+
+
 
 </script>
 
