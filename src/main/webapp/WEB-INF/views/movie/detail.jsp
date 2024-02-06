@@ -45,6 +45,7 @@
                     </c:otherwise>
                 </c:choose>
             </sec:authorize>
+
             <sec:authorize access="!isAuthenticated()">
                 <!-- 로그인하지 않은 사용자의 경우 로그인 버튼 표시 -->
                 <button onclick="location.href='/member/login'">로그인 해주세요</button>

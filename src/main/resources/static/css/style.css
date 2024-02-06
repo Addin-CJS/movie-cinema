@@ -2371,5 +2371,56 @@ div.myTicket .myTicketPagination .active {
     border-radius: 10px;
 }
 
+#interest-movies-section {
+        background-color: #1a202c;
+        color: white;
+        font-family: 'Noto Sans KR', sans-serif;
+        padding: 1.5rem;
+    }
 
+.interestContainer {
+    max-width: 640px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
 
+.interestMove-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #4a5568;
+    margin-bottom: 1rem;
+}
+
+.interestMovie-img {
+    display: block;
+    width: 150px;
+    height: auto;
+    margin-right: 1rem;
+}
+
+.interestMovie-title {
+    flex-grow: 1;
+}#interest-movies-pagination .page-link-container {
+     display: flex;
+     justify-content: center;
+     flex-wrap: wrap;
+     gap: 0.5rem;
+     margin-top: 2rem;
+ }
+
+.page-link {
+    padding: .5rem 1rem;
+    background-color: #4a5568;
+    text-decoration: none;
+    color: white;
+    border-radius: .25rem;
+}
+
+.page-link:not(:last-child) {
+    margin-right: 0.5rem;
+}
+
+.page-link:hover {
+    background-color: #2d3748;
+}
