@@ -23,7 +23,7 @@ a {
 body {
     width: 100%;
     overflow-x: hidden;
-    background-color: #111;
+    background-color: black;
 }
 
 body, a {
@@ -92,7 +92,7 @@ header nav .fa:hover {
 }
 
 .nav {
-    background: rgba(0, 0, 0, 0.5); /* 투명한 흰색 배경 */
+    background: rgba(0, 0, 0, 0.45); /* 투명한 흰색 배경 */
     color: #ffffff;
     transition: background .5s;
     backdrop-filter: blur(10px); /* 가우시안 블러 효과 */
@@ -2834,4 +2834,50 @@ div.myTicket .myTicketPagination .active {
 .interest-button:hover {
     background-color: transparent;
     box-shadow: none;
+}
+
+.main-posters .swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.main-posters {
+    color: black;
+}
+
+.main-posters .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-posters .swiper-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main-posters .swiper-slide::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 1), transparent 15%, transparent 85%, rgba(0, 0, 0, 1));
+    pointer-events: none; /* 비네팅 효과에 마우스 이벤트 방지 */
+}
+
+.main-posters .swiper-button-prev, .main-posters .swiper-button-next {
+    color: white;
+}
+
+.main-posters .swiper-pagination-bullet-active {
+    background-color: white;
 }

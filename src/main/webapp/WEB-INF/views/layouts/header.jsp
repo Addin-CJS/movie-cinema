@@ -33,24 +33,28 @@
                 <li data-path="/member/login" onclick="location.href='/member/login'">로그인</li>
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
-                <h4>${loginUser.username}님 환영합니다!</h4>
                 <li data-path="/member/myPage" onclick="location.href='/member/myPage'">마이페이지</li>
-                <li><a href="/logout">로그아웃</a></li>
+                <li><a href="/logout" id="logout">로그아웃</a></li>
             </sec:authorize>
         </ul>
 
     </nav>
 </header>
 <script>
+    //indicator
+    let marker = $('.marker');
+    marker.css('left', localStorage.getItem('markerLeft'));
+    marker.css('width', localStorage.getItem('markerRight'));
+
     $(document).ready(function () {
         //indicator
         let marker = $('.marker');
         let items = $('#menu-box li');
         let currentPath = window.location.pathname;
 
+        initializeIndicator();
+
         function initializeIndicator() {
-            marker.css('left', localStorage.getItem('markerLeft'));
-            marker.css('width', localStorage.getItem('markerRight'));
             items.each(function() {
                 let path = $(this).data("path");
                 if (path && (currentPath === path)) {
@@ -66,8 +70,6 @@
             localStorage.setItem('markerRight', element.offsetWidth);
         }
 
-        initializeIndicator();
-
         //scroll
         let nav = $('nav');
 
@@ -76,12 +78,6 @@
                 nav.addClass('nav');
             } else {
                 nav.removeClass('nav');
-            }
-
-            if ($(this).scrollTop() >= 700) {
-                nav.addClass('navBlack');
-            } else {
-                nav.removeClass('navBlack');
             }
         });
 
@@ -101,6 +97,16 @@
                 a = true;
             }
         });
+
+        // 로그아웃
+        $('#logout').click(function(event) {
+            event.preventDefault(); // 기본 동작 방지
+            let confirmLogout = confirm('로그아웃 하시겠습니까?');
+            if (confirmLogout) {
+                window.location.href = this.href; // 사용자가 '예'를 선택한 경우, 로그아웃
+            }
+        });
+
     });
 
 </script>

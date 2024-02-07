@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
-public class OpenApiService {
+public class TmdbApiService {
     @Autowired
     private MovieRepository movieRepository;
 

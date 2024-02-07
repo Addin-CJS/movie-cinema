@@ -28,7 +28,6 @@
                         </li>
                         <li>
                             <a id="showMyInterestMovies">
-                                <i><img src="/img/icons/film.png" alt="film"></i>
                                 <span>관심 영화</span>
                             </a>
                         </li>
