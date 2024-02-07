@@ -15,7 +15,7 @@
                                 <li id="resetMyPw">
                                     <span>비밀번호 재설정</span>
                                 </li>
-                                <li id="byeMember">
+                                <li id="withdrawMember">
                                     <span>회원 탈퇴</span>
                                 </li>
                             </ul>
@@ -114,6 +114,17 @@
             e.preventDefault();
             $.ajax({
                 url: '/member/resetMyPw',
+                type: 'GET',
+                success: function(data) {
+                    $('.showPage').html(data);
+                }
+            });
+        });
+
+        $("#withdrawMember").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/member/withdrawMember',
                 type: 'GET',
                 success: function(data) {
                     $('.showPage').html(data);

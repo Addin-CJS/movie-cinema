@@ -26,4 +26,6 @@ public interface MemberRepository  extends JpaRepository<Member, Long>{
 
     ObservationFilter findByEmail(String email);
 
+    @Query("SELECT m FROM Member m WHERE m.username = :username AND m.name = :name")
+    Member findMember(@Param("username") String username, @Param("name") String name);
 }
