@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
 
     boolean existsByUsernameAndTypeAndMovieId(String username, Notification.NotificationType type, Long movieId);
+
+    boolean existsByUsernameAndTypeAndReviewId(String username, Notification.NotificationType type, Long reviewId);
     }
 
 

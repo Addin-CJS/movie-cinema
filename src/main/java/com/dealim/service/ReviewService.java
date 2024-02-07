@@ -46,12 +46,12 @@ public class ReviewService {
 
     //좋아요 상태를 바꾸는 메서드 (컨트롤러에서 사용)
     @Transactional
-    public void  changeLikeStatus(Long reviewId, String likeAction, Set<Long> likedReviews, String username) {
+    public void  changeLikeStatus(Long reviewId, String likeAction, Set<Long> likedReviews, String likerUsername) {
         if ("like".equals(likeAction)) {
             updateLikeCount(reviewId, true);//참이면 +1 증가
             likedReviews.add(reviewId);
-
-//            notificationService.createNotification(username, "리뷰에 좋아요가 추가되었습니다: " + reviewId, Notification.NotificationType.LIKE_NOTIFICATION);
+            // "좋아요" 알림 전송
+            notificationService.sendLikeNotification(reviewId, likerUsername);
         } else if ("unlike".equals(likeAction)) {
             updateLikeCount(reviewId, false);//거짓이면 -1 감소
             likedReviews.remove(reviewId);

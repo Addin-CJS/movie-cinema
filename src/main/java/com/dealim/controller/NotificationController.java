@@ -30,53 +30,9 @@ public class NotificationController {
         response.setCharacterEncoding("UTF-8");
         return sseEmitterService.createEmitterForUser(username);
     }
-//
-//    @GetMapping(path = "/notifications/{username}", produces = "text/event-stream")
-//    public SseEmitter sendNotification(@PathVariable String username) {
-//        final SseEmitter emitter = new SseEmitter();
-//        executorService.execute(() -> {
-//            try {
-//
-//                String notificationJson = String.format("{\"message\": \"안녕하세요, %s님. 새로운 알림이 있습니다ㅋㅋ.\", \"type\": \"NEW_MESSAGE\"}", username);
-//                emitter.send(SseEmitter.event().name("notification").data(notificationJson));
-//                emitter.complete();
-//            } catch (Exception e) {
-//                emitter.completeWithError(e);
-//            }
-//        });
-//        return emitter;
-//    }
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-//    private ExecutorService executor = Executors.newCachedThreadPool();
-//
-//    @GetMapping(path = "/notifications/{username}", produces = "text/event-stream")
-//    public SseEmitter handle(@PathVariable String username) {
-//        SseEmitter emitter = new SseEmitter(); // 타임아웃을 무한으로 설정 // 지워야함 테스트 끝나고
-//        executor.execute(() -> {
-//            try {
-//
-//                    emitter.send(SseEmitter.event().name("notification")
-//                        .data("notic."));
-//                        emitter.complete();
-//            } catch (Exception ex) {
-//                emitter.completeWithError(ex);
-//            }
-//        });
-//        return emitter;
-//    }
 }

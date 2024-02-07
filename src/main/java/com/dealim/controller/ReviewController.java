@@ -93,13 +93,6 @@ public class ReviewController {
         String username = userDetails.getUsername();
 
 
-
-//        String username = SecurityUtils.getCurrentUsername();
-//        if (username == null) {
-//            return "fail"; // 사용자 인증 실패
-//        }
-
-
         HttpSession session = request.getSession();
         Set<Long> likedReviews = (Set<Long>) session.getAttribute("likedReviews");
         if (likedReviews == null) {

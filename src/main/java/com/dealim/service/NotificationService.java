@@ -1,7 +1,9 @@
 package com.dealim.service;
 
 import com.dealim.domain.Notification;
+import com.dealim.domain.Review;
 import com.dealim.repository.NotificationRepository;
+import com.dealim.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,9 @@ public class NotificationService {
 
     @Autowired
     private  SseEmitterService sseEmitterService;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     public void sendInterestMovieAddedNotification(String username, Long movieId) {
         System.out.println("sendInterestMovieAddedNotification called with username: " + username + ", movieId: " + movieId); // 로그 추가
@@ -39,35 +44,34 @@ public class NotificationService {
 
         }
     }
+    public void sendLikeNotification(Long reviewId, String likerUsername) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new RuntimeException("리뷰를 찾을 수 없습니다."));
+        String ownerUsername = review.getReviewWriter(); // 리뷰 작성자의 사용자명
+
+        // "좋아요" 알림이 이미 존재하는지 확인
+        if (!notificationRepository.existsByUsernameAndTypeAndReviewId(ownerUsername, Notification.NotificationType.LIKE_NOTIFICATION, reviewId)) {
+            // 새로운 "좋아요" 알림 객체 생성 및 저장
+            Notification notification = Notification.builder()
+                    .username(ownerUsername)
+                    .type(Notification.NotificationType.LIKE_NOTIFICATION)
+                    .reviewId(reviewId)
+                    .isRead(false)
+                    .isSent(true)
+                    .createdDateTime(LocalDateTime.now())
+                    .build();
+            Notification savedNotification = notificationRepository.save(notification);
+
+            // 알림 JSON 생성
+            String notificationJson = String.format("{\"id\": \"%d\", \"message\": \"%s님이 당신의 리뷰 %d에 좋아요를 눌렀습니다.\", \"type\": \"LIKE_NOTIFICATION\"}", savedNotification.getId(), likerUsername, reviewId);
+
+            // 특정 사용자에게 알림 전송
+            sseEmitterService.sendNotification(ownerUsername, notificationJson);
+        }
+    }
 
 
 
 
-//    public void createNotification(String username, String message, Notification.NotificationType type) {
-//        Notification notification = new Notification();
-//        notification.setUsername(username);
-//        notification.setType(type);
-//        notification.setRead(false);
-//        notification.setCreatedDateTime(LocalDateTime.now());
-//        notificationRepository.save(notification);
-//    }
-//    public void sendInterestMovieAddedNotification(String username, Long movieId) {
-//
-//        boolean alreadyExists = notificationRepository.existsByUsernameAndTypeAndMovieId(username, Notification.NotificationType.INTEREST_MOVIE_ADDED, movieId);
-//        if (!alreadyExists) {
-//            Notification notification = new Notification();
-//            notification.setUsername(username);
-//            notification.setType(Notification.NotificationType.INTEREST_MOVIE_ADDED);
-//            notification.setMovieId(movieId);
-//            notification.setRead(false);
-//            notification.setSent(true);
-//            notification.setCreatedDateTime(LocalDateTime.now());
-//            Notification savedNotification = notificationRepository.save(notification);
-//
-//            // 고유 ID를 포함한 알림 데이터 생성
-//            String notificationJson = String.format("{\"id\": \"%d\", \"message\": \"안녕하세요, %s님. 관심 영화 '%d'가 추가되었습니다.\", \"type\": \"INTEREST_MOVIE_ADDED\"}", savedNotification.getId(), username, movieId);
-//
-//        }
-//    }
 
 }

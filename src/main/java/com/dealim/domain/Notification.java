@@ -29,7 +29,8 @@ public class Notification {
 
     private LocalDateTime createdDateTime = LocalDateTime.now();
     private Long movieId;
-
+    @Column(name = "review_id")
+    private Long reviewId;
 
     public enum NotificationType {
         INTEREST_MOVIE_ADDED,
