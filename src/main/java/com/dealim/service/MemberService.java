@@ -4,6 +4,7 @@ import com.dealim.domain.Member;
 import com.dealim.dto.MyPageMember;
 import com.dealim.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,6 +14,9 @@ import java.util.Optional;
 public class MemberService {
     @Autowired
     MemberRepository memberRepository;
+
+    @Autowired
+    PasswordEncoder pEncoder;
 
 
     public Member insertMember(Member member) {
@@ -58,4 +62,36 @@ public class MemberService {
         return findMemberForRestPw;
     }
 
+    public boolean findMemberForWithdraw(String username, String name, String password) {
+        Member findMemberForWithdraw = memberRepository.findMember(username, name);
+        if (findMemberForWithdraw != null) {
+            // 비밀번호 검증
+            boolean matches = pEncoder.matches(password, findMemberForWithdraw.getPassword());
+            return matches;
+        }
+        return false;
+    }
+
+    public boolean withdrawMemberOk(String username, String password) {
+        Optional<Member> optionalMember = memberRepository.findByUsername(username);
+        System.out.println("옵셔널멤버" + optionalMember);
+        if (optionalMember.isPresent()) {
+            Member member = optionalMember.get();
+
+            boolean matches = pEncoder.matches(password, member.getPassword());
+
+            if (matches) {
+                member.setIsWithdrawn('Y');
+                member.setMemberId(member.getMemberId());
+                member.setUsername(member.getUsername());
+                member.setName(member.getName());
+                member.setEmail(member.getEmail());
+                member.setPhoneNumber(member.getPhoneNumber());
+                member.setHomeAddress(member.getHomeAddress());
+                memberRepository.save(member);
+                return true;
+            }
+        }
+        return false;
+    }
 }

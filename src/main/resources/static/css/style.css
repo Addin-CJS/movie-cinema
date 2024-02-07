@@ -1351,6 +1351,85 @@ section .resetMyPw button {
     font-size:11px;
 }
 
+/*회원 탈퇴*/
+section.withdraw {
+    width:100%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+section.withdraw h3{
+    margin: 20px;
+}
+
+#withdrawForm {
+    margin:15px 0;
+}
+
+.withdrawInfo{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 300px;
+}
+
+.withdrawWrap{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#withdrawForm label {
+    width: 15%;
+    text-align: left;
+}
+
+#withdrawForm div {
+    flex: 1;
+    text-align: left;
+}
+
+#withdrawForm input {
+    width: 100%;
+    background: none;
+    color: white;
+    outline: none;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 13px;
+    height: 40px;
+}
+
+#checkMemberResult {
+    font-size: 0.8em;
+    margin: auto;
+}
+
+section #withdrawForm button {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    background: #DB0000;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#withdrawForm input::placeholder{
+    color:white;
+    font-size:11px;
+}
+
 
 /* 회원가입 */
 section .register {
