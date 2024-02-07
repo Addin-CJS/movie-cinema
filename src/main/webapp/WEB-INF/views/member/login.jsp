@@ -9,13 +9,15 @@
                 <li class="loginInput">
                     <input name="username" class="form-control" id="userId" placeholder="아이디를 입력해주세요">
                 </li>
-                <c:if test="${param.error == 'true'}">
-                    ${SPRING_SECURITY_LAST_EXCEPTION}
-                </c:if>
                 <li class="loginInput">
                     <input type="password" name="password" class="form-control" id="password"
                            placeholder="비밀번호를 입력해주세요">
                 </li>
+                <c:if test="${param.error == 'true'}">
+                    <div class="error-text">
+                        ${SPRING_SECURITY_LAST_EXCEPTION}
+                    </div>
+                </c:if>
                 <c:if test="${not empty loginError}">
                     <div class="error-text">${loginError}</div>
                 </c:if>
