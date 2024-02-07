@@ -3,34 +3,26 @@
 
 <section>
         <div class="resetMyPw">
-            <h3>비밀번호 재설정</h3>
+            <h2>비밀번호 재설정</h2>
             <sec:authentication var="loginUser" property="principal.member"/>
             <form action="resetMyPw" method="post" id="resetMyPwForm">
-                <table>
-                     <tr>
-                        <th><label for="password">PW</label></th>
-                        <td>
-                            <div>
-                                <input type="password" name="password" id="password" placeholder="영문, 숫자, 영문자 포함 8~12글자"  maxlength="12">
-                                 <div id="checkPwResult1" style="font-size: 0.8em; display: none;"></div>
-                            </div>
-                        </td>
-                     </tr>
-                      <tr>
-                         <th><label for="password">PW 확인</label></th>
-                         <td>
-                             <div>
-                                 <input type="password" id="passwordCheck" placeholder="비밀번호를 한번 더 입력해주세요."  maxlength="12">
-                                  <div id="checkPwResult2" style="font-size: 0.8em; display: none;"></div>
-                             </div>
-                         </td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">
-                             <button type="submit">재설정</button>
-                        </td>
-                      </tr>
-                </table>
+                <div class="resetMyPwWrap">
+                    <label for="password">PW</label>
+                    <div>
+                        <input type="password" name="password" id="password" placeholder="영문, 숫자, 영문자 포함 8~12글자"  maxlength="12">
+                        <div id="checkPwResult1" style="font-size: 0.8em; display: none;"></div>
+                    </div>
+                 </div>
+                <div class="resetMyPwWrap">
+                    <label for="password">PW 확인</label>
+                    <div>
+                        <input type="password" id="passwordCheck" placeholder="비밀번호를 한번 더 입력해주세요."  maxlength="12">
+                        <div id="checkPwResult2" style="font-size: 0.8em; display: none;"></div>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit">재설정</button>
+                </div>
                 <input type="hidden" name="memberId" value="${loginUser.memberId}">
                 <input type="hidden" name="username" value="${loginUser.username}">
                 <input type="hidden" name="name" value="${loginUser.name}">

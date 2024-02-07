@@ -7,34 +7,27 @@
                 <aside>
                     <ul>
                         <li id="showMyInfo" onclick="showSubMenu('myInfo');">
-                            <i><img src="/img/icons/man.png" alt="people"></i>
                                 <span>개인 정보</span>
-                            <ul id="myInfo" style="display: none">
+                            <ul id="myInfo"style="display: none">
                                 <li id="myInfoEdit">
-                                    <i><img src="/img/icons/edit.png" alt="edit"></i>
                                     <span>내 정보 수정</span>
                                 </li>
                                 <li id="resetMyPw">
-                                    <i><img src="/img/icons/locked.png" alt="locked"></i>
                                     <span>비밀번호 재설정</span>
                                 </li>
-                                <li>
-                                    <i><img src="/img/icons/out.png" alt="out"></i>
+                                <li id="withdrawMember">
                                     <span>회원 탈퇴</span>
                                 </li>
                             </ul>
                         </li>
                         <li id="showMyTickets">
-                                <i><img src="/img/icons/tickets.png" alt="tickets"></i>
                                 <span>예매 내역 조회</span>
                         </li>
                         <li id="showMyReviews">
-                                <i><img src="/img/icons/comments.png" alt="comments"></i>
                                 <span>리뷰 보기</span>
                         </li>
                         <li>
                             <a id="showMyInterestMovies">
-                                <i><img src="/img/icons/film.png" alt="film"></i>
                                 <span>관심 영화</span>
                             </a>
                         </li>
@@ -128,7 +121,16 @@
             });
         });
 
-
+        $("#withdrawMember").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/member/withdrawMember',
+                type: 'GET',
+                success: function(data) {
+                    $('.showPage').html(data);
+                }
+            });
+        });
 
         $("#showMyInterestMovies").click(function(e) {
             e.preventDefault();

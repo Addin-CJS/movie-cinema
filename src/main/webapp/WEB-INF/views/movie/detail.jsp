@@ -88,14 +88,12 @@
                 </ul>
             </div>
         </div>
-        <c:choose>
-            <c:when test="${not empty loginUser}">
-                <button class="movie-btns" type="button" onclick="selectSeat()">좌석선택</button>
-            </c:when>
-            <c:otherwise>
-                <button class="off-btns" type="button" onclick="location.href='/member/login'">로그인 해주세요</button>
-            </c:otherwise>
-        </c:choose>
+        <sec:authorize access="isAuthenticated()">
+            <button class="movie-btns" type="button" onclick="selectSeat()">좌석선택</button>
+        </sec:authorize>
+        <sec:authorize access="isAnonymous()">
+            <button class="off-btns" type="button" onclick="location.href='/member/login'">로그인 해주세요</button>
+        </sec:authorize>
     </div>
 </section>
 
@@ -226,16 +224,13 @@
                     $(this).parent().addClass('on');
                 }
             });
-            console.log(theaterList);
             theaterList.each(function () {
                 console.log($(this).text(), localStorage.getItem("selectedTheater"));
                 if ($(this).text() == localStorage.getItem("selectedTheater")) {
                     $(this).parent().addClass('on');
                 }
             });
-
         };
-
     });
 
     // 중앙에 위치 시키기
@@ -355,8 +350,6 @@
             window.location.href = "/member/login";
         }
     }
-
-
 
 </script>
 

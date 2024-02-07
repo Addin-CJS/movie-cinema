@@ -2,9 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-
-
-<!----filter-search-box ---->
 <div class="movie-card-section">
     <c:forEach var="movie" items="${movieList.content}">
         <div class="card">
@@ -22,10 +19,3 @@
         </div>
     </c:forEach>
 </div>
-
-
-<script>
-
-</script>
-
-

@@ -1,6 +1,7 @@
 package com.dealim.repository;
 
 import com.dealim.domain.Member;
+import io.micrometer.observation.ObservationFilter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,4 +23,9 @@ public interface MemberRepository  extends JpaRepository<Member, Long>{
     Member findByUserNameAndNameAndPhoneNumber(String username, String name, String phoneNumber);
 
     List<Member> findByMemberIdIn(List<Long> memberIdsList);
+
+    ObservationFilter findByEmail(String email);
+
+    @Query("SELECT m FROM Member m WHERE m.username = :username AND m.name = :name")
+    Member findMember(@Param("username") String username, @Param("name") String name);
 }

@@ -8,27 +8,26 @@
 
 <section>
     <div class="myPageEdit">
-        <h3>내 정보 수정</h3>
+        <h2>내 정보 수정</h2>
         <sec:authentication var="me" property="principal.member"/>
-
         <form action="myPageEdit" method="post" id="myPageEditForm">
-            <table>
-                <tr>
-                    <th><label for="username">ID</label></th>
-                    <td>
-                        <input name="username" id="username" value="${me.username}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label for="name">NAME</label></th>
-                    <td>
-                        <input name="name" id="name" value="${me.name}">
-                        <div id="checkNameResult" style="font-size: 0.8em; display: none;"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label>EMAIL</label></th>
-                    <td>
+            <div class="myPageEditForm">
+                <div class="myPagEditInfo">
+                    <div class="wrap">
+                        <label for="username">ID</label>
+                        <div>
+                            <input name="username" id="username" value="${me.username}" readonly>
+                        </div>
+                    </div>
+                    <div class="wrap">
+                        <label for="name">NAME</label>
+                        <div>
+                            <input name="name" id="name" value="${me.name}">
+                        </div>
+                    </div>
+                    <div id="checkNameResult" style="font-size: 0.8em; display: none;"></div>
+                    <div class="wrap">
+                        <label>EMAIL</label>
                         <div id="emailField">
                             <input id="emailId" required><span id="middle">@</span><input id="emailAddress">
                             <select class="form-select" aria-label="Default select example" id="emailOption"
@@ -40,36 +39,29 @@
                                 <option value="@apple.com">apple.com</option>
                             </select>
                             <input type="hidden" id="totalEmail" name="email" value="">
-                            <div id="checkEmailResult" style="font-size: 0.8em; display: none;"></div>
                         </div>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th><label for="phoneNumber">PHONE</label></th>
-                    <td>
-                        <input name="phoneNumber" id="phoneNumber" value="${me.phoneNumber}" >
-                        <div id="checkPhoneResult" style="font-size: 0.8em; display: none;"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label for="kakaoAddress">ADDRESS</label></th>
-                    <td>
+                    </div>
+                    <div id="checkEmailResult" style="font-size: 0.8em; display: none;"></div>
+                    <div class="wrap">
+                        <label for="phoneNumber">PHONE</label>
+                        <div>
+                            <input name="phoneNumber" id="phoneNumber" value="${me.phoneNumber}" >
+                        </div>
+                    </div>
+                    <div id="checkPhoneResult" style="font-size: 0.8em; display: none;"></div>
+                    <div class="wrap">
+                        <label for="kakaoAddress">ADDRESS</label>
                         <div id=addressField>
-                            <input type="text" name="homeAddress" id="kakaoAddress" value="${me.homeAddress}">
-                            <input type="button" value="주소 검색" onclick="findAddr();">
-                            <div id="checkAddressResult" style="font-size: 0.8em; display: none;"></div>
+                                <input type="text" name="homeAddress" id="kakaoAddress" value="${me.homeAddress}">
+                                <input type="button" value="주소 검색" onclick="findAddr();">
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div id=btnField>
-                            <button type="submit">수정</button>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                    <div id="checkAddressResult" style="font-size: 0.8em; display: none;"></div>
+                </div>
+            </div>
+            <div id=btnField>
+                <button type="submit">수정</button>
+            </div>
             <input type="hidden" name="password" value="${me.password}">
         </form>
     </div>

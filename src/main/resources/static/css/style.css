@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     transition: all .2s;
+    font-family: "Roboto", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -22,7 +23,7 @@ a {
 body {
     width: 100%;
     overflow-x: hidden;
-    background-color: #111;
+    background-color: black;
 }
 
 body, a {
@@ -31,6 +32,7 @@ body, a {
     /*letter-spacing: 0.03em;*/
     font-style: normal;
     color: #fff;
+    font-family: "Roboto", sans-serif;
 }
 
 header {
@@ -90,17 +92,14 @@ header nav .fa:hover {
 }
 
 .nav {
-    background: #fff;
-    color: #000;
+    background: rgba(0, 0, 0, 0.45); /* 투명한 흰색 배경 */
+    color: #ffffff;
     transition: background .5s;
-}
-
-.nav .logo a {
-    color: #000;
+    backdrop-filter: blur(10px); /* 가우시안 블러 효과 */
 }
 
 .navBlack {
-    background: #000;
+    background: #000000;
     color: #fff;
     transition: background .5s;
 }
@@ -124,7 +123,6 @@ header nav ul .marker {
     height: 2px;
     position: absolute;
     bottom: -5px;
-    left: 0;
     border-radius: 20px;
 }
 
@@ -360,9 +358,16 @@ section .movie-ticket-book button:hover {
     color: #000000;
 }
 
-section .filter-search-box {
-    background: #111;
+section .filters-box {
     display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+section .filter-search-box {
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: 20px 100px;
@@ -370,23 +375,20 @@ section .filter-search-box {
     position: relative;
 }
 
-section .filter-search-box .filters-box {
+section .filter-search-box .filter-box {
     display: flex;
     gap: 50px;
     color: #fff;
 }
 
 
-section .filter-search-box .filters-box .filters {
+section .filter-search-box .filter-box .filters {
     cursor: pointer;
 }
 
 
 section .filter-search-box .search-bar {
-    position: absolute;
-    bottom: 0;
-    left: 100px;
-    width: 83%;
+    width: 100%;
     height: 2px;
     background: #fff;
     border-radius: 50px;
@@ -427,7 +429,6 @@ section .filter-search-box .search-filters input {
 
 
 section .movie-card-section {
-    background: #111;
     padding: 20px 100px;
     width: 100%;
     display: grid;
@@ -479,7 +480,6 @@ section .movie-card-section .card .card-content .movie-info .d3 {
 section .pagination {
     width: 100%;
     text-align: center;
-    background: #111;
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -496,11 +496,13 @@ section .pagination a {
 }
 
 section .pagination a:hover {
-    background-color: #FFA500;
+    background-color: white;
+    color:black;
 }
 
 section .pagination .active {
-    background-color: #FFA500;
+    background-color: white;
+    color:black;
     font-weight: bold;
 }
 
@@ -1042,52 +1044,99 @@ body.modal-active .overlay {
 
 section .login {
     text-align: center;
-    padding: 20px;
+    padding: 20px 0 0;
     height: 100%;
 }
 
-section .login h3 {
-    margin: 30px;
+section .login h2 {
+    margin: 20px;
+}
+.loginInfo{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
-section .login table {
-    margin: 0 auto;
+.login form li{list-style-type: none;}
+
+.login form{
+    width:300px;
+    align-items: center;
+}
+
+.login form .loginInput{
+    width:100%;
+    height:50px;
+    margin:15px 0;
+}
+
+.loginInput input{
+    width:100%;
+    height:100%;
+background: transparent !important;
+    color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding:20px;
+}
+.loginInput input::placeholder{
+    color:white;
+    font-size:11px;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-transition: background-color 9999s ease-out;
+    -webkit-box-shadow: none !important;
+    -webkit-text-fill-color: #fff !important;
+}
+
+.loginBtns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginBtn1 {
     width: 300px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
 }
 
-section .login th {
-    color: white;
-    width: 50px;
-}
+.loginBtn2 {
+    width: 300px;
+    display:flex;
+    justify-content: space-evenly;
 
-section .login td {
-    color: white;
-}
-
-section .login td input {
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
-    padding-left: 10px;
 }
 
 section .login button {
-    margin-top: 10px;
-    width: 145px;
-    height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 
 #findIdAndPw {
     text-align: center;
-    margin-top: 10px;
     padding: 20px;
-    height: 100%;
+    height: 50px;
+    font-size: 18px;
 }
 
 #findIdAndPw a {
@@ -1104,45 +1153,65 @@ section .login button {
 
 /* 아이디 찾기 */
 section .findId {
-    text-align: center;
-    padding: 20px;
+    width:100%;
     height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
-section .findId h3 {
+.findId form{
+    width:300px;
+    margin:15px 0;
+}
+
+section .findId h2 {
     margin: 30px;
 }
 
-section .findId table {
-    margin: 0 auto;
+.findIdInfo{
+    display: flex;
+    flex-direction: column;
     width: 300px;
 }
 
-section .findId th {
-    color: white;
-    width: 50px;
+.findIdInput{
+    width:100%;
+    height:40px;
+    margin-bottom: 20px;
 }
 
-section .findId td {
+section .findIdInput input {
+    width:100%;
+    height:100%;
+    background: none;
     color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding:10px;
 }
 
-section .findId td input {
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
-    padding-left: 10px;
+.findIdInput input::placeholder{
+    color:white;
+    font-size:11px;
 }
 
 section .findId button {
-    margin-top: 10px;
     width: 100%;
-    height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 #findIdResult {
@@ -1150,126 +1219,266 @@ section .findId button {
     padding: 10px;
 }
 
-/* 비밀번호 재생성 */
+/* 비밀번호 재설정 */
 section .resetPw {
-    text-align: center;
-    padding: 20px;
+    width:100%;
     height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
-section .resetPw h3 {
-    margin: 30px;
+section .resetPw h2 {
+    margin: 20px;
 }
 
-section .resetPw table {
-    margin: 0 auto;
+.resetPw form, #resetPwForm{
+    width:300px;
+    margin:15px 0;
+}
+
+.resetPwInfo{
+    display: flex;
+    flex-direction: column;
     width: 300px;
 }
 
-section .resetPw th {
-    color: white;
-    width: 70px;
+.resetPwInput{
+    width:100%;
+    height:40px;
+    margin-bottom: 20px;
 }
 
-section .resetPw td {
+section .resetPwInput input {
+    width:100%;
+    height:100%;
+    background: none;
     color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding:10px;
 }
 
-section .resetPw td input {
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
-    padding-left: 10px;
+.resetPwInput input::placeholder{
+    color:white;
+    font-size:11px;
 }
 
 section .resetPw button {
-    margin-top: 10px;
     width: 100%;
-    height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 /*회원 비밀번호 재설정*/
 section .resetMyPw {
-    text-align: center;
-    padding: 20px;
+    width:100%;
     height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
-section .resetMyPw h3 {
-    margin: 30px;
+section .resetMyPw h2 {
+    margin: 20px;
 }
 
-section .resetMyPw table {
+#resetMyPwForm{
+    width:300px;
+    margin:15px 0;
+}
+
+.resetMyPwWrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+#resetMyPwForm label{
+    width: 25%;
+    text-align: left;
+}
+#resetMyPwForm div{
+    flex: 1;
+}
+
+
+
+section .resetMyPw #resetMyPwForm input {
+    width: 100%;
+    background: none;
+    color: white;
+    outline: none;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 13px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+section .resetMyPw button {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    background: #DB0000;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.resetMyPwForm input::placeholder{
+    color:white;
+    font-size:11px;
+}
+
+/*회원 탈퇴*/
+section.withdraw {
+    width:100%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+section.withdraw h3{
+    margin: 20px;
+}
+
+#withdrawForm {
+    margin:15px 0;
+}
+
+.withdrawInfo{
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
     width: 300px;
 }
 
-section .resetMyPw th {
-    color: white;
-    width: 70px;
+.withdrawWrap{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-section .resetMyPw td {
-    color: white;
+#withdrawForm label {
+    width: 15%;
+    text-align: left;
 }
 
-section .resetMyPw td input {
+#withdrawForm div {
+    flex: 1;
+    text-align: left;
+}
+
+#withdrawForm input {
     width: 100%;
-    height: 40px;
-    border-radius: 10px;
+    background: none;
+    color: white;
+    outline: none;
+    border: 2px solid white;
+    border-radius: 5px;
     padding-left: 10px;
+    font-size: 13px;
+    height: 40px;
 }
 
-section .resetMyPw button {
-    margin-top: 10px;
+#checkMemberResult {
+    font-size: 0.8em;
+    margin: auto;
+}
+
+section #withdrawForm button {
     width: 100%;
-    height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#withdrawForm input::placeholder{
+    color:white;
+    font-size:11px;
 }
 
 
 /* 회원가입 */
-
 section .register {
     text-align: center;
-    padding: 20px;
     height: 100%;
 }
 
-section .register h3 {
-    margin: 30px;
+section .register h2 {
+    margin: 20px;
 }
 
-section .register table {
-    margin: 0 auto;
-    width: 500px;
+.registerForm {
+    display: flex;
+    justify-content: center;
 }
 
-section .register th {
+.registerInfo .registerWrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.registerForm .registerInfo div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.registerForm .registerInfo .registerWrap label{
+    width: 15%;
+    text-align: left;
+}
+.registerForm .registerInfo .registerWrap div{
+    flex: 1;
+}
+
+
+section .register .registerInfo input {
+    width:100%;
+    background: none;
     color: white;
-}
-
-section .register td {
-    color: white;
-    width: 100%;
-}
-
-section .register td input {
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
     padding-left: 10px;
+    font-size:13px;
+    height: 40px;
 }
-
 
 section .register #emailField,
 section .register #addressField {
@@ -1277,6 +1486,20 @@ section .register #addressField {
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+    margin-bottom: 5px;
+}
+
+section .register #emailField input,
+section .register #addressField input, #phoneNumber{
+    width:100%;
+    background: none;
+    color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size:13px;
+    height: 40px;
 }
 
 section .register #emailField select {
@@ -1308,20 +1531,41 @@ section .register #emailAddress:disabled {
 
 
 section .register #addressField input[type="button"] {
-    width: 130px;
+    width: 120px;
+    height:40px;
+    background-color: white;
+    color:black;
+    align-items: center;
     padding-right: 10px;
 }
+.registerBtn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
 
-section .register button {
-    margin-top: 10px;
-    width: 243px;
-    height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+section .register .registerBtn button {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.register #checkIdResult, .register #checkPwResult,
+.register #checkNameResult, .register #checkEmailResult,
+.register #checkPhoneResult, .register #checkAddressResult {
+    margin-bottom: 10px;
+    text-align: left;
+    margin-left: 80px;
 }
 
 /* 리뷰 */
@@ -1341,7 +1585,7 @@ section .register button {
     border-radius: 5px;
 }
 
-.reviewList button {
+.reviewList .review-btn {
     width: 200px;
     border: none;
     outline: none;
@@ -1372,15 +1616,19 @@ section .register button {
 
 
 .reviewList button {
-    flex-grow: 1;
-    margin-top: 10px;
-    height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+    width: 200px;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    font-size: 1em;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding: 10px 10px;
 }
 
 .review-content {
@@ -1402,7 +1650,7 @@ div.review .pagination a {
     display: inline-block;
     padding: 5px 10px;
     margin: 0 5px;
-    background-color: #DB0000;
+    background-color: red;
     color: #fff;
     border-radius: 20px;
     font-size: 16px;
@@ -1410,11 +1658,13 @@ div.review .pagination a {
 }
 
 div.review .pagination a:hover {
-    background-color: #FFA500;
+    background-color: white;
+    color:red;
 }
 
 div.review .pagination .active {
-    background-color: #FFA500;
+    background-color: white;
+    color:red;
     font-weight: bold;
 }
 
@@ -1674,7 +1924,7 @@ section .slider-wrap img {
     }
 
 
-    section .filter-search-box .filters-box {
+    section .filter-search-box .filter-box {
         gap: 10px;
     }
 
@@ -1770,7 +2020,7 @@ section .slider-wrap img {
         padding: 20px 20px;
     }
 
-    section .filter-search-box .filters-box {
+    section .filter-search-box .filter-box {
         gap: 10px;
     }
 
@@ -1860,49 +2110,58 @@ section .slider-wrap img {
 /*end of 카테고리 css*/
 
 /*마이페이지*/
-
 section .myPage {
     text-align: center;
     height: 100%;
-    padding: 20px;
 }
 
-section .myPage h3 {
-    margin: 30px;
+section .myPage h2 {
+    margin: 20px;
 }
 
-section .myPage table {
-    margin: 0 auto;
-    width: 500px;
+.myPageForm{
+    display: flex;
 }
 
-section .myPage th {
-    color: white;
+#myPageForm {
+    display: flex;
+    justify-content: center;
+    height: 100%;
 }
 
-section .myPage td {
-    color: white;
-    width: 100%;
-}
-
-section .myPage td input {
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
-    padding-left: 10px;
-}
-
-section .myPage button {
+.myPageTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100px;
+    height: 230px;
     margin-top: 10px;
-    width: 100%;
-    height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
-    cursor: pointer;
-    text-align: center;
 }
+.myPageTitle div{
+    height: 40px;
+    width: 100px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+section .myPage .myPageInfo {
+    width: 400px;
+}
+
+section .myPage .myPageInfo input {
+    width:100%;
+    background: none;
+    color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size:13px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
 
 /*스와이프*/
 
@@ -1952,57 +2211,120 @@ section .myPage button {
 }
 
 /* 마이페이지 수정 */
-
 section .myPageEdit {
-    background-color: black;
-    color: white;
+    display: flex;
+    align-items: center;
+    height: 100vh;
     text-align: center;
-    padding: 70px;
-    height: 100%;
+    flex-direction: column;
 }
 
-section .myPageEdit h3 {
-    margin: 30px;
+section .myPageEdit h2 {
+    margin: 20px;
 }
 
-section .myPageEdit table {
-    margin: 0 auto;
+#myPageEditForm{
     width: 500px;
 }
 
-section .myPageEdit th {
-    color: white;
-}
-
-section .myPageEdit td {
-    color: white;
-    width: 100%;
-}
-
-section .myPageEdit td input {
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
-    padding-left: 10px;
-}
-
-section .myPageEdit td #btnField {
+.myPageEditForm{
     display: flex;
     justify-content: center;
+}
+
+.myPageEditInfo div input {
+    width:100%;
+    background: none;
+    color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size:13px;
+    height: 40px;
+}
+
+.myPagEditInfo .wrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.myPagEditInfo .wrap > div{
+    flex: 1;
+}
+.myPagEditInfo .wrap label{
+    width: 15%;
+    text-align: left;
+}
+
+.myPageEdit #emailField,
+.myPageEdit #addressField {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     gap: 10px;
 }
 
-
-section .myPageEdit button {
-    flex-grow: 1;
-    margin-top: 10px;
+.myPageEditForm input {
+    width:100%;
+    background: none;
+    color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size:13px;
     height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+}
+
+.myPageEdit #emailField select {
+    border-radius: 5px;
+    height: 40px;
+}
+
+.myPageEdit #emailField option {
+    border-radius: 5px;
+}
+
+.myPageEdit #emailId,
+.myPageEdit #emailAddress,
+.myPageEdit #kakaoAddress {
+    flex-grow: 1;
+}
+
+.myPageEdit #emailOption {
+    flex-shrink: 0;
+    min-width: 100px;
+}
+
+.myPageEdit #emailAddress:disabled {
+    color: black;
+    background-color: white;
+}
+
+.myPageEdit #addressField input[type="button"] {
+    width: 120px;
+    height:40px;
+    background-color: white;
+    color:black;
+    align-items: center;
+    padding-right: 10px;
+}
+
+ #btnField button{
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 section .myPageEdit #emailField,
@@ -2048,6 +2370,13 @@ section .myPageEdit #addressField input[type="button"] {
     flex-shrink: 0;
     width: 120px;
     padding-right: 10px;
+}
+
+.myPageEdit #checkNameResult, .myPageEdit #checkEmailResult,
+.myPageEdit #checkPhoneResult, .myPageEdit #checkAddressResult {
+    margin-bottom: 10px;
+    text-align: left;
+    margin-left: 80px;
 }
 
 /*별점*/
@@ -2149,7 +2478,7 @@ section .myPageEdit #addressField input[type="button"] {
     color: gray;
 }
 
-
+/*마이페이지*/
 section.showMyPage {
     display: flex;
     justify-content: flex-start;
@@ -2158,7 +2487,7 @@ section.showMyPage {
 }
 
 section.showMyPage h3 {
-    margin: 20px;
+    margin: 30px;
     font-weight: bold;
     text-align: center;
 }
@@ -2167,30 +2496,69 @@ section.showMyPage ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 section.showMyPage .myPage-navbar {
     width: 20%;
-    background: #767676;
     margin: 0 auto;
     text-align: left;
+    border-right: 2px solid white;
 }
 
-section.showMyPage .myPage-navbar #myInfo {
-    background: #19aae1;
+section.showMyPage .myPage-navbar ul li {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px 0;
+    cursor: pointer;
+    border-top: 1px solid #555;
 }
 
-section.showMyPage .myPage-navbar li {
-    margin: 20px;
+section.showMyPage .myPage-navbar ul li i,
+section.showMyPage .myPage-navbar ul li span {
+    margin-right: 10px;
 }
 
-section.showMyPage .myPage-navbar span:hover {
-    color: rebeccapurple;
+section.showMyPage .myPage-navbar ul li span {
+    flex-grow: 1;
+}
+
+section.showMyPage .myPage-navbar ul li:hover > span {
+    color: #DB0000;
 }
 
 section.showMyPage .showPage {
     width: 80%;
 }
+
+/* 하위 메뉴 스타일 조정 */
+
+section.showMyPage .myPage-navbar ul li ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+}
+
+section.showMyPage .myPage-navbar ul li ul li {
+    padding: 10px 0;
+    border-top: none;
+}
+
+section.showMyPage .myPage-navbar #myInfoEdit:hover span {
+    color: lightcoral;
+}
+section.showMyPage .myPage-navbar #resetMyPw:hover span {
+    color: lightcoral;
+}
+section.showMyPage .myPage-navbar #byeMember:hover span {
+    color: lightcoral;
+}
+
+
 
 /* 나의 리뷰 */
 .myReviewList {
@@ -2232,10 +2600,8 @@ div.myReview .myReviewPagination .active {
 }
 
 /* 나의 예매 내역 */
-.myTicketList {
-    text-align: center;
-    padding: 30px;
-    width: 100%;
+.myTicket {
+    height: 100%;
 }
 
 .myTicketList #myTicketTitle {
@@ -2263,7 +2629,6 @@ div.myTicket .myTicketPagination .active {
     font-weight: bold;
 }
 
-/*나의 예매 내역*/
 .myTicket h1 {
     text-align: center;
     margin-top: 20px;
@@ -2272,7 +2637,6 @@ div.myTicket .myTicketPagination .active {
 .myTicketList {
     max-width: 1000px;
     margin: 0 auto;
-    border: 2px solid black;
 }
 
 .ticketHeader {
@@ -2359,18 +2723,37 @@ div.myTicket .myTicketPagination .active {
     font-weight: bold;
     text-align: center;
     margin: 20px;
+    font-size: 24px;
+    margin-bottom: 40px;
 }
 
 .movie-chartList {
     display: flex;
-    margin-left: 30px;
+    padding:0 30px;
 }
 .movie-chartList .chartList {
     width: 100%;
+    position: relative;
 }
+.movie-chartList .chartList a {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    padding:0 10px;
+    position: relative;
 
+}
+.movie-chartList .chartList .movierank {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    font-size:42px;
+    font-weight: 500;
+    color: #fff;
+    font-style: italic;
+}
 .movie-chartList .chartList img{
-        width: 80%;
+    width: 100%;
         object-fit: cover;
         border-radius: 10px;
         box-shadow: 0 0 30px #000;
@@ -2378,26 +2761,32 @@ div.myTicket .myTicketPagination .active {
 
 .movie-chartList .chartList p {
     text-align: center;
-    width: 80%;
+    margin-top: 10px;
+    padding: 0 10px;
+    word-break: keep-all;
 }
 
 .bottom-section{
     display: flex;
     width: 100%;
+    margin: 20px 0px;
     margin: 30px 0px;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0;
 }
 
 .best-review{
     width: 52%;
-    background-color: aliceblue;
-    color: #007bff;
-    border-radius: 20px;
 }
-.best-review h4{
+.best-review h4 {
     font-weight: bold;
     text-align: center;
-    margin: 20px;
-
+    font-size: 26px;
+    margin-bottom: 40px;
+}
+.best_review_slide {
+    height: 330px;
 }
 
 .nothing{
@@ -2421,16 +2810,22 @@ div.myTicket .myTicketPagination .active {
 
 .bestReviewWriter {
     width: 10%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .bestReviewContent {
     width: 80%;
     white-space: normal;
+    color: #eee;
 }
-
+.bestReviewItem {
+    color: rgba(255,255,255,0.6);
+}
 .bestReviewContent a{
-    color: #007bff;
     width: 70%;
+    color: #fff;
 }
 
 .bestReviewCreateReviewDate {
@@ -2519,4 +2914,50 @@ div.myTicket .myTicketPagination .active {
 .interest-button:hover {
     background-color: transparent;
     box-shadow: none;
+}
+
+.main-posters .swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.main-posters {
+    color: black;
+}
+
+.main-posters .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-posters .swiper-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main-posters .swiper-slide::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 1), transparent 15%, transparent 85%, rgba(0, 0, 0, 1));
+    pointer-events: none; /* 비네팅 효과에 마우스 이벤트 방지 */
+}
+
+.main-posters .swiper-button-prev, .main-posters .swiper-button-next {
+    color: white;
+}
+
+.main-posters .swiper-pagination-bullet-active {
+    background-color: white;
 }

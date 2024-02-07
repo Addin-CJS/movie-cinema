@@ -3,76 +3,52 @@
 
 <section>
         <div class="resetPw">
-            <h3>비밀번호 재설정</h3>
+            <h2>비밀번호 재설정</h2>
             <form action="checkForResetPw" method="post" id="checkForResetPwForm">
-                <table>
-                    <tr>
-                        <th><label for="username">ID</label></th>
-                        <td>
-                            <div>
-                                <input name="username" id="username" class="form-control" placeholder="아이디" type="text">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><label for="name">NAME</label></th>
-                        <td>
-                            <div>
-                                <input name="name" id="name" class="form-control" placeholder="이름" type="text">
-                            </div>
-                        </td>
-                    </tr>
-                     <tr>
-                         <th><label for="phoneNumber">PHONE</label></th>
-                         <td>
-                            <input name="phoneNumber" id="phoneNumber" class="form-control" placeholder="전화번호" type="text" maxlength="11">
-                         </td>
-                     </tr>
-                     <tr>
-                        <td colspan="2">
+                <div class="resetPwInfo">
+                    <li class="resetPwInput">
+                        <input name="username" id="username" class="form-control" placeholder="아이디" type="text">
+                    </li>
+                    <li class="resetPwInput">
+                        <input name="name" id="name" class="form-control" placeholder="이름" type="text">
+                    </li>
+                     <li class="resetPwInput">
+                        <input name="phoneNumber" id="phoneNumber" class="form-control" placeholder="전화번호" type="text" maxlength="11">
+                     </li>
+                     <div>
                             <button type="submit">계정 확인</button>
-                        </td>
-                     </tr>
-                </table>
+                     </div>
+                </div>
             </form>
-                <div id="findIdResult"></div>
+            <div id="findIdResult"></div>
             <form action="resetPw" method="post" id="resetPwForm" style="display:none;">
-                <table>
-                     <tr>
-                        <th><label for="password">PW</label></th>
-                        <td>
-                            <div>
-                                <input type="password" name="password" id="password" placeholder="영문, 숫자, 영문자 포함 8~12글자"  maxlength="12">
-                                 <div id="checkPwResult1" style="font-size: 0.8em; display: none;"></div>
-                            </div>
-                        </td>
-                     </tr>
-                      <tr>
-                         <th><label for="password">PW 확인</label></th>
-                         <td>
-                             <div>
-                                 <input type="password" id="passwordCheck" placeholder="비밀번호를 한번 더 입력해주세요."  maxlength="12">
-                                  <div id="checkPwResult2" style="font-size: 0.8em; display: none;"></div>
-                             </div>
-                         </td>
-                      </tr>
-                      <tr>
-                          <td colspan="2">
-                              <!-- hidden 필드 추가 -->
-                              <input type="hidden" name="memberId" id="hiddenMemberId">
-                              <input type="hidden" name="username" id="hiddenUsername">
-                              <input type="hidden" name="name" id="hiddenName">
-                              <input type="hidden" name="email" id="hiddenEmail">
-                              <input type="hidden" name="phoneNumber" id="hiddenPhoneNumber">
-                              <input type="hidden" name="homeAddress" id="hiddenHomeAddress">
-                           </td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">
-                             <button type="submit">비밀번호 재설정</button>
-                        </td>
-                      </tr>
-                </table>
+                <div>
+                    <div>
+                        <label for="password">PW</label>
+                        <div class="resetPwInput">
+                            <input type="password" name="password" id="password" placeholder="영문, 숫자, 영문자 포함 8~12글자"  maxlength="12">
+                             <div id="checkPwResult1" style="font-size: 0.8em; display: none;"></div>
+                        </div>
+                    </div>
+                    <div>
+                         <label for="password">PW 확인</label>
+                         <div class="resetPwInput">
+                             <input type="password" id="passwordCheck" placeholder="비밀번호를 한번 더 입력해주세요."  maxlength="12">
+                              <div id="checkPwResult2" style="font-size: 0.8em; display: none;"></div>
+                         </div>
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" name="memberId" id="hiddenMemberId">
+                    <input type="hidden" name="username" id="hiddenUsername">
+                    <input type="hidden" name="name" id="hiddenName">
+                    <input type="hidden" name="email" id="hiddenEmail">
+                    <input type="hidden" name="phoneNumber" id="hiddenPhoneNumber">
+                    <input type="hidden" name="homeAddress" id="hiddenHomeAddress">
+                </div>
+                <div>
+                    <button type="submit">비밀번호 재설정</button>
+                </div>
             </form>
         </div>
 </section>
