@@ -494,11 +494,13 @@ section .pagination a {
 }
 
 section .pagination a:hover {
-    background-color: #FFA500;
+    background-color: white;
+    color:black;
 }
 
 section .pagination .active {
-    background-color: #FFA500;
+    background-color: white;
+    color:black;
     font-weight: bold;
 }
 
@@ -1041,6 +1043,7 @@ body.modal-active .overlay {
 section .login {
     text-align: center;
     padding: 20px 0 0;
+    height: 100%;
 }
 
 section .login h2 {
@@ -1224,9 +1227,10 @@ section .resetPw {
 }
 
 section .resetPw h2 {
-    margin: 30px;
+    margin: 20px;
 }
-.resetPw form{
+
+.resetPw form, #resetPwForm{
     width:300px;
     margin:15px 0;
 }
@@ -1278,50 +1282,76 @@ section .resetPw button {
 
 /*회원 비밀번호 재설정*/
 section .resetMyPw {
-    text-align: center;
-    padding: 20px;
+    width:100%;
     height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
-section .resetMyPw h3 {
-    margin: 30px;
+section .resetMyPw h2 {
+    margin: 20px;
 }
 
-section .resetMyPw table {
-    margin: 0 auto;
-    width: 300px;
+#resetMyPwForm{
+    width:300px;
+    margin:15px 0;
 }
 
-section .resetMyPw th {
-    color: white;
-    width: 70px;
+.resetMyPwWrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-section .resetMyPw td {
-    color: white;
+
+#resetMyPwForm label{
+    width: 25%;
+    text-align: left;
+}
+#resetMyPwForm div{
+    flex: 1;
 }
 
-section .resetMyPw td input {
+
+
+section .resetMyPw #resetMyPwForm input {
     width: 100%;
-    height: 40px;
-    border-radius: 10px;
+    background: none;
+    color: white;
+    outline: none;
+    border: 2px solid white;
+    border-radius: 5px;
     padding-left: 10px;
+    font-size: 13px;
+    height: 40px;
+    margin-bottom: 10px;
 }
 
 section .resetMyPw button {
-    margin-top: 10px;
     width: 100%;
-    height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.resetMyPwForm input::placeholder{
+    color:white;
+    font-size:11px;
 }
 
 
 /* 회원가입 */
-
 section .register {
     text-align: center;
     height: 100%;
@@ -1336,19 +1366,26 @@ section .register h2 {
     justify-content: center;
 }
 
-.registerTitle {
+.registerInfo .registerWrap {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    height: 100%;
+    align-items: center;
+    margin-bottom: 10px;
 }
-.registerTitle div{
-    height: 40px;
-    width: 100px;
-    margin-top: 10px;
+
+.registerForm .registerInfo div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.registerForm .registerInfo .registerWrap label{
+    width: 15%;
     text-align: left;
 }
+.registerForm .registerInfo .registerWrap div{
+    flex: 1;
+}
+
 
 section .register .registerInfo input {
     width:100%;
@@ -1360,7 +1397,6 @@ section .register .registerInfo input {
     padding-left: 10px;
     font-size:13px;
     height: 40px;
-    margin-bottom: 10px;
 }
 
 section .register #emailField,
@@ -1369,6 +1405,7 @@ section .register #addressField {
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+    margin-bottom: 5px;
 }
 
 section .register #emailField input,
@@ -1382,7 +1419,6 @@ section .register #addressField input, #phoneNumber{
     padding-left: 10px;
     font-size:13px;
     height: 40px;
-    margin-bottom: 10px;
 }
 
 section .register #emailField select {
@@ -1422,14 +1458,13 @@ section .register #addressField input[type="button"] {
     padding-right: 10px;
 }
 .registerBtn {
-    width: 500px;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
 }
 
-section .register button {
+section .register .registerBtn button {
     width: 100%;
     border: none;
     outline: none;
@@ -1439,11 +1474,17 @@ section .register button {
     cursor: pointer;
     display: flex;
     justify-content: center;
-    gap:10px;
     align-items: center;
     height: 40px;
     margin-top: 10px;
     margin-bottom: 20px;
+}
+.register #checkIdResult, .register #checkPwResult,
+.register #checkNameResult, .register #checkEmailResult,
+.register #checkPhoneResult, .register #checkAddressResult {
+    margin-bottom: 10px;
+    text-align: left;
+    margin-left: 80px;
 }
 
 /* 리뷰 */
@@ -1988,49 +2029,58 @@ section .slider-wrap img {
 /*end of 카테고리 css*/
 
 /*마이페이지*/
-
 section .myPage {
     text-align: center;
     height: 100%;
-    padding: 20px;
 }
 
-section .myPage h3 {
-    margin: 30px;
+section .myPage h2 {
+    margin: 20px;
 }
 
-section .myPage table {
-    margin: 0 auto;
-    width: 500px;
+.myPageForm{
+    display: flex;
 }
 
-section .myPage th {
-    color: white;
+#myPageForm {
+    display: flex;
+    justify-content: center;
+    height: 100%;
 }
 
-section .myPage td {
-    color: white;
-    width: 100%;
-}
-
-section .myPage td input {
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
-    padding-left: 10px;
-}
-
-section .myPage button {
+.myPageTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100px;
+    height: 230px;
     margin-top: 10px;
-    width: 100%;
-    height: 40px;
-    background: #DB0000;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
-    cursor: pointer;
-    text-align: center;
 }
+.myPageTitle div{
+    height: 40px;
+    width: 100px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+section .myPage .myPageInfo {
+    width: 400px;
+}
+
+section .myPage .myPageInfo input {
+    width:100%;
+    background: none;
+    color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size:13px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
 
 /*스와이프*/
 
@@ -2080,57 +2130,120 @@ section .myPage button {
 }
 
 /* 마이페이지 수정 */
-
 section .myPageEdit {
-    background-color: black;
-    color: white;
+    display: flex;
+    align-items: center;
+    height: 100vh;
     text-align: center;
-    padding: 70px;
-    height: 100%;
+    flex-direction: column;
 }
 
-section .myPageEdit h3 {
-    margin: 30px;
+section .myPageEdit h2 {
+    margin: 20px;
 }
 
-section .myPageEdit table {
-    margin: 0 auto;
+#myPageEditForm{
     width: 500px;
 }
 
-section .myPageEdit th {
-    color: white;
-}
-
-section .myPageEdit td {
-    color: white;
-    width: 100%;
-}
-
-section .myPageEdit td input {
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
-    padding-left: 10px;
-}
-
-section .myPageEdit td #btnField {
+.myPageEditForm{
     display: flex;
     justify-content: center;
+}
+
+.myPageEditInfo div input {
+    width:100%;
+    background: none;
+    color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size:13px;
+    height: 40px;
+}
+
+.myPagEditInfo .wrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.myPagEditInfo .wrap > div{
+    flex: 1;
+}
+.myPagEditInfo .wrap label{
+    width: 15%;
+    text-align: left;
+}
+
+.myPageEdit #emailField,
+.myPageEdit #addressField {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     gap: 10px;
 }
 
-
-section .myPageEdit button {
-    flex-grow: 1;
-    margin-top: 10px;
+.myPageEditForm input {
+    width:100%;
+    background: none;
+    color: white;
+    outline: none;
+    border:2px solid white;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size:13px;
     height: 40px;
-    background: #FF7012;
-    color: #fff;
-    border-radius: 30px;
-    padding: 0 30px;
+}
+
+.myPageEdit #emailField select {
+    border-radius: 5px;
+    height: 40px;
+}
+
+.myPageEdit #emailField option {
+    border-radius: 5px;
+}
+
+.myPageEdit #emailId,
+.myPageEdit #emailAddress,
+.myPageEdit #kakaoAddress {
+    flex-grow: 1;
+}
+
+.myPageEdit #emailOption {
+    flex-shrink: 0;
+    min-width: 100px;
+}
+
+.myPageEdit #emailAddress:disabled {
+    color: black;
+    background-color: white;
+}
+
+.myPageEdit #addressField input[type="button"] {
+    width: 120px;
+    height:40px;
+    background-color: white;
+    color:black;
+    align-items: center;
+    padding-right: 10px;
+}
+
+ #btnField button{
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: #DB0000;
+    color: white;
     cursor: pointer;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 section .myPageEdit #emailField,
@@ -2176,6 +2289,13 @@ section .myPageEdit #addressField input[type="button"] {
     flex-shrink: 0;
     width: 120px;
     padding-right: 10px;
+}
+
+.myPageEdit #checkNameResult, .myPageEdit #checkEmailResult,
+.myPageEdit #checkPhoneResult, .myPageEdit #checkAddressResult {
+    margin-bottom: 10px;
+    text-align: left;
+    margin-left: 80px;
 }
 
 /*별점*/
@@ -2326,7 +2446,7 @@ section.showMyPage .myPage-navbar ul li span {
     flex-grow: 1;
 }
 
-section.showMyPage .myPage-navbar ul li:hover span {
+section.showMyPage .myPage-navbar ul li:hover > span {
     color: #DB0000;
 }
 
@@ -2348,8 +2468,14 @@ section.showMyPage .myPage-navbar ul li ul li {
     border-top: none;
 }
 
-section.showMyPage .myPage-navbar #myInfo:hover span {
-    color: green;
+section.showMyPage .myPage-navbar #myInfoEdit:hover span {
+    color: lightcoral;
+}
+section.showMyPage .myPage-navbar #resetMyPw:hover span {
+    color: lightcoral;
+}
+section.showMyPage .myPage-navbar #byeMember:hover span {
+    color: lightcoral;
 }
 
 
@@ -2394,10 +2520,8 @@ div.myReview .myReviewPagination .active {
 }
 
 /* 나의 예매 내역 */
-.myTicketList {
-    text-align: center;
-    padding: 30px;
-    width: 100%;
+.myTicket {
+    height: 100%;
 }
 
 .myTicketList #myTicketTitle {
@@ -2425,7 +2549,6 @@ div.myTicket .myTicketPagination .active {
     font-weight: bold;
 }
 
-/*나의 예매 내역*/
 .myTicket h1 {
     text-align: center;
     margin-top: 20px;
@@ -2434,7 +2557,6 @@ div.myTicket .myTicketPagination .active {
 .myTicketList {
     max-width: 1000px;
     margin: 0 auto;
-    border: 2px solid black;
 }
 
 .ticketHeader {

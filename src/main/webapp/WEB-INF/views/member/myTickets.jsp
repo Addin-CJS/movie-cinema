@@ -44,20 +44,19 @@
                     <div id="moviePrice">
                         <p class="moviePrice"><fmt:formatNumber value="${myTicket.ticketPrice}" pattern="#,##0원"/></p>
                     </div>
-
                 </div>
             </c:forEach>
-        </div>
-        <div class="myTicketPagination">
-            <c:if test="${nowPage > 0}">
-                <a href="javascript:loadTicketPage(${nowPage - 1})">이전</a>
-            </c:if>
-            <c:forEach begin="${startPage}" end="${endPage}" var="page">
-                <a href="javascript:loadTicketPage(${page})" class="${page == nowPage ? 'active' : ''}">[${page + 1}]</a>
-            </c:forEach>
-            <c:if test="${nowPage + 1 < totalPages}">
-                <a href="javascript:loadTicketPage(${nowPage + 1})">다음</a>
-            </c:if>
+            <div class="myTicketPagination">
+                <c:if test="${nowPage > 0}">
+                    <a href="javascript:loadTicketPage(${nowPage - 1})">이전</a>
+                </c:if>
+                <c:forEach begin="${startPage}" end="${endPage}" var="page">
+                    <a href="javascript:loadTicketPage(${page})" class="${page == nowPage ? 'active' : ''}">[${page + 1}]</a>
+                </c:forEach>
+                <c:if test="${nowPage + 1 < totalPages}">
+                    <a href="javascript:loadTicketPage(${nowPage + 1})">다음</a>
+                </c:if>
+            </div>
         </div>
     </div>
 </section>
