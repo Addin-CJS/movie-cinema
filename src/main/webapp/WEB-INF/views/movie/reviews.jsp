@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <section>
+    <jsp:include page="../movie/notificationSection.jsp"/>
     <div class="review">
         <sec:authentication var="me" property="principal"/>
         <table class="reviewList">
