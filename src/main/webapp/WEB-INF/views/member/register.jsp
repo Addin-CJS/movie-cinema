@@ -7,31 +7,34 @@
         <h2>회원가입</h2>
         <form action="register" method="post" id="enrollForm">
             <div class="registerForm">
-                <div class="registerTitle">
-                    <div><label for="username">ID</label></div>
-                    <div><label for="name">NAME</label></div>
-                    <div><label for="password">PW</label></div>
-                    <div><label>EMAIL</label></div>
-                    <div><label for="phoneNumber">PHONE</label></div>
-                    <div><label for="kakaoAddress">ADDRESS</label></div>
-                </div>
                 <div class="registerInfo">
-                    <div>
-                        <input type="text" name="username" class="form-control" id="username"
-                               placeholder="영문과 숫자를 조합해 6~10글자" maxlength="10">
-                        <div id="checkIdResult" style="font-size: 0.8em; display: none;"></div>
-                    </div>
-                    <div>
+                    <div class="registerWrap">
+                        <label for="username">ID</label>
                         <div>
-                            <input type="text" name="name" id="name" placeholder="이름 입력" required>
-                            <div id="checkNameResult" style="font-size: 0.8em; display: none;"></div>
+                            <input type="text" name="username" class="form-control" id="username"
+                               placeholder="영문과 숫자를 조합해 6~10글자" maxlength="10">
                         </div>
                     </div>
-                    <div>
-                        <input type="password" name="password" id="password" placeholder="영문, 숫자, 영문자 포함 8~12글자"  maxlength="12">
-                         <div id="checkPwResult" style="font-size: 0.8em; display: none;"></div>
+                    <div id="checkIdResult" style="font-size: 0.8em; display: none;"></div>
+
+                    <div class="registerWrap">
+                        <label for="name">NAME</label>
+                        <div>
+                            <input type="text" name="name" id="name" placeholder="이름 입력" required>
+                        </div>
                     </div>
-                    <div>
+                    <div id="checkNameResult" style="font-size: 0.8em; display: none;"></div>
+
+                    <div class="registerWrap">
+                        <label for="password">PW</label>
+                        <div>
+                             <input type="password" name="password" id="password" placeholder="영문, 숫자, 영문자 포함 8~12글자"  maxlength="12">
+                        </div>
+                    </div>
+                    <div id="checkPwResult" style="font-size: 0.8em; display: none;"></div>
+
+                    <div class="registerWrap">
+                        <label>EMAIL</label>
                         <div id="emailField">
                             <input id="emailId" required><span id="middle">@</span><input id="emailAddress">
                             <select class="form-select" aria-label="Default select example" id="emailOption"
@@ -43,22 +46,26 @@
                                 <option value="@apple.com">apple.com</option>
                             </select>
                             <input type="hidden" id="totalEmail" name="email" value="">
-                            <div id="checkEmailResult" style="font-size: 0.8em; display: none;"></div>
                         </div>
                     </div>
-                    <div>
+                    <div id="checkEmailResult" style="font-size: 0.8em; display: none;"></div>
+
+                    <div class="registerWrap">
+                        <label for="phoneNumber">PHONE</label>
                         <div>
                             <input name="phoneNumber" id="phoneNumber" placeholder="- 빼고 입력해주세요"  maxlength="11" required>
-                            <div id="checkPhoneResult" style="font-size: 0.8em; display: none;"></div>
                         </div>
                     </div>
-                    <div>
+                    <div id="checkPhoneResult" style="font-size: 0.8em; display: none;"></div>
+
+                    <div class="registerWrap">
+                        <label for="kakaoAddress">ADDRESS</label>
                         <div id="addressField">
                             <input type="text" name="homeAddress" id="kakaoAddress" readonly>
                             <input type="button" value="주소 검색" onclick="findAddr();">
-                            <div id="checkAddressResult" style="font-size: 0.8em; display: none;"></div>
                         </div>
                     </div>
+                    <div id="checkAddressResult" style="font-size: 0.8em; display: none;"></div>
                     <div class="registerBtn">
                         <button type="submit">회원가입</button>
                         <button type="reset">초기화</button>

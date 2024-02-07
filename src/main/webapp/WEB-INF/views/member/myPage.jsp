@@ -8,14 +8,14 @@
                     <ul>
                         <li id="showMyInfo" onclick="showSubMenu('myInfo');">
                                 <span>개인 정보</span>
-                            <ul id="myInfo" style="display: none">
+                            <ul id="myInfo"style="display: none">
                                 <li id="myInfoEdit">
                                     <span>내 정보 수정</span>
                                 </li>
                                 <li id="resetMyPw">
                                     <span>비밀번호 재설정</span>
                                 </li>
-                                <li>
+                                <li id="byeMember">
                                     <span>회원 탈퇴</span>
                                 </li>
                             </ul>
