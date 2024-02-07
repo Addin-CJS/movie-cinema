@@ -358,9 +358,16 @@ section .movie-ticket-book button:hover {
     color: #000000;
 }
 
-section .filter-search-box {
-    background: #111;
+section .filters-box {
     display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+section .filter-search-box {
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: 20px 100px;
@@ -368,23 +375,20 @@ section .filter-search-box {
     position: relative;
 }
 
-section .filter-search-box .filters-box {
+section .filter-search-box .filter-box {
     display: flex;
     gap: 50px;
     color: #fff;
 }
 
 
-section .filter-search-box .filters-box .filters {
+section .filter-search-box .filter-box .filters {
     cursor: pointer;
 }
 
 
 section .filter-search-box .search-bar {
-    position: absolute;
-    bottom: 0;
-    left: 100px;
-    width: 83%;
+    width: 100%;
     height: 2px;
     background: #fff;
     border-radius: 50px;
@@ -425,7 +429,6 @@ section .filter-search-box .search-filters input {
 
 
 section .movie-card-section {
-    background: #111;
     padding: 20px 100px;
     width: 100%;
     display: grid;
@@ -477,7 +480,6 @@ section .movie-card-section .card .card-content .movie-info .d3 {
 section .pagination {
     width: 100%;
     text-align: center;
-    background: #111;
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -1843,7 +1845,7 @@ section .slider-wrap img {
     }
 
 
-    section .filter-search-box .filters-box {
+    section .filter-search-box .filter-box {
         gap: 10px;
     }
 
@@ -1939,7 +1941,7 @@ section .slider-wrap img {
         padding: 20px 20px;
     }
 
-    section .filter-search-box .filters-box {
+    section .filter-search-box .filter-box {
         gap: 10px;
     }
 
@@ -2421,7 +2423,6 @@ section.showMyPage ul {
 
 section.showMyPage .myPage-navbar {
     width: 20%;
-    background: black;
     margin: 0 auto;
     text-align: left;
     border-right: 2px solid white;

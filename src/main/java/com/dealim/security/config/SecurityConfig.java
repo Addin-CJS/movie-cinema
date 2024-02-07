@@ -2,6 +2,7 @@ package com.dealim.security.config;
 
 
 import com.dealim.security.config.oauth.OAuth2CustomDetailsService;
+import com.dealim.security.error.CustomAuthenticationFailureHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +35,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/member/login").permitAll()
-                        .failureUrl("/member/login")
+                        .failureHandler(new CustomAuthenticationFailureHandler())
                         .permitAll())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/member/login")

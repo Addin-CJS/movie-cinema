@@ -57,7 +57,18 @@ public class CustomUserDetails implements UserDetails, OAuth2User {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        Character isWithdrawn = member.getIsWithdrawn();
+        Boolean result = true;
+
+        if (isWithdrawn.equals('Y')) {
+            result = false;
+        }
+
+        if (isWithdrawn.equals('N')){
+            result = true;
+        }
+
+        return result;
     }
 
     @Override
