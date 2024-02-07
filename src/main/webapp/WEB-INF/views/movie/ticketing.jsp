@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <link rel="stylesheet" href="/css/style.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<sec:authentication property="principal.member" var="me"></sec:authentication>
 <html>
 <head>
     <title>Ticketing</title>
@@ -117,7 +119,7 @@
                     ticketPrice: localStorage.getItem("ticketedPrice"),
                     movieId: ${movie.movieId},
                     theaterId: localStorage.getItem("theaterId"),
-                    memberId: ${loginUser.memberId}
+                    memberId: ${me.memberId}
                 },
                 success: function (response) {
                     window.opener.location.href = "/ticketing/success";

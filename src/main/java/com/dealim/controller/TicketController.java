@@ -3,12 +3,13 @@ package com.dealim.controller;
 import com.dealim.domain.Member;
 import com.dealim.domain.Movie;
 import com.dealim.dto.PaidTicket;
+import com.dealim.security.custom.CustomUserDetails;
 import com.dealim.service.MovieService;
 import com.dealim.service.SeatService;
 import com.dealim.service.TicketService;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,8 +36,8 @@ public class TicketController {
     }
 
     @PostMapping("")
-    public String payTicket(PaidTicket paidTicket, HttpSession session) {
-        Member loginUser = (Member) session.getAttribute("loginUser");
+    public String payTicket(PaidTicket paidTicket, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        Member loginUser = customUserDetails.getMember();
         ticketService.saveTicket(paidTicket, loginUser);
 
         seatService.saveSeats(paidTicket, loginUser);

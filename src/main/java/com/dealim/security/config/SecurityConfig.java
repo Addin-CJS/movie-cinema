@@ -1,5 +1,6 @@
 package com.dealim.security.config;
 
+
 import com.dealim.security.config.oauth.OAuth2CustomDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -31,7 +32,7 @@ public class SecurityConfig {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated())
-                .formLogin(form -> form
+                .formLogin((form) -> form
                         .loginPage("/member/login").permitAll()
                         .failureUrl("/member/login")
                         .permitAll())

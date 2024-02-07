@@ -27,7 +27,8 @@
                                 <span>리뷰 보기</span>
                         </li>
                         <li>
-                            <a href="#">
+                            <a id="showMyInterestMovies">
+                                <i><img src="/img/icons/film.png" alt="film"></i>
                                 <span>관심 영화</span>
                             </a>
                         </li>
@@ -75,6 +76,18 @@
         });
     }
 
+    function loadInterestMoviesPage(pageNumber) {
+        $.ajax({
+            url: '/member/myInterestMovies?page=' + pageNumber,
+            type: 'GET',
+            success: function(data) {
+                console.log("관심영화 목록 조회 성공");
+                $('.showPage').html(data);
+            }
+        });
+    }
+
+
     $(document).ready(function() {
         $("#showMyInfo").click(function(e) {
             e.preventDefault();
@@ -108,6 +121,14 @@
                 }
             });
         });
+
+
+
+        $("#showMyInterestMovies").click(function(e) {
+            e.preventDefault();
+            loadInterestMoviesPage(0);
+        });
+
 
         $("#showMyReviews").click(function(e) {
             e.preventDefault();
