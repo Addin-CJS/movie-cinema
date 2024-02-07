@@ -222,16 +222,13 @@
                     $(this).parent().addClass('on');
                 }
             });
-            console.log(theaterList);
             theaterList.each(function () {
                 console.log($(this).text(), localStorage.getItem("selectedTheater"));
                 if ($(this).text() == localStorage.getItem("selectedTheater")) {
                     $(this).parent().addClass('on');
                 }
             });
-
         };
-
     });
 
     // 중앙에 위치 시키기
@@ -351,8 +348,6 @@
             window.location.href = "/member/login";
         }
     }
-
-
 
 </script>
 

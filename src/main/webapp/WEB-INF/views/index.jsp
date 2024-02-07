@@ -3,7 +3,6 @@
 <jsp:include page="layouts/header.jsp"/>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
 <section>
     <div class="movie-chart">
         <h1>TOP5 관심 영화</h1>

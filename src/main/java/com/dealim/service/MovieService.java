@@ -24,15 +24,10 @@ public class MovieService {
     private MovieTheaterRepository movieTheaterRepository;
     @Autowired
     private TheaterRepository theaterRepository;
-    /*public List<Movie> selectNowMovie() {
-
-        return movieRepository.findAll();
-    }*/
 
     public Optional<Movie> selectMovieDetailById(Long movieId) {
         return movieRepository.findById(movieId);
     }
-
 
     public Page<Movie> movieList(Pageable pageable) {
         return  movieRepository.findAll(pageable);

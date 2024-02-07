@@ -128,8 +128,6 @@
             });
         });
 
-
-
         $("#showMyInterestMovies").click(function(e) {
             e.preventDefault();
             loadInterestMoviesPage(0);

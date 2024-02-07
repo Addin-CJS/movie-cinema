@@ -13,7 +13,7 @@
 
                 <div class="successBtn">
                         <button id="homeBtn" onclick="location.href='/'">홈으로</button>
-                        <button id="mypageBtn" onclick="location.href='/'">마이페이지</button>
+                        <button id="mypageBtn" onclick="location.href='/member/myPage'">마이페이지</button>
                 </div>
             </div>
         </div>
