@@ -1,38 +1,53 @@
 package com.dealim.service;
 
 import com.dealim.domain.Member;
+import com.dealim.domain.MemberRole;
 import com.dealim.dto.MyPageMember;
 import com.dealim.repository.MemberRepository;
+import com.dealim.repository.MemberRoleRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 
 @Service
+@Slf4j
 public class MemberService {
     @Autowired
     MemberRepository memberRepository;
-
+    @Autowired
+    MemberRoleRepository memberRoleRepository;
     @Autowired
     PasswordEncoder pEncoder;
 
+    @Transactional
+    public List<Member> getAllMembers() {
+        return memberRepository.findAll();
+    }
 
     public Member insertMember(Member member) {
-
         return memberRepository.save(member);
     }
 
+    public MemberRole setMemberRole(Member member, String role) {
+        MemberRole memberRole = MemberRole.builder()
+                .member(member)
+                .roleName(role)
+                .build();
+        return memberRoleRepository.save(memberRole);
+    }
+
     public boolean idCheck(String username) {
-
         return memberRepository.existsByUsername(username);
-
     }
 
     public Optional<Member> selectMemberByUsername(Member member) {
-
         return memberRepository.findByUsername(member.getUsername());
     }
 

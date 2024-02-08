@@ -2,6 +2,7 @@ package com.dealim.repository;
 
 import com.dealim.domain.Member;
 import io.micrometer.observation.ObservationFilter;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,4 +29,7 @@ public interface MemberRepository  extends JpaRepository<Member, Long>{
 
     @Query("SELECT m FROM Member m WHERE m.username = :username AND m.name = :name")
     Member findMember(@Param("username") String username, @Param("name") String name);
+
+    @EntityGraph(attributePaths = {"roles"})
+    Optional<Member> findWithRolesByUsername(String username);
 }

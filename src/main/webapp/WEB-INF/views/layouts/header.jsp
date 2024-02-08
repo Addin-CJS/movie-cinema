@@ -34,6 +34,13 @@
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
                 <li data-path="/member/myPage" onclick="location.href='/member/myPage'">마이페이지</li>
+            </sec:authorize>
+            <sec:authorize access="hasAnyRole('ADMIN')">
+                <li data-path="/admin/main" onclick="location.href='/admin/main'">
+                    관리자
+                </li>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
                 <li><a href="/logout" id="logout">로그아웃</a></li>
             </sec:authorize>
         </ul>

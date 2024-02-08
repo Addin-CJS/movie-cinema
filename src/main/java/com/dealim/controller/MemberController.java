@@ -53,10 +53,13 @@ public class MemberController {
 
     @PostMapping("/member/register")
     public String insertMember(Member member) {
+        log.info("====회원가입 진행중====");
+
         String enPass = pEncoder.encode(member.getPassword());    // 사용자가 입력한 패스워드 암호화해서 변수에 넣기
         member.setPassword(enPass);
-        Member insert = memberService.insertMember(member);
-        return "redirect:login";
+        Member insertedMember = memberService.insertMember(member);
+        memberService.setMemberRole(insertedMember, "ROLE_USER");
+        return "member/login";
     }
 
     @GetMapping("/member/idCheck")
@@ -68,7 +71,6 @@ public class MemberController {
 
     @GetMapping("/member/myPage")
     public String showMyPage( ) {
-
         return "member/myPage";
     }
 
