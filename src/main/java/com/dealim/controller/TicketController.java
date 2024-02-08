@@ -2,6 +2,7 @@ package com.dealim.controller;
 
 import com.dealim.domain.Member;
 import com.dealim.domain.Movie;
+import com.dealim.domain.Ticket;
 import com.dealim.dto.PaidTicket;
 import com.dealim.security.custom.CustomUserDetails;
 import com.dealim.service.MovieService;
@@ -9,13 +10,14 @@ import com.dealim.service.SeatService;
 import com.dealim.service.TicketService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -38,8 +40,8 @@ public class TicketController {
     @PostMapping("")
     public String payTicket(PaidTicket paidTicket, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Member loginUser = customUserDetails.getMember();
-        ticketService.saveTicket(paidTicket, loginUser);
-
+        Ticket savedTicket = ticketService.saveTicket(paidTicket, loginUser);
+        paidTicket.setTicketId(savedTicket.getTicketId());
         seatService.saveSeats(paidTicket, loginUser);
 
         return "movie/ticketing";
@@ -47,8 +49,20 @@ public class TicketController {
 
     @GetMapping("/success")
     public String success() {
-
         return "movie/ticketingSuccess";
     }
-    // TODO: @ExceptionHandler or @ControllerAdvice를 통해 오류 처리할것
+
+    // TODO: 티켓ID로 티켓 지우는 api
+    @DeleteMapping("/delete")
+    @ResponseBody
+    public ResponseEntity<?> deleteTicket(@RequestParam("ticketId") Long ticketId) {
+        try {
+            ticketService.deleteTicket(ticketId);
+            seatService.deleteByTicketId(ticketId);
+            return ResponseEntity.status(HttpStatus.OK).body(Map.of("status", "success", "message", "티켓이 성공적으로 삭제되었습니다."));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("status", "failure", "message", "티켓 삭제 중 오류가 발생했습니다."));
+        }
+    }
 }

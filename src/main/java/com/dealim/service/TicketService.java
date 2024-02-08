@@ -112,4 +112,8 @@ public class TicketService {
 
         return myTicketList;
     }
+
+    public void deleteTicket(Long ticketId) {
+        ticketRepository.deleteById(ticketId);
+    }
 }

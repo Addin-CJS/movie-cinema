@@ -18,7 +18,6 @@ public class SeatController {
     @Autowired
     private SeatService seatService;
 
-    // TODO: 좌석에 있는지 확인하고 결과를 반환
     @GetMapping("/isTaken")
     public Boolean isTaken(@RequestParam Long movieId, @RequestParam Long theaterId, @RequestParam Integer seatNumber) {
         return seatService.isTakenSeats(movieId, theaterId, seatNumber);
@@ -26,7 +25,6 @@ public class SeatController {
 
     @GetMapping("/getTakenSeats")
     public List<Integer> getTakenSeats(@RequestParam Long movieId, @RequestParam Long theaterId) {
-        log.warn(seatService.getTakenSeats(movieId, theaterId).toString());
         return seatService.getTakenSeats(movieId, theaterId);
     }
 }

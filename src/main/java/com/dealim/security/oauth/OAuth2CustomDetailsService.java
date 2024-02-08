@@ -1,4 +1,4 @@
-package com.dealim.security.config.oauth;
+package com.dealim.security.oauth;
 
 import com.dealim.domain.Member;
 import com.dealim.repository.MemberRepository;

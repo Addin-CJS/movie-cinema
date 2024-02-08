@@ -1,8 +1,8 @@
 package com.dealim.security.config;
 
 
-import com.dealim.security.config.oauth.OAuth2CustomDetailsService;
 import com.dealim.security.error.CustomAuthenticationFailureHandler;
+import com.dealim.security.oauth.OAuth2CustomDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;

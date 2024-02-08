@@ -4,6 +4,7 @@ import com.dealim.domain.Member;
 import com.dealim.domain.Seat;
 import com.dealim.dto.PaidTicket;
 import com.dealim.repository.SeatRepository;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class SeatService {
                     .theaterId(Long.valueOf(paidTicket.getTheaterId()))
                     .movieId(paidTicket.getMovieId())
                     .memberId(Long.parseLong(paidTicket.getMemberId()))
+                    .ticketId(paidTicket.getTicketId())
                     .build());
         }
     }
@@ -38,5 +40,10 @@ public class SeatService {
 
     public List<Integer> getTakenSeats(Long movieId, Long theaterId) {
         return seatRepository.getTakenSeats(movieId, theaterId);
+    }
+
+    @Transactional
+    public void deleteByTicketId(Long ticketId) {
+        seatRepository.deleteByTicketId(ticketId);
     }
 }
