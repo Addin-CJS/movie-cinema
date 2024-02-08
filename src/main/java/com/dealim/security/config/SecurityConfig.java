@@ -35,7 +35,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/member/login").permitAll()
-                        .failureHandler(new CustomAuthenticationFailureHandler())
+                        .failureHandler(new CustomAuthenticationFailureHandler()) // 로그인 실패시 에러처리
                         .permitAll())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/member/login")

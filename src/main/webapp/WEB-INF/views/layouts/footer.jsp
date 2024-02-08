@@ -4,7 +4,7 @@
         <p class="logo">
             김지창과<span>아이들</span>
         </p>
-        <p><i class="fa fa-copyright"></i> 2001-2017, SIA Multiflex</p>
+        <p><i class="fa fa-copyright"></i> 2024, AddInEdu</p>
     </div>
 
     <ul>
