@@ -6,6 +6,7 @@ import com.dealim.domain.Movie;
 import com.dealim.security.custom.CustomUserDetails;
 import com.dealim.service.InterestMovieService;
 import com.dealim.service.MovieService;
+import com.dealim.service.NotificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +32,9 @@ public class MovieController {
 
    @Autowired
    private InterestMovieService interestMovieService;
+
+   @Autowired
+   private NotificationService notificationService;
 
     @RequestMapping("/movieHome")
     public String movieHome(Model model,
@@ -87,7 +91,11 @@ public class MovieController {
         interestMovie.setUserName(member.getUsername());
 
         boolean added = interestMovieService.addInterestMovie(interestMovie);
+
+        System.out.println("movie컨트롤러 무비아이디 "+interestMovie.getMovieId());
+        System.out.println("movie컨트롤러 아이디 "+member.getUsername());
         if (added) {
+            notificationService.sendInterestMovieAddedNotification(member.getUsername(), interestMovie.getMovieId());
             redirectAttributes.addFlashAttribute("successMessage", "관심 영화가 성공적으로 추가되었습니다.");
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "이미 관심 영화로 등록되어 있습니다.");

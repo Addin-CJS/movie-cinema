@@ -89,6 +89,9 @@ public class ReviewController {
             return "fail";
         }
 
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+
 
         HttpSession session = request.getSession();
         Set<Long> likedReviews = (Set<Long>) session.getAttribute("likedReviews");
@@ -96,7 +99,7 @@ public class ReviewController {
             likedReviews = new HashSet<>();
         }
 
-        reviewService.changeLikeStatus(reviewId, likeAction, likedReviews);
+        reviewService.changeLikeStatus(reviewId, likeAction, likedReviews,username);
 
 
         if ("like".equals(likeAction)) {

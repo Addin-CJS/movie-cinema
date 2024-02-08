@@ -18,6 +18,9 @@ import java.util.Set;
 public class ReviewService {
     @Autowired
     ReviewRepository reviewRepository;
+    @Autowired
+    NotificationService notificationService;
+
     public Review reviewInsert(Review review) {
         return reviewRepository.save(review);
     }
@@ -42,11 +45,13 @@ public class ReviewService {
     }
 
     //좋아요 상태를 바꾸는 메서드 (컨트롤러에서 사용)
-        @Transactional
-    public void  changeLikeStatus(Long reviewId, String likeAction, Set<Long> likedReviews) {
+    @Transactional
+    public void  changeLikeStatus(Long reviewId, String likeAction, Set<Long> likedReviews, String likerUsername) {
         if ("like".equals(likeAction)) {
             updateLikeCount(reviewId, true);//참이면 +1 증가
             likedReviews.add(reviewId);
+            // "좋아요" 알림 전송
+            notificationService.sendLikeNotification(reviewId, likerUsername);
         } else if ("unlike".equals(likeAction)) {
             updateLikeCount(reviewId, false);//거짓이면 -1 감소
             likedReviews.remove(reviewId);
@@ -64,6 +69,8 @@ public class ReviewService {
         }
         review.setLikeCount(isLike ? currentLikeCount + 1 : Math.max(0, currentLikeCount - 1));
         reviewRepository.save(review);
+
+
     }
 
 
