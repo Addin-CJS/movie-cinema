@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 
@@ -65,7 +66,6 @@ public class MemberService {
     public boolean findMemberForWithdraw(String username, String name, String password) {
         Member findMemberForWithdraw = memberRepository.findMember(username, name);
         if (findMemberForWithdraw != null) {
-            // 비밀번호 검증
             boolean matches = pEncoder.matches(password, findMemberForWithdraw.getPassword());
             return matches;
         }
@@ -74,14 +74,16 @@ public class MemberService {
 
     public boolean withdrawMemberOk(String username, String password) {
         Optional<Member> optionalMember = memberRepository.findByUsername(username);
-        System.out.println("옵셔널멤버" + optionalMember);
         if (optionalMember.isPresent()) {
             Member member = optionalMember.get();
 
             boolean matches = pEncoder.matches(password, member.getPassword());
 
             if (matches) {
+                LocalDateTime nowDate = LocalDateTime.now();
+
                 member.setIsWithdrawn('Y');
+                member.setWithdrawnAt(nowDate);
                 member.setMemberId(member.getMemberId());
                 member.setUsername(member.getUsername());
                 member.setName(member.getName());
