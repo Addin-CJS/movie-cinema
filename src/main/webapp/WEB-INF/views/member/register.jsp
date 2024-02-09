@@ -156,7 +156,6 @@
 
     // 모든 필드 유효성 검사 통과 확인-2
     $("#enrollForm").submit(function (event) {
-        console.log(validationResults);
         const allValidOk = Object.values(validationResults).every(result => result);
         if (!allValidOk) {
             event.preventDefault();
