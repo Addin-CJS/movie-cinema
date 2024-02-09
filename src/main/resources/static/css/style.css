@@ -200,7 +200,7 @@ section .movie-ticket-book .off-btns:hover {
     z-index: 1;
 }
 
-.swiper-date, .swiper-time, .swiper-theater{
+.swiper-date, .swiper-time, .swiper-theater {
     padding: 0 30px 0 30px;
 }
 
@@ -497,12 +497,12 @@ section .pagination a {
 
 section .pagination a:hover {
     background-color: white;
-    color:black;
+    color: black;
 }
 
 section .pagination .active {
     background-color: white;
-    color:black;
+    color: black;
     font-weight: bold;
 }
 
@@ -1051,39 +1051,44 @@ section .login {
 section .login h2 {
     margin: 20px;
 }
-.loginInfo{
+
+.loginInfo {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-.login form li{list-style-type: none;}
+.login form li {
+    list-style-type: none;
+}
 
-.login form{
-    width:300px;
+.login form {
+    width: 300px;
     align-items: center;
 }
 
-.login form .loginInput{
-    width:100%;
-    height:50px;
-    margin:15px 0;
+.login form .loginInput {
+    width: 100%;
+    height: 50px;
+    margin: 15px 0;
 }
 
-.loginInput input{
-    width:100%;
-    height:100%;
-background: transparent !important;
+.loginInput input {
+    width: 100%;
+    height: 100%;
+    background: transparent !important;
     color: white;
     outline: none;
-    border:2px solid white;
+    border: 2px solid white;
     border-radius: 5px;
-    padding:20px;
+    padding: 20px;
 }
-.loginInput input::placeholder{
-    color:white;
-    font-size:11px;
+
+.loginInput input::placeholder {
+    color: white;
+    font-size: 11px;
 }
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -1109,7 +1114,7 @@ input:-webkit-autofill:active {
 
 .loginBtn2 {
     width: 300px;
-    display:flex;
+    display: flex;
     justify-content: space-evenly;
 
 }
@@ -1153,48 +1158,48 @@ section .login button {
 
 /* 아이디 찾기 */
 section .findId {
-    width:100%;
+    width: 100%;
     height: 100%;
     align-items: center;
     display: flex;
     flex-direction: column;
 }
 
-.findId form{
-    width:300px;
-    margin:15px 0;
+.findId form {
+    width: 300px;
+    margin: 15px 0;
 }
 
 section .findId h2 {
     margin: 30px;
 }
 
-.findIdInfo{
+.findIdInfo {
     display: flex;
     flex-direction: column;
     width: 300px;
 }
 
-.findIdInput{
-    width:100%;
-    height:40px;
+.findIdInput {
+    width: 100%;
+    height: 40px;
     margin-bottom: 20px;
 }
 
 section .findIdInput input {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     background: none;
     color: white;
     outline: none;
-    border:2px solid white;
+    border: 2px solid white;
     border-radius: 5px;
-    padding:10px;
+    padding: 10px;
 }
 
-.findIdInput input::placeholder{
-    color:white;
-    font-size:11px;
+.findIdInput input::placeholder {
+    color: white;
+    font-size: 11px;
 }
 
 section .findId button {
@@ -1221,7 +1226,7 @@ section .findId button {
 
 /* 비밀번호 재설정 */
 section .resetPw {
-    width:100%;
+    width: 100%;
     height: 100%;
     align-items: center;
     display: flex;
@@ -1232,37 +1237,37 @@ section .resetPw h2 {
     margin: 20px;
 }
 
-.resetPw form, #resetPwForm{
-    width:300px;
-    margin:15px 0;
+.resetPw form, #resetPwForm {
+    width: 300px;
+    margin: 15px 0;
 }
 
-.resetPwInfo{
+.resetPwInfo {
     display: flex;
     flex-direction: column;
     width: 300px;
 }
 
-.resetPwInput{
-    width:100%;
-    height:40px;
+.resetPwInput {
+    width: 100%;
+    height: 40px;
     margin-bottom: 20px;
 }
 
 section .resetPwInput input {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     background: none;
     color: white;
     outline: none;
-    border:2px solid white;
+    border: 2px solid white;
     border-radius: 5px;
-    padding:10px;
+    padding: 10px;
 }
 
-.resetPwInput input::placeholder{
-    color:white;
-    font-size:11px;
+.resetPwInput input::placeholder {
+    color: white;
+    font-size: 11px;
 }
 
 section .resetPw button {
@@ -1284,7 +1289,7 @@ section .resetPw button {
 
 /*회원 비밀번호 재설정*/
 section .resetMyPw {
-    width:100%;
+    width: 100%;
     height: 100%;
     align-items: center;
     display: flex;
@@ -1295,9 +1300,9 @@ section .resetMyPw h2 {
     margin: 20px;
 }
 
-#resetMyPwForm{
-    width:300px;
-    margin:15px 0;
+#resetMyPwForm {
+    width: 300px;
+    margin: 15px 0;
 }
 
 .resetMyPwWrap {
@@ -1307,14 +1312,14 @@ section .resetMyPw h2 {
 }
 
 
-#resetMyPwForm label{
+#resetMyPwForm label {
     width: 25%;
     text-align: left;
 }
-#resetMyPwForm div{
+
+#resetMyPwForm div {
     flex: 1;
 }
-
 
 
 section .resetMyPw #resetMyPwForm input {
@@ -1347,36 +1352,36 @@ section .resetMyPw button {
     margin-bottom: 20px;
 }
 
-.resetMyPwForm input::placeholder{
-    color:white;
-    font-size:11px;
+.resetMyPwForm input::placeholder {
+    color: white;
+    font-size: 11px;
 }
 
 /*회원 탈퇴*/
 section.withdraw {
-    width:100%;
+    width: 100%;
     height: 100%;
     align-items: center;
     display: flex;
     flex-direction: column;
 }
 
-section.withdraw h3{
+section.withdraw h3 {
     margin: 20px;
 }
 
 #withdrawForm {
-    margin:15px 0;
+    margin: 15px 0;
 }
 
-.withdrawInfo{
+.withdrawInfo {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
     width: 300px;
 }
 
-.withdrawWrap{
+.withdrawWrap {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -1426,9 +1431,9 @@ section #withdrawForm button {
     margin-bottom: 20px;
 }
 
-#withdrawForm input::placeholder{
-    color:white;
-    font-size:11px;
+#withdrawForm input::placeholder {
+    color: white;
+    font-size: 11px;
 }
 
 
@@ -1453,30 +1458,31 @@ section .register h2 {
     margin-bottom: 10px;
 }
 
-.registerForm .registerInfo div{
+.registerForm .registerInfo div {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.registerForm .registerInfo .registerWrap label{
+.registerForm .registerInfo .registerWrap label {
     width: 15%;
     text-align: left;
 }
-.registerForm .registerInfo .registerWrap div{
+
+.registerForm .registerInfo .registerWrap div {
     flex: 1;
 }
 
 
 section .register .registerInfo input {
-    width:100%;
+    width: 100%;
     background: none;
     color: white;
     outline: none;
-    border:2px solid white;
+    border: 2px solid white;
     border-radius: 5px;
     padding-left: 10px;
-    font-size:13px;
+    font-size: 13px;
     height: 40px;
 }
 
@@ -1490,15 +1496,15 @@ section .register #addressField {
 }
 
 section .register #emailField input,
-section .register #addressField input, #phoneNumber{
-    width:100%;
+section .register #addressField input, #phoneNumber {
+    width: 100%;
     background: none;
     color: white;
     outline: none;
-    border:2px solid white;
+    border: 2px solid white;
     border-radius: 5px;
     padding-left: 10px;
-    font-size:13px;
+    font-size: 13px;
     height: 40px;
 }
 
@@ -1532,12 +1538,13 @@ section .register #emailAddress:disabled {
 
 section .register #addressField input[type="button"] {
     width: 120px;
-    height:40px;
+    height: 40px;
     background-color: white;
-    color:black;
+    color: black;
     align-items: center;
     padding-right: 10px;
 }
+
 .registerBtn {
     display: flex;
     flex-direction: row;
@@ -1560,6 +1567,7 @@ section .register .registerBtn button {
     margin-top: 10px;
     margin-bottom: 20px;
 }
+
 .register #checkIdResult, .register #checkPwResult,
 .register #checkNameResult, .register #checkEmailResult,
 .register #checkPhoneResult, .register #checkAddressResult {
@@ -1659,12 +1667,12 @@ div.review .pagination a {
 
 div.review .pagination a:hover {
     background-color: white;
-    color:red;
+    color: red;
 }
 
 div.review .pagination .active {
     background-color: white;
-    color:red;
+    color: red;
     font-weight: bold;
 }
 
@@ -2119,7 +2127,7 @@ section .myPage h2 {
     margin: 20px;
 }
 
-.myPageForm{
+.myPageForm {
     display: flex;
 }
 
@@ -2138,7 +2146,8 @@ section .myPage h2 {
     height: 230px;
     margin-top: 10px;
 }
-.myPageTitle div{
+
+.myPageTitle div {
     height: 40px;
     width: 100px;
     margin-top: 10px;
@@ -2150,14 +2159,14 @@ section .myPage .myPageInfo {
 }
 
 section .myPage .myPageInfo input {
-    width:100%;
+    width: 100%;
     background: none;
     color: white;
     outline: none;
-    border:2px solid white;
+    border: 2px solid white;
     border-radius: 5px;
     padding-left: 10px;
-    font-size:13px;
+    font-size: 13px;
     height: 40px;
     margin-bottom: 10px;
 }
@@ -2223,24 +2232,24 @@ section .myPageEdit h2 {
     margin: 20px;
 }
 
-#myPageEditForm{
+#myPageEditForm {
     width: 500px;
 }
 
-.myPageEditForm{
+.myPageEditForm {
     display: flex;
     justify-content: center;
 }
 
 .myPageEditInfo div input {
-    width:100%;
+    width: 100%;
     background: none;
     color: white;
     outline: none;
-    border:2px solid white;
+    border: 2px solid white;
     border-radius: 5px;
     padding-left: 10px;
-    font-size:13px;
+    font-size: 13px;
     height: 40px;
 }
 
@@ -2249,10 +2258,12 @@ section .myPageEdit h2 {
     align-items: center;
     margin-bottom: 10px;
 }
-.myPagEditInfo .wrap > div{
+
+.myPagEditInfo .wrap > div {
     flex: 1;
 }
-.myPagEditInfo .wrap label{
+
+.myPagEditInfo .wrap label {
     width: 15%;
     text-align: left;
 }
@@ -2266,14 +2277,14 @@ section .myPageEdit h2 {
 }
 
 .myPageEditForm input {
-    width:100%;
+    width: 100%;
     background: none;
     color: white;
     outline: none;
-    border:2px solid white;
+    border: 2px solid white;
     border-radius: 5px;
     padding-left: 10px;
-    font-size:13px;
+    font-size: 13px;
     height: 40px;
 }
 
@@ -2304,14 +2315,14 @@ section .myPageEdit h2 {
 
 .myPageEdit #addressField input[type="button"] {
     width: 120px;
-    height:40px;
+    height: 40px;
     background-color: white;
-    color:black;
+    color: black;
     align-items: center;
     padding-right: 10px;
 }
 
- #btnField button{
+#btnField button {
     width: 100%;
     border: none;
     outline: none;
@@ -2551,13 +2562,14 @@ section.showMyPage .myPage-navbar ul li ul li {
 section.showMyPage .myPage-navbar #myInfoEdit:hover span {
     color: lightcoral;
 }
+
 section.showMyPage .myPage-navbar #resetMyPw:hover span {
     color: lightcoral;
 }
+
 section.showMyPage .myPage-navbar #byeMember:hover span {
     color: lightcoral;
 }
-
 
 
 /* 나의 리뷰 */
@@ -2650,16 +2662,16 @@ div.myTicket .myTicketPagination .active {
     border-top-right-radius: 10px;
 }
 
-.ticketHeader .titleAndId{
+.ticketHeader .titleAndId {
     font-size: 1.25rem;
     font-weight: bold;
 }
 
-.ticketHeader .ticketBuyDate{
+.ticketHeader .ticketBuyDate {
     font-size: 0.875rem;
 }
 
-.ticketContent{
+.ticketContent {
     padding: 16px;
     background-color: white;
     color: black;
@@ -2669,15 +2681,16 @@ div.myTicket .myTicketPagination .active {
     display: flex;
     align-items: center;
 }
-.ticketContent .ticketedTotalInfo{
+
+.ticketContent .ticketedTotalInfo {
     width: 80%;
 }
 
-.ticketContent #moviePrice{
+.ticketContent #moviePrice {
     width: 10%;
 }
 
-.ticketContent .ticketInfo{
+.ticketContent .ticketInfo {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
@@ -2693,12 +2706,11 @@ div.myTicket .myTicketPagination .active {
 }
 
 
-
-.ticketContent .ticketInfo .ticketDetailInfo{
+.ticketContent .ticketInfo .ticketDetailInfo {
     font-size: 1.2rem;
 }
 
-.ticketContent .ticketDetailInfo .movieDetailInfo{
+.ticketContent .ticketDetailInfo .movieDetailInfo {
     text-align: left;
 }
 
@@ -2706,7 +2718,7 @@ div.myTicket .myTicketPagination .active {
     font-size: 1.25rem;
 }
 
-.ticketContent .tickedMvImg{
+.ticketContent .tickedMvImg {
     margin-right: 20px;
 }
 
@@ -2729,34 +2741,38 @@ div.myTicket .myTicketPagination .active {
 
 .movie-chartList {
     display: flex;
-    padding:0 30px;
+    padding: 0 30px;
 }
+
 .movie-chartList .chartList {
     width: 100%;
     position: relative;
 }
+
 .movie-chartList .chartList a {
     cursor: pointer;
     display: block;
     width: 100%;
-    padding:0 10px;
+    padding: 0 10px;
     position: relative;
 
 }
+
 .movie-chartList .chartList .movierank {
     position: absolute;
     bottom: 0;
     left: 20px;
-    font-size:42px;
+    font-size: 42px;
     font-weight: 500;
     color: #fff;
     font-style: italic;
 }
-.movie-chartList .chartList img{
+
+.movie-chartList .chartList img {
     width: 100%;
-        object-fit: cover;
-        border-radius: 10px;
-        box-shadow: 0 0 30px #000;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 30px #000;
 }
 
 .movie-chartList .chartList p {
@@ -2766,7 +2782,7 @@ div.myTicket .myTicketPagination .active {
     word-break: keep-all;
 }
 
-.bottom-section{
+.bottom-section {
     display: flex;
     width: 100%;
     margin: 20px 0px;
@@ -2776,20 +2792,22 @@ div.myTicket .myTicketPagination .active {
     padding: 100px 0;
 }
 
-.best-review{
+.best-review {
     width: 52%;
 }
+
 .best-review h4 {
     font-weight: bold;
     text-align: center;
     font-size: 26px;
     margin-bottom: 40px;
 }
+
 .best_review_slide {
     height: 330px;
 }
 
-.nothing{
+.nothing {
     width: 52%;
     background-color: #888888;
     color: #007bff;
@@ -2804,6 +2822,7 @@ div.myTicket .myTicketPagination .active {
     text-align: center;
     align-items: center;
 }
+
 .bestReviewId {
     width: 5%;
 }
@@ -2820,10 +2839,12 @@ div.myTicket .myTicketPagination .active {
     white-space: normal;
     color: #eee;
 }
+
 .bestReviewItem {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
 }
-.bestReviewContent a{
+
+.bestReviewContent a {
     width: 70%;
     color: #fff;
 }
@@ -2833,11 +2854,11 @@ div.myTicket .myTicketPagination .active {
 }
 
 #interest-movies-section {
-        background-color: #1a202c;
-        color: white;
-        font-family: 'Noto Sans KR', sans-serif;
-        padding: 1.5rem;
-    }
+    background-color: #1a202c;
+    color: white;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 1.5rem;
+}
 
 .interestContainer {
     max-width: 640px;
@@ -2862,13 +2883,15 @@ div.myTicket .myTicketPagination .active {
 
 .interestMovie-title {
     flex-grow: 1;
-}#interest-movies-pagination .page-link-container {
-     display: flex;
-     justify-content: center;
-     flex-wrap: wrap;
-     gap: 0.5rem;
-     margin-top: 2rem;
- }
+}
+
+#interest-movies-pagination .page-link-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
 
 .page-link {
     padding: .5rem 1rem;
@@ -2960,4 +2983,88 @@ div.myTicket .myTicketPagination .active {
 
 .main-posters .swiper-pagination-bullet-active {
     background-color: white;
+}
+
+.showAdminPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+}
+
+.showAdminPage button {
+    background: #b91c1c;
+    margin: 2px;
+    border: 0;
+    outline: 0;
+    display: block;
+    position: relative;
+    float: left;
+    width: 60px;
+    height: 30px;
+    padding: 0;
+    font-weight: 600;
+    text-align: center;
+    color: #FFF;
+    border-radius: 5px;
+    transition: all 0.2s;
+}
+
+.showAdminPage button:hover {
+    background: #9d1616;
+}
+
+.showAdminPage table {
+    margin-top: 40px;
+    width: 80%;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.showAdminPage th,
+.showAdminPage td {
+    text-align: center;
+    height: 100px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.showAdminPage td:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.showAdminPage thead {
+    th {
+        background-color: #55608f;
+    }
+}
+
+.showAdminPage tbody {
+    tr {
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+    }
+
+    td {
+        position: relative;
+
+        &:hover {
+            &:before {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: -9999px;
+                bottom: -9999px;
+                background-color: rgba(255, 255, 255, 0.2);
+                z-index: -1;
+            }
+        }
+    }
 }

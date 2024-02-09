@@ -50,8 +50,6 @@
 <script>
     //indicator
     let marker = $('.marker');
-    marker.css('left', localStorage.getItem('markerLeft'));
-    marker.css('width', localStorage.getItem('markerRight'));
 
     $(document).ready(function () {
         //indicator
@@ -72,9 +70,7 @@
 
         function updateIndicator(element) {
             marker.css('left', element.offsetLeft + 'px');
-            localStorage.setItem('makerLeft', element.offsetLeft);
             marker.css('width', element.offsetWidth + 'px');
-            localStorage.setItem('markerRight', element.offsetWidth);
         }
 
         //scroll

@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,9 +25,8 @@ public class MemberService {
     @Autowired
     PasswordEncoder pEncoder;
 
-    @Transactional
-    public List<Member> getAllMembers() {
-        return memberRepository.findAll();
+    public List<Member> getAllMembersNotWithdrawn() {
+        return memberRepository.findAllByIsWithdrawn('N');
     }
 
     public Member insertMember(Member member) {
@@ -110,5 +108,12 @@ public class MemberService {
             }
         }
         return false;
+    }
+
+    public Member deleteMember(Long memberId) throws Exception {
+        Member deleteMember = memberRepository.findById(memberId).orElseThrow(() -> new Exception("삭제할 멤버를 찾을 수 없습니다."));
+        deleteMember.setIsWithdrawn('Y');
+        deleteMember.setWithdrawnAt(LocalDateTime.now());
+        return memberRepository.save(deleteMember);
     }
 }

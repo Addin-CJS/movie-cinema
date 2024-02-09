@@ -25,6 +25,8 @@ public interface MemberRepository  extends JpaRepository<Member, Long>{
 
     List<Member> findByMemberIdIn(List<Long> memberIdsList);
 
+    List<Member> findAllByIsWithdrawn(Character isWithdrawn);
+
     ObservationFilter findByEmail(String email);
 
     @Query("SELECT m FROM Member m WHERE m.username = :username AND m.name = :name")

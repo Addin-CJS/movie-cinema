@@ -3,81 +3,6 @@
 <jsp:include page="../layouts/header.jsp"/>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<style>
-    .showAdminPage {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        width: 80%;
-    }
-
-    .showAdminPage button {
-        background: #b91c1c;
-        margin: 2px;
-        border: 0;
-        outline: 0;
-        display: block;
-        position: relative;
-        float: left;
-        width: 60px;
-        height: 30px;
-        padding: 0;
-        font-weight: 600;
-        text-align: center;
-        color: #FFF;
-        border-radius: 5px;
-        transition: all 0.2s ;
-    }
-
-    .showAdminPage table {
-        margin-top: 40px;
-        width: 80%;
-        border-collapse: collapse;
-        overflow: hidden;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .showAdminPage th,
-    .showAdminPage td {
-        text-align: center;
-        height: 100px;
-        padding: 15px;
-        background-color: rgba(255, 255, 255, 0.2);
-        color: #fff;
-    }
-
-    .showAdminPage thead {
-        th {
-            background-color: #55608f;
-        }
-    }
-
-    .showAdminPage tbody {
-        tr {
-            &:hover {
-                background-color: rgba(255, 255, 255, 0.3);
-            }
-        }
-
-        td {
-            position: relative;
-
-            &:hover {
-                &:before {
-                    content: "";
-                    position: absolute;
-                    left: 0;
-                    right: 0;
-                    top: -9999px;
-                    bottom: -9999px;
-                    background-color: rgba(255, 255, 255, 0.2);
-                    z-index: -1;
-                }
-            }
-        }
-    }
-</style>
 
 <section class="showMyPage">
     <div class="myPage-navbar">
@@ -113,7 +38,7 @@
                         '<td>' + member.phoneNumber + '</td>' +
                         '<td>' + member.homeAddress + '</td>' +
                         '<td>' +
-                        '<button onclick="editMember(' + member.memberId + ')">수정</button>' +
+                        '<button onclick="modifyMember(' + member.memberId + ')">수정</button>' +
                         '<button onclick="deleteMember(' + member.memberId + ')">삭제</button>' +
                         '</td>' +
                         '</tr>';
@@ -127,10 +52,24 @@
         });
     });
 
-    function editMember(memberId) {
+    function modifyMember(memberId) {
+
     }
 
     function deleteMember(memberId) {
+        if(confirm("회원을 삭제 하시겠습니까?")) {
+            $.ajax({
+                url: "/api/member/delete?memberId="+memberId,
+                type: "GET",
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                    alert("회원 삭제 실패");
+                }
+            });
+        }
     }
 
 </script>

@@ -52,7 +52,6 @@ public class TicketController {
         return "movie/ticketingSuccess";
     }
 
-    // TODO: 티켓ID로 티켓 지우는 api
     @DeleteMapping("/delete")
     @ResponseBody
     public ResponseEntity<?> deleteTicket(@RequestParam("ticketId") Long ticketId) {
