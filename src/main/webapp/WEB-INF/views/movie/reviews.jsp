@@ -5,26 +5,22 @@
 <section>
     <div class="review">
         <sec:authentication var="me" property="principal"/>
+        <div class="latest-likes">
+            <div class="likesWrap">
+                <div class="sort-options">
+                    <a href="#" onclick="updateReviewList(movieId, 0, 'latest'); return false;">최신순</a>
+                </div>
+            </div>
+            <div class="likesWrap">
+                <div class="sort-options">
+                    <a href="#" onclick="updateReviewList(movieId, 0, 'likes'); return false;">좋아요순</a>
+                </div>
+            </div>
+        </div>
         <table class="reviewList">
             <thead>
-            <tr id="latest-likes">
-                <th>
-                    <div class="sort-options">
-                        <a href="#" onclick="updateReviewList(movieId, 0, 'latest'); return false;">최신순</a>
-                    </div>
-                </th>
-
-                <th>
-                    <div>
-                        <a href="#" onclick="updateReviewList(movieId, 0, 'likes'); return false;">좋아요순</a>
-                    </div>
-                </th>
-            </tr>
-
             <tr id="reviewTitle">
-
                 <th colspan="2">영화후기</th>
-
                 <th>별점
                     <form name="stars" id="starForm" method="post">
                         <fieldset>

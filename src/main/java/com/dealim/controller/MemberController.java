@@ -101,7 +101,7 @@ public class MemberController {
 
     @GetMapping("/member/myReviews")
     public String getMyReviews(Authentication authentication, Model model,
-                               @PageableDefault(page = 0, size = 10, sort = "createReviewDate",
+                               @PageableDefault(page = 0, size = 7, sort = "createReviewDate",
                                        direction = Sort.Direction.DESC) Pageable pageable) {
         Member loginUser = ((CustomUserDetails)authentication.getPrincipal()).getMember();
 

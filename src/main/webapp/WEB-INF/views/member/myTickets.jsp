@@ -5,7 +5,7 @@
 
 <section>
     <div class="myTicket">
-        <h1>나의 예매 내역</h1>
+        <h2>나의 예매 내역</h2>
         <div class="myTicketList">
             <c:forEach var="myTicket" items="${myTicketList}">
                 <div class="ticketHeader">

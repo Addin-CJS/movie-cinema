@@ -1569,9 +1569,15 @@ section .register .registerBtn button {
 }
 
 /* 리뷰 */
+.latest-likes {
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+    margin: 20px;
+}
 .reviewList {
     text-align: center;
-    padding: 30px;
+    margin: 30px;
     width: 100%;
 }
 
@@ -2561,24 +2567,42 @@ section.showMyPage .myPage-navbar #byeMember:hover span {
 
 
 /* 나의 리뷰 */
-.myReviewList {
+.myReview {
     text-align: center;
-    padding: 30px;
     width: 100%;
 }
 
-.reviewList #myReviewTitle {
-    margin-bottom: 30px;
+.myReviewList {
+    margin: 10px 50px;
 }
 
-#myReviewContent {
-    max-width: 300px;
+.myReviewList h2{
+    margin: 20px;
+}
+
+#myReviewItem {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: 70px 200px 120px 1fr 100px;
+    gap: 10px;
+    align-items: center;
+}
+
+.reviewId, .starRating, .reviewDate {
+    white-space: nowrap;
+}
+
+.myReviewContent, .reviewContent a , .reviewWriter{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
     text-align: left;
 }
 
-.myReviewList th, .reviewList td {
-    padding: 10px;
+#myReviewItem .reviewDate{
+    flex: 0 0 100px;
 }
+
 
 div.myReview .myReviewPagination {
     width: 100%;
@@ -2608,10 +2632,6 @@ div.myReview .myReviewPagination .active {
     margin-bottom: 30px;
 }
 
-.myTicketList th, .reviewList td {
-    padding: 10px;
-}
-
 div.myTicket .myTicketPagination {
     width: 100%;
     text-align: center;
@@ -2629,15 +2649,92 @@ div.myTicket .myTicketPagination .active {
     font-weight: bold;
 }
 
-.myTicket h1 {
+.myTicket h2 {
     text-align: center;
-    margin-top: 20px;
+    margin: 20px;
 }
 
 .myTicketList {
     max-width: 1000px;
     margin: 0 auto;
 }
+
+
+/*나의 관심영화*/
+.myInterestMovies {
+      text-align: center;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+.movieListContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.movieContainer {
+    border: 3px solid #DB0000;
+    border-radius: 10px;
+    margin: 20px;
+    width: 700px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-around;
+}
+
+.interestMovieImg img {
+    width: 150px;
+    height: auto;
+    border-radius: 20px;
+    border: 1px solid;
+    margin-left: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.myInterestMovieInfo1 {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 30px;
+}
+
+.interestMovieTitle {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.interestMovieWrap {
+    margin: 20px;
+    text-align: left;
+}
+
+.myInterestMovieInfo2 {
+    display: flex;
+    align-items: center;
+}
+
+ .myInterestMoviePagination {
+    width: 100%;
+    text-align: center;
+}
+
+ .myInterestMoviePagination a {
+    margin: 0 5px;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+ .myInterestMoviePagination .active {
+    font-weight: bold;
+}
+
 
 .ticketHeader {
     background-color: #b91c1c;
@@ -2675,6 +2772,7 @@ div.myTicket .myTicketPagination .active {
 
 .ticketContent #moviePrice{
     width: 10%;
+    text-align: center;
 }
 
 .ticketContent .ticketInfo{
@@ -2832,59 +2930,6 @@ div.myTicket .myTicketPagination .active {
     width: 15%;
 }
 
-#interest-movies-section {
-        background-color: #1a202c;
-        color: white;
-        font-family: 'Noto Sans KR', sans-serif;
-        padding: 1.5rem;
-    }
-
-.interestContainer {
-    max-width: 640px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.interestMove-row {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #4a5568;
-    margin-bottom: 1rem;
-}
-
-.interestMovie-img {
-    display: block;
-    width: 150px;
-    height: auto;
-    margin-right: 1rem;
-}
-
-.interestMovie-title {
-    flex-grow: 1;
-}#interest-movies-pagination .page-link-container {
-     display: flex;
-     justify-content: center;
-     flex-wrap: wrap;
-     gap: 0.5rem;
-     margin-top: 2rem;
- }
-
-.page-link {
-    padding: .5rem 1rem;
-    background-color: #4a5568;
-    text-decoration: none;
-    color: white;
-    border-radius: .25rem;
-}
-
-.page-link:not(:last-child) {
-    margin-right: 0.5rem;
-}
-
-.page-link:hover {
-    background-color: #2d3748;
-}
 
 .interest-button {
     background-color: transparent;
