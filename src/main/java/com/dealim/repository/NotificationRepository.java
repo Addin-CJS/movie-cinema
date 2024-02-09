@@ -11,5 +11,3 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 
     boolean existsByUsernameAndTypeAndReviewId(String username, Notification.NotificationType type, Long reviewId);
     }
-
-

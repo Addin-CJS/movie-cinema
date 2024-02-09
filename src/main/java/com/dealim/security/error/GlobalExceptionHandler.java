@@ -14,4 +14,3 @@ public class GlobalExceptionHandler {
         return "redirect:/member/register";
     }
 }
-

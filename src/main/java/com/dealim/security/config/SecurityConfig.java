@@ -29,11 +29,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+        return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/**","/member/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/member/login").permitAll()
@@ -45,9 +45,8 @@ public class SecurityConfig {
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
                                 .userService(oAuth2CustomDetailsService))
-                        .defaultSuccessUrl("/", true));
-
-        return http.build();
+                        .defaultSuccessUrl("/", true))
+                .build();
     }
 
     @Bean

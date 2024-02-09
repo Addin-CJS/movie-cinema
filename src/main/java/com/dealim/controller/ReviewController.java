@@ -28,7 +28,6 @@ public class ReviewController {
     @Autowired
     ReviewService reviewService;
 
-
     @PostMapping("/reviewInsert")
     @ResponseBody
     public String insertReview(Review review, Authentication authentication) {
@@ -59,7 +58,6 @@ public class ReviewController {
         return ResponseEntity.ok(reviewList);
     }
 
-
     @PostMapping("/updateReview")
     @ResponseBody
     public String updateReview(Review review, Authentication authentication) {
@@ -67,8 +65,6 @@ public class ReviewController {
         if (authentication == null || !authentication.isAuthenticated()) {
             return "fail";
         }
-
-
 
         reviewService.updateReview(review);
         return "success";
@@ -92,22 +88,19 @@ public class ReviewController {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
 
-
         HttpSession session = request.getSession();
         Set<Long> likedReviews = (Set<Long>) session.getAttribute("likedReviews");
         if (likedReviews == null) {
             likedReviews = new HashSet<>();
         }
 
-        reviewService.changeLikeStatus(reviewId, likeAction, likedReviews,username);
-
+        reviewService.changeLikeStatus(reviewId, likeAction, likedReviews, username);
 
         if ("like".equals(likeAction)) {
             likedReviews.add(reviewId);
         } else if ("unlike".equals(likeAction)) {
             likedReviews.remove(reviewId);
         }
-
 
         session.setAttribute("likedReviews", likedReviews);
 
@@ -122,9 +115,6 @@ public class ReviewController {
         if (likedReviews == null) {
             likedReviews = new HashSet<>();
         }
-
         return ResponseEntity.ok(likedReviews);
     }
-
-
-    }
+}

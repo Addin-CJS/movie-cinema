@@ -1,6 +1,5 @@
 package com.dealim.repository;
 
-
 import com.dealim.domain.MemberRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

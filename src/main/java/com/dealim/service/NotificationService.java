@@ -16,7 +16,7 @@ public class NotificationService {
     private NotificationRepository notificationRepository;
 
     @Autowired
-    private  SseEmitterService sseEmitterService;
+    private SseEmitterService sseEmitterService;
 
     @Autowired
     private ReviewRepository reviewRepository;
@@ -38,12 +38,13 @@ public class NotificationService {
 
             // 고유 ID를 포함한 알림 JSON 생성는 코드임
             String notificationJson = String.format("{\"id\": \"%d\", \"message\": \"안녕하세요, %s님. 관심 영화 '%d'가 추가되었습니다.\", \"type\": \"INTEREST_MOVIE_ADDED\"}", savedNotification.getId(), username, movieId);
-            System.out.println("json~~~~~~"+notificationJson);
+            System.out.println("json~~~~~~" + notificationJson);
             // SseEmitterService를 사용하여 특정 사용자에게 알림 전송 코드임
             sseEmitterService.sendNotification(username, notificationJson);
 
         }
     }
+
     public void sendLikeNotification(Long reviewId, String likerUsername) {
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new RuntimeException("리뷰를 찾을 수 없습니다."));
@@ -69,9 +70,4 @@ public class NotificationService {
             sseEmitterService.sendNotification(ownerUsername, notificationJson);
         }
     }
-
-
-
-
-
 }

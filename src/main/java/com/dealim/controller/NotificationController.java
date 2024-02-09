@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-
 @RestController
 public class NotificationController {
 
@@ -21,7 +20,6 @@ public class NotificationController {
     private NotificationService notificationService;
     @Autowired
     private SseEmitterService sseEmitterService;
-
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @GetMapping(path = "/connect/{username}", produces = "text/event-stream")
@@ -30,9 +28,4 @@ public class NotificationController {
         response.setCharacterEncoding("UTF-8");
         return sseEmitterService.createEmitterForUser(username);
     }
-
-
-
-
-
 }

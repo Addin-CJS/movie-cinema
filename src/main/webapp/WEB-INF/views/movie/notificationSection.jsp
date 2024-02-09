@@ -3,27 +3,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
-
-
-    <style>
-        .notification-popup {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: yellow;
-            color: blue;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-            display: none;
-            z-index: 1000;
-        }
-    </style>
+<style>
+    .notification-popup {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: yellow;
+        color: blue;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        display: none;
+        z-index: 1000;
+    }
+</style>
 
 <section>
-<div id="notificationArea"></div>
-<sec:authentication var="me" property="principal"/>
+    <div id="notificationArea"></div>
+    <sec:authentication var="me" property="principal"/>
 
 </section>
 <script>
@@ -43,14 +40,14 @@
             console.error("SSE 연결에 오류가 발생했습니다.", event);
         };
 
-        source.onmessage = function(event) {
+        source.onmessage = function (event) {
             console.log("Received message: ", event.data);
 
         };
 
         var receivedNotifications = {}; // 이미 받은 알림을 추적하는 객체
 
-        source.addEventListener('notification', function(e) {
+        source.addEventListener('notification', function (e) {
             console.log("Received data 알림 : ", e.data);
             try {
                 var data = JSON.parse(e.data);
@@ -70,13 +67,13 @@
                 notification.style.display = 'block';
 
                 // 알림 자동 숨김
-                setTimeout(function() {
+                setTimeout(function () {
                     notification.style.display = 'none';
                     document.body.removeChild(notification);
                 }, 5000);
 
                 // 알림 클릭 시 숨김
-                notification.onclick = function() {
+                notification.onclick = function () {
                     notification.style.display = 'none';
                     document.body.removeChild(notification);
                 };

@@ -19,7 +19,6 @@ public class SseEmitterService {
             this.userEmitters.remove(username);
         }
 
-
     public SseEmitter createEmitterForUser(String username) {
         SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);
         this.userEmitters.put(username, emitter);
@@ -58,5 +57,4 @@ public class SseEmitterService {
             }
         }
     }
-
 }

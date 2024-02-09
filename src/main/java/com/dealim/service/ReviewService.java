@@ -73,7 +73,6 @@ public class ReviewService {
 
     }
 
-
     public Page<Review> getMyReviews(String username, Pageable pageable, Model model) {
         Page<Review> myReviewList = reviewRepository.findAllByUsername(username, pageable);
 

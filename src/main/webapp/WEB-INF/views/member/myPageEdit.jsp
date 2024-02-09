@@ -5,7 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-
 <section>
     <div class="myPageEdit">
         <h2>내 정보 수정</h2>
@@ -154,7 +153,4 @@
                 '숫자만 입력해주세요. 전화번호는 11자리입니다.', $("#checkPhoneResult"), "phoneNumber");
         });
     });
-
-
-
 </script>

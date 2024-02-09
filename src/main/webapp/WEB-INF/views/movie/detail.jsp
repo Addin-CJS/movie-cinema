@@ -4,7 +4,6 @@
 <jsp:include page="../layouts/header.jsp"/>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-
 <section>
     <sec:authentication var="me" property="principal"/>
 

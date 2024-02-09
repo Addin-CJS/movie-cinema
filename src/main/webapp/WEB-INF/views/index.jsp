@@ -83,8 +83,8 @@
 
     var posterSwiper = new Swiper(".main-posters-slide", {
         cssMode: true,
-        autoplay : {
-            delay : 3000,
+        autoplay: {
+            delay: 3000,
         },
         navigation: {
             nextEl: ".swiper-button-next",

@@ -1,6 +1,5 @@
 package com.dealim.controller;
 
-
 import com.dealim.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

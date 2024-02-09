@@ -234,7 +234,6 @@
         });
     }
 
-
     function loadUserLikes() {
         $.ajax({
             url: "/getUserLikes",

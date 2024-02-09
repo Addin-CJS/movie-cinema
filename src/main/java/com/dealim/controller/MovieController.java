@@ -30,11 +30,11 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
-   @Autowired
-   private InterestMovieService interestMovieService;
+    @Autowired
+    private InterestMovieService interestMovieService;
 
-   @Autowired
-   private NotificationService notificationService;
+    @Autowired
+    private NotificationService notificationService;
 
     @RequestMapping("/movieHome")
     public String movieHome(Model model,
@@ -54,14 +54,11 @@ public class MovieController {
             CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
             Member member = userDetails.getMember();
 
-
             boolean isInterested = interestMovieService.getMovieInterestedByUser(movieId, member.getUsername());
             model.addAttribute("isInterested", isInterested);//상태를 jsp로 보내주는거
         } else {
             model.addAttribute("isInterested", false);
         }
-
-
         movieService.getShowDetail(movieId, model);
         return "movie/detail";
     }
@@ -69,16 +66,15 @@ public class MovieController {
     @GetMapping("/movieSeats")
     public String movieSeats(@RequestParam("movieId") Long movieId, Model model) {
 
-        Optional <Movie> movie = movieService.selectMovieDetailById(movieId);
+        Optional<Movie> movie = movieService.selectMovieDetailById(movieId);
 
-        if(movie.isPresent()) {
+        if (movie.isPresent()) {
             model.addAttribute("movie", movie.get());
         } else {
             model.addAttribute("movie", null);
         }
         return "movie/movieSeats";
     }
-
 
     @PostMapping("/interestMovie")
     public String addInterestMovie(InterestMovie interestMovie, Authentication authentication, RedirectAttributes redirectAttributes) {
@@ -92,8 +88,8 @@ public class MovieController {
 
         boolean added = interestMovieService.addInterestMovie(interestMovie);
 
-        System.out.println("movie컨트롤러 무비아이디 "+interestMovie.getMovieId());
-        System.out.println("movie컨트롤러 아이디 "+member.getUsername());
+        System.out.println("movie컨트롤러 무비아이디 " + interestMovie.getMovieId());
+        System.out.println("movie컨트롤러 아이디 " + member.getUsername());
         if (added) {
             notificationService.sendInterestMovieAddedNotification(member.getUsername(), interestMovie.getMovieId());
             redirectAttributes.addFlashAttribute("successMessage", "관심 영화가 성공적으로 추가되었습니다.");
@@ -102,7 +98,6 @@ public class MovieController {
         }
         return "redirect:/showDetail?movieId=" + interestMovie.getMovieId();
     }
-
 
     @PostMapping("/removeInterestMovie")
     public String removeInterestMovie(@RequestParam("movieId") Long movieId, Authentication authentication, RedirectAttributes redirectAttributes) {
@@ -121,14 +116,4 @@ public class MovieController {
         }
         return "redirect:/showDetail?movieId=" + movieId;
     }
-
-
-
-
-    }
-
-
-
-
-
-
+}

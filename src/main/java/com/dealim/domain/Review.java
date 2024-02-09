@@ -20,7 +20,6 @@ public class Review {
     private int movieNo;
     private String reviewWriter;
 
-
     @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
     private Integer likeCount=0;
 

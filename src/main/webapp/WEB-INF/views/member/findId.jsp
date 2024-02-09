@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <jsp:include page="../layouts/header.jsp"/>
 
 <section>
@@ -57,6 +58,5 @@
         })
     });
 </script>
-
 
 <jsp:include page="../layouts/footer.jsp"/>
