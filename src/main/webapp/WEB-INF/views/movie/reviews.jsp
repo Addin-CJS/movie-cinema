@@ -6,30 +6,25 @@
     <jsp:include page="../movie/notificationSection.jsp"/>
     <div class="review">
         <sec:authentication var="me" property="principal"/>
-        <table class="reviewList">
-            <thead>
-            <tr id="latest-likes">
-                <th>
-                    <div class="sort-options">
-                        <a href="#" onclick="updateReviewList(movieId, 0, 'latest'); return false;">최신순</a>
-                    </div>
-                </th>
+        <div class="latest-likes">
+            <div class="likesWrap">
+                <div class="sort-options">
+                    <a href="#" onclick="updateReviewList(movieId, 0, 'latest'); return false;">최신순</a>
+                </div>
+            </div>
+            <div class="likesWrap">
+                <div class="sort-options">
+                    <a href="#" onclick="updateReviewList(movieId, 0, 'likes'); return false;">좋아요순</a>
+                </div>
+            </div>
+        </div>
 
-                <th>
-                    <div>
-                        <a href="#" onclick="updateReviewList(movieId, 0, 'likes'); return false;">좋아요순</a>
-                    </div>
-                </th>
-            </tr>
-
-            <tr id="reviewTitle">
-
-                <th colspan="2">영화후기</th>
-
-                <th>별점
+        <div class="reviewHeader">
+            <div class="reviewTitleRow">
+                <div class="reviewTitle">영화후기</div>
+                <div class="reviewRating">
                     <form name="stars" id="starForm" method="post">
                         <fieldset>
-                            <span class="text-bold"></span>
                             <input type="radio" name="reviewStar" value="5" id="rate5"><label for="rate5">★</label>
                             <input type="radio" name="reviewStar" value="4" id="rate4"><label for="rate4">★</label>
                             <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
@@ -37,45 +32,64 @@
                             <input type="radio" name="reviewStar" value="1" id="rate1"><label for="rate1">★</label>
                         </fieldset>
                     </form>
-                </th>
-
-                <th><textarea cols="80" rows="4" id="reviewContent"> </textarea></th>
-                <th colspan="3">
+                </div>
+                <div class="reviewInput">
+                    <textarea cols="80" rows="4" id="reviewContent"></textarea>
+                </div>
+                <div class="reviewSubmit">
                     <button class="review-btn" onclick="insertReview();">평점 및 리뷰작성</button>
-                </th>
+                </div>
+            </div>
 
-            </tr>
-            <tr id="reviewEditForm" style="display : none;">
-                <th colspan="2">영화후기 수정</th>
-                <th>별점</th>
-                <th><textarea cols="80" rows="4" id="editReviewContent"> </textarea></th>
-                <th colspan="2">
-                    <button onclick="updateReview();">수정 완료</button>
-                    <button onclick="cancelEdit();">수정 취소</button>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="review" items="${reviewList.content}">
-                <tr id="reviewItem">
-                    <td>${review.reviewId}</td>
-                    <td>${review.reviewWriter}</td>
-                    <td>별점</td>
-                    <td>${review.reviewContent}</td>
-                    <td>${fn:substringBefore(review.createReviewDate.toString(), 'T')}</td>
+            <div id="reviewEditForm" class="reviewEditRow" style="display: none;">
+                <div class="reviewEditTitle">영화후기 수정</div>
+                <div class="reviewEditRating">
+                    <form name="stars" id="starEditForm" method="post">
+                        <fieldset>
+                            <input type="radio" name="reviewStar" value="5" id="rate5"><label for="rate5">★</label>
+                            <input type="radio" name="reviewStar" value="4" id="rate4"><label for="rate4">★</label>
+                            <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
+                            <input type="radio" name="reviewStar" value="2" id="rate2"><label for="rate2">★</label>
+                            <input type="radio" name="reviewStar" value="1" id="rate1"><label for="rate1">★</label>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="reviewEditInput">
+                    <textarea cols="80" rows="4" id="editReviewContent"></textarea>
+                </div>
+                <div class="reviewEditSubmit">
+                    <button onclick="updateReview();">수정</button>
+                    <button onclick="cancelEdit();">취소</button>
+                </div>
+            </div>
+        </div>
 
-                    <td>
-                        <sec:authorize access="isAuthenticated()">
-                            <c:if test="${not empty me and not empty me.member and me.member.username == review.reviewWriter}">
-                                <button onclick="updateReview(${review.reviewId});">수정</button>
-                                <button onclick="deleteReview(${review.reviewId});">삭제</button>
-                            </c:if>
-                        </sec:authorize>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+        <div class="reviewList">
+            <div class="reviewContent">
+                <c:forEach var="review" items="${reviewList.content}">
+                    <div class="reviewItem">
+                        <div class="reviewWrapper1">
+                            <div class="reviewWrapper2">
+                                <div>${review.reviewId}</div>
+                                <div>${review.reviewWriter}</div>
+                            </div>
+                            <div class="reviewStar">별점</div>
+                            <div class="reviewText">${review.reviewContent}</div>
+                            <div>${fn:substringBefore(review.createReviewDate.toString(), 'T')}</div>
+                            <div>
+                                <sec:authorize access="isAuthenticated()">
+                                    <c:if test="${not empty me and not empty me.member and me.member.username == review.reviewWriter}">
+                                        <button onclick="updateReview(${review.reviewId});">수정</button>
+                                        <button onclick="deleteReview(${review.reviewId});">삭제</button>
+                                    </c:if>
+                                </sec:authorize>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+
         <div class="pagination"></div>
     </div>
 </section>
@@ -174,57 +188,60 @@
                             stars += '<span class="gray-star">★</span>';
                         }
 
-                        reviewsHtml += '<tr><td>'
-                            + review.reviewId + '</td><td>'
-                            + review.reviewWriter + '</td><td>'
-                            + stars + '</td><td>'
-                            + review.reviewContent + '</td><td>'
-                            + '<a href="javascript:void(0);" onclick="likeReview(' + review.reviewId + ');" id="heart-' + review.reviewId + '">🩵</a>'
-                            + '<span id="like-count-' + review.reviewId + '">'
-                            + (review.likeCount !== null ? review.likeCount : 0)
-                            + '</span></td><td>'
-                            + displayDate.substring(0, 10) + '</td><td>'
-
-                        if (loginUsername === review.reviewWriter) {
-                            reviewsHtml += '<a href="javascript:void(0);" onclick="editReview(' + review.reviewId + ')">[수정]</a>'
-                            reviewsHtml += '<a href="javascript:void(0);" class="delete-review" reviewNo="' + review.reviewId + '">[삭제]</a>'
-                        }
-                        reviewsHtml += '</td></tr>';
+                        reviewsHtml += '<div class="reviewWrapper1">' +
+                            '<div class="reviewItem">' +
+                            '<div class="reviewWrapper2">' +
+                            '<div>' + review.reviewId + '</div>' +
+                            '<div>' + review.reviewWriter + '</div>' +
+                            '<div class=reviewBtns>' +
+                            (loginUsername === review.reviewWriter ? '<button onclick="editReview(' + review.reviewId + ')">[수정]</button>' +
+                                '<button class="delete-review" reviewNo="' + review.reviewId + '">[삭제]</button>' : '') +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="reviewStar">' + stars + '</div>' +
+                            '<div class="reviewText">' + review.reviewContent + '</div>' +
+                            '<div class="reviewWrapper3">' +
+                            '<div class="reviewDate">' + displayDate + '</div>' +
+                            '<div class="reviewLike"><a href="javascript:void(0);" onclick="likeReview(' + review.reviewId + ');" id="heart-' + review.reviewId + '">🩵</a>' +
+                            '<span id="like-count-' + review.reviewId + '">' + (review.likeCount !== null ? review.likeCount : 0) + '</span></div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
                     });
+                }
 
-                    var totalPages = response.totalPages;
-                    var pageGroupSize = 5;
-                    var currentPageGroup = Math.floor(currentPage / pageGroupSize);
-                    var startPage = currentPageGroup * pageGroupSize;
-                    var endPage = Math.min(startPage + pageGroupSize - 1, totalPages - 1);
+                var totalPages = response.totalPages;
+                var pageGroupSize = 5;
+                var currentPageGroup = Math.floor(currentPage / pageGroupSize);
+                var startPage = currentPageGroup * pageGroupSize;
+                var endPage = Math.min(startPage + pageGroupSize - 1, totalPages - 1);
 
-                    var paginationHtml = '';
-                    if (totalPages > 1) {
+                var paginationHtml = '';
+                if (totalPages > 1) {
 
-                        if (currentPage > 0) {
-                            paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',0);">처음</a> ';
-                        }
+                    if (currentPage > 0) {
+                        paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',0);">처음</a> ';
+                    }
 
-                        if (currentPage > 0) {
-                            paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (currentPage - 1) + ');">이전</a> ';
-                        }
+                    if (currentPage > 0) {
+                        paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (currentPage - 1) + ');">이전</a> ';
+                    }
 
-                        for (var pageNum = startPage; pageNum <= endPage; pageNum++) {
-                            paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + pageNum + ');" ' + (pageNum === currentPage ? 'class="active"' : '') + '>' + (pageNum + 1) + '</a>';
-                        }
+                    for (var pageNum = startPage; pageNum <= endPage; pageNum++) {
+                        paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + pageNum + ');" ' + (pageNum === currentPage ? 'class="active"' : '') + '>' + (pageNum + 1) + '</a>';
+                    }
 
-                        if (currentPage < totalPages - 1) {
-                            paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (currentPage + 1) + ');">다음</a> ';
-                        }
+                    if (currentPage < totalPages - 1) {
+                        paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (currentPage + 1) + ');">다음</a> ';
+                    }
 
-                        if (currentPage < totalPages - 1) {
-                            paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (totalPages - 1) + ');">마지막</a>';
-                        }
+                    if (currentPage < totalPages - 1) {
+                        paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (totalPages - 1) + ');">마지막</a>';
                     }
                 }
 
                 $('.pagination').html(paginationHtml);
-                $('.reviewList tbody').html(reviewsHtml);
+                $('.reviewList').html(reviewsHtml);
 
                 loadUserLikes(); //좋아요 세션에 담아서
             },
@@ -257,27 +274,29 @@
             if (review) {
                 $("#editReviewContent").val(review.reviewContent);
                 $("#reviewEditForm").data("reviewId", reviewId);
-                $("#reviewTitle").hide();
+                $(".reviewTitleRow").hide();
                 $("#reviewEditForm").show();
             }
         }
     }
 
     function cancelEdit() {
-        $(".reviewList").show();
+        $(".reviewTitleRow").show();
         $("#reviewEditForm").hide();
     }
 
     function updateReview() {
         var reviewId = $("#reviewEditForm").data("reviewId"); // 수정 중인 리뷰 ID 저장 필요
         var reviewContent = $("#editReviewContent").val();
+        var starRating = $('input[name="reviewStar"]:checked').val();
         $.ajax({
             url: "updateReview",
             data: {
                 movieNo: movieId,
                 reviewId: reviewId,
                 reviewWriter: loginUsername,
-                reviewContent: reviewContent
+                reviewContent: reviewContent,
+                starRating: starRating
             },
             type: "post",
             success: function (result) {

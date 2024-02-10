@@ -49,7 +49,7 @@ public class ReviewController {
     public ResponseEntity<Page<Review>> getReviewsByMovieId(
             @RequestParam("movieNo") Long movieId,
             @RequestParam(value = "sortType", defaultValue = "latest") String sortType,
-            @PageableDefault(page = 0, size = 10, sort = "reviewId", direction = Sort.Direction.DESC) Pageable pageable,
+            @PageableDefault(page = 0, size = 6, sort = "reviewId", direction = Sort.Direction.DESC) Pageable pageable,
             Model model) {
 
 

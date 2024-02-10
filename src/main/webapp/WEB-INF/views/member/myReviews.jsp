@@ -3,18 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <section>
     <div class="myReview">
-        <table class="myReviewList">
-            <thead>
-                <tr id="myReviewTitle">
-                    <th colspan="7">나의 영화 리뷰 리스트</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div class="myReviewList">
+                    <h2>나의 영화 후기</h2>
+            <div>
                 <c:forEach var="myReview" items="${myReviewList}">
-                    <tr id="myReviewItem">
-                        <td>${myReview.reviewId}</td>
-                        <td>${myReview.reviewWriter}</td>
-                        <td>
+                    <div id="myReviewItem">
+                        <div class="reviewId">${myReview.reviewId}</div>
+                        <div class="reviewWriter">${myReview.reviewWriter}</div>
+                        <div class="starRating">
                             <!-- 별점 표시 부분 -->
                             <c:forEach var="i" begin="1" end="${myReview.starRating}">
                                 <span class="yellow-star">★</span>
@@ -22,13 +18,13 @@
                             <c:forEach var="i" begin="${myReview.starRating + 1}" end="5">
                                 <span class="gray-star">★</span>
                             </c:forEach>
-                        </td>
-                        <td id="myReviewContent"><a href="/showDetail?movieId=${myReview.movieNo}">${myReview.reviewContent}</a></td>
-                        <td>${fn:substringBefore(myReview.createReviewDate.toString(), 'T')}</td>
-                   </tr>
+                        </div>
+                        <div class="myReviewContent"><a href="/showDetail?movieId=${myReview.movieNo}">${myReview.reviewContent}</a></div>
+                        <div class="reviewDate">${fn:substringBefore(myReview.createReviewDate.toString(), 'T')}</div>
+                   </div>
                 </c:forEach>
-             </tbody>
-        </table>
+             </div>
+        </div>
         <div class="myReviewPagination">
             <c:if test="${nowPage > 0}">
                 <a href="javascript:loadReviewPage(${nowPage - 1})">이전</a>
