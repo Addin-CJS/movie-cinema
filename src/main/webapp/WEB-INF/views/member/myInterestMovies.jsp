@@ -9,7 +9,7 @@
         <div class="movieListContainer">
             <c:if test="${not empty interestMoviesPage}">
                 <c:forEach var="movie" items="${interestMoviesPage.content}">
-                    <div class="movieContainer"> <!-- 각 영화 정보를 담는 새로운 컨테이너 -->
+                    <div class="movieContainer">
                         <div class="interestMovieImg">
                             <a href="/showDetail?movieId=${movie.movieId}">
                                 <img class="interestMovie-img" src="${moviesInfo[movie.movieId].mvImg}" alt="${moviesInfo[movie.movieId].mvTitle}"/>

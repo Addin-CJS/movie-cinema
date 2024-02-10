@@ -1569,6 +1569,9 @@ section .register .registerBtn button {
 }
 
 /* 리뷰 */
+section .review {
+    width: 100%;
+}
 .latest-likes {
     display: flex;
     justify-content: space-around;
@@ -1577,64 +1580,131 @@ section .register .registerBtn button {
 }
 .reviewList {
     text-align: center;
-    margin: 30px;
-    width: 100%;
 }
 
-.reviewList textarea {
+.reviewTitleRow, .reviewEditRow {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 92%;
+    margin: 40px;
+    gap: 30px;
+    text-align: center;
+}
+
+.reviewTitle, .reviewEditTitle {
+    width: 70px;
+}
+
+.reviewRating, .reviewEditRating{
+    width: 150px;
+}
+
+.reviewInput, .reviewEditInput {
+    flex: 1;
+}
+
+.reviewSubmit, .reviewEditSubmit{
+    display: flex;
+    width: 120px;
+    gap: 10px;
+}
+
+.reviewHeader textarea {
     width: 100%;
     min-width: 200px;
     min-height: 100px;
-}
-
-.reviewList textarea {
     border-radius: 5px;
 }
 
-.reviewList .review-btn {
-    width: 200px;
+.reviewHeader button {
+    width: 150px;
     border: none;
     outline: none;
-    border-radius: 50px;
-    font-size: 1em;
+    border-radius: 5px;
+    font-size: 0.8em;
     background: #DB0000;
     color: white;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50px;
+    height: 40px;
     padding: 10px 10px;
 }
 
-.reviewList button:hover {
+.reviewHeader button:hover {
     background: white;
     color: black;
 }
 
-.reviewList #reviewTitle {
-    margin-bottom: 30px;
+
+.reviewContent {
+    width: 80%;
+    margin: 20px;
 }
 
-.reviewList th, .reviewList td {
-    padding: 10px;
-}
-
-
-.reviewList button {
-    width: 200px;
-    border: none;
-    outline: none;
-    border-radius: 50px;
-    font-size: 1em;
-    background: #DB0000;
-    color: white;
-    cursor: pointer;
+.reviewItem {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 50px;
-    padding: 10px 10px;
+    height: 200px;
+}
+
+.reviewWrapper1 {
+    display: inline-block;
+    width: 40%;
+}
+
+.reviewWrapper1 div {
+    width: 100%;
+}
+
+.reviewBtns {
+    text-align: right;
+    width: 200px;
+    margin-right: 20px;
+}
+
+.reviewBtns button {
+    background-color: black;
+    border-radius: 5px;
+    border: none;
+    color: white;
+}
+
+.reviewWrapper2 {
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.reviewStar {
+    margin-bottom: 10px;
+    text-align: left;
+    margin-left: 7px;
+}
+
+.reviewText {
+    margin-bottom: 10px;
+    text-align: left;
+    margin-left: 7px;
+    height: 70px;
+}
+
+.reviewWrapper3 {
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.reviewLike {
+    text-align: right;
+    margin-right: 20px;
 }
 
 .review-content {
@@ -1647,7 +1717,6 @@ section .register .registerBtn button {
 div.review .pagination {
     width: 100%;
     text-align: center;
-    background: #111;
     margin-top: 20px;
     margin-bottom: 50px;
 }
@@ -2386,28 +2455,27 @@ section .myPageEdit #addressField input[type="button"] {
 }
 
 /*별점*/
-
-#starForm fieldset {
+#starForm fieldset, #starEditForm fieldset {
     display: inline-block;
     direction: rtl;
     border: 0;
 }
 
-#starForm fieldset legend {
+#starForm fieldset legend, #starEditForm fieldset legend {
     text-align: right;
 }
 
-#starForm input[type=radio] {
+#starForm input[type=radio], #starEditForm input[type=radio] {
     display: none;
 }
 
-#starForm label {
+#starForm label, #starEditForm label {
     font-size: 1.2em;
     color: transparent;
     text-shadow: 0 0 0 #f0f0f0;
 }
 
-#starForm label:hover {
+#starForm label:hover, #starEditForm label:hover {
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 }
 
@@ -2590,6 +2658,19 @@ section.showMyPage .myPage-navbar #byeMember:hover span {
 
 .reviewId, .starRating, .reviewDate {
     white-space: nowrap;
+}
+
+.reviewContent {
+   width: 80%;
+    margin: 20px;
+}
+
+.reviewItem {
+    display: inline-block;
+    border: 1px solid white;
+    padding: 10px;
+    margin: 10px;
+    width: 40%;
 }
 
 .myReviewContent, .reviewContent a , .reviewWriter{
