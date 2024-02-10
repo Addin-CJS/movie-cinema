@@ -31,7 +31,7 @@
                     <div class="loginBtn2">
                         <a href="/oauth2/authorization/google"><img src="/img/google.png"/></a>
                         <a href="#"><img src="/img/naver.png"/></a>
-                        <a href="#"><img src="/img/kakao.png"/></a>
+                        <a href="/oauth2/authorization/kakao"><img src="/img/kakao.png"/></a>
                     </div>
                 </div>
                 <div id="findIdAndPw">
