@@ -46,7 +46,7 @@ public class SseEmitterService {
     public void sendNotification(String username, String notificationJson) {
         SseEmitter emitter = userEmitters.get(username);
         System.out.println("Sending notification if 들어가기전 see서비스 부분: " + notificationJson); // 로그 추가
-        System.out.println("Sending notification:  if 들어가기전 see서비스 부분 " +  username); // 로그 추가
+        System.out.println("Sending notification if 들어가기전 see서비스 부분: " +  username); // 로그 추가
         if (emitter != null) {
             try {
                 System.out.println("Sending notification if 들어간후: " + notificationJson); // 로그 추가

@@ -70,7 +70,7 @@
                 setTimeout(function () {
                     notification.style.display = 'none';
                     document.body.removeChild(notification);
-                }, 5000);
+                }, 10000);
 
                 // 알림 클릭 시 숨김
                 notification.onclick = function () {

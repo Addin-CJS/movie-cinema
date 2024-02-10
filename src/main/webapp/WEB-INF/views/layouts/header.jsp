@@ -22,7 +22,7 @@
         <h1 class="logo">
             <a href="/">영화<span>예매</span></a>
         </h1>
-
+        <jsp:include page="../movie/notification.jsp" />
         <i class="fa fa-bars" id="menu"></i>
 
         <ul id="menu-box">

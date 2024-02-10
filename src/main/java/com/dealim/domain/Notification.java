@@ -19,7 +19,6 @@ public class Notification {
     private Long id;
     @Column(name = "user_name")
     private String username;
-
     @Enumerated(EnumType.STRING)
     private NotificationType type;
     private boolean isRead = false;
