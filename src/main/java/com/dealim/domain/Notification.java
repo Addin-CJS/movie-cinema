@@ -28,6 +28,7 @@ public class Notification {
 
     private LocalDateTime createdDateTime = LocalDateTime.now();
     private Long movieId;
+    private Long ticketId;
     @Column(name = "review_id")
     private Long reviewId;
 

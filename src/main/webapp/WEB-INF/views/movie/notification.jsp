@@ -5,32 +5,48 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 
-
-    <style>
-        .notification-popup {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: yellow;
-            color: blue;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-            display: none;
-            z-index: 1000;
-        }
-    </style>
+<style>
+    .notification-popup {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: yellow;
+        color: blue;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        display: none;
+        z-index: 1000;
+    }
+</style>
 
 <section>
-<div id="notificationArea"></div>
-<sec:authentication var="me" property="principal"/>
+    <div id="notificationArea">
+        알림개수: <span id="notification-count"></span>
+    </div>
+
+
+    <sec:authentication var="me" property="principal"/>
 
 </section>
 <script>
+    <sec:authorize access="isAuthenticated()">
+    var username = "<c:out value='${me.member.username}'/>";
+    </sec:authorize>
+
+    function fetchInitialUnreadNotificationCount() {
+        fetch('/unread-count/' + encodeURIComponent(username))
+            .then(response => response.json())
+            .then(data => {
+                console.log("알림숫자", data)
+                document.getElementById("notification-count").innerText = data.count;
+            })
+            .catch(error => console.error('읽지 않은 알림 수 조회 중 오류 발생:', error));
+    }
+
+
     window.onload = function () {
-        <sec:authorize access="isAuthenticated()">
-        var username = "<c:out value='${me.member.username}'/>";
-        </sec:authorize>
+        fetchInitialUnreadNotificationCount();
 
         var eventSourceUrl = '/connect/' + encodeURIComponent(username);
         var source = new EventSource(eventSourceUrl);
@@ -43,44 +59,53 @@
             console.error("SSE 연결에 오류가 발생했습니다.", event);
         };
 
-        source.onmessage = function(event) {
-            console.log("Received message: ", event.data);
+        source.onmessage = function (event) {
+            console.log("알림 message: ", event.data);
 
         };
 
+
         var receivedNotifications = {}; // 이미 받은 알림을 추적하는 객체
 
-        source.addEventListener('notification', function(e) {
-            console.log("Received data 알림 : ", e.data);
+        source.addEventListener('notification', function (e) {
+            console.log(" function(e) 알림: ", e.data);
             try {
                 var data = JSON.parse(e.data);
-                console.log("Parsed data: ", data);
+                console.log("JSON.parse ", data);
             } catch (error) {
-                console.error("JSON parsing error: ", error);
+                console.error("JSON.parse 오류 알림: ", error);
             }
-            if (!receivedNotifications[data.id]) {
-                console.log("New notification received: ", data);
-                receivedNotifications[data.id] = true; // 알림 ID를 추적 객체에 추가
+            if (data.type === "UNREAD_NOTIFICATION_COUNT") {
+                // 읽지 않은 알림의 수만 업데이트
+                document.getElementById("notification-count").innerText = data.count;
+            } else {
+                // 다른 타입의 알림은 팝업으로 표시
+                displayNotification(data);
+            }
 
-                // 알림 메시지 표시
+        });
+
+        function displayNotification(data) {
+            if (!receivedNotifications[data.id]) {
+                console.log("알림 데이터: ", data);
+                receivedNotifications[data.id] = true;
+
                 var notification = document.createElement('div');
                 notification.className = 'notification-popup';
                 notification.innerText = data.message;
                 document.body.appendChild(notification);
                 notification.style.display = 'block';
 
-                // 알림 자동 숨김
-                setTimeout(function() {
+                setTimeout(function () {
                     notification.style.display = 'none';
                     document.body.removeChild(notification);
                 }, 10000);
 
-                // 알림 클릭 시 숨김
-                notification.onclick = function() {
+                notification.onclick = function () {
                     notification.style.display = 'none';
                     document.body.removeChild(notification);
                 };
             }
-        });
+        }
     };
 </script>
