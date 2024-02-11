@@ -26,6 +26,7 @@ public class OAuth2CustomDetailsService extends DefaultOAuth2UserService {
         String username = null;
         String name = null;
         String email = null;
+        String phoneNumber=null;
 
         if(provider.equals("google")) {
             providerId = oAuth2User.getAttribute("sub");
@@ -37,6 +38,12 @@ public class OAuth2CustomDetailsService extends DefaultOAuth2UserService {
             if (kakaoAccount != null) {
                 username = (String) kakaoAccount.get("nickname");
             }
+        } else if(provider.equals("naver")) {
+            Map<String, Object> naverAccount = (Map<String, Object>) oAuth2User.getAttributes().get("response");
+            providerId=(String) naverAccount.get("id");
+            name=(String) naverAccount.get("name");
+            email = (String) naverAccount.get("email");
+            phoneNumber = (String) naverAccount.get("mobile");
         }
 
         username = provider + "_" + providerId;
@@ -48,6 +55,7 @@ public class OAuth2CustomDetailsService extends DefaultOAuth2UserService {
                     .username(username)
                     .name(name)
                     .email(email)
+                    .phoneNumber(phoneNumber)
                     .provider(provider)
                     .providerId(providerId)
                     .build();
