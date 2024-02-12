@@ -40,7 +40,7 @@ public class Member {
     private Character isWithdrawn = 'N';
     private String provider;
     private String providerId;
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<MemberRole> roles;
 }
