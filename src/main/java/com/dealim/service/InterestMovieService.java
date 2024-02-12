@@ -42,9 +42,8 @@ public class InterestMovieService {
 
 //                notificationService.createNotification(interestMovie.getUserName(), "관심 영화 추가됨: " + interestMovie.getMovieId(), Notification.NotificationType.INTEREST_MOVIE_ADDED);
 
-                notificationService.sendInterestMovieAddedNotification(interestMovie.getUserName(), interestMovie.getMovieId());//관심영화에추가에 성공했을때만 알림전송하는거
-                System.out.println("addinteresmovie"+interestMovie.getUserName());
-                System.out.println("addinteresmovie" +interestMovie.getMovieId());
+              //  notificationService.sendInterestMovieAddedNotification(interestMovie.getUserName(), interestMovie.getMovieId());//관심영화에추가에 성공했을때만 알림전송하는거
+
                 return true;
             }
             return false;
