@@ -45,6 +45,7 @@
                     <input type="hidden" name="email" id="hiddenEmail">
                     <input type="hidden" name="phoneNumber" id="hiddenPhoneNumber">
                     <input type="hidden" name="homeAddress" id="hiddenHomeAddress">
+                    <input type="hidden" name="isWithdrawn" id="hiddenIsWithdrawn">
                 </div>
                 <div>
                     <button type="submit">비밀번호 재설정</button>
@@ -87,6 +88,7 @@
                         $("#hiddenEmail").val(result.email);
                         $("#hiddenPhoneNumber").val(result.phoneNumber);
                         $("#hiddenHomeAddress").val(result.homeAddress);
+                        $("#hiddenIsWithdrawn").val(result.isWithdrawn);
 
                         $("#resetPwForm").show();
                     } else {
