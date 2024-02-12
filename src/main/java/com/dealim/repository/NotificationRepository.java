@@ -18,6 +18,9 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
     @Query("SELECT COUNT(n) FROM Notification n WHERE n.movieId = :movieId AND n.type = :type AND n.createdDateTime BETWEEN :start AND :end")
     long countByMovieIdAndTypeAndCreatedDateTimeBetween(@Param("movieId") Long movieId, @Param("type") Notification.NotificationType type, @Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 
+
+    long countByUsernameAndIsReadFalse(String username);
+
     }
 
 
