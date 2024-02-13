@@ -1,14 +1,15 @@
 package com.dealim.security.config;
 
 
-import com.dealim.security.config.oauth.OAuth2CustomDetailsService;
 import com.dealim.security.error.CustomAuthenticationFailureHandler;
+import com.dealim.security.oauth.OAuth2CustomDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @Slf4j
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
     private final OAuth2CustomDetailsService oAuth2CustomDetailsService;
@@ -27,15 +29,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+        return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/**","/member/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/member/login").permitAll()
-                        .failureHandler(new CustomAuthenticationFailureHandler())
+                        .failureHandler(new CustomAuthenticationFailureHandler()) // 로그인 실패시 에러처리
                         .permitAll())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/member/login")
@@ -43,8 +45,8 @@ public class SecurityConfig {
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
                                 .userService(oAuth2CustomDetailsService))
-                        .defaultSuccessUrl("/", true));
-        return http.build();
+                        .defaultSuccessUrl("/", true))
+                .build();
     }
 
     @Bean

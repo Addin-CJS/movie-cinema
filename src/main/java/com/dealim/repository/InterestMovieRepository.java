@@ -15,7 +15,6 @@ import java.util.Optional;
 public interface InterestMovieRepository extends JpaRepository<InterestMovie, Long> {
     boolean existsByMovieIdAndUserName(Long movieId, String userName);
 
-
     Optional<InterestMovie> findByMovieIdAndUserName(Long movieId, String userName);
 
     Page<InterestMovie> findAllByUserName(String userName, Pageable pageable);

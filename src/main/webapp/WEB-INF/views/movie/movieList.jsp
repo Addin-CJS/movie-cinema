@@ -5,7 +5,9 @@
 <div class="movie-card-section">
     <c:forEach var="movie" items="${movieList.content}">
         <div class="card">
-            <img src="${movie.mvImg}">
+            <a href="/showDetail?movieId=${movie.movieId}">
+                <img src="${movie.mvImg}" alt="영화 포스터">
+            </a>
             <div class="card-content">
                 <p class="movie-name">
                     <a href="/showDetail?movieId=${movie.movieId}"> ${movie.mvTitle}</a>

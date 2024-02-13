@@ -14,4 +14,5 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
 
     @Query("SELECT s.seatNumber FROM Seat s WHERE s.movieId = :movieId AND s.theaterId = :theaterId")
     List<Integer> getTakenSeats(@Param("movieId") Long movieId, @Param("theaterId") Long theaterId);
+    void deleteByTicketId(Long ticketId);
 }

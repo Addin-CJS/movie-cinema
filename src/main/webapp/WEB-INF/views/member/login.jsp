@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <jsp:include page="../layouts/header.jsp"/>
+
 <section>
     <div class="login">
         <h2>로그인</h2>
@@ -39,4 +41,5 @@
         </div>
     </div>
 </section>
+
 <jsp:include page="../layouts/footer.jsp"/>

@@ -8,8 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
     @Query("SELECT t FROM Ticket t WHERE t.memberId = :memberId ORDER BY t.ticketedDate DESC")
     Page<Ticket> findAllByMemberId(@Param("memberId") Long memberId, Pageable pageable);
+
+    @Query("SELECT t FROM Ticket t WHERE t.ticketedDate BETWEEN :start AND :end")
+    List<Ticket> findByTicketedDateBetween(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 }

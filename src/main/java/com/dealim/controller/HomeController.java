@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-
 @Controller
 @Slf4j
 public class HomeController {
@@ -25,7 +24,6 @@ public class HomeController {
     private MovieTheaterRepository movieTheaterRepository;
     @Autowired
     private ReviewService reviewService;
-
 
     @RequestMapping("/")
     public String home(Model model) {

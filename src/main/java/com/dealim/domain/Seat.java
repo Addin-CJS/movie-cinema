@@ -22,4 +22,5 @@ public class Seat {
     private Long theaterId;
     private Integer seatNumber;
     private Long memberId;
+    private Long ticketId;
 }

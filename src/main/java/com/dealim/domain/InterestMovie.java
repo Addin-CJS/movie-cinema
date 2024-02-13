@@ -19,5 +19,4 @@ public class InterestMovie {
 
     @Column(name = "user_name")
     private String userName;
-
 }

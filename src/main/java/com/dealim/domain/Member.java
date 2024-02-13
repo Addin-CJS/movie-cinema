@@ -1,5 +1,6 @@
 package com.dealim.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,10 +36,11 @@ public class Member {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private LocalDateTime withdrawnAt;
-    @Column(columnDefinition = "CHAR(1) default 'N'")
-    private Character isWithdrawn;
-
+    @Column
+    private Character isWithdrawn = 'N';
     private String provider;
     private String providerId;
-
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<MemberRole> roles;
 }

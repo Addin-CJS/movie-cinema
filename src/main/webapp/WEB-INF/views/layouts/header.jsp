@@ -22,7 +22,7 @@
         <h1 class="logo">
             <a href="/">영화<span>예매</span></a>
         </h1>
-
+        <jsp:include page="../movie/notification.jsp" />
         <i class="fa fa-bars" id="menu"></i>
 
         <ul id="menu-box">
@@ -34,6 +34,13 @@
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
                 <li data-path="/member/myPage" onclick="location.href='/member/myPage'">마이페이지</li>
+            </sec:authorize>
+            <sec:authorize access="hasAnyRole('ADMIN')">
+                <li data-path="/admin/main" onclick="location.href='/admin/main'">
+                    관리자
+                </li>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
                 <li><a href="/logout" id="logout">로그아웃</a></li>
             </sec:authorize>
         </ul>
@@ -43,8 +50,6 @@
 <script>
     //indicator
     let marker = $('.marker');
-    marker.css('left', localStorage.getItem('markerLeft'));
-    marker.css('width', localStorage.getItem('markerRight'));
 
     $(document).ready(function () {
         //indicator
@@ -65,9 +70,7 @@
 
         function updateIndicator(element) {
             marker.css('left', element.offsetLeft + 'px');
-            localStorage.setItem('makerLeft', element.offsetLeft);
             marker.css('width', element.offsetWidth + 'px');
-            localStorage.setItem('markerRight', element.offsetWidth);
         }
 
         //scroll

@@ -132,5 +132,3 @@
 </script>
 
 <jsp:include page="../layouts/footer.jsp"/>
-
-

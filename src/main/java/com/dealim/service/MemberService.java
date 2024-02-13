@@ -1,38 +1,50 @@
 package com.dealim.service;
 
 import com.dealim.domain.Member;
+import com.dealim.domain.MemberRole;
 import com.dealim.dto.MyPageMember;
 import com.dealim.repository.MemberRepository;
+import com.dealim.repository.MemberRoleRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
-
 @Service
+@Slf4j
 public class MemberService {
     @Autowired
     MemberRepository memberRepository;
-
+    @Autowired
+    MemberRoleRepository memberRoleRepository;
     @Autowired
     PasswordEncoder pEncoder;
 
+    public List<Member> getAllMembersNotWithdrawn() {
+        return memberRepository.findAllByIsWithdrawn('N');
+    }
 
     public Member insertMember(Member member) {
-
         return memberRepository.save(member);
     }
 
+    public MemberRole setMemberRole(Member member, String role) {
+        MemberRole memberRole = MemberRole.builder()
+                .member(member)
+                .roleName(role)
+                .build();
+        return memberRoleRepository.save(memberRole);
+    }
+
     public boolean idCheck(String username) {
-
         return memberRepository.existsByUsername(username);
-
     }
 
     public Optional<Member> selectMemberByUsername(Member member) {
-
         return memberRepository.findByUsername(member.getUsername());
     }
 
@@ -95,5 +107,12 @@ public class MemberService {
             }
         }
         return false;
+    }
+
+    public Member deleteMember(Long memberId) throws Exception {
+        Member deleteMember = memberRepository.findById(memberId).orElseThrow(() -> new Exception("삭제할 멤버를 찾을 수 없습니다."));
+        deleteMember.setIsWithdrawn('Y');
+        deleteMember.setWithdrawnAt(LocalDateTime.now());
+        return memberRepository.save(deleteMember);
     }
 }

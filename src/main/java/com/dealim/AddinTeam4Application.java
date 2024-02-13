@@ -10,5 +10,4 @@ public class AddinTeam4Application {
     public static void main(String[] args) {
         SpringApplication.run(AddinTeam4Application.class, args);
     }
-
 }

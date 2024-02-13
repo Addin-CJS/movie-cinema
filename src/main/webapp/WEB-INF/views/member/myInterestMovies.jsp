@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<link href="style.css" rel="stylesheet">
+
+<link href="style.css" rel="stylesheet"> <!-- CSS 파일 경로를 확인해주세요 -->
 
 <section>
     <div class="myInterestMovies">

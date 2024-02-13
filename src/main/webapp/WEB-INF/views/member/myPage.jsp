@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <jsp:include page="../layouts/header.jsp"/>
+
 <section class="showMyPage">
     <div class="myPage-navbar">
             <h3>마이페이지</h3>

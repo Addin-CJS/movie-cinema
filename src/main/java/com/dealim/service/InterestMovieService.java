@@ -23,6 +23,8 @@ import java.util.stream.Collectors;
 @Service
 public class InterestMovieService {
 
+    @Autowired
+    private NotificationService notificationService;
 
     @Autowired
     private InterestMovieRepository interestMovieRepository;
@@ -35,6 +37,12 @@ public class InterestMovieService {
         try {
             if (!interestMovieRepository.existsByMovieIdAndUserName(interestMovie.getMovieId(), interestMovie.getUserName())) {
                 interestMovieRepository.save(interestMovie);
+
+//                notificationService.createNotification(interestMovie.getUserName(), "관심 영화 추가됨: " + interestMovie.getMovieId(), Notification.NotificationType.INTEREST_MOVIE_ADDED);
+
+                notificationService.sendInterestMovieAddedNotification(interestMovie.getUserName(), interestMovie.getMovieId());//관심영화에추가에 성공했을때만 알림전송하는거
+                System.out.println("addinteresmovie" + interestMovie.getUserName());
+                System.out.println("addinteresmovie" + interestMovie.getMovieId());
                 return true;
             }
             return false;
@@ -66,7 +74,7 @@ public class InterestMovieService {
 
             return false;
         }
-        }
+    }
 
     public void getMyInterestMoviesDetails(String userName, Pageable pageable, Model model) {
         Page<InterestMovie> interestMoviesPage = interestMovieRepository.findAllByUserName(userName, pageable);
@@ -92,7 +100,6 @@ public class InterestMovieService {
         model.addAttribute("totalPages", totalPages);
     }
 
-
     public List<MoviePopularity> getTop5MoviesByPopularity(Model model) {
         Page<Object[]> page = interestMovieRepository.findMovieIdAndCountByPopularity(PageRequest.of(0, 5));
         List<MoviePopularity> moviePopularityList = page.getContent().stream()
@@ -106,14 +113,10 @@ public class InterestMovieService {
 
         List<Movie> movies = movieRepository.findByMovieIdIn(movieIds);
         Map<Long, Movie> moviesInfo = movies.stream()
-                        .collect(Collectors.toMap(Movie::getMovieId, Movie -> Movie));
+                .collect(Collectors.toMap(Movie::getMovieId, Movie -> Movie));
 
         model.addAttribute("moviesInfo", moviesInfo);
 
         return moviePopularityList;
     }
 }
-
-
-
-

@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class PaidTicket {
+    private Long ticketId;
     private Long movieId;
     private Double ticketPrice;
     private String selectedDate;
