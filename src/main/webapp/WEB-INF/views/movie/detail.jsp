@@ -224,7 +224,6 @@
                 }
             });
             theaterList.each(function () {
-                console.log($(this).text(), localStorage.getItem("selectedTheater"));
                 if ($(this).text() == localStorage.getItem("selectedTheater")) {
                     $(this).parent().addClass('on');
                 }

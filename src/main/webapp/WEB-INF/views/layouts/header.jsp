@@ -61,7 +61,6 @@
     let marker = $('.marker');
 
     $(document).ready(function () {
-        //indicator
         let marker = $('.marker');
         let items = $('#menu-box li');
         let currentPath = window.location.pathname;
@@ -69,17 +68,29 @@
         initializeIndicator();
 
         function initializeIndicator() {
+            let isPathMatched = false;
+
             items.each(function() {
                 let path = $(this).data("path");
                 if (path && (currentPath === path)) {
                     updateIndicator(this);
+                    isPathMatched = true;
+                    return
                 }
             });
+
+            if (!isPathMatched) {
+                removeIndicator();
+            }
         }
 
         function updateIndicator(element) {
             marker.css('left', element.offsetLeft + 'px');
             marker.css('width', element.offsetWidth + 'px');
+        }
+
+        function removeIndicator() {
+            marker.hide(); // 인디케이터 숨김
         }
 
         //scroll
