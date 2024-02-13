@@ -1578,12 +1578,26 @@ section .register .registerBtn button {
 section .review {
     width: 100%;
 }
+
+.reviewWrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.writeWrap {
+    margin-right: 70px;
+}
+
 .latest-likes {
     display: flex;
-    justify-content: space-around;
-    width: 200px;
-    margin: 20px;
+    justify-content: flex-end;
+    margin-right: 70px;
 }
+.latest-likes .likesWrap{
+    margin:10px;
+}
+
 .reviewList {
     text-align: center;
 }
@@ -1592,8 +1606,9 @@ section .review {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 92%;
+    width: 85%;
     margin: 40px;
+    margin-left: 110px;
     gap: 30px;
     text-align: center;
 }
@@ -2483,7 +2498,19 @@ section .myPageEdit #addressField input[type="button"] {
     text-shadow: 0 0 0 #f0f0f0;
 }
 
-#starForm label:hover, #starEditForm label:hover {
+#starForm label:hover ~ label {
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+
+#starForm input[type=radio]:checked ~ label {
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+
+#starEditForm label:hover ~ label {
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+
+#starEditForm input[type=radio]:checked ~ label {
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 }
 
@@ -2544,21 +2571,6 @@ section .myPageEdit #addressField input[type="button"] {
     border-radius: 4px;
 }
 
-#starForm label:hover ~ label {
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-
-#starForm input[type=radio]:checked ~ label {
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-
-.yellow-star {
-    color: yellow;
-}
-
-.gray-star {
-    color: gray;
-}
 
 /*마이페이지*/
 section.showMyPage {
@@ -2756,6 +2768,10 @@ div.myTicket .myTicketPagination .active {
       flex-direction: column;
       align-items: center;
   }
+
+.myInterestMovies h2 {
+    margin: 20px;
+}
 
 .movieListContainer {
     display: flex;
@@ -3062,22 +3078,6 @@ div.myTicket .myTicketPagination .active {
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 2rem;
-}
-
-.page-link {
-    padding: .5rem 1rem;
-    background-color: #4a5568;
-    text-decoration: none;
-    color: white;
-    border-radius: .25rem;
-}
-
-.page-link:not(:last-child) {
-    margin-right: 0.5rem;
-}
-
-.page-link:hover {
-    background-color: #2d3748;
 }
 
 .interest-button {

@@ -6,64 +6,6 @@
     <jsp:include page="notification.jsp"/>
     <div class="review">
         <sec:authentication var="me" property="principal"/>
-        <div class="latest-likes">
-            <div class="likesWrap">
-                <div class="sort-options">
-                    <a href="#" onclick="updateReviewList(movieId, 0, 'latest'); return false;">최신순</a>
-                </div>
-            </div>
-            <div class="likesWrap">
-                <div class="sort-options">
-                    <a href="#" onclick="updateReviewList(movieId, 0, 'likes'); return false;">좋아요순</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="reviewHeader">
-            <div class="reviewTitleRow">
-                <div class="reviewTitle">영화후기</div>
-                <div class="reviewRating">
-                    <form name="stars" id="starForm" method="post">
-                        <fieldset>
-                            <input type="radio" name="reviewStar" value="5" id="rate5"><label for="rate5">★</label>
-                            <input type="radio" name="reviewStar" value="4" id="rate4"><label for="rate4">★</label>
-                            <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
-                            <input type="radio" name="reviewStar" value="2" id="rate2"><label for="rate2">★</label>
-                            <input type="radio" name="reviewStar" value="1" id="rate1"><label for="rate1">★</label>
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="reviewInput">
-                    <textarea cols="80" rows="4" id="reviewContent"></textarea>
-                </div>
-                <div class="reviewSubmit">
-                    <button class="review-btn" onclick="insertReview();">평점 및 리뷰작성</button>
-                </div>
-            </div>
-
-            <div id="reviewEditForm" class="reviewEditRow" style="display: none;">
-                <div class="reviewEditTitle">영화후기 수정</div>
-                <div class="reviewEditRating">
-                    <form name="stars" id="starEditForm" method="post">
-                        <fieldset>
-                            <input type="radio" name="reviewStar" value="5" id="rate5"><label for="rate5">★</label>
-                            <input type="radio" name="reviewStar" value="4" id="rate4"><label for="rate4">★</label>
-                            <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
-                            <input type="radio" name="reviewStar" value="2" id="rate2"><label for="rate2">★</label>
-                            <input type="radio" name="reviewStar" value="1" id="rate1"><label for="rate1">★</label>
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="reviewEditInput">
-                    <textarea cols="80" rows="4" id="editReviewContent"></textarea>
-                </div>
-                <div class="reviewEditSubmit">
-                    <button onclick="updateReview();">수정</button>
-                    <button onclick="cancelEdit();">취소</button>
-                </div>
-            </div>
-        </div>
-
         <div class="reviewList">
             <div class="reviewContent">
                 <c:forEach var="review" items="${reviewList.content}">
@@ -174,7 +116,64 @@
 
                 console.log("Received response:", response);
 
-                var reviewsHtml = '';
+                var reviewsHtml = `
+                <div class="reviewHeader">
+                    <div class="reviewTitleRow">
+                        <div class="reviewTitle">영화후기</div>
+                        <div class="reviewRating">
+                            <form name="stars" id="starForm" method="post">
+                                <fieldset>
+                                    <input type="radio" name="reviewStar" value="5" id="rate5"><label for="rate5">★</label>
+                                    <input type="radio" name="reviewStar" value="4" id="rate4"><label for="rate4">★</label>
+                                    <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
+                                    <input type="radio" name="reviewStar" value="2" id="rate2"><label for="rate2">★</label>
+                                    <input type="radio" name="reviewStar" value="1" id="rate1"><label for="rate1">★</label>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="reviewInput">
+                            <textarea cols="80" rows="4" id="reviewContent"></textarea>
+                        </div>
+                        <div class="reviewSubmit">
+                            <button class="review-btn" onclick="insertReview();">평점 및 리뷰작성</button>
+                        </div>
+                    </div>
+
+                    <div id="reviewEditForm" class="reviewEditRow" style="display: none;">
+                        <div class="reviewEditTitle">영화후기 수정</div>
+                        <div class="reviewEditRating">
+                            <form name="stars" id="starEditForm" method="post">
+                                <fieldset>
+                                    <input type="radio" name="reviewStar" value="5" id="editRate5"><label for="editRate5">★</label>
+                                    <input type="radio" name="reviewStar" value="4" id="editRate4"><label for="editRate4">★</label>
+                                    <input type="radio" name="reviewStar" value="3" id="editRate3"><label for="editRate3">★</label>
+                                    <input type="radio" name="reviewStar" value="2" id="editRate2"><label for="editRate2">★</label>
+                                    <input type="radio" name="reviewStar" value="1" id="editRate1"><label for="editRate1">★</label>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="reviewEditInput">
+                            <textarea cols="80" rows="4" id="editReviewContent"></textarea>
+                        </div>
+                        <div class="reviewEditSubmit">
+                            <button onclick="updateReview();">수정</button>
+                            <button onclick="cancelEdit();">취소</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="latest-likes">
+                    <div class="likesWrap">
+                        <div class="sort-options">
+                            <a href="#" onclick="updateReviewList(movieId, 0, 'latest'); return false;">최신순</a>
+                        </div>
+                    </div>
+                    <div class="likesWrap">
+                        <div class="sort-options">
+                            <a href="#" onclick="updateReviewList(movieId, 0, 'likes'); return false;">좋아요순</a>
+                        </div>
+                    </div>
+                </div>
+                `;
                 if (response.content && Array.isArray(response.content)) {
                     response.content.forEach(function (review) {
                         var displayDate = review.updateReviewDate ? review.updateReviewDate : review.createReviewDate;
@@ -268,7 +267,6 @@
 
     function editReview(reviewId) {
         const yn = confirm(reviewId + "번 리뷰를 수정하시겠습니까?");
-
         if (yn) {
             var review = reviews.find(review => review.reviewId == reviewId);
             if (review) {
@@ -276,6 +274,13 @@
                 $("#reviewEditForm").data("reviewId", reviewId);
                 $(".reviewTitleRow").hide();
                 $("#reviewEditForm").show();
+
+                var starRating = review.starRating;
+                if (starRating) {
+                    $('input[name="reviewStar"][value="' + starRating + '"]').prop('checked', true);
+                } else {
+                    alert('별점을 선택해주세요.');
+                }
             }
         }
     }
@@ -286,7 +291,7 @@
     }
 
     function updateReview() {
-        var reviewId = $("#reviewEditForm").data("reviewId"); // 수정 중인 리뷰 ID 저장 필요
+        var reviewId = $("#reviewEditForm").data("reviewId");
         var reviewContent = $("#editReviewContent").val();
         var starRating = $('input[name="reviewStar"]:checked').val();
         $.ajax({

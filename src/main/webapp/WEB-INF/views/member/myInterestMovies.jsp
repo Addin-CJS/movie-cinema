@@ -36,7 +36,6 @@
     </div>
 
     <div class="myInterestMoviePagination">
-            <a href="javascript:loadInterestMoviesPage(0)" class="page-link">처음</a>
             <c:if test="${nowPage > 1}">
                 <a href="javascript:loadInterestMoviesPage(${nowPage - 2})" class="page-link">이전</a>
             </c:if>
@@ -46,7 +45,6 @@
             <c:if test="${nowPage < totalPages}">
                 <a href="javascript:loadInterestMoviesPage(${nowPage})" class="page-link">다음</a>
             </c:if>
-            <a href="javascript:loadInterestMoviesPage(${totalPages - 1})" class="page-link">마지막</a>
         </div>
     </div>
 </section>
