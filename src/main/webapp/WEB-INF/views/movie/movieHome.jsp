@@ -57,8 +57,10 @@
     <div class="movie-card-section">
         <c:forEach var="movie" items="${movieList.content}">
             <div class="card">
-                <img src="${movie.mvImg}"
-                     onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
+                <a href="/showDetail?movieId=${movie.movieId}">
+                    <img src="${movie.mvImg}"
+                         onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
+                </a>
                 <div class="card-content">
                     <p class="movie-name">
                         <a href="/showDetail?movieId=${movie.movieId}"> ${movie.mvTitle}</a>
@@ -77,33 +79,33 @@
     <div class="pagination">
         <c:choose>
             <c:when test="${not empty searchKeyword}">
-                <a href="${pageContext.request.contextPath}/movieHome?page=0&searchKeyword=${fn:escapeXml(searchKeyword)}">처음으로</a>
-                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage - 1}&searchKeyword=${fn:escapeXml(searchKeyword)}" ${nowPage <= 0 ? 'style="display:none;"' : ''}>이전</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=0&searchKeyword=${fn:escapeXml(searchKeyword)}"><<</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage - 1}&searchKeyword=${fn:escapeXml(searchKeyword)}" ${nowPage <= 0 ? 'style="display:none;"' : ''}><</a>
                 <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
                     <a href="${pageContext.request.contextPath}/movieHome?page=${pageNum}&searchKeyword=${fn:escapeXml(searchKeyword)}" ${pageNum == nowPage ? 'class="active"' : ''}>${pageNum + 1}</a>
                 </c:forEach>
-                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage + 1}&searchKeyword=${fn:escapeXml(searchKeyword)}" ${nowPage >= totalPages - 1 ? 'style="display:none;"' : ''}>다음</a>
-                <a href="${pageContext.request.contextPath}/movieHome?page=${totalPages - 1}&searchKeyword=${fn:escapeXml(searchKeyword)}">마지막으로</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage + 1}&searchKeyword=${fn:escapeXml(searchKeyword)}" ${nowPage >= totalPages - 1 ? 'style="display:none;"' : ''}>></a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${totalPages - 1}&searchKeyword=${fn:escapeXml(searchKeyword)}">>></a>
             </c:when>
 
             <c:when test="${not empty selectedCategory}">
-                <a href="${pageContext.request.contextPath}/movieHome?page=0&category=${fn:escapeXml(selectedCategory)}">처음으로</a>
-                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage - 1}&category=${fn:escapeXml(selectedCategory)}" ${nowPage <= 0 ? 'style="display:none;"' : ''}>이전</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=0&category=${fn:escapeXml(selectedCategory)}"><<</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage - 1}&category=${fn:escapeXml(selectedCategory)}" ${nowPage <= 0 ? 'style="display:none;"' : ''}><</a>
                 <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
                     <a href="${pageContext.request.contextPath}/movieHome?page=${pageNum}&category=${fn:escapeXml(selectedCategory)}" ${pageNum == nowPage ? 'class="active"' : ''}>${pageNum + 1}</a>
                 </c:forEach>
-                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage + 1}&category=${fn:escapeXml(selectedCategory)}" ${nowPage >= totalPages - 1 ? 'style="display:none;"' : ''}>다음</a>
-                <a href="${pageContext.request.contextPath}/movieHome?page=${totalPages - 1}&category=${fn:escapeXml(selectedCategory)}">마지막으로</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage + 1}&category=${fn:escapeXml(selectedCategory)}" ${nowPage >= totalPages - 1 ? 'style="display:none;"' : ''}>></a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${totalPages - 1}&category=${fn:escapeXml(selectedCategory)}">>></a>
             </c:when>
 
             <c:otherwise>
-                <a href="${pageContext.request.contextPath}/movieHome?page=0">처음으로</a>
-                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage - 1}" ${nowPage <= 0 ? 'style="display:none;"' : ''}>이전</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=0"><<</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage - 1}" ${nowPage <= 0 ? 'style="display:none;"' : ''}><</a>
                 <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
                     <a href="${pageContext.request.contextPath}/movieHome?page=${pageNum}" ${pageNum == nowPage ? 'class="active"' : ''}>${pageNum + 1}</a>
                 </c:forEach>
-                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage + 1}" ${nowPage >= totalPages - 1 ? 'style="display:none;"' : ''}>다음</a>
-                <a href="${pageContext.request.contextPath}/movieHome?page=${totalPages - 1}">마지막으로</a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${nowPage + 1}" ${nowPage >= totalPages - 1 ? 'style="display:none;"' : ''}>></a>
+                <a href="${pageContext.request.contextPath}/movieHome?page=${totalPages - 1}">>></a>
             </c:otherwise>
         </c:choose>
     </div>
@@ -123,10 +125,10 @@
         }
     });
 
-    $(document).ready(function (){
-       let totalPages = ${totalPages};
-       let nowPage = ${nowPage}+1;
-       $(".bar").css("width",nowPage*100/totalPages+"%");
+    $(document).ready(function () {
+        let totalPages = ${totalPages};
+        let nowPage = ${nowPage}+1;
+        $(".bar").css("width", nowPage * 100 / totalPages + "%");
     });
 
 </script>

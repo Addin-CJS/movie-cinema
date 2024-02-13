@@ -9,10 +9,8 @@
 
     <ul>
         <li>main</li>
-        <li>schedlues</li>
+        <li>movie</li>
         <li>tickets</li>
-        <li>news</li>
-        <li>contact</li>
     </ul>
 
     <div class="socail-box">

@@ -484,8 +484,7 @@ section .pagination a {
     display: inline-block;
     padding: 5px 10px;
     margin: 0 5px;
-    background-color: #DB0000;
-    color: #fff;
+    color: white;
     border-radius: 20px;
     font-size: 16px;
     transition: background-color 0.3s ease;
@@ -493,15 +492,14 @@ section .pagination a {
 
 section .pagination a:hover {
     background-color: white;
-    color: black;
+    color: #DB0000;
 }
 
 section .pagination .active {
-    background-color: white;
-    color: black;
+    background-color: #DB0000;
+    color: white;
     font-weight: bold;
 }
-
 
 section .show {
     display: flex;
@@ -1605,7 +1603,6 @@ section .review {
     align-items: center;
     width: 85%;
     margin: 40px;
-    margin-left: 110px;
     gap: 30px;
     text-align: center;
 }
@@ -1633,6 +1630,7 @@ section .review {
     min-width: 200px;
     min-height: 100px;
     border-radius: 5px;
+    padding: 5px;
 }
 
 .reviewHeader button {
@@ -1674,7 +1672,7 @@ section .review {
 }
 
 .reviewWrapper1 div {
-    width: 100%;
+    width: 95%;
 }
 
 .reviewBtns {
@@ -1688,6 +1686,10 @@ section .review {
     border-radius: 5px;
     border: none;
     color: white;
+}
+
+.reviewBtns button:hover {
+    color: #DB0000;
 }
 
 .reviewWrapper2 {
@@ -1709,6 +1711,8 @@ section .review {
     text-align: left;
     margin-left: 7px;
     height: 70px;
+    overflow: auto;
+    word-break: break-all;
 }
 
 .reviewWrapper3 {
@@ -2683,8 +2687,9 @@ section.showMyPage .myPage-navbar #byeMember:hover span {
 }
 
 .reviewItem {
+    background: #333333;
     display: inline-block;
-    border: 1px solid white;
+    border-radius: 5px;
     padding: 10px;
     margin: 10px;
     width: 40%;

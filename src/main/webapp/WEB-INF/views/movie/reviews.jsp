@@ -95,6 +95,7 @@
 
     function updateReviewList(movieId, currentPage, sortType = currentSortType) {
         currentSortType = sortType;
+
         console.log("movieId:", movieId, "currentPage:", currentPage, "sortType:", sortType);
         if (currentPage === undefined || currentPage === null) {
             currentPage = 0;
@@ -164,16 +165,17 @@
                 <div class="latest-likes">
                     <div class="likesWrap">
                         <div class="sort-options">
-                            <a href="#" onclick="updateReviewList(movieId, 0, 'latest'); return false;">최신순</a>
+                            <a href="#" id="ltstTag" onclick="updateReviewList(movieId, 0, 'latest'); return false;">최신순</a>
                         </div>
                     </div>
                     <div class="likesWrap">
                         <div class="sort-options">
-                            <a href="#" onclick="updateReviewList(movieId, 0, 'likes'); return false;">좋아요순</a>
+                            <a href="#" id="likesTag" onclick="updateReviewList(movieId, 0, 'likes'); return false;">좋아요순</a>
                         </div>
                     </div>
                 </div>
                 `;
+
                 if (response.content && Array.isArray(response.content)) {
                     response.content.forEach(function (review) {
                         var displayDate = review.updateReviewDate ? review.updateReviewDate : review.createReviewDate;
@@ -241,13 +243,26 @@
 
                 $('.pagination').html(paginationHtml);
                 $('.reviewList').html(reviewsHtml);
-
+                updateSortTagStyle(currentSortType); // css 업데이트
                 loadUserLikes(); //좋아요 세션에 담아서
             },
             error: function () {
                 console.log("리뷰 목록 불러오기 실패");
             }
         });
+
+    }
+
+    function updateSortTagStyle(sortType) {
+        // 모든 정렬 태그의 스타일을 초기화
+        $("#ltstTag, #likesTag").css('color', ''); // 기본 색상으로 설정
+
+        // 현재 정렬 타입에 따라 해당 태그의 색상을 변경
+        if (sortType === "latest") {
+            $("#ltstTag").css('color', 'red');
+        } else if (sortType === "likes") {
+            $("#likesTag").css('color', 'red');
+        }
     }
 
     function loadUserLikes() {
