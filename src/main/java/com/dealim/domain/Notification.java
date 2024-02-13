@@ -29,7 +29,7 @@ public class Notification {
     private Long ticketId;
     @Column(name = "review_id")
     private Long reviewId;
-
+    private String message;
     public enum NotificationType {
         INTEREST_MOVIE_ADDED,
         LIKE_NOTIFICATION,

@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
@@ -21,6 +22,10 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 
     long countByUsernameAndIsReadFalse(String username);
 
-    }
+    List<Notification> findByUsernameAndIsReadFalse(String username);
+
+    List<Notification> findByUsernameAndCreatedDateTimeAfter(String username, LocalDateTime dateTime);
+
+}
 
 

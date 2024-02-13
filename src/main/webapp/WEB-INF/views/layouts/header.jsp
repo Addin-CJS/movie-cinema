@@ -22,7 +22,7 @@
         <h1 class="logo">
             <a href="/">영화<span>예매</span></a>
         </h1>
-        <jsp:include page="../movie/notification.jsp" />
+        <jsp:include page="../notification/notification.jsp" />
         <i class="fa fa-bars" id="menu"></i>
 
         <ul id="menu-box">
@@ -42,6 +42,15 @@
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
                 <li><a href="/logout" id="logout">로그아웃</a></li>
+            </sec:authorize>
+
+            <sec:authorize access="isAuthenticated()">
+                <div class="notification-icon">
+                    <a href="/notifications" id="notification-link">
+                        <img src="../img/icons/notification.png" alt="Notifications" />
+                        <span class="notification-count" id="notification-count">0</span>
+                    </a>
+                </div>
             </sec:authorize>
         </ul>
 

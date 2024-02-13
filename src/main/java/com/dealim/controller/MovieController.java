@@ -91,7 +91,7 @@ public class MovieController {
         System.out.println("movie컨트롤러 무비아이디 " + interestMovie.getMovieId());
         System.out.println("movie컨트롤러 아이디 " + member.getUsername());
         if (added) {
-            notificationService.sendInterestMovieAddedNotification(member.getUsername(), interestMovie.getMovieId());
+           // notificationService.sendInterestMovieAddedNotification(member.getUsername(), interestMovie.getMovieId());
             redirectAttributes.addFlashAttribute("successMessage", "관심 영화가 성공적으로 추가되었습니다.");
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "이미 관심 영화로 등록되어 있습니다.");
