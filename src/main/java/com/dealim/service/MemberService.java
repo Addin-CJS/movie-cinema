@@ -6,6 +6,7 @@ import com.dealim.dto.MyPageMember;
 import com.dealim.repository.MemberRepository;
 import com.dealim.repository.MemberRoleRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,10 @@ public class MemberService {
         return memberRepository.findByUsername(member.getUsername());
     }
 
+    public Member findById(Long memberId) {
+        return memberRepository.findById(memberId).orElseGet(() -> null);
+    }
+
     public Member updateMember(MyPageMember myPageMember, Member loginUser) {
         Member member = memberRepository.findById(loginUser.getMemberId()).orElse(null);
 
@@ -63,6 +68,11 @@ public class MemberService {
             memberRepository.save(member);
         }
         return member;
+    }
+
+    public Member modifyMember(Member updatedMember, Member repositoryMember) {
+        BeanUtils.copyProperties(repositoryMember, updatedMember);
+        return memberRepository.save(repositoryMember);
     }
 
     public Member findIdByNameAndPhoneNumber(String name, String phoneNumber) {

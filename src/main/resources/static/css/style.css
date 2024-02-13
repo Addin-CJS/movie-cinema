@@ -1746,7 +1746,6 @@ div.review .pagination a {
     display: inline-block;
     padding: 5px 10px;
     margin: 0 5px;
-    background-color: red;
     color: #fff;
     border-radius: 20px;
     font-size: 16px;
@@ -1759,8 +1758,8 @@ div.review .pagination a:hover {
 }
 
 div.review .pagination .active {
-    background-color: white;
-    color: red;
+    background-color: #DB0000;
+    color: white;
     font-weight: bold;
 }
 

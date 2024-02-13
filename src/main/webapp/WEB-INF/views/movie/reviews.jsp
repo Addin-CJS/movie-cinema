@@ -221,11 +221,11 @@
                 if (totalPages > 1) {
 
                     if (currentPage > 0) {
-                        paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',0);">처음</a> ';
+                        paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',0);"><<</a> ';
                     }
 
                     if (currentPage > 0) {
-                        paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (currentPage - 1) + ');">이전</a> ';
+                        paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (currentPage - 1) + ');"><</a> ';
                     }
 
                     for (var pageNum = startPage; pageNum <= endPage; pageNum++) {
@@ -233,11 +233,11 @@
                     }
 
                     if (currentPage < totalPages - 1) {
-                        paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (currentPage + 1) + ');">다음</a> ';
+                        paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (currentPage + 1) + ');">></a> ';
                     }
 
                     if (currentPage < totalPages - 1) {
-                        paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (totalPages - 1) + ');">마지막</a>';
+                        paginationHtml += '<a href="javascript:void(0);" onclick="updateReviewList(' + movieId + ',' + (totalPages - 1) + ');">>></a>';
                     }
                 }
 
