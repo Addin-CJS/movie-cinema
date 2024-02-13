@@ -67,7 +67,7 @@ public class NotificationService {
             String reviewWriterUsername = review.getReviewWriter();
 
             if (!notificationRepository.existsByUsernameAndTypeAndReviewId(reviewWriterUsername, Notification.NotificationType.LIKE_NOTIFICATION, reviewId)) {
-                String message = likerUsername + "님이 당신의 리뷰에 좋아요를 눌렀습니다.";
+                String message = likerUsername + "님이 당신의 " + review.getReviewId() + "번 영화후기 에 좋아요를 눌렀습니다.";
                 Notification notification = createNotificationForReviewLiked(reviewWriterUsername, reviewId, message);
 
                 sseEmitterService.sendNotification(reviewWriterUsername, formatNotificationJson(notification,  message));
