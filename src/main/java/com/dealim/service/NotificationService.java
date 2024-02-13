@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,7 +71,7 @@ public class NotificationService {
                 String message = likerUsername + "님이 당신의 " + review.getReviewId() + "번 영화후기 에 좋아요를 눌렀습니다.";
                 Notification notification = createNotificationForReviewLiked(reviewWriterUsername, reviewId, message);
 
-                sseEmitterService.sendNotification(reviewWriterUsername, formatNotificationJson(notification, message));
+                sseEmitterService.sendNotification(reviewWriterUsername, formatNotificationJson(notification, message, null));
                 updateAndSendUnreadNotificationCountByUsername(reviewWriterUsername);  // 미확인 알림 메서드 안하면  실시간으로 반영안되고 새로고침해야함
             }
         } catch (Exception e) {
@@ -78,16 +79,29 @@ public class NotificationService {
         }
     }
 
+
+    //영화시작 알림을 생성하는 객체 메서드
+
+
     public void sendMovieStartNotification(Long memberId, Ticket ticket) {
         try {
             Movie movie = movieRepository.findById(ticket.getMovieId()).orElseThrow(() -> new RuntimeException("영화 정보를 찾을 수 없습니다."));
             Member member = getMemberOrThrow(memberId);
+            boolean notificationExists = notificationRepository.existsByUsernameAndTypeAndTicketId(member.getUsername(), Notification.NotificationType.MOVIE_BOOKED, ticket.getTicketId());
 
-            String message = member.getUsername() + "님, 티켓 번호 " + ticket.getTicketId() + ", 영화 '" + movie.getMvTitle() + "'의 상영 시간이 한 시간 남았습니다.";
-            Notification notification = createNotificationForMovieStart(member.getUsername(), ticket, message);
+            if (!notificationExists) {
+                LocalDateTime showtime = ticket.getTicketedDate();
+                String showtimeFormatted = showtime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
-            sseEmitterService.sendNotification(member.getUsername(), formatNotificationJson(notification, message));
-            updateAndSendUnreadNotificationCount(memberId); // 미확인 알림 메서드 안하면  실시간으로 반영안되고 새로고침해야함
+                String message = String.format("%s님의 예매내역, <br>티켓 번호: %d, <br>영화 제목: '%s', <br>좌석 번호: '%s', <br>상영 시간: %s",
+                        member.getUsername(), ticket.getTicketId(), movie.getMvTitle(), ticket.getTicketedSeat(), showtimeFormatted);
+
+                Notification notification = createNotificationForMovieStart(member.getUsername(), ticket, movie, message); //알림 객체 생성하는 메서드 ㅎ
+
+                sseEmitterService.sendNotification(member.getUsername(), formatNotificationJson(notification, message, showtime));
+
+                updateAndSendUnreadNotificationCount(memberId); // 미확인 알림 메서드 안하면  실시간으로 반영안되고 새로고침해야함
+            }
         } catch (Exception e) {
             log.error("영화 시작 알림 전송 중 오류 발생", e);
         }
@@ -125,8 +139,7 @@ public class NotificationService {
         return notificationRepository.save(notification);
     }
 
-    //영화시작 알림을 생성하는 객체 메서드
-    private Notification createNotificationForMovieStart(String username, Ticket ticket, String message) {
+    private Notification createNotificationForMovieStart(String username, Ticket ticket, Movie movie, String message) {
         Notification notification = Notification.builder()
                 .username(username)
                 .type(Notification.NotificationType.MOVIE_BOOKED)
@@ -137,13 +150,27 @@ public class NotificationService {
                 .createdDateTime(LocalDateTime.now())
                 .message(message)
                 .build();
+
         return notificationRepository.save(notification);
     }
 
     //알림 id, 메시지, 타입 내용등
-    private String formatNotificationJson(Notification notification, String message) {
-        return String.format("{\"id\": \"%d\", \"message\": \"%s\", \"type\": \"%s\"}",
-                notification.getId(), message, notification.getType().toString());
+    private String formatNotificationJson(Notification notification, String message, LocalDateTime showtime) {
+        StringBuilder jsonBuilder = new StringBuilder();
+
+
+        jsonBuilder.append(String.format("{\"id\": \"%d\", \"message\": \"%s\"", notification.getId(), message));
+
+
+        if (showtime != null) {
+            String showtimeFormatted = showtime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            jsonBuilder.append(String.format(", \"showtime\": \"%s\"", showtimeFormatted));
+        }
+
+
+        jsonBuilder.append(String.format(", \"type\": \"%s\"}", notification.getType().toString()));
+
+        return jsonBuilder.toString();
     }
 
     //예외처리 하는거 메서드
@@ -153,7 +180,7 @@ public class NotificationService {
 
     //알림 목록
     public List<Notification> getUserNotifications(String username) {
-        // List<Notification> notifications =
+
         return notificationRepository.findByUsernameAndIsReadFalse(username);
     }
 
