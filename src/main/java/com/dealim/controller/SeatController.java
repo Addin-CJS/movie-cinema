@@ -28,4 +28,10 @@ public class SeatController {
         LocalDateTime tickectedDate = LocalDateTime.parse(selectedDate + "T" + selectedTime);
         return seatService.getTakenSeats(movieId, theaterId, tickectedDate);
     }
+
+    @GetMapping("/getTakenSeatsNumber")
+    public Integer getTakenSeatsNumber(@RequestParam Long movieId, @RequestParam Long theaterId, @RequestParam String selectedDate, @RequestParam String selectedTime) {
+        LocalDateTime tickectedDate = LocalDateTime.parse(selectedDate + "T" + selectedTime);
+        return seatService.getTakenSeatsNumber(movieId, theaterId, tickectedDate);
+    }
 }

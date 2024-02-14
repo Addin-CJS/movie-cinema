@@ -40,6 +40,10 @@ public class SeatService {
         return seatRepository.existsByMovieIdAndTheaterIdAndSeatNumber(movieId, theaterId, seatNumber);
     }
 
+    public Integer getTakenSeatsNumber(Long movieId, Long theaterId, LocalDateTime ticketedDate) {
+        return seatRepository.getTakenSeats(movieId, theaterId, ticketedDate).size();
+    }
+
     public List<Integer> getTakenSeats(Long movieId, Long theaterId, LocalDateTime ticketedDate) {
         return seatRepository.getTakenSeats(movieId, theaterId, ticketedDate);
     }
@@ -48,4 +52,5 @@ public class SeatService {
     public void deleteByTicketId(Long ticketId) {
         seatRepository.deleteByTicketId(ticketId);
     }
+
 }
