@@ -12,8 +12,8 @@
                     <div class="reviewItem">
                         <div class="reviewWrapper1">
                             <div class="reviewWrapper2">
-                                <div>${review.reviewId}</div>
-                                <div>${review.reviewWriter}</div>
+                                <div class="reviewId">${review.reviewId}</div>
+                                <div class="reviewWriter">${review.reviewWriter}</div>
                             </div>
                             <div class="reviewStar">별점</div>
                             <div class="reviewText">${review.reviewContent}</div>
@@ -178,7 +178,8 @@
 
                 if (response.content && Array.isArray(response.content)) {
                     response.content.forEach(function (review) {
-                        var displayDate = review.updateReviewDate ? review.updateReviewDate : review.createReviewDate;
+                        var date = review.updateReviewDate ? review.updateReviewDate : review.createReviewDate;
+                        var displayDate = formatDate(date);
                         var stars = '';
 
                         for (var i = 0; i < review.starRating; i++) {
@@ -192,8 +193,10 @@
                         reviewsHtml += '<div class="reviewWrapper1">' +
                             '<div class="reviewItem">' +
                             '<div class="reviewWrapper2">' +
-                            '<div>' + review.reviewId + '</div>' +
-                            '<div>' + review.reviewWriter + '</div>' +
+                            '<div class="reviewIdAndWriter">' +
+                            '<div class="reviewId">' + review.reviewId + '</div>' +
+                            '<div class="reviewWriter">' + review.reviewWriter + '</div>' +
+                            '</div>' +
                             '<div class=reviewBtns>' +
                             (loginUsername === review.reviewWriter ? '<button onclick="editReview(' + review.reviewId + ')">[수정]</button>' +
                                 '<button class="delete-review" reviewNo="' + review.reviewId + '">[삭제]</button>' : '') +
@@ -251,6 +254,18 @@
             }
         });
 
+    }
+
+    function formatDate(dateTime) {
+        let date = new Date(dateTime);
+        var year = date.getFullYear();
+        var month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줌
+        var day = String(date.getDate()).padStart(2, '0');
+        var hours = String(date.getHours()).padStart(2, '0');
+        var minutes = String(date.getMinutes()).padStart(2, '0');
+        var seconds = String(date.getSeconds()).padStart(2, '0');
+
+        return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
     }
 
     function updateSortTagStyle(sortType) {

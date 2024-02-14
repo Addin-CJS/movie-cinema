@@ -8,6 +8,7 @@
         <h2>로그인</h2>
         <div class="loginInfo">
             <form action="login" method="post">
+                <input type="hidden" name="redirect" value="${param.redirect}"/>
                 <li class="loginInput">
                     <input name="username" class="form-control" id="userId" placeholder="아이디를 입력해주세요">
                 </li>

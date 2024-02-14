@@ -26,6 +26,9 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 
     List<Notification> findByUsernameAndCreatedDateTimeAfter(String username, LocalDateTime dateTime);
 
+    boolean existsByUsernameAndTypeAndTicketId(String username, Notification.NotificationType notificationType, Long ticketId);
+
+    boolean existsByTicketIdAndType(Long ticketId, Notification.NotificationType notificationType);
 }
 
 

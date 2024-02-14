@@ -33,8 +33,10 @@ public class SchedulerConfig {
         List<Ticket> tickets = ticketRepository.findByTicketedDateBetween(now, oneHourLater);
         for (Ticket ticket : tickets) {
             // 중복 알림 생성 방지
-            long existingNotificationsCount = notificationRepository.countByMovieIdAndTypeAndCreatedDateTimeBetween(ticket.getMovieId(), Notification.NotificationType.MOVIE_BOOKED, LocalDateTime.now().minusDays(1), LocalDateTime.now());
-            if (existingNotificationsCount == 0) {
+            //  long existingNotificationsCount = notificationRepository.countByMovieIdAndTypeAndCreatedDateTimeBetween(ticket.getMovieId(), Notification.NotificationType.MOVIE_BOOKED, LocalDateTime.now().minusDays(1), LocalDateTime.now());
+
+            boolean notificationExists = notificationRepository.existsByTicketIdAndType(ticket.getTicketId(), Notification.NotificationType.MOVIE_BOOKED);
+            if (!notificationExists) {
                 notificationService.sendMovieStartNotification(ticket.getMemberId(), ticket);
             }
         }

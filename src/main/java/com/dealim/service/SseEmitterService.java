@@ -21,7 +21,7 @@ public class SseEmitterService {
     }
 
     public SseEmitter createEmitterForUser(String username) {
-       // SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);
+        //SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);
         SseEmitter emitter = new SseEmitter(300_000L); //5분
       // SseEmitter emitter = new SseEmitter(60000L); // 1분
         this.userEmitters.put(username, emitter);
@@ -52,6 +52,8 @@ public class SseEmitterService {
             try {
                 emitter.send(SseEmitter.event().name("notification").data(notificationJson));
                 log.info("알림 sendNotification -> {}: {}", username, notificationJson);
+                log.debug("Notification JSON: {}", notificationJson);
+                System.out.println(notificationJson);
             } catch (IOException e) {
                 emitter.completeWithError(e);
                 userEmitters.remove(username);

@@ -73,7 +73,7 @@
             })
             .catch(error => console.error('읽지 않은 알림 수 조회 중 오류 발생:', error));
     }
-
+    // 알림 목록에서 체크하면 알림 상태가 변환됨 (true) , 여기서는 알림이 오면 거기서 확인할수있게 원래는 notification.jsp에 있음
     function checkReadNotification(notificationId, btn) {
         if (confirm("알림을 확인하시겠습니까? 확인을 누르면 더이상 해당 알림은 확인할수없습니다.")) {
             $.ajax({
@@ -142,16 +142,40 @@
 
         });
 
+        function parseShowtime(showtimeStr) {
+            const [date, time] = showtimeStr.split(' ');
+            const [year, month, day] = date.split('-').map(num => parseInt(num, 10));
+            const [hour, minute] = time.split(':').map(num => parseInt(num, 10));
+            return new Date(year, month - 1, day, hour, minute);
+        }
+
+
         function displayNotification(data) {
             if (!receivedNotifications[data.id]) {
-                console.log("알림 데이터: ", data);
+                var messageContent = data.message;
+
+                if (data.type === "MOVIE_BOOKED" && data.showtime) {
+                    var showtime = parseShowtime(data.showtime);
+                    var now = new Date();
+                    var diff = showtime - now;
+                    var minutesLeft = Math.round(diff / 60000);
+
+                    if (!isNaN(minutesLeft) && minutesLeft > 0) {
+
+                        messageContent += "<br> ->상영까지 남은 시간: " + minutesLeft + "분 남았습니다";
+                    } else {
+                        console.error("Invalid showtime received:", data.showtime);
+                  }
+                }
+
+                console.log("알림 데이터: ",messageContent);
                 receivedNotifications[data.id] = true;
 
                 var notification = document.createElement('div');
                 notification.className = 'notification-popup';
 
                 notification.innerHTML = `
-                <div>${"${data.message}"}</div>
+                <div>${"${messageContent}"}</div>
                 <button class="notification-close-btn" onclick="this.parentNode.style.display='none';">&#x2715;</button>
                 <button class="notification-confirm-btn" onclick="checkReadNotification(${"${data.id}"}, this)">확인</button>
                 `;

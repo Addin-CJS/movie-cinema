@@ -443,7 +443,7 @@ section .movie-card-section .card {
 
 section .movie-card-section .card img {
     width: 100%;
-    height: 500px;
+    height: 400px;
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 0 30px #000;
@@ -1625,6 +1625,11 @@ section .review {
     gap: 10px;
 }
 
+.reviewHeader {
+    display: flex;
+    justify-content: center;
+}
+
 .reviewHeader textarea {
     width: 100%;
     min-width: 200px;
@@ -1663,7 +1668,6 @@ section .review {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 200px;
 }
 
 .reviewWrapper1 {
@@ -1671,18 +1675,8 @@ section .review {
     width: 45%;
 }
 
-.reviewWrapper1 div {
-    width: 95%;
-}
-
-.reviewBtns {
-    text-align: right;
-    width: 200px;
-    margin-right: 20px;
-}
-
 .reviewBtns button {
-    background-color: black;
+    background-color: #333333;
     border-radius: 5px;
     border: none;
     color: white;
@@ -1698,6 +1692,7 @@ section .review {
     margin-top: 10px;
     margin-bottom: 10px;
     display: flex;
+    justify-content: space-between;
 }
 
 .reviewStar {
@@ -1710,9 +1705,22 @@ section .review {
     margin-bottom: 10px;
     text-align: left;
     margin-left: 7px;
-    height: 70px;
+    height: 200px;
     overflow: auto;
     word-break: break-all;
+}
+
+.reviewText::-webkit-scrollbar {
+    width: 10px;
+}
+
+.reviewText::-webkit-scrollbar-thumb {
+    background-color: #DB0000;
+    border-radius: 5px;
+}
+
+.reviewText::-webkit-scrollbar-track {
+    background-color: #333333;
 }
 
 .reviewWrapper3 {
@@ -1721,6 +1729,7 @@ section .review {
     margin-top: 10px;
     margin-bottom: 10px;
     display: flex;
+    justify-content: space-between;
 }
 
 .reviewLike {
@@ -2685,13 +2694,21 @@ section.showMyPage .myPage-navbar #byeMember:hover span {
     margin: 20px;
 }
 
+.reviewItem .reviewId {
+    padding-right: 10px;
+}
+
+.reviewIdAndWriter {
+    display: flex;
+}
+
 .reviewItem {
     background: #333333;
     display: inline-block;
     border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-    width: 40%;
+    padding: 20px;
+    margin: 20px;
+    width: 90%;
 }
 
 .myReviewContent, .reviewContent a, .reviewWriter {
