@@ -20,7 +20,7 @@
 <header>
     <nav>
         <h1 class="logo">
-            <a href="/">영화<span>예매</span></a>
+            <a href="/"><span>MoVie</span>Cinema</a>
         </h1>
         <jsp:include page="../movie/notification.jsp" />
         <i class="fa fa-bars" id="menu"></i>

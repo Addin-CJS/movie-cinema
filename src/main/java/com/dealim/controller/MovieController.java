@@ -1,26 +1,21 @@
 package com.dealim.controller;
 
-import com.dealim.domain.InterestMovie;
-import com.dealim.domain.Member;
-import com.dealim.domain.Movie;
+import com.dealim.domain.*;
 import com.dealim.security.custom.CustomUserDetails;
-import com.dealim.service.InterestMovieService;
-import com.dealim.service.MovieService;
-import com.dealim.service.NotificationService;
+import com.dealim.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -35,6 +30,12 @@ public class MovieController {
 
     @Autowired
     private NotificationService notificationService;
+
+    @Autowired
+    private RegionService regionService;
+
+    @Autowired
+    private TheaterService theaterService;
 
     @RequestMapping("/movieHome")
     public String movieHome(Model model,
@@ -116,4 +117,20 @@ public class MovieController {
         }
         return "redirect:/showDetail?movieId=" + movieId;
     }
+
+    @GetMapping("/region")
+    @ResponseBody
+    public ResponseEntity<List<Region>> getRegions() {
+        List<Region> regions = regionService.getAllRegions();
+        return ResponseEntity.ok(regions);
+    }
+
+    @GetMapping("/theater")
+    @ResponseBody
+    public ResponseEntity<List<Theater>> getTheatersByRegionId(@RequestParam("regionId") Long regionId,
+                                                               Model model) {
+        List<Theater> movieTheaters = theaterService.getTheaterByRegionId(regionId);
+        return ResponseEntity.ok(movieTheaters);
+    }
+
 }
