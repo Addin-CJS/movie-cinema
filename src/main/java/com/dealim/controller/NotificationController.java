@@ -3,7 +3,6 @@ package com.dealim.controller;
 
 import com.dealim.domain.Notification;
 import com.dealim.service.NotificationService;
-import com.dealim.service.SseEmitterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +19,6 @@ import java.util.List;
 public class NotificationController {
     @Autowired
     private NotificationService notificationService;
-    @Autowired
-    private SseEmitterService sseEmitterService;
-
 
     @GetMapping("/notifications/{username}")
     public String getUserNotifications(@PathVariable String username, Model model) {
@@ -33,11 +29,19 @@ public class NotificationController {
 
     @PostMapping("/notifications/{notificationId}/readNotification")
     @ResponseBody
-    public ResponseEntity<String> markNotificationAsRead(@PathVariable Long notificationId) {
+    public ResponseEntity<String> updateNotificationToRead(@PathVariable Long notificationId) {
 
-        notificationService.readNotification(notificationId);
+        notificationService.setNotificationAsRead(notificationId);
 
         return ResponseEntity.ok("Success");
+    }
+
+    @PostMapping("/notifications/readAll")
+    @ResponseBody
+    public ResponseEntity<String> updateAllNotificationToRead(){
+        notificationService.setAllNotificationAsRead();
+        return ResponseEntity.ok("setAll Notification Success");
+
     }
 
 }

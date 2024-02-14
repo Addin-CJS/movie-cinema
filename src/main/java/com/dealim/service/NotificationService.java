@@ -30,16 +30,14 @@ public class NotificationService {
     @Autowired
     private MovieRepository movieRepository;
 
-
     @Autowired
     private MemberRepository memberRepository;
 
     public void sendInterestMovieAddedNotification(String username, Long movieId) {
         System.out.println("sendInterestMovieAddedNotification called with username: " + username + ", movieId: " + movieId);
 
-        // 알림이 이미 존재하는지 확인 코드임
         if (!notificationRepository.existsByUsernameAndTypeAndMovieId(username, Notification.NotificationType.INTEREST_MOVIE_ADDED, movieId)) {
-            // 새로운 알림 객체 생성 및 저장 코드임
+
             Notification notification = Notification.builder()
                     .username(username)
                     .type(Notification.NotificationType.INTEREST_MOVIE_ADDED)
@@ -50,13 +48,12 @@ public class NotificationService {
                     .build();
             Notification savedNotification = notificationRepository.save(notification);
 
-            // 알림 json 생성 코드임  키:값
             String notificationJson = String.format("{\"id\": \"%d\", \"message\": \"안녕하세요, %s님. 관심 영화 '%d'가 추가되었습니다.\", \"type\": \"INTEREST_MOVIE_ADDED\"}",
                     savedNotification.getId(),
                     username,
                     movieId);
             System.out.println("json~~~~~~" + notificationJson);
-            // 특정 사용자에게 알림 전송 코드임
+
             sseEmitterService.sendNotification(username, notificationJson);
 
         }
@@ -72,16 +69,12 @@ public class NotificationService {
                 Notification notification = createNotificationForReviewLiked(reviewWriterUsername, reviewId, message);
 
                 sseEmitterService.sendNotification(reviewWriterUsername, formatNotificationJson(notification, message, null));
-                updateAndSendUnreadNotificationCountByUsername(reviewWriterUsername);  // 미확인 알림 메서드 안하면  실시간으로 반영안되고 새로고침해야함
+                updateAndSendUnreadNotificationCountByUsername(reviewWriterUsername);
             }
         } catch (Exception e) {
             log.error("좋아요 알림 전송 중 오류 발생", e);
         }
     }
-
-
-    //영화시작 알림을 생성하는 객체 메서드
-
 
     public void sendMovieStartNotification(Long memberId, Ticket ticket) {
         try {
@@ -96,36 +89,17 @@ public class NotificationService {
                 String message = String.format("%s님의 예매내역, <br>티켓 번호: %d, <br>영화 제목: '%s', <br>좌석 번호: '%s', <br>상영 시간: %s",
                         member.getUsername(), ticket.getTicketId(), movie.getMvTitle(), ticket.getTicketedSeat(), showtimeFormatted);
 
-                Notification notification = createNotificationForMovieStart(member.getUsername(), ticket, movie, message); //알림 객체 생성하는 메서드 ㅎ
+                Notification notification = createNotificationForMovieStart(member.getUsername(), ticket, movie, message);
 
                 sseEmitterService.sendNotification(member.getUsername(), formatNotificationJson(notification, message, showtime));
 
-                updateAndSendUnreadNotificationCount(memberId); // 미확인 알림 메서드 안하면  실시간으로 반영안되고 새로고침해야함
+                updateAndSendUnreadNotificationCount(memberId);
             }
         } catch (Exception e) {
             log.error("영화 시작 알림 전송 중 오류 발생", e);
         }
     }
 
-    //읽지않은 알림 카운트 업데이트및 보내주는 메서드  memberId로
-    public void updateAndSendUnreadNotificationCount(Long memberId) {
-        Member member = getMemberOrThrow(memberId);
-        updateAndSendUnreadNotificationCountByUsername(member.getUsername());
-    }
-
-    //읽지않은 알림 카운트 업데이트및 보내주는 메서드 username으로
-    private void updateAndSendUnreadNotificationCountByUsername(String username) {
-        long unreadCount = notificationRepository.countByUsernameAndIsReadFalse(username);
-        String notificationCountJson = String.format("{\"type\": \"UNREAD_NOTIFICATION_COUNT\", \"count\": %d}", unreadCount);
-        sseEmitterService.sendNotification(username, notificationCountJson);
-    }
-
-    // getUnreadNotificationCount 컨트롤러에서 사용하는 메서드 알림수를 위한
-    public long getUnreadNotificationCount(String username) {
-        return notificationRepository.countByUsernameAndIsReadFalse(username);
-    }
-
-    //좋아요 알림을 생성하는 객체 메서드
     private Notification createNotificationForReviewLiked(String username, Long reviewId, String message) {
         Notification notification = Notification.builder()
                 .username(username)
@@ -154,26 +128,57 @@ public class NotificationService {
         return notificationRepository.save(notification);
     }
 
-    //알림 id, 메시지, 타입 내용등
     private String formatNotificationJson(Notification notification, String message, LocalDateTime showtime) {
         StringBuilder jsonBuilder = new StringBuilder();
 
-
         jsonBuilder.append(String.format("{\"id\": \"%d\", \"message\": \"%s\"", notification.getId(), message));
-
 
         if (showtime != null) {
             String showtimeFormatted = showtime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             jsonBuilder.append(String.format(", \"showtime\": \"%s\"", showtimeFormatted));
         }
 
-
         jsonBuilder.append(String.format(", \"type\": \"%s\"}", notification.getType().toString()));
 
         return jsonBuilder.toString();
     }
 
-    //예외처리 하는거 메서드
+    public void setNotificationAsRead(Long notificationId) {
+        Optional<Notification> optionalNotification = notificationRepository.findById(notificationId);
+        if (optionalNotification.isPresent()) {
+            Notification notification = optionalNotification.get();
+            notification.setRead(true);
+           notificationRepository.save(notification);
+        } else {
+            throw new RuntimeException("해당알림이 존재하지않거나 오류입니다: " + notificationId);
+        }
+    }
+
+    public void setAllNotificationAsRead(){
+        List<Notification> notifications = notificationRepository.findAllByIsReadFalse();
+        for (Notification notification :notifications) {
+            notification.setRead(true);
+        }
+        notificationRepository.saveAll(notifications);
+    }
+
+
+    public void updateAndSendUnreadNotificationCount(Long memberId) {
+        Member member = getMemberOrThrow(memberId);
+        updateAndSendUnreadNotificationCountByUsername(member.getUsername());
+    }
+
+    private void updateAndSendUnreadNotificationCountByUsername(String username) {
+        long unreadCount = notificationRepository.countByUsernameAndIsReadFalse(username);
+        String notificationCountJson = String.format("{\"type\": \"UNREAD_NOTIFICATION_COUNT\", \"count\": %d}", unreadCount);
+        sseEmitterService.sendNotification(username, notificationCountJson);
+    }
+
+    public long getUnreadNotificationCount(String username) {
+        return notificationRepository.countByUsernameAndIsReadFalse(username);
+    }
+
+
     private Member getMemberOrThrow(Long memberId) {
         return memberRepository.findById(memberId).orElseThrow(() -> new RuntimeException("회원 정보를 찾을 수 없습니다. Member ID: " + memberId));
     }
@@ -184,17 +189,7 @@ public class NotificationService {
         return notificationRepository.findByUsernameAndIsReadFalse(username);
     }
 
-    public Notification readNotification(Long notificationId) {
-        Optional<Notification> optionalNotification = notificationRepository.findById(notificationId);
-        if (optionalNotification.isPresent()) {
-            Notification notification = optionalNotification.get();
-            notification.setRead(true);
-            return notificationRepository.save(notification);
-        } else {
 
-            throw new RuntimeException("해당알림이 존재하지않거나 오류입니다: " + notificationId);
-        }
-    }
 }
 
 

@@ -29,6 +29,9 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
     boolean existsByUsernameAndTypeAndTicketId(String username, Notification.NotificationType notificationType, Long ticketId);
 
     boolean existsByTicketIdAndType(Long ticketId, Notification.NotificationType notificationType);
+
+    @Query("SELECT n FROM Notification n WHERE n.isRead = FALSE ")
+    List<Notification> findAllByIsReadFalse();
 }
 
 
