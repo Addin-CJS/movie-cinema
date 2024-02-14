@@ -93,9 +93,9 @@ public class MovieController {
         System.out.println("movie컨트롤러 아이디 " + member.getUsername());
         if (added) {
            // notificationService.sendInterestMovieAddedNotification(member.getUsername(), interestMovie.getMovieId());
-            redirectAttributes.addFlashAttribute("successMessage", "관심 영화가 성공적으로 추가되었습니다.");
+            redirectAttributes.addFlashAttribute("successMessage", "관심 영화 추가 성공!");
         } else {
-            redirectAttributes.addFlashAttribute("errorMessage", "이미 관심 영화로 등록되어 있습니다.");
+            redirectAttributes.addFlashAttribute("errorMessage", "이미 관심영화로 등록되어있습니다.");
         }
         return "redirect:/showDetail?movieId=" + interestMovie.getMovieId();
     }
@@ -111,7 +111,7 @@ public class MovieController {
 
         boolean removed = interestMovieService.removeInterestMovie(movieId, member.getUsername());
         if (removed) {
-            redirectAttributes.addFlashAttribute("successMessage", "관심 영화가 성공적으로 취소되었습니다.");
+            redirectAttributes.addFlashAttribute("successMessage", "관심 영화 취소 성공!");
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "관심 영화 취소에 실패했습니다.");
         }
