@@ -36,7 +36,7 @@ public class SseEmitterController {
     }
 
 
-    @GetMapping("/unread-count/{username}") // 페이지를 처음 실행할 때 또는 수동으로 새로고침할 때 읽지 않은 알림의 수를 조회에 필요한거!!!
+    @GetMapping("/unread-count/{username}")
     public ResponseEntity<?> getUnreadNotificationCountConnect(@PathVariable String username) {
         try {
             long count = notificationService.getUnreadNotificationCount(username);

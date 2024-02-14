@@ -17,6 +17,9 @@
 
 <section>
     <h2>알림 목록</h2>
+<sec:authorize access="isAuthenticated()">
+    <button onclick="checkReadAllNotifications()">모든 알림 확인 체크하기</button>
+</sec:authorize>
     <div id="notificationList">
         <sec:authorize access="isAuthenticated()">
             <c:forEach var="notification" items="${notifications}">
@@ -26,6 +29,8 @@
                     <p><b>알림 유형:</b> ${notification.type}</p>
                     <p><b>날짜:</b> <c:out value="${notification.createdDateTime}"/></p>
                     <button onclick="checkReadNotification(${notification.id})">알림 확인 체크하기</button>
+
+
                 </div>
             </c:forEach>
         </sec:authorize>
@@ -54,7 +59,26 @@
         }
     }
 
+    function checkReadAllNotifications(){
+        var confirmCheck = confirm("모든 알림을 읽음 상태로 변경하시겠습니까?");
+        if(confirmCheck){
+            $.ajax({
+                type: 'POST',
+                url: '/notifications/readAll',
+                success: function (response) {
+                    alert('모든 알림이 확인되었습니다.');
+                    location.reload();
+                },
+                error: function (xhr, status, error){
+                    alert('모든 알림 읽기중 오류가 발생했습니다');
+                    console.error(xhr.responseText);
+                }
 
+
+            });
+
+        }
+    }
 
 </script>
 
