@@ -50,12 +50,12 @@
 
 <script>
     $(document).ready(function() {
-
         $.ajax({
             url: '/region',
             type: 'GET',
             success: function(response) {
                 displayRegions(response);
+                updateSelectedState();
             },
             error: function() {
                 console.error('지역 조회 ajax통신 실패');
@@ -100,8 +100,6 @@
                 displayTimes();
             }
         });
-
-        updateSelectedState();
     });
 
     function displayRegions(regions) {
@@ -122,11 +120,11 @@
         var promises = timeList.map(function(time) {
             return fetchTakenSeatsNumber(${movie.movieId}, localStorage.getItem("selectedTheaterId"), localStorage.getItem("selectedDate"), time);
         });
-
         Promise.all(promises).then(function(results) {
             results.forEach(function(result) {
                 timeContainer.append(makeTimeOption(result.time, result.takenSeatsNumber));
             });
+            updateSelectedState();
         }).catch(function(error) {
             console.error('Error:', error);
         });
@@ -153,7 +151,6 @@
         });
     }
 
-
     function makeTimeOption(time, takenSeatsNumber) {
         var timeOption = $('<div>', {
             'class': 'time-option',
@@ -174,6 +171,7 @@
             type: 'GET',
             success: function(response) {
                 displayTheaters(response);
+                updateSelectedState();
             },
             error: function() {
                 console.error('영화관 조회 ajax통신 실패');
@@ -223,16 +221,6 @@
         }
         return times;
     }
-    //
-    // function displayTimeList() {
-    //     let timeList = createTimeList();
-    //     let timeDropdown = $('.chooseTime');
-    //
-    //     timeList.forEach(function(time) {
-    //         let option = $('<option>' + time + '</option>');
-    //         timeDropdown.append(option);
-    //     });
-    // }
 
     function updateSelectedState() {
         let selectedRegion = localStorage.getItem("selectedRegion");
@@ -240,46 +228,49 @@
         let selectedDate = localStorage.getItem("selectedDate");
         let selectedTime = localStorage.getItem("selectedTime");
 
-        $('.chooseRegion option').each(function () {
-            if($(this).text() == selectedRegion) {
-                $(this).prop('selected', true).parent().addClass('on');
+        if (selectedRegion && selectedTheater && selectedDate && selectedTime) {
+            $('.chooseRegion .region-btn').each(function () {
+                if ($(this).text() === selectedRegion) {
+                    $(this).addClass('selected');
+                } else {
+                    $(this).removeClass('selected');
+                }
+            });
+            $('.chooseTheater .theater-btn').each(function () {
+                if ($(this).text() === selectedTheater) {
+                    $(this).addClass('selected');
+                } else {
+                    $(this).removeClass('selected');
+                }
+            });
+
+            $('.chooseDate .datepicker').datepicker('setDate', new Date(selectedDate));
+
+            let selectedTime = localStorage.getItem("selectedTime");
+            if (selectedTime) {
+                $('.chooseTime .time-option').each(function () {
+                    var timeText = $(this).text().split(" ")[0];
+                    if (timeText === selectedTime) {
+                        $(this).addClass('selected');
+                    } else {
+                        $(this).removeClass('selected');
+                    }
+                });
             }
-        });
-        $('.chooseTheater option').each(function () {
-            if($(this).text() == selectedTheater) {
-                $(this).prop('selected', true).parent().addClass('on');
-            }
-        });
-        $('.chooseDate option').each(function () {
-            if($(this).text() == selectedDate) {
-                $(this).prop('selected', true).parent().addClass('on');
-            }
-        });
-        $('.chooseTime option').each(function () {
-            if($(this).text() == selectedTime) {
-                $(this).prop('selected', true).parent().addClass('on');
-            }
-        });
+        }
     }
 
     function selectSeat() {
-        if (!localStorage.getItem("selectedTime")) {
-            alert("시간을 선택해주세요");
-            return;
-        }
-        if (!localStorage.getItem("selectedDate")) {
-            alert("일자를 선택해주세요");
-            return;
-        }
-        if (!localStorage.getItem("selectedTheater")) {
-            alert("영화관을 선택해주세요");
+        var selectedRegion = $('.chooseRegion button.selected').length > 0;
+        var selectedTheater = $('.chooseTheater button.selected').length > 0;
+        var selectedDate = localStorage.getItem("selectedDate") !== null;
+        var selectedTime = localStorage.getItem("selectedTime") !== null;
+
+        if (!selectedRegion || !selectedTheater || !selectedDate || !selectedTime) {
+            alert("모든 STEP 항목을 선택해주세요!");
             return;
         }
         location.href = 'movieSeats?movieId=${movie.movieId}';
-    }
-
-    function updateTakenSeats() {
-
     }
 
 </script>
