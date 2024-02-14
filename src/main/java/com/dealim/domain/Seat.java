@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @SequenceGenerator(name = "seats_SEQ", sequenceName = "seats_SEQ", allocationSize = 1)
@@ -23,4 +25,5 @@ public class Seat {
     private Integer seatNumber;
     private Long memberId;
     private Long ticketId;
+    private LocalDateTime ticketedDate;
 }

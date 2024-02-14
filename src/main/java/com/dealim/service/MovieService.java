@@ -75,29 +75,29 @@ public class MovieService {
 
     //영화 상세보기 비즈니스 로직
     public void getShowDetail(Long movieId, Model model) {
-        //영화 상세보기 메서드
+
         Optional<Movie> movie = selectMovieDetailById(movieId);
 
         model.addAttribute("movie", movie.orElse(null));
         if (movie.isPresent()) {
             Float popularityValue = movie.get().getMvPopularity();
-            Float minPopularity = 0.0f;
-            Float maxPopularity = 10.0f;
-            Float minRating = 0.0f;
-            Float maxRating = 5.0f;
 
+            // 인기도 점수가 null인 경우 0.0으로 설정
             if (popularityValue == null) {
                 popularityValue = 0.0f;
             }
 
-            Float rating = ((popularityValue - minPopularity) / (maxPopularity - minPopularity)) * (maxRating - minRating) + minRating;
-            DecimalFormat df = new DecimalFormat("0.0");
-            String formattedRating = df.format(rating);
-            String finalRating = formattedRating + "/100";
-            model.addAttribute("movieRating", finalRating);
+            // DecimalFormat을 사용하여 소수점 없이 포맷
+            DecimalFormat df = new DecimalFormat("0");
+            String formattedPopularity = df.format(popularityValue);
+
+            // 최종 결과 문자열 생성
+            String finalPopularity = formattedPopularity;
+            model.addAttribute("movieRating", finalPopularity);
         } else {
             model.addAttribute("movieRating", null);
         }
+
     }
 
     public List<Theater> getTheaterListByMovieId(Long movieId) {
