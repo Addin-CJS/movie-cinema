@@ -1,38 +1,75 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="../layouts/header.jsp"/>
 
-    <style>
-        .notification-item {
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-        }
-    </style>
+<style>
+    #listNotificationContainer {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .listNotification-item {
+        margin-bottom: 15px;
+        border: 1px solid #d9534f;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #ffffff;
+        color: #333;
+    }
+
+    .listNotification-item p {
+        margin: 5px 0;
+    }
+
+    .listNotification-header {
+        color: #d9534f;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .listNotification-button {
+        background-color: #d9534f;
+        color: #ffffff;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .listNotification-button:hover {
+        background-color: #c9302c;
+    }
+</style>
 <sec:authentication var="me" property="principal"/>
 
 <section>
-    <h2>알림 목록</h2>
-<sec:authorize access="isAuthenticated()">
-    <button onclick="checkReadAllNotifications()">모든 알림 확인 체크하기</button>
-</sec:authorize>
-    <div id="notificationList">
+    <h2 class="listNotification-header">알림 목록</h2>
+    <div id="listNotificationContainer">
         <sec:authorize access="isAuthenticated()">
-            <c:forEach var="notification" items="${notifications}">
-                <div class="notification-item">
-                    <p><b>알림번호:</b> ${notification.id}</p>
-                    <p><b>메시지:</b> ${notification.message}</p>
-                    <p><b>알림 유형:</b> ${notification.type}</p>
-                    <p><b>날짜:</b> <c:out value="${notification.createdDateTime}"/></p>
-                    <button onclick="checkReadNotification(${notification.id})">알림 확인 체크하기</button>
-
-
-                </div>
-            </c:forEach>
+            <button onclick="checkReadAllNotifications()" class="listNotification-button">모든 알림 확인 체크하기</button>
+            <div id="notificationList">
+                <sec:authorize access="isAuthenticated()">
+                    <c:forEach var="notification" items="${notifications}">
+                        <div class="listNotification-item">
+                            <p><b>알림번호:</b> ${notification.id}</p>
+                            <p><b>메시지:</b> ${notification.message}</p>
+                            <p><b>알림 유형:</b> ${notification.type}</p>
+                            <p><b>예매 날짜:</b>
+                                    ${fn:substringBefore(notification.createdDateTime.toString(), 'T')}
+                                   (${fn:substring(fn:substringAfter(notification.createdDateTime.toString(), 'T'), 0, 5)})
+                            </p>
+                            <button onclick="checkReadNotification(${notification.id})" class="listNotification-button">알림 확인 체크하기</button>
+                        </div>
+                    </c:forEach>
+                </sec:authorize>
+            </div>
         </sec:authorize>
     </div>
 </section>

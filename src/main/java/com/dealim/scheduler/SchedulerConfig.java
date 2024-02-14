@@ -25,7 +25,7 @@ public class SchedulerConfig {
     @Autowired
     private NotificationRepository notificationRepository;
 
-    @Scheduled(fixedRate = 60000) //  매 1분마다 실행 한다는거
+    @Scheduled(fixedRate = 40000) //  매 30초마다 실행 한다는거
     public void sendReminderNotifications() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime oneHourLater = now.plusHours(1);
