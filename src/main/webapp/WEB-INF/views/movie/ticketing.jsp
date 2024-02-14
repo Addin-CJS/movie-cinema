@@ -118,7 +118,7 @@
                     selectedDate: localStorage.getItem("selectedDate"),
                     ticketPrice: localStorage.getItem("ticketedPrice"),
                     movieId: ${movie.movieId},
-                    theaterId: localStorage.getItem("theaterId"),
+                    theaterId: localStorage.getItem("selectedTheaterId"),
                     memberId: ${me.memberId}
                 },
                 success: function (response) {

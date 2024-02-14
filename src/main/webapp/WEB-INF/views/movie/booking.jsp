@@ -50,6 +50,7 @@
 
 <script>
     $(document).ready(function() {
+
         $.ajax({
             url: '/region',
             type: 'GET',
@@ -74,8 +75,10 @@
             $('.chooseTheater button').removeClass('selected');
             $(this).addClass('selected');
 
+            var selectedTheaterId = $(this).data('theater-id');
             var selectedTheaterName = $(this).text();
             localStorage.setItem("selectedTheater", selectedTheaterName);
+            localStorage.setItem("selectedTheaterId", selectedTheaterId);
         });
         $('.datepicker').datepicker({
             dateFormat: 'yy-mm-dd',

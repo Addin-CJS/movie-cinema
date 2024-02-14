@@ -309,7 +309,7 @@
             type: 'GET',
             data: {
                 movieId: ${movie.movieId},
-                theaterId: localStorage.getItem("theaterId")
+                theaterId: localStorage.getItem("selectedTheaterId")
             },
             success: function (reservedSeats) {
                 $(seatContEl).each(function () {
