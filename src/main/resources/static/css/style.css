@@ -237,8 +237,9 @@ section .popular-movie-slider {
     justify-content: center;
     align-items: start;
     gap: 35px;
-    padding: 10px 100px;
+    padding: 20px 100px;
     position: relative;
+    margin-bottom: 20px;
 }
 
 section .popular-movie-slider .poster {
@@ -246,28 +247,41 @@ section .popular-movie-slider .poster {
     height: 400px;
     object-fit: cover;
     border-radius: 10px;
+    border: 3px solid red;
 }
 
 
 section .popular-movie-slider .popular-movie-slider-content {
     line-height: 25px;
-    margin-top: 20px
+    max-width: 650px;
+    margin-top: 40px
 }
 
 section .popular-movie-slider .popular-movie-slider-content .movie-name {
     font-size: 1.8em;
+    margin-top: 10px;
 }
 
 
 section .popular-movie-slider .popular-movie-slider-content .category {
     display: flex;
-    gap: 30px;
     text-transform: capitalize;
-    margin: 10px 0;
+    margin-top: 10px;
+}
+
+section .popular-movie-slider .popular-movie-slider-content .category p{
+    margin-left: 3px;
 }
 
 section .popular-movie-slider .popular-movie-slider-content .desc {
     font-size: .90em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    margin-top: 10px;
 }
 
 section .popular-movie-slider .popular-movie-slider-content .movie-info {
@@ -292,13 +306,14 @@ section .popular-movie-slider .popular-movie-slider-content .movie-info .fa span
 }
 
 
-section .popular-movie-slider .popular-movie-slider-content .movie-btns {
+section .popular-movie-slider .popular-movie-slider-content .movieBtnWrap {
     display: flex;
-    gap: 10px;
+    gap: 20px;
+    margin-top: 50px;
 }
 
 
-section .popular-movie-slider .popular-movie-slider-content .movie-btns button {
+section .popular-movie-slider .popular-movie-slider-content .movieBtnWrap button, #interest-button {
     width: 200px;
     border: none;
     outline: none;
@@ -311,10 +326,13 @@ section .popular-movie-slider .popular-movie-slider-content .movie-btns button {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2px;
+}
+.movieBtnWrap .alert {
+    margin-top: 15px;
+    font-size: 0.8em;
 }
 
-section .popular-movie-slider .popular-movie-slider-content .movie-btns button .fa {
+section .popular-movie-slider .popular-movie-slider-content .movieBtnWrap button .fa {
     font-size: .65em;
     color: #fff;
 }
@@ -1586,7 +1604,7 @@ section .review {
 .latest-likes {
     display: flex;
     justify-content: flex-end;
-    margin-right: 70px;
+    margin-right: 110px;
 }
 
 .latest-likes .likesWrap{
@@ -1884,33 +1902,27 @@ section .slider-wrap img {
         display: flex;
         justify-content: center;
         align-items: start;
-        gap: 35px;
+        gap: 45px;
         padding: 10px 100px;
         position: relative;
     }
 
     section .popular-movie-slider .poster {
         width: 300px;
-        height: 400px;
+        height: 380px;
         object-fit: cover;
         border-radius: 10px;
     }
 
 
     section .popular-movie-slider .popular-movie-slider-content {
-        line-height: 25px;
+        line-height: 30px;
+        max-width: 700px;
+        margin-top: 20px;
     }
 
     section .popular-movie-slider .popular-movie-slider-content .movie-name {
         font-size: 1.8em;
-    }
-
-
-    section .popular-movie-slider .popular-movie-slider-content .category {
-        display: flex;
-        gap: 30px;
-        text-transform: capitalize;
-        margin: 10px 0;
     }
 
     section .popular-movie-slider .popular-movie-slider-content .desc {
@@ -2718,6 +2730,24 @@ section.showMyPage .myPage-navbar #byeMember:hover span {
     text-align: left;
 }
 
+.myReviewContent {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.myReviewContent::-webkit-scrollbar {
+    width: 10px;
+}
+
+.myReviewContent::-webkit-scrollbar-thumb {
+    background-color: #DB0000;
+    border-radius: 5px;
+}
+
+.myReviewContent::-webkit-scrollbar-track {
+    background-color: #333333;
+}
+
 #myReviewItem .reviewDate {
     flex: 0 0 100px;
 }
@@ -2797,10 +2827,13 @@ div.myTicket .myTicketPagination .active {
 }
 
 .movieContainer {
-    border: 3px solid #DB0000;
+    border: 5px solid #DB0000;
+    background-color: white;
+    color: black;
     border-radius: 10px;
     margin: 20px;
-    width: 700px;
+    max-width: 700px;
+    height: 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -2808,20 +2841,17 @@ div.myTicket .myTicketPagination .active {
 }
 
 .interestMovieImg img {
-    width: 150px;
-    height: auto;
+    padding: 10px;
+    margin: auto;
+    height: 100%;
     border-radius: 20px;
     border: 1px solid;
-    margin-left: 40px;
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 .myInterestMovieInfo1 {
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin-left: 30px;
 }
 
 .interestMovieTitle {
@@ -3094,21 +3124,6 @@ div.myTicket .myTicketPagination .active {
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 2rem;
-}
-
-.interest-button {
-    background-color: transparent;
-    color: #ffffff;
-    padding: 0;
-    border: none;
-    font-size: 0.875rem;
-    font-weight: 400;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease-in-out;
-    margin-top: 8px;
 }
 
 .interest-button .emoji {

@@ -111,11 +111,9 @@
             type: "get",
             dataType: "json",
             success: function (response) {
+                displayAverageRating(response.content);
+
                 reviews = response.content;
-
-                console.log("Sorted by:", sortType, "First item:", response.content[0]);
-
-                console.log("Received response:", response);
 
                 var reviewsHtml = `
                 <div class="reviewHeader">
@@ -405,7 +403,23 @@
                 alert('좋아요 처리 중 오류 발생');
             }
         });
+    }
 
+    function displayAverageRating(reviews) {
+        if (!reviews || reviews.length === 0) {
+            document.querySelector(".averageRating").textContent = "등록된 별점이 없습니다.";
+            return;
+            return;
+        }
+        var totalRating = 0;
+        reviews.forEach(function(review) {
+            totalRating += review.starRating;
+        });
+
+        var averageRating = totalRating / reviews.length;
+        averageRating = averageRating.toFixed(2);
+
+        document.querySelector(".averageRating").textContent = "평균 별점: " + averageRating + "/5";
     }
 
 </script>

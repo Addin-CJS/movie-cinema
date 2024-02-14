@@ -22,10 +22,10 @@
                             </div>
                             <div class="myInterestMovieInfo2">
                                 <div class="interestMovieWrap">
-                                    <span class="interestMovieDate">${moviesInfo[movie.movieId].mvReleaseDate}</span>
+                                    <span class="interestMovieDate">개봉 : ${moviesInfo[movie.movieId].mvReleaseDate}</span>
                                 </div>
                                 <div class="interestMovieWrap">
-                                    <span class="interestMovieGenre">${moviesInfo[movie.movieId].mvGenre}</span>
+                                    <span class="interestMovieGenre">장르 : ${moviesInfo[movie.movieId].mvGenre}</span>
                                 </div>
                             </div>
                         </div>
