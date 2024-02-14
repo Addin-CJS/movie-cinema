@@ -3449,7 +3449,8 @@ html .ui-button.ui-state-disabled:active {font-weight: normal; color: #454545; t
     font-size: 0.9em;
 }
 .chooseTheater{
-    margin-top: 10px;
+    border-top: 1px solid #edf2f7;
+    padding-top: 15px;
 }
 .chooseTheater button {
     margin-left: 10px;
@@ -3466,7 +3467,6 @@ html .ui-button.ui-state-disabled:active {font-weight: normal; color: #454545; t
     max-height: 200px;
     overflow-y: auto;
 }
-
 
 .chooseRegion button.selected, .chooseTheater button.selected {
     background-color: #DB0000;

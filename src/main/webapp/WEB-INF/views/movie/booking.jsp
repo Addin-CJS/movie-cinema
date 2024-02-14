@@ -71,6 +71,7 @@
             localStorage.setItem("selectedRegion", selectedRegionName);
             loadTheaters(selectedRegionId);
         });
+
         $('.chooseTheater').on('click', 'button', function() {
             $('.chooseTheater button').removeClass('selected');
             $(this).addClass('selected');
@@ -80,6 +81,7 @@
             localStorage.setItem("selectedTheater", selectedTheaterName);
             localStorage.setItem("selectedTheaterId", selectedTheaterId);
         });
+
         $('.datepicker').datepicker({
             dateFormat: 'yy-mm-dd',
             prevText: '이전 달',
