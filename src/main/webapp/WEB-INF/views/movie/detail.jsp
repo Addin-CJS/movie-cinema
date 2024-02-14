@@ -21,7 +21,7 @@
             <div class="movie-info">
                 <i class="fa fa-clock-o"> &nbsp;&nbsp;&nbsp;런타임 : <span>${movie.mvRuntime}min</span></i>
                 <i class="fa fa-circle"> &nbsp;&nbsp;&nbsp;<span>전체 인기도 : <b>${movieRating}</b></span></i>
-                <i class="fa fa-star"> &nbsp;&nbsp;&nbsp;<span class="averageRating"> MVC 별점 : <b> </b></span></i>
+                <i class="fa fa-star"> &nbsp;&nbsp;&nbsp;MVC 별점 : <span class="averageRating"><b> </b></span></i>
             </div>
             <div class="movieBtnWrap">
                 <button onclick="window.open('${movie.mvVideo}', '_blank');">▶ 예고편 보기</button>

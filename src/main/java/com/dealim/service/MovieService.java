@@ -82,16 +82,13 @@ public class MovieService {
         if (movie.isPresent()) {
             Float popularityValue = movie.get().getMvPopularity();
 
-            // 인기도 점수가 null인 경우 0.0으로 설정
             if (popularityValue == null) {
                 popularityValue = 0.0f;
             }
 
-            // DecimalFormat을 사용하여 소수점 없이 포맷
             DecimalFormat df = new DecimalFormat("0");
             String formattedPopularity = df.format(popularityValue);
 
-            // 최종 결과 문자열 생성
             String finalPopularity = formattedPopularity;
             model.addAttribute("movieRating", finalPopularity);
         } else {
