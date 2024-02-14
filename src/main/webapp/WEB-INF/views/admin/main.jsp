@@ -13,6 +13,9 @@
                     <li id="showMyInfo" onclick="showSubMenu('myInfo');">
                         <span>회원 관리</span>
                     </li>
+                    <li id="writeAnnounce" onclick="showSubMenu('myInfo');">
+                        <span>공지사항 작성</span>
+                    </li>
                 </ul>
             </aside>
         </div>

@@ -223,16 +223,6 @@
         }
         return times;
     }
-    //
-    // function displayTimeList() {
-    //     let timeList = createTimeList();
-    //     let timeDropdown = $('.chooseTime');
-    //
-    //     timeList.forEach(function(time) {
-    //         let option = $('<option>' + time + '</option>');
-    //         timeDropdown.append(option);
-    //     });
-    // }
 
     function updateSelectedState() {
         let selectedRegion = localStorage.getItem("selectedRegion");
@@ -276,10 +266,6 @@
             return;
         }
         location.href = 'movieSeats?movieId=${movie.movieId}';
-    }
-
-    function updateTakenSeats() {
-
     }
 
 </script>
