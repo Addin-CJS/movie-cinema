@@ -23,9 +23,7 @@
         box-sizing: border-box;
         max-width: 320px;
         word-wrap: break-word;
-
     }
-
 
     .notification-confirm-btn {
         background-color: #5C6BC0;
@@ -104,10 +102,8 @@
         }
     }
 
-
     window.onload = function () {
         fetchInitialUnreadNotificationCount();
-
 
         document.getElementById("notification-link").href = "/notifications/" + encodeURIComponent(username);
 
@@ -124,7 +120,6 @@
 
         source.onmessage = function (event) {
             console.log("알림 message: ", event.data);
-
         };
 
         var receivedNotifications = {}; // 이미 받은 알림을 추적하는 객체
@@ -176,7 +171,5 @@
                 };
             }
         }
-
-
     };
 </script>

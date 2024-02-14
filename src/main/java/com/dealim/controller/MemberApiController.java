@@ -25,7 +25,7 @@ public class MemberApiController {
         List<Member> memberList = memberService.getAllMembersNotWithdrawn();
         return ResponseEntity.ok(memberList);
     }
-
+    
     @GetMapping("/member/delete")
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<?> deleteMember(@RequestParam("memberId") Long memberId) throws Exception {
