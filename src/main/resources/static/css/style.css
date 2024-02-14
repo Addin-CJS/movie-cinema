@@ -2292,7 +2292,7 @@ section .myPage .myPageInfo input {
 
 .conlist li a {
     padding: 0 10px;
-    font-size: 1.1em;
+    font-size: 1em;
     color: #767676;
     font-weight: 500;
 }
@@ -3280,4 +3280,206 @@ div.myTicket .myTicketPagination .active {
     padding: 2px 6px;
     font-size: 14px;
     font-weight: bold;
+}
+
+.chooseInfo {
+    padding: 1rem 0;
+    background-color: black;
+}
+
+.space-x-8 > * + * {
+    margin-left: 2rem;
+}
+
+.stepWrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.step {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+.step h4 {
+    font-weight: bold;
+    color: #e53e3e;
+    margin-bottom: 1rem;
+}
+#step1 {
+    flex: 1;
+}
+
+#step2 {
+    width:350px;
+}
+
+#step3 {
+    width: 250px;
+}
+
+#step4 {
+    width: 250px;
+}
+
+
+.step div + div {
+    margin-top: 1rem;
+}
+.step button {
+    background-color: #edf2f7;
+    color: #4a5568;
+    padding: 0.25rem 1rem;
+    border-radius: 0.25rem;
+    border: none;
+    cursor: pointer;
+}
+.step button:hover {
+    background-color: #e2e8f0;
+}
+.text-sm {
+    font-size: 0.875rem;
+}
+.text-red-600 {
+    color: #e53e3e;
+}
+
+.ui-datepicker th {
+    padding: 0.7em 0.3em;
+    text-align: center;
+    font-weight: bold;
+    border: 0;
+    color: black;
+}
+
+.ui-datepicker-calendar>thead>tr>th { font-size: 14px !important; }
+
+.ui-datepicker .ui-datepicker-header { position: relative; padding: 10px 0; }
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-state-default,
+.ui-button,
+html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active {font-weight: normal; color: #454545; text-align: center; }
+
+.ui-datepicker .ui-datepicker-title { margin: 0 0em; line-height: 16px; text-align: center; font-size: 14px; padding: 0px; font-weight: bold; }
+
+.ui-datepicker { display: none; background-color: #fff; border-radius: 4px; margin-top: 10px; margin-left: 0px; margin-right: 0px; padding: 20px; padding-bottom: 10px; width: 300px; box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1); }
+
+.ui-widget.ui-widget-content { border: 1px solid #eee; }
+
+#datepicker:focus>.ui-datepicker { display: block; }
+
+.ui-datepicker-prev,
+.ui-datepicker-next { cursor: pointer; }
+
+.ui-datepicker-next { float: right; }
+
+.ui-state-disabled { cursor: auto; color: hsla(0, 0%, 80%, 1); }
+
+.ui-datepicker-title { text-align: center; padding: 10px; font-weight: 100; font-size: 20px; }
+
+.ui-datepicker-calendar { width: 100%; }
+
+.ui-datepicker-calendar>thead>tr>th { padding: 5px; font-size: 20px; font-weight: 400; }
+
+.ui-datepicker-calendar>tbody>tr>td>a { color: #000; font-size: 12px !important; font-weight: bold !important; text-decoration: none;}
+
+.ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover { cursor: auto; background-color: #fff; }
+
+.ui-datepicker-calendar>tbody>tr>td { border-radius: 100%; width: 44px; height: 30px; cursor: pointer; padding: 5px; font-weight: 100; text-align: center; font-size: 12px; }
+
+.ui-datepicker-calendar>tbody>tr>td:hover { background-color: transparent; opacity: 0.6; }
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus,
+.ui-button:hover,
+.ui-button:focus { border: 0px solid #cccccc; background-color: transparent; font-weight: normal; color: #2b2b2b; }
+
+.ui-widget-header .ui-icon { background-image: url('../img/btns.png'); }
+
+.ui-icon-circle-triangle-e { background-position: -20px 0px; background-size: 36px; }
+
+.ui-icon-circle-triangle-w { background-position: -0px -0px; background-size: 36px; }
+
+.ui-datepicker-calendar>tbody>tr>td:first-child a { color: red !important; }
+
+.ui-datepicker-calendar>tbody>tr>td:last-child a { color: #0099ff !important; }
+
+.ui-datepicker-calendar>thead>tr>th:first-child { color: red !important; }
+
+.ui-datepicker-calendar>thead>tr>th:last-child { color: #0099ff !important; }
+
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-state-highlight { border: 0px; background: #f1f1f1;}
+
+.inp { padding: 10px 10px; background-color: #f1f1f1; border-radius: 4px; border: 0px; }
+
+.inp:focus { outline: none; background-color: #eee; }
+
+.ui-widget-header, .ui-state-default, .ui-widget-content .ui-state-default {
+    border: none !important;
+    background: transparent !important;
+}
+
+.ui-widget.ui-widget-content {
+    width: 100%;
+    border: none !important;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    background-color: lemonchiffon !important;
+    border-radius: 15%;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    color: black !important;
+    font-size: 20px !important;
+}
+
+.chooseRegion button {
+    margin-left: 10px;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+.chooseTheater{
+    margin-top: 10px;
+}
+.chooseTheater button {
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+
+.chooseTime option{
+    color: black;
+    margin-bottom: 10px;
+}
+
+.chooseTime {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+
+.chooseRegion button.selected, .chooseTheater button.selected {
+    background-color: #DB0000;
+    color: white;
+}
+
+.time-option {
+    margin: 2px;
+    cursor: pointer;
+    color: black;
+}
+
+.time-option.selected {
+    background-color: #DB0000;
+    color: white;
 }

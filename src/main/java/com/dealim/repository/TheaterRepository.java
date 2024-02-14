@@ -9,4 +9,7 @@ import java.util.List;
 @Repository
 public interface TheaterRepository extends JpaRepository<Theater, Long> {
     List<Theater> findByTheaterIdIn(List<Long> ids);
+
+
+    List<Theater> findByRegionId(Long regionId);
 }
