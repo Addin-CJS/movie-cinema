@@ -23,11 +23,15 @@
                     </div>
                     <div class="moviePrice">
                         <p>영화 가격</p>
-                        <h1 id="moviePrice">1,300원</h1>
+                        <h1 id="moviePrice" class="dateOn">1,300원</h1>
                     </div>
                     <div class="dateCont">
                         <p>상영 일자</p>
-                        <p id="dateOn" class="dateOn">Wed , 31th march</p>
+                        <p id="dateOn" class="dateOn"></p>
+                    </div>
+                    <div class="theaterCont">
+                        <p>상영관</p>
+                        <p id="theaterOn" class="dateOn"></p>
                     </div>
                 </div>
             </div>
@@ -138,6 +142,11 @@
             dateOn.text(localStorage.getItem("selectedDate") + " " + localStorage.getItem("selectedTime"));
         };
         updateDate();
+
+        // 영화관 업데이트
+        let theaterOn = $("#theaterOn");
+
+        theaterOn.text(localStorage.getItem("selectedTheater"))
 
     });
 </script>

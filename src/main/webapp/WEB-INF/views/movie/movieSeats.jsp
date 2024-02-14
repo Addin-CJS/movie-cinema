@@ -132,11 +132,15 @@
                         </div>
                         <div class="moviePrice">
                             <p>영화 가격</p>
-                            <h1 id="moviePrice">1,300원</h1>
+                            <h1 id="moviePrice" class="dateOn">1,300원</h1>
                         </div>
                         <div class="dateCont">
                             <p>상영 일자</p>
                             <p id="dateOn" class="dateOn"></p>
+                        </div>
+                        <div class="theaterCont">
+                            <p>상영관</p>
+                            <p id="theaterOn" class="dateOn"></p>
                         </div>
                     </div>
                 </div>
@@ -224,6 +228,11 @@
         };
         updateDate();
 
+        // 영화관 업데이트
+        let theaterOn = $("#theaterOn");
+
+        theaterOn.text(localStorage.getItem("selectedTheater"))
+
         // 오른쪽 좌석 html 업데이트
         function updateSeats() {
             $(selectedSeatsHolderEl).empty();
@@ -309,7 +318,9 @@
             type: 'GET',
             data: {
                 movieId: ${movie.movieId},
-                theaterId: localStorage.getItem("selectedTheaterId")
+                theaterId: localStorage.getItem("selectedTheaterId"),
+                selectedDate: localStorage.getItem("selectedDate"),
+                selectedTime: localStorage.getItem("selectedTime")
             },
             success: function (reservedSeats) {
                 $(seatContEl).each(function () {

@@ -38,10 +38,11 @@ public class TicketService {
     public Ticket saveTicket(PaidTicket paidTicket, Member loginUser) {
 
         // 날짜 형식에 맞는 정규 표현식 패턴
-        Pattern pattern = Pattern.compile("(\\d+)월 (\\d+)일");
+        Pattern pattern = Pattern.compile("(\\d{4})-(\\d{2})-(\\d{2})");
         Matcher matcher = pattern.matcher(paidTicket.getSelectedDate());
 
         LocalDateTime dateTime = null;
+
         if (matcher.find()) {
             // 연도는 현재 연도로 설정, 월과 일은 문자열에서 추출
             String year = String.valueOf(LocalDateTime.now().getYear());
@@ -49,8 +50,8 @@ public class TicketService {
             String day = matcher.group(2);
 
             // 날짜와 시간을 결합
-            String dateTimeStr = year + "-" + month + "-" + day + "T" + paidTicket.getSelectedTime();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d'T'HH:mm");
+            String dateTimeStr = paidTicket.getSelectedDate() + "T" + paidTicket.getSelectedTime();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
             // 문자열을 LocalDateTime 객체로 파싱
             dateTime = LocalDateTime.parse(dateTimeStr, formatter);
@@ -58,6 +59,7 @@ public class TicketService {
 
         Ticket ticket = Ticket.builder()
                 .memberId(loginUser.getMemberId())
+                .theaterId(Long.parseLong(paidTicket.getTheaterId()))
                 .movieId(paidTicket.getMovieId())
                 .ticketPrice(paidTicket.getTicketPrice())
                 .ticketedDate(dateTime)

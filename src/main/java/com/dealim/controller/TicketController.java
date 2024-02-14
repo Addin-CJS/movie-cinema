@@ -40,10 +40,8 @@ public class TicketController {
     @PostMapping("")
     public String payTicket(PaidTicket paidTicket, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Member loginUser = customUserDetails.getMember();
-        log.info(paidTicket.toString());
         Ticket savedTicket = ticketService.saveTicket(paidTicket, loginUser);
-        paidTicket.setTicketId(savedTicket.getTicketId());
-        seatService.saveSeats(paidTicket, loginUser);
+        seatService.saveSeats(savedTicket, loginUser);
 
         return "movie/ticketing";
     }

@@ -71,6 +71,7 @@
             localStorage.setItem("selectedRegion", selectedRegionName);
             loadTheaters(selectedRegionId);
         });
+
         $('.chooseTheater').on('click', 'button', function() {
             $('.chooseTheater button').removeClass('selected');
             $(this).addClass('selected');
@@ -79,7 +80,9 @@
             var selectedTheaterName = $(this).text();
             localStorage.setItem("selectedTheater", selectedTheaterName);
             localStorage.setItem("selectedTheaterId", selectedTheaterId);
+            displayTimes();
         });
+
         $('.datepicker').datepicker({
             dateFormat: 'yy-mm-dd',
             prevText: '이전 달',
@@ -94,26 +97,10 @@
             minDate: 0, // 오늘 날짜를 최소 선택 가능 날짜로 설정
             onSelect: function(dateText) {
                 localStorage.setItem("selectedDate", dateText);
+                displayTimes();
             }
         });
 
-        var timeList = createTimeList();
-        var timeContainer = $('.chooseTime');
-        timeContainer.empty();
-
-        timeList.forEach(function(time) {
-            var timeOption = $('<div>', {
-                'class': 'time-option',
-                'text': time,
-                'click': function() {
-                    localStorage.setItem("selectedTime", time);
-
-                    $('.time-option').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            });
-            timeContainer.append(timeOption);
-        });
         updateSelectedState();
     });
 
@@ -125,6 +112,60 @@
             var button = $('<button class="region-btn" data-region-id="' + region.regionId + '">' + region.regionName + '</button>');
             regionList.append(button);
         });
+    }
+
+    function displayTimes() {
+        var timeList = createTimeList();
+        var timeContainer = $('.chooseTime');
+        timeContainer.empty();
+
+        var promises = timeList.map(function(time) {
+            return fetchTakenSeatsNumber(${movie.movieId}, localStorage.getItem("selectedTheaterId"), localStorage.getItem("selectedDate"), time);
+        });
+
+        Promise.all(promises).then(function(results) {
+            results.forEach(function(result) {
+                timeContainer.append(makeTimeOption(result.time, result.takenSeatsNumber));
+            });
+        }).catch(function(error) {
+            console.error('Error:', error);
+        });
+    }
+
+    function fetchTakenSeatsNumber(movieId, theaterId, selectedDate, time) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/api/seats/getTakenSeatsNumber',
+                type: 'GET',
+                data: {
+                    movieId: movieId,
+                    theaterId: theaterId,
+                    selectedDate: selectedDate,
+                    selectedTime: time
+                },
+                success: function(takenSeatsNumber) {
+                    resolve({time: time, takenSeatsNumber: takenSeatsNumber});
+                },
+                error: function(error) {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+
+    function makeTimeOption(time, takenSeatsNumber) {
+        var timeOption = $('<div>', {
+            'class': 'time-option',
+            'text': time + " (" +takenSeatsNumber + ' / 64)',
+            'click': function() {
+                localStorage.setItem("selectedTime", time);
+
+                $('.time-option').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+        return timeOption;
     }
 
     function loadTheaters(regionId) {
@@ -182,15 +223,16 @@
         }
         return times;
     }
-
-    var timeList = createTimeList();
-    var timeDropdown = $('.chooseTime');
-
-    timeList.forEach(function(time) {
-        var option = $('<option>' + time + '</option>');
-        timeDropdown.append(option);
-    });
-
+    //
+    // function displayTimeList() {
+    //     let timeList = createTimeList();
+    //     let timeDropdown = $('.chooseTime');
+    //
+    //     timeList.forEach(function(time) {
+    //         let option = $('<option>' + time + '</option>');
+    //         timeDropdown.append(option);
+    //     });
+    // }
 
     function updateSelectedState() {
         let selectedRegion = localStorage.getItem("selectedRegion");
@@ -234,6 +276,10 @@
             return;
         }
         location.href = 'movieSeats?movieId=${movie.movieId}';
+    }
+
+    function updateTakenSeats() {
+
     }
 
 </script>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,14 @@ public class SeatController {
     }
 
     @GetMapping("/getTakenSeats")
-    public List<Integer> getTakenSeats(@RequestParam Long movieId, @RequestParam Long theaterId) {
-        return seatService.getTakenSeats(movieId, theaterId);
+    public List<Integer> getTakenSeats(@RequestParam Long movieId, @RequestParam Long theaterId, @RequestParam String selectedDate, @RequestParam String selectedTime) {
+        LocalDateTime tickectedDate = LocalDateTime.parse(selectedDate + "T" + selectedTime);
+        return seatService.getTakenSeats(movieId, theaterId, tickectedDate);
+    }
+
+    @GetMapping("/getTakenSeatsNumber")
+    public Integer getTakenSeatsNumber(@RequestParam Long movieId, @RequestParam Long theaterId, @RequestParam String selectedDate, @RequestParam String selectedTime) {
+        LocalDateTime tickectedDate = LocalDateTime.parse(selectedDate + "T" + selectedTime);
+        return seatService.getTakenSeatsNumber(movieId, theaterId, tickectedDate);
     }
 }
