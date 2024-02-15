@@ -16,7 +16,7 @@
                         <input name="phoneNumber" id="phoneNumber" class="form-control" placeholder="전화번호" type="text" maxlength="11">
                      </li>
                      <div>
-                            <button type="submit">계정 확인</button>
+                        <button type="submit">계정 확인</button>
                      </div>
                 </div>
             </form>
@@ -112,7 +112,6 @@
 
         $pwInput.on('input', function() {
             const pw = $pwInput.val();
-
             if(!pw) {
                 $checkPwResult1.show().css("color", "red").text('비밀번호를 입력해주세요.');
                 $enrollFormSubmit.attr("disabled", true);
@@ -146,7 +145,6 @@
                 $resetPwFormSubmit.attr("disabled", false);
             }
         }
-
         $password.on('input', validatePassword);
         $passwordCheck.on('input', validatePassword);
     });

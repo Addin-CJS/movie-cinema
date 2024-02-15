@@ -76,7 +76,6 @@
                 $resetPwFormSubmit.attr("disabled", false);
             }
         }
-
         $password.on('input', validatePassword);
         $passwordCheck.on('input', validatePassword);
     });

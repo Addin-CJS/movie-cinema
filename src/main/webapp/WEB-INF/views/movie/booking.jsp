@@ -14,7 +14,6 @@
             <div class="chooseTheater">
             </div>
         </div>
-
         <!-- Step 2 -->
         <div class="step" id="step2">
             <h4>STEP2<br>날짜 선택</h4>
@@ -22,7 +21,6 @@
                 <div class="datepicker"></div>
             </div>
         </div>
-
         <!-- Step 3 -->
         <div class="step" id="step3">
             <h4>STEP3<br>시간 선택</h4>
@@ -30,7 +28,6 @@
                 <div class="chooseTime"></div>
             </div>
         </div>
-
         <!-- Step 4 -->
         <div class="step" id="step4">
             <h4>STEP4<br>좌석 선택</h4>
@@ -182,7 +179,6 @@
     function displayTheaters(theaters) {
         var theaterList = $('.chooseTheater');
         theaterList.empty();
-
         theaters.forEach(function(theater) {
             var button = $('<button class="theater-btn" data-theater-id="' + theater.theaterId + '">' + theater.theaterName + '</button>');
             theaterList.append(button);
@@ -213,7 +209,6 @@
             } else {
                 currentMinutes = 30;
             }
-
             // 24시간을 초과하는 경우에 대한 처리
             if (currentHour >= 24) {
                 currentHour -= 24;

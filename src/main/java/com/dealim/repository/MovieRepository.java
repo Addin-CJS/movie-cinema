@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -19,4 +20,9 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     Page<Movie> findByMvGenre(String mvGenre, Pageable pageable);
 
     List<Movie> findByMovieIdIn(List<Long> movieIdsList);
+
+    @Query("SELECT m FROM Movie m WHERE YEAR(m.mvReleaseDate) BETWEEN ?1 AND ?2")
+    Page<Movie> findByMvReleaseYear(int yearStart, int yearEnd, Pageable pageable);
+
+    Page<Movie> findByMvReleaseDateAfter(LocalDate date, Pageable pageable);
 }
