@@ -133,7 +133,7 @@
             type: "GET",
             success: function (likedReviews) {
                 likedReviews.forEach(function (reviewId) {
-                    $("#heart-" + reviewId).addClass('liked').html('🩷');
+                    $("#heart-" + reviewId).addClass('liked').html('<img src="img/like.png" alt="like">');
                 });
             },
             error: function (error) {
@@ -240,10 +240,12 @@
                 if (response === "success") {
                     var currentLikeCount = parseInt($("#" + likeCountElementId).text());
                     if (isLiked) {
-                        $("#" + heartElementId).html('🩵').removeClass('liked');
+                        // 좋아요를 취소하는 경우
+                        $("#" + heartElementId).html('<img src="img/unlike.png" alt="Unlike">').removeClass('liked');
                         $("#" + likeCountElementId).text(currentLikeCount - 1);
                     } else {
-                        $("#" + heartElementId).html('🩷').addClass('liked');
+                        // 좋아요를 누르는 경우
+                        $("#" + heartElementId).html('<img src="img/like.png" alt="Like">').addClass('liked');
                         $("#" + likeCountElementId).text(currentLikeCount + 1);
                     }
                 } else if (response === "fail") {
@@ -254,6 +256,7 @@
                 alert('좋아요 처리 중 오류 발생');
             }
         });
+
     }
 
     // 평균 별점 계산
@@ -360,7 +363,7 @@
                 '<div class="reviewText">' + review.reviewContent + '</div>' +
                 '<div class="reviewWrapper3">' +
                 '<div class="reviewDate">' + displayDate + '</div>' +
-                '<div class="reviewLike"><a href="javascript:void(0);" onclick="likeReview(' + review.reviewId + ');" id="heart-' + review.reviewId + '">🩵</a>' +
+                '<div class="reviewLike"><a href="javascript:void(0);" onclick="likeReview(' + review.reviewId + ');" id="heart-' + review.reviewId + '"><img src="img/unlike.png" alt="Unlike"></a>' +
                 '<span id="like-count-' + review.reviewId + '">' + (review.likeCount !== null ? review.likeCount : 0) + '</span></div>' +
                 '</div>' +
                 '</div>' +

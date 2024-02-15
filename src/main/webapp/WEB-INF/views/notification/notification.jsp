@@ -75,7 +75,7 @@
     }
     // 알림 목록에서 체크하면 알림 상태가 변환됨 (true) , 여기서는 알림이 오면 거기서 확인할수있게 원래는 notification.jsp에 있음
     function checkReadNotification(notificationId, btn) {
-        if (confirm("알림을 확인하시겠습니까? 확인을 누르면 더이상 해당 알림은 확인할수없습니다.")) {
+        if (confirm("알림을 확인하시겠습니까? 확인을 누르면 더이상 해당 알림은 확인할 수 없습니다.")) {
             $.ajax({
                 type: 'POST',
                 url: '/notifications/' + notificationId + '/readNotification',

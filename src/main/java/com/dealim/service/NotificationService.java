@@ -34,8 +34,6 @@ public class NotificationService {
     private MemberRepository memberRepository;
 
     public void sendInterestMovieAddedNotification(String username, Long movieId) {
-        System.out.println("sendInterestMovieAddedNotification called with username: " + username + ", movieId: " + movieId);
-
         if (!notificationRepository.existsByUsernameAndTypeAndMovieId(username, Notification.NotificationType.INTEREST_MOVIE_ADDED, movieId)) {
 
             Notification notification = Notification.builder()
@@ -52,7 +50,6 @@ public class NotificationService {
                     savedNotification.getId(),
                     username,
                     movieId);
-            System.out.println("json~~~~~~" + notificationJson);
 
             sseEmitterService.sendNotification(username, notificationJson);
 

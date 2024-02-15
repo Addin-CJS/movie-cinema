@@ -23,7 +23,6 @@ public class Notification {
     private NotificationType type;
     private boolean isRead = false;
     private boolean isSent = false;
-
     private LocalDateTime createdDateTime = LocalDateTime.now();
     private Long movieId;
     private Long ticketId;

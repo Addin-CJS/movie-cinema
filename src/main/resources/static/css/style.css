@@ -1750,8 +1750,13 @@ section .review {
 }
 
 .reviewLike {
+    display: flex;
     text-align: right;
     margin-right: 20px;
+}
+
+.reviewLike img {
+    margin-right: 5px;
 }
 
 .review-content {
