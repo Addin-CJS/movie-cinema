@@ -1,11 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@font-face {
+    font-family: 'TheJamsil5Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     transition: all .2s;
-    font-family: "Roboto", sans-serif;
+    font-family: "TheJamsil5Bold";
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -28,11 +34,10 @@ body {
 
 body, a {
     font-size: 16px;
-    font-weight: 400;
-    /*letter-spacing: 0.03em;*/
+    font-weight: 100;
     font-style: normal;
     color: #fff;
-    font-family: "Roboto", sans-serif;
+    font-family: "TheJamsil5Bold";
 }
 
 header {
@@ -3023,11 +3028,11 @@ div.myTicket .myTicketPagination .active {
     margin: 30px 0px;
     justify-content: space-around;
     align-items: center;
-    padding: 100px 0;
+    padding: 90px 0;
 }
 
 .best-review {
-    width: 40%;
+    width: 45%;
     margin: 20px;
 }
 .best-review h4, .announce h4 {
@@ -3043,7 +3048,7 @@ div.myTicket .myTicketPagination .active {
 
 
 .announce {
-    width: 40%;
+    width: 45%;
     margin: 20px;
     color: #fff;
     padding: 1em;
@@ -3163,7 +3168,7 @@ div.myTicket .myTicketPagination .active {
 }
 
 .bestReviewCreateReviewDate {
-    width: 20%;
+    width: 150px;
 }
 
 #interest-movies-section {
