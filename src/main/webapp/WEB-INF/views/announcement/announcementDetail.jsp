@@ -75,7 +75,7 @@
         <div class="announceDetail-item">ID: ${announcement.id}</div>
         <div class="announceDetail-item">사용자 이름: ${announcement.username}</div>
         <div class="announceDetail-item">제목: ${announcement.title}</div>
-        <div class="announceDetail-item">내용: ${announcement.content}</div>
+        <div class="announceDetail-item" id="announcement-content2">내용: ${announcement.content}</div>
     </div>
 </div>
 
@@ -92,6 +92,18 @@
     function confirmDelete() {
         return confirm("정말 삭제하시겠습니까?");
     }
+
+    function displayAnnouncementWithEnter() {
+        document.querySelectorAll('#announcement-content2').forEach(function(content) {
+            var originalText = content.textContent || content.innerText;
+            var EnterText = originalText.replace(/\n/g, '<br>');
+            content.innerHTML = EnterText;
+        });
+    }
+
+    $(document).ready(function() {
+        displayAnnouncementWithEnter()
+    });
 </script>
 
 
