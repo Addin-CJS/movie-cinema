@@ -46,7 +46,6 @@
             return;
         }
 
-
         $.ajax({
             url: "reviewInsert",
             data: {
@@ -229,10 +228,6 @@
         var heartElementId = "heart-" + reviewId;
         var isLiked = $("#" + heartElementId).hasClass('liked');
 
-        var confirmMessage = isLiked ? '좋아요를 취소하시겠습니까?' : '좋아요를 하시겠습니까?';
-        if (!confirm(confirmMessage)) {
-            return;
-        }
         $.ajax({
             url: "like",
             type: 'POST',
@@ -406,7 +401,6 @@
         }
         return paginationHtml;
     }
-
 </script>
 
 <jsp:include page="../layouts/footer.jsp"/>

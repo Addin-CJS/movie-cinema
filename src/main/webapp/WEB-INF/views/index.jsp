@@ -29,62 +29,64 @@
             <div class="swiper-pagination"></div>
         </div>
     </div>
-    <div class="movie-chart">
-        <h1>TOP5 관심 영화</h1>
-        <div class="movie-chartList">
-            <c:forEach var="topMovie" items="${top5Movies}" varStatus="i">
-                <div class="chartList">
-                    <c:set var="movie" value="${moviesInfo[topMovie.movieId]}"/>
-                    <a href="/showDetail?movieId=${movie.movieId}">
-                        <img src="${movie.mvImg}"
-                             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
-                        <span class="movierank">${i.count}</span>
-                    </a>
-                    <p class="movie-name">
-                        <a href="/showDetail?movieId=${movie.movieId}">${movie.mvTitle}</a>
-                    </p>
-                </div>
-            </c:forEach>
+    <div class="main-pages">
+        <div class="movie-chart">
+            <h1>TOP5 관심 영화</h1>
+            <div class="movie-chartList">
+                <c:forEach var="topMovie" items="${top5Movies}" varStatus="i">
+                    <div class="chartList">
+                        <c:set var="movie" value="${moviesInfo[topMovie.movieId]}"/>
+                        <a href="/showDetail?movieId=${movie.movieId}">
+                            <img src="${movie.mvImg}"
+                                 onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
+                            <span class="movierank">${i.count}</span>
+                        </a>
+                        <p class="movie-name">
+                            <a href="/showDetail?movieId=${movie.movieId}">${movie.mvTitle}</a>
+                        </p>
+                    </div>
+                </c:forEach>
+            </div>
         </div>
-    </div>
-    <div class="bottom-section">
-        <div class="best-review">
-            <h4>베스트 리뷰</h4>
-            <div class="swiper best_review_slide">
-                <div class="swiper-wrapper">
-                    <c:forEach var="bestReview" items="${bestReviews}">
-                        <div class="bestReviewItem swiper-slide">
-                            <div class="bestReviewId">${bestReview.reviewId}</div>
-                            <div class="bestReviewWriter">${bestReview.reviewWriter}</div>
-                            <div class="bestReviewContent" id="myReviewContent">
-                                <a href="/showDetail?movieId=${bestReview.movieNo}">${bestReview.reviewContent}</a>
+        <div class="bottom-section">
+            <div class="best-review">
+                <h4>베스트 리뷰</h4>
+                <div class="swiper best_review_slide">
+                    <div class="swiper-wrapper">
+                        <c:forEach var="bestReview" items="${bestReviews}">
+                            <div class="bestReviewItem swiper-slide">
+                                <div class="bestReviewId">${bestReview.reviewId}</div>
+                                <div class="bestReviewWriter">${bestReview.reviewWriter}</div>
+                                <div class="bestReviewContent" id="myReviewContent">
+                                    <a href="/showDetail?movieId=${bestReview.movieNo}">${bestReview.reviewContent}</a>
+                                </div>
+                                <div class="bestReviewCreateReviewDate">
+                                        ${fn:substringBefore(bestReview.createReviewDate.toString(), 'T')}
+                                </div>
                             </div>
-                            <div class="bestReviewCreateReviewDate">
-                                    ${fn:substringBefore(bestReview.createReviewDate.toString(), 'T')}
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+            <div class="announce">
+                <h4>공지사항</h4>
+                <div class="announce-wrapper">
+                    <c:forEach var="announcement" items="${announcements}">
+                        <div class="announcement-item">
+                            <div class="announcement-title2">
+                                <div class="announceTitle1">
+                                        ${announcement.title}
+                                </div>
+                                <div class="announceTitle2">
+                                    <span class="toggle-content">+</span>
+                                </div>
+                            </div>
+                            <div class="announcement-content2" style="display: none;">
+                                    ${announcement.content}
                             </div>
                         </div>
                     </c:forEach>
                 </div>
-            </div>
-        </div>
-        <div class="announce">
-            <h4>공지사항</h4>
-            <div class="announce-wrapper">
-                <c:forEach var="announcement" items="${announcements}">
-                    <div class="announcement-item">
-                        <div class="announcement-title2">
-                            <div class="announceTitle1">
-                                    ${announcement.title}
-                            </div>
-                            <div class="announceTitle2">
-                             <span class="toggle-content">+</span>
-                            </div>
-                        </div>
-                        <div class="announcement-content2" style="display: none;">
-                                ${announcement.content}
-                        </div>
-                    </div>
-                </c:forEach>
             </div>
         </div>
     </div>
@@ -117,30 +119,31 @@
         keyboard: true,
     });
 
-    $(document).ready(function() {
-        $('.toggle-content').click(function() {
+    $(document).ready(function () {
+        displayAnnouncementWithEnter();
+    });
+
+    $(document).ready(function () {
+        $('.toggle-content').click(function () {
             var content = $(this).closest('.announcement-item').find('.announcement-content2');
-            if (content.css('display') === 'none') {
-                content.css('display', 'block');
+            if (content.is(':hidden')) {
+                content.slideDown(500);
                 $(this).text('-');
             } else {
-                content.css('display', 'none');
+                content.slideUp(500);
                 $(this).text('+');
             }
+
         });
     });
 
     function displayAnnouncementWithEnter() {
-        document.querySelectorAll('.announcement-content2').forEach(function(content) {
+        document.querySelectorAll('.announcement-content2').forEach(function (content) {
             var originalText = content.textContent || content.innerText;
             var EnterText = originalText.replace(/\n/g, '<br>');
             content.innerHTML = EnterText;
         });
     }
-
-    $(document).ready(function() {
-        displayAnnouncementWithEnter();
-    });
 
 </script>
 
