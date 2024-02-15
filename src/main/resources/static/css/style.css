@@ -3023,13 +3023,13 @@ div.myTicket .myTicketPagination .active {
     width: 100%;
     margin: 20px 0px;
     margin: 30px 0px;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     padding: 100px 0;
 }
 
 .best-review {
-    width: 50%;
+    width: 40%;
     margin: 20px;
 }
 .best-review h4, .announce h4 {
@@ -3045,7 +3045,7 @@ div.myTicket .myTicketPagination .active {
 
 
 .announce {
-    width: 50%;
+    width: 40%;
     margin: 20px;
     color: #fff;
     padding: 1em;
@@ -3074,7 +3074,7 @@ div.myTicket .myTicketPagination .active {
 }
 .announcement-item {
     font-size: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     text-align: center;
 }
 
@@ -3085,7 +3085,7 @@ div.myTicket .myTicketPagination .active {
 
 .announcement-title2 .announceTitle1 {
     flex:1;
-    margin: 10px;
+    margin: 15px;
     color: #ccc;
     text-decoration: none;
     transition: color 0.3s;
@@ -3094,7 +3094,7 @@ div.myTicket .myTicketPagination .active {
 .announcement-title2 .announceTitle2{
     width: 50px;
     font-size: 20px;
-    margin: 10px;
+    margin: 15px;
 }
 
 .announcement-title2 .announceTile1:hover {
@@ -3148,7 +3148,7 @@ div.myTicket .myTicketPagination .active {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     white-space: normal;
-    height: 2.4em;
+    max-height: 2.4em;
     word-break:keep-all;
 }
 
@@ -3577,4 +3577,8 @@ html .ui-button.ui-state-disabled:active {font-weight: normal; color: #454545; t
 .time-option.selected {
     background-color: #DB0000;
     color: white;
+}
+
+.main-pages {
+    padding: 80px;
 }
