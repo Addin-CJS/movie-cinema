@@ -5,6 +5,7 @@ import com.dealim.security.custom.CustomUserDetails;
 import com.dealim.service.ReviewService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Controller
+@Slf4j
 public class ReviewController {
     @Autowired
     ReviewService reviewService;
@@ -50,7 +52,7 @@ public class ReviewController {
             Model model) {
 
         Page<Review> reviewList = reviewService.selectReviewListByMovieNo(movieId, pageable, sortType);
-
+        
         return ResponseEntity.ok(reviewList);
     }
 

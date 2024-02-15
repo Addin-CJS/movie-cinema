@@ -5,6 +5,16 @@
 <jsp:include page="../layouts/header.jsp"/>
 
 <style>
+
+    .listNotification-item-button {
+        display: flex;
+        justify-content: end;
+    }
+
+    #listNotification-button {
+        margin-bottom: 15px;
+    }
+
     #listNotificationContainer {
         max-width: 600px;
         margin: 20px auto;
@@ -28,7 +38,7 @@
     }
 
     .listNotification-header {
-        color: #d9534f;
+        color: white;
         text-align: center;
         margin-bottom: 20px;
     }
@@ -44,7 +54,7 @@
     }
 
     .listNotification-button:hover {
-        background-color: #c9302c;
+        background-color: #DB0000;
     }
 </style>
 <sec:authentication var="me" property="principal"/>
@@ -53,19 +63,24 @@
     <h2 class="listNotification-header">알림 목록</h2>
     <div id="listNotificationContainer">
         <sec:authorize access="isAuthenticated()">
-            <button onclick="checkReadAllNotifications()" class="listNotification-button">모든 알림 확인 체크하기</button>
+            <button onclick="checkReadAllNotifications()" class="listNotification-button" id="listNotification-button">모든 알림 확인 체크하기</button>
             <div id="notificationList">
                 <sec:authorize access="isAuthenticated()">
                     <c:forEach var="notification" items="${notifications}">
                         <div class="listNotification-item">
-                            <p><b>알림번호:</b> ${notification.id}</p>
-                            <p><b>메시지:</b> ${notification.message}</p>
-                            <p><b>알림 유형:</b> ${notification.type}</p>
-                            <p><b>예매 날짜:</b>
-                                    ${fn:substringBefore(notification.createdDateTime.toString(), 'T')}
-                                   (${fn:substring(fn:substringAfter(notification.createdDateTime.toString(), 'T'), 0, 5)})
-                            </p>
-                            <button onclick="checkReadNotification(${notification.id})" class="listNotification-button">알림 확인 체크하기</button>
+                            <div class="listNotification-item-list"><p><b>알림번호:</b> ${notification.id}</p>
+                                <p><b>메시지:</b> ${notification.message}</p>
+                                <p><b>알림 유형:</b> ${notification.type}</p>
+                                <p><b>예매 날짜:</b>
+                                        ${fn:substringBefore(notification.createdDateTime.toString(), 'T')}
+                                    (${fn:substring(fn:substringAfter(notification.createdDateTime.toString(), 'T'), 0, 5)})
+                                </p>
+                            </div>
+                            <div class="listNotification-item-button">
+                                <button onclick="checkReadNotification(${notification.id})"
+                                        class="listNotification-button">알림 확인 체크하기
+                                </button>
+                            </div>
                         </div>
                     </c:forEach>
                 </sec:authorize>

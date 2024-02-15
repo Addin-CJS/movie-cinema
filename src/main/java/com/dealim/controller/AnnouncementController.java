@@ -80,5 +80,4 @@ public class AnnouncementController {
         return "redirect:/announceList";
     }
 
-
 }
