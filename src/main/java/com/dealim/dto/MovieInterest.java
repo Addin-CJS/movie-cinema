@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class MoviePopularity {
+public class MovieInterest {
     private Long movieId;
     private Long count;
 }
