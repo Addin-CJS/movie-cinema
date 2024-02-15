@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,11 +45,30 @@ public class MovieService {
         return movieRepository.findByMvGenre(mvGenre, pageable);
     }
 
-    public void getMovieHome(Pageable pageable, String searchKeyword, String category, Model model) {
+    private Page<Movie> findMoviesByReleaseYear(String releaseDate, Pageable pageable) {
+        String releaseYear = releaseDate.substring(0, 4);
+        int year = Integer.parseInt(releaseYear);
+
+        int yearStart = (year / 10) * 10;
+        int yearEnd = yearStart + 9;
+
+        return movieRepository.findByMvReleaseYear(yearStart, yearEnd, pageable);
+    }
+
+    private Page<Movie> findMoviesByReleaseDateAfterToday(Pageable pageable) {
+        LocalDate today = LocalDate.now();
+        return movieRepository.findByMvReleaseDateAfter(today, pageable);
+    }
+
+    public void getMovieHome(Pageable pageable, String searchKeyword, String category, String releaseDate, String comingSoon, Model model) {
         Page<Movie> movieList;
 
         if (category != null && !category.trim().isEmpty()) {
             movieList = findMoviesByGenre(category, pageable);
+        } else if (releaseDate != null && !releaseDate.trim().isEmpty()) {
+            movieList = findMoviesByReleaseYear(releaseDate, pageable);
+        } else if (comingSoon != null) {
+            movieList = findMoviesByReleaseDateAfterToday(pageable);
         } else if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
             movieList = findMoviesByKeyword(searchKeyword, pageable);
         } else {
@@ -69,6 +89,8 @@ public class MovieService {
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("searchKeyword", searchKeyword);
         model.addAttribute("selectedCategory", category);
+        model.addAttribute("selectedReleaseDate", releaseDate);
+        model.addAttribute("comingSoon", comingSoon);
     }
 
     public void getShowDetail(Long movieId, Model model) {

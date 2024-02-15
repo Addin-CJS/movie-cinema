@@ -5,9 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <section>
-
     <sec:authentication var="me" property="principal"/>
-
     <div class="popular-movie-slider">
         <img src="${movie.mvImg}" alt="영화 이미지" class="poster">
 
@@ -25,7 +23,6 @@
             </div>
             <div class="movieBtnWrap">
                 <button onclick="window.open('${movie.mvVideo}', '_blank');">▶ 예고편 보기</button>
-
 
                 <sec:authorize access="isAuthenticated()">
                     <!-- 관심 영화 추가 또는 제거 버튼 -->

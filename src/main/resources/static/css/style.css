@@ -2193,14 +2193,15 @@ section .slider-wrap img {
 
 }
 
-/*카테고리 css*/
+/*개봉일, 장르별 탭 css*/
 
-.category-filters {
+.category-filters, .date-filters {
     position: relative;
 }
 
-#genre-list {
+#genre-list, #release-list {
     display: none;
+    width: 120px;
     position: absolute;
     top: 100%;
     left: 0;
@@ -2212,17 +2213,15 @@ section .slider-wrap img {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-#genre-list li {
+#genre-list li, #release-list li {
     padding: 5px;
     color: white;
     cursor: pointer;
 }
 
-#genre-list li:hover {
+#genre-list li:hover, #release-list li:hover {
     background-color: #444;
 }
-
-/*end of 카테고리 css*/
 
 /*마이페이지*/
 section .myPage {

@@ -41,9 +41,11 @@ public class MovieController {
     public String movieHome(Model model,
                             @PageableDefault(page = 0, size = 8, sort = "movieId", direction = Sort.Direction.DESC) Pageable pageable,
                             @RequestParam(value = "searchKeyword", required = false) String searchKeyword,
-                            @RequestParam(value = "category", required = false) String category) {
+                            @RequestParam(value = "category", required = false) String category,
+                            @RequestParam(value= "releaseDate", required = false) String releaseDate,
+                            @RequestParam(value = "comingSoon", required = false) String comingSoon) {
 
-        movieService.getMovieHome(pageable, searchKeyword, category, model);
+        movieService.getMovieHome(pageable, searchKeyword, category, releaseDate, comingSoon, model);
 
         return "movie/movieHome";
     }
