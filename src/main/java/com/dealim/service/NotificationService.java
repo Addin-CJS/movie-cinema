@@ -53,7 +53,6 @@ public class NotificationService {
             log.error("좋아요 알림 전송 중 오류 발생", e);
         }
     }
-
     public void sendMovieStartNotification(Long memberId, Ticket ticket) {
         try {
             Movie movie = movieRepository.findById(ticket.getMovieId())

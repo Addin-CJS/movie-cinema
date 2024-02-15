@@ -78,7 +78,7 @@
 
 <h2 class="announcement-header">공지사항 목록</h2>
 <ul id="announcementList">
-    <c:forEach var="announcement" items="${announceList}"ㄴ
+    <c:forEach var="announcement" items="${announceList}">
         <li>
             <span class="announcement-id">글번호: ${announcement.id}</span>
             <span class="announcement-title">제목: <a
@@ -86,7 +86,7 @@
         </li>
     </c:forEach>
 </ul>
-<div class="announcement-link-container">                                                                            ㄴ
+<div class="announcement-link-container">
     <a href="/writeAnnounce" class="announcement-create-link">공지사항 작성</a>
 </div>
 
