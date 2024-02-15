@@ -3127,13 +3127,15 @@ div.myTicket .myTicketPagination .active {
 
 .bestReviewId {
     width: 5%;
+    margin: 10px;
 }
 
 .bestReviewWriter {
-    width: 10%;
+    width: 15%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: left;
 }
 
 .bestReviewContent {
@@ -3161,7 +3163,7 @@ div.myTicket .myTicketPagination .active {
 }
 
 .bestReviewCreateReviewDate {
-    width: 15%;
+    width: 20%;
 }
 
 #interest-movies-section {
