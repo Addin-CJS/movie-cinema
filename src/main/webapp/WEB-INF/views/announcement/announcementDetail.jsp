@@ -79,14 +79,15 @@
     </div>
 </div>
 
-<div class="center-content">
-    <a href="/editAnnounce?id=${announcement.id}" class="announcement-action-editLink">수정하기</a>
-    <form action="deleteAnnounce" method="post" onsubmit="return confirmDelete();" style="display: inline;">
-        <input type="hidden" name="id" value="${announcement.id}">
-        <button type="submit" class="announcement-delete-button">삭제하기</button>
-    </form>
-</div>
-
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+    <div class="center-content">
+        <a href="/editAnnounce?id=${announcement.id}" class="announcement-action-editLink">수정하기</a>
+        <form action="deleteAnnounce" method="post" onsubmit="return confirmDelete();" style="display: inline;">
+            <input type="hidden" name="id" value="${announcement.id}">
+            <button type="submit" class="announcement-delete-button">삭제하기</button>
+        </form>
+    </div>
+</sec:authorize>
 
 <script>
     function confirmDelete() {

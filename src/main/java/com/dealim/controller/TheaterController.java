@@ -19,3 +19,4 @@ public class TheaterController {
         return ResponseEntity.ok(movieService.getTheaterListByMovieId(movieId));
     }
 }
+

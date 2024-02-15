@@ -81,7 +81,8 @@
     <c:forEach var="announcement" items="${announceList}">
         <li>
             <span class="announcement-id">글번호: ${announcement.id}</span>
-            <span class="announcement-title">제목: <a href="/detailAnnounce?id=${announcement.id}">${announcement.title}</a></span>
+            <span class="announcement-title">제목: <a
+                    href="/detailAnnounce?id=${announcement.id}">${announcement.title}</a></span>
         </li>
     </c:forEach>
 </ul>
