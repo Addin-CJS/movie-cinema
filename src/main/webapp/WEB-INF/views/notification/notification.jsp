@@ -187,7 +187,7 @@
                 setTimeout(function () {
                     notification.style.display = 'none';
                     document.body.removeChild(notification);
-                }, 10000);
+                }, 30000);
 
                 notification.onclick = function () {
                     notification.style.display = 'none';
