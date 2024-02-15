@@ -46,6 +46,7 @@
             return;
         }
 
+
         $.ajax({
             url: "reviewInsert",
             data: {
@@ -276,6 +277,11 @@
         document.querySelector(".averageRating").textContent = averageRating + " /5";
     }
 
+
+    function displayReviewWithEnter(reviewText) {
+        return reviewText.replace(/\n/g, '<br>');
+    }
+
     function createReviewsHtml(reviews) {
         let reviewsHtml = `
         <div class="reviewHeader">
@@ -347,6 +353,7 @@
                 stars += '<span class="gray-star">★</span>';
             }
 
+            var reviewContentWithEnter = displayReviewWithEnter(review.reviewContent);
             reviewsHtml += '<div class="reviewWrapper1">' +
                 '<div class="reviewItem">' +
                 '<div class="reviewWrapper2">' +
@@ -360,7 +367,7 @@
                 '</div>' +
                 '</div>' +
                 '<div class="reviewStar">' + stars + '</div>' +
-                '<div class="reviewText">' + review.reviewContent + '</div>' +
+                '<div class="reviewText">' + reviewContentWithEnter + '</div>' +
                 '<div class="reviewWrapper3">' +
                 '<div class="reviewDate">' + displayDate + '</div>' +
                 '<div class="reviewLike"><a href="javascript:void(0);" onclick="likeReview(' + review.reviewId + ');" id="heart-' + review.reviewId + '"><img src="img/unlike.png" alt="Unlike"></a>' +

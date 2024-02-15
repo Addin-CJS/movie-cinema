@@ -89,11 +89,4 @@
     <a href="/writeAnnounce" class="announcement-create-link">공지사항 작성</a>
 </div>
 
-
-
-
-
-
-
-
 <jsp:include page="../layouts/footer.jsp"/>

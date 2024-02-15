@@ -67,6 +67,26 @@
                 </div>
             </div>
         </div>
+        <div class="announce">
+            <h4>공지사항</h4>
+            <div class="announce-wrapper">
+                <c:forEach var="announcement" items="${announcements}">
+                    <div class="announcement-item">
+                        <div class="announcement-title2">
+                            <div class="announceTitle1">
+                                    ${announcement.title}
+                            </div>
+                            <div class="announceTitle2">
+                             <span class="toggle-content">+</span>
+                            </div>
+                        </div>
+                        <div class="announcement-content2" style="display: none;">
+                                ${announcement.content}
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
     </div>
 </section>
 <script>
@@ -96,6 +116,32 @@
         mousewheel: true,
         keyboard: true,
     });
+
+    $(document).ready(function() {
+        $('.toggle-content').click(function() {
+            var content = $(this).closest('.announcement-item').find('.announcement-content2');
+            if (content.css('display') === 'none') {
+                content.css('display', 'block');
+                $(this).text('-');
+            } else {
+                content.css('display', 'none');
+                $(this).text('+');
+            }
+        });
+    });
+
+    function displayAnnouncementWithEnter() {
+        document.querySelectorAll('.announcement-content2').forEach(function(content) {
+            var originalText = content.textContent || content.innerText;
+            var EnterText = originalText.replace(/\n/g, '<br>');
+            content.innerHTML = EnterText;
+        });
+    }
+
+    $(document).ready(function() {
+        displayAnnouncementWithEnter();
+    });
+
 </script>
 
 <jsp:include page="layouts/footer.jsp"/>
