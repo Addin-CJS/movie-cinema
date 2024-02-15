@@ -20,8 +20,10 @@ public class MovieService {
 
     @Autowired
     private MovieRepository movieRepository;
+
     @Autowired
     private MovieTheaterRepository movieTheaterRepository;
+
     @Autowired
     private TheaterRepository theaterRepository;
 
@@ -36,19 +38,15 @@ public class MovieService {
 
     public Page<Movie> findMoviesByKeyword(String searchKeyword, Pageable pageable) {
         return movieRepository.findByMvTitleIgnoreCase(searchKeyword, pageable);
-
     }
 
     public Page<Movie> findMoviesByGenre(String mvGenre, Pageable pageable) {
         return movieRepository.findByMvGenre(mvGenre, pageable);
-
     }
 
-    //movieHomeController 비즈니스 로직
     public void getMovieHome(Pageable pageable, String searchKeyword, String category, Model model) {
         Page<Movie> movieList;
 
-        //사용자 요청에따라서 목록 조회해오는
         if (category != null && !category.trim().isEmpty()) {
             movieList = findMoviesByGenre(category, pageable);
         } else if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
@@ -73,7 +71,6 @@ public class MovieService {
         model.addAttribute("selectedCategory", category);
     }
 
-    //영화 상세보기 비즈니스 로직
     public void getShowDetail(Long movieId, Model model) {
 
         Optional<Movie> movie = selectMovieDetailById(movieId);
@@ -94,7 +91,6 @@ public class MovieService {
         } else {
             model.addAttribute("movieRating", null);
         }
-
     }
 
     public List<Theater> getTheaterListByMovieId(Long movieId) {

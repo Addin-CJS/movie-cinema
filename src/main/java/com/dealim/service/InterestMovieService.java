@@ -38,10 +38,6 @@ public class InterestMovieService {
             if (!interestMovieRepository.existsByMovieIdAndUserName(interestMovie.getMovieId(), interestMovie.getUserName())) {
                 interestMovieRepository.save(interestMovie);
 
-//                notificationService.createNotification(interestMovie.getUserName(), "관심 영화 추가됨: " + interestMovie.getMovieId(), Notification.NotificationType.INTEREST_MOVIE_ADDED);
-
-              //  notificationService.sendInterestMovieAddedNotification(interestMovie.getUserName(), interestMovie.getMovieId());//관심영화에추가에 성공했을때만 알림전송하는거
-
                 return true;
             }
             return false;
@@ -66,13 +62,13 @@ public class InterestMovieService {
     }
 
     public boolean getMovieInterestedByUser(Long movieId, String userName) {
-        try {
-            return interestMovieRepository.existsByMovieIdAndUserName(movieId, userName);
-        } catch (Exception e) {
-            log.error("사용자의 영화 관심 여부 확인 중 오류 발생", e);
+            try {
+                return interestMovieRepository.existsByMovieIdAndUserName(movieId, userName);
+            } catch (Exception e) {
+                log.error("사용자의 영화 관심 여부 확인 중 오류 발생", e);
 
-            return false;
-        }
+                return false;
+            }
         }
 
     public void getMyInterestMoviesDetails(String userName, Pageable pageable, Model model) {
@@ -105,7 +101,6 @@ public class InterestMovieService {
                 .map(result -> new MoviePopularity((Long) result[0], (Long) result[1]))
                 .collect(Collectors.toList());
 
-        // movieId로 movie 정보 가져오기
         List<Long> movieIds = moviePopularityList.stream()
                 .map(MoviePopularity::getMovieId)
                 .collect(Collectors.toList());

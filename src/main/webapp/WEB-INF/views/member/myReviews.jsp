@@ -4,14 +4,13 @@
 <section>
     <div class="myReview">
         <div class="myReviewList">
-                    <h2>나의 영화 후기</h2>
+            <h2>나의 영화 후기</h2>
             <div>
                 <c:forEach var="myReview" items="${myReviewList}">
                     <div id="myReviewItem">
                         <div class="reviewId">${myReview.reviewId}</div>
                         <div class="reviewWriter">${myReview.reviewWriter}</div>
                         <div class="starRating">
-                            <!-- 별점 표시 부분 -->
                             <c:forEach var="i" begin="1" end="${myReview.starRating}">
                                 <span class="yellow-star">★</span>
                             </c:forEach>

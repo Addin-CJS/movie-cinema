@@ -44,7 +44,6 @@ public class ReviewService {
        return reviewRepository.save(review);
     }
 
-    //좋아요 상태를 바꾸는 메서드 (컨트롤러에서 사용)
     @Transactional
     public void  changeLikeStatus(Long reviewId, String likeAction, Set<Long> likedReviews, String likerUsername) {
         if ("like".equals(likeAction)) {
@@ -58,7 +57,6 @@ public class ReviewService {
         }
     }
 
-    //좋아요 증가 or 감소 시키는 메서드
     public void updateLikeCount(Long reviewId, boolean isLike) {
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new RuntimeException("리뷰를 찾지못했습니다"));
@@ -69,8 +67,6 @@ public class ReviewService {
         }
         review.setLikeCount(isLike ? currentLikeCount + 1 : Math.max(0, currentLikeCount - 1));
         reviewRepository.save(review);
-
-
     }
 
     public Page<Review> getMyReviews(String username, Pageable pageable, Model model) {

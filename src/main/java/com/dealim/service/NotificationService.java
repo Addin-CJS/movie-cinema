@@ -162,7 +162,6 @@ public class NotificationService {
         notificationRepository.saveAll(notifications);
     }
 
-
     public void updateAndSendUnreadNotificationCount(Long memberId) {
         Member member = getMemberOrThrow(memberId);
         updateAndSendUnreadNotificationCountByUsername(member.getUsername());
@@ -185,11 +184,8 @@ public class NotificationService {
 
     //알림 목록
     public List<Notification> getUserNotifications(String username) {
-
         return notificationRepository.findByUsernameAndIsReadFalse(username);
     }
-
-
 }
 
 

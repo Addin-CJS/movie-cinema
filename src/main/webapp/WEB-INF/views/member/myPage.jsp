@@ -11,13 +11,13 @@
                         <li id="showMyInfo" onclick="showSubMenu('myInfo');">
                                 <span>개인 정보</span>
                             <ul id="myInfo"style="display: none">
-                                <li id="myInfoEdit">
+                                <li id="myInfoEdit" onclick="stopPropagation();">
                                     <span>내 정보 수정</span>
                                 </li>
-                                <li id="resetMyPw">
+                                <li id="resetMyPw" onclick="stopPropagation();">
                                     <span>비밀번호 재설정</span>
                                 </li>
-                                <li id="withdrawMember">
+                                <li id="withdrawMember" onclick="stopPropagation();">
                                     <span>회원 탈퇴</span>
                                 </li>
                             </ul>
@@ -42,7 +42,7 @@
 </section>
 
 <script>
-    function showSubMenu(menuId) {
+    function showSubMenu(menuId, event) {
         const subMenu = document.getElementById(menuId);
         if (subMenu.style.display === 'block') {
             subMenu.style.display = 'none';
