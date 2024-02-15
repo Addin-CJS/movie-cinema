@@ -1628,10 +1628,6 @@ section .review {
     width: 70px;
 }
 
-.reviewRating, .reviewEditRating {
-    width: 150px;
-}
-
 .reviewInput, .reviewEditInput {
     flex: 1;
 }
@@ -1660,7 +1656,6 @@ section .review {
     border: none;
     outline: none;
     border-radius: 5px;
-    font-size: 0.8em;
     background: #DB0000;
     color: white;
     cursor: pointer;
@@ -2966,6 +2961,9 @@ div.myTicket .myTicketPagination .active {
     margin-right: 10px;
 }
 
+.swiper-pagination-bullet {
+    background: white;
+}
 /* 메인페이지 TOP5 관심 영화 */
 
 .movie-chart h1 {
