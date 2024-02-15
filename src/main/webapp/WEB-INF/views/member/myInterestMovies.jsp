@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<link href="style.css" rel="stylesheet"> <!-- CSS 파일 경로를 확인해주세요 -->
+<link href="style.css" rel="stylesheet">
 
 <section>
     <div class="myInterestMovies">
@@ -34,7 +34,6 @@
             </c:if>
         </div>
     </div>
-
     <div class="myInterestMoviePagination">
             <c:if test="${nowPage > 1}">
                 <a href="javascript:loadInterestMoviesPage(${nowPage - 2})" class="page-link">이전</a>

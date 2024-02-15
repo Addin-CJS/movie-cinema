@@ -56,7 +56,7 @@ public class MovieController {
             Member member = userDetails.getMember();
 
             boolean isInterested = interestMovieService.getMovieInterestedByUser(movieId, member.getUsername());
-            model.addAttribute("isInterested", isInterested);//상태를 jsp로 보내주는거
+            model.addAttribute("isInterested", isInterested);
         } else {
             model.addAttribute("isInterested", false);
         }
@@ -89,10 +89,7 @@ public class MovieController {
 
         boolean added = interestMovieService.addInterestMovie(interestMovie);
 
-        System.out.println("movie컨트롤러 무비아이디 " + interestMovie.getMovieId());
-        System.out.println("movie컨트롤러 아이디 " + member.getUsername());
         if (added) {
-           // notificationService.sendInterestMovieAddedNotification(member.getUsername(), interestMovie.getMovieId());
             redirectAttributes.addFlashAttribute("successMessage", "관심 영화 추가 성공!");
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "이미 관심영화로 등록되어있습니다.");

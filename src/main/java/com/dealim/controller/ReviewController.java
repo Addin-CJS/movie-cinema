@@ -31,12 +31,9 @@ public class ReviewController {
     @PostMapping("/reviewInsert")
     @ResponseBody
     public String insertReview(Review review, Authentication authentication) {
-        // Authentication 객체를 통해 로그인 상태 확인
         if (authentication == null || !authentication.isAuthenticated()) {
             return "fail";
         }
-
-        // 현재 로그인한 사용자 정보를 Review 객체에 설정
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         review.setReviewWriter(userDetails.getUsername());
 
@@ -51,7 +48,6 @@ public class ReviewController {
             @RequestParam(value = "sortType", defaultValue = "latest") String sortType,
             @PageableDefault(page = 0, size = 4, sort = "reviewId", direction = Sort.Direction.DESC) Pageable pageable,
             Model model) {
-
 
         Page<Review> reviewList = reviewService.selectReviewListByMovieNo(movieId, pageable, sortType);
 

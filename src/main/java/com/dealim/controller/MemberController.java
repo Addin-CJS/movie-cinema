@@ -55,7 +55,7 @@ public class MemberController {
     public String insertMember(Member member) {
         log.info("====회원가입 진행중====");
 
-        String enPass = pEncoder.encode(member.getPassword());    // 사용자가 입력한 패스워드 암호화해서 변수에 넣기
+        String enPass = pEncoder.encode(member.getPassword());
         member.setPassword(enPass);
         Member insertedMember = memberService.insertMember(member);
         memberService.setMemberRole(insertedMember, "ROLE_USER");

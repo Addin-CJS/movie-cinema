@@ -78,14 +78,12 @@
 </section>
 
 <script>
-    // 전체 필드 유효성 검사 통과 확인-1
     let validationResults = {
         username: false,
         password: false,
         name: false,
         phoneNumber: false,
-        // TODO: 이메일 유효성 검사 해야할듯
-        email: true
+        email: false
     }
 
     // 유효성 검사
@@ -131,6 +129,15 @@
             validateInput($(this), /^[0-9]{11}$/,
                 '숫자만 입력해주세요. 전화번호는 11자리 입니다.', $("#checkPhoneResult"),$(this).attr('id'));
         });
+        // 이메일 유효성 검사
+        $('#emailId').on('input', function () {
+            validateInput($(this), /^[A-Za-z0-9_\-]+$/,
+                '영문과 숫자로 입력해주세요.', $("#checkEmailResult"), $(this).attr('id'));
+        })
+        $('#emailAddress').on('input', function () {
+            validateInput($(this), /[a-zA-Z]{2,}$/,
+                '정확한 주소를 입력해주세요.', $("#checkEmailResult"), $(this).attr('id'));
+        });
     })
 
     function checkIdDuplication(id) {
@@ -138,7 +145,7 @@
             url: "idCheck",
             data: {id: id},
             success: function (result) {
-                const $checkIdResult = $("checkIdResult");
+                const $checkIdResult = $("#checkIdResult");
                 if (result === "true") {
                     $checkIdResult.show().css("color", "red").text("이미 사용 중인 아이디 입니다.")
                 } else if (result === "false") {
@@ -196,5 +203,4 @@
     }
 
 </script>
-
 <jsp:include page="../layouts/footer.jsp"/>

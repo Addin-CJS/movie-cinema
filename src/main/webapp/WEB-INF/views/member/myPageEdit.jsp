@@ -99,7 +99,6 @@
 
     function loadEmail() {
         const currentUserEmail = "${me.email}";
-
         setMyPageEditEmail(currentUserEmail);
     }
 
@@ -107,24 +106,25 @@
 
      $("#emailId, #emailAddress, #emailOption").on('blur change', function() {
             email();
-        });
+     });
 
-        function email() {
-            const emailId = $("#emailId").val();
-            const middle = $("#middle").text();
-            const emailAddress = $("#emailAddress").val();
-            if(emailId != null && emailAddress != null) {
-                $("#totalEmail").val(emailId+middle+emailAddress);
-            }
+    function email() {
+        const emailId = $("#emailId").val();
+        const middle = $("#middle").text();
+        const emailAddress = $("#emailAddress").val();
+        if(emailId != null && emailAddress != null) {
+            $("#totalEmail").val(emailId+middle+emailAddress);
         }
-        function handleEmailOption() {
-         let emailOption = $("#emailOption").val();
-            if (emailOption === "input") {
-                $("#emailAddress").val("").attr("disabled", false);
-            } else {
-                $("#emailAddress").val(emailOption.replace("@", "")).attr("disabled", true);
-            }
+    }
+
+    function handleEmailOption() {
+     let emailOption = $("#emailOption").val();
+        if (emailOption === "input") {
+            $("#emailAddress").val("").attr("disabled", false);
+        } else {
+            $("#emailAddress").val(emailOption.replace("@", "")).attr("disabled", true);
         }
+    }
 
     const validateInput = (input, regex, errorMsg, resultElement, fieldName) => {
         const value = input.val().trim();
