@@ -2,7 +2,10 @@ package com.dealim.controller;
 
 import com.dealim.domain.*;
 import com.dealim.security.custom.CustomUserDetails;
-import com.dealim.service.*;
+import com.dealim.service.InterestMovieService;
+import com.dealim.service.MovieService;
+import com.dealim.service.RegionService;
+import com.dealim.service.TheaterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -28,8 +31,6 @@ public class MovieController {
     @Autowired
     private InterestMovieService interestMovieService;
 
-    @Autowired
-    private NotificationService notificationService;
 
     @Autowired
     private RegionService regionService;
@@ -92,7 +93,7 @@ public class MovieController {
         System.out.println("movie컨트롤러 무비아이디 " + interestMovie.getMovieId());
         System.out.println("movie컨트롤러 아이디 " + member.getUsername());
         if (added) {
-           // notificationService.sendInterestMovieAddedNotification(member.getUsername(), interestMovie.getMovieId());
+
             redirectAttributes.addFlashAttribute("successMessage", "관심 영화 추가 성공!");
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "이미 관심영화로 등록되어있습니다.");
