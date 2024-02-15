@@ -4,6 +4,7 @@ import com.dealim.domain.Movie;
 import com.dealim.domain.Theater;
 import com.dealim.repository.MovieRepository;
 import com.dealim.repository.MovieTheaterRepository;
+import com.dealim.repository.ReviewRepository;
 import com.dealim.repository.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,9 @@ public class MovieService {
 
     @Autowired
     private TheaterRepository theaterRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     public Optional<Movie> selectMovieDetailById(Long movieId) {
         return movieRepository.findById(movieId);
@@ -120,4 +124,10 @@ public class MovieService {
         List<Theater> theaterList = theaterRepository.findByTheaterIdIn(theaterIdList);
         return theaterList;
     }
+
+    public List<Movie> getMovieListByPopularity() {
+        List<Movie> movieListByPopularity = movieRepository.findAllByMvPopularity();
+        return movieListByPopularity;
+    }
+
 }

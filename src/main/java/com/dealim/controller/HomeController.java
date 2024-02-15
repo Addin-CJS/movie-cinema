@@ -2,10 +2,12 @@ package com.dealim.controller;
 
 
 import com.dealim.domain.Announcement;
+import com.dealim.domain.Movie;
 import com.dealim.domain.Review;
-import com.dealim.dto.MoviePopularity;
+import com.dealim.dto.MovieInterest;
 import com.dealim.service.AnnouncementService;
 import com.dealim.service.InterestMovieService;
+import com.dealim.service.MovieService;
 import com.dealim.service.ReviewService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +27,14 @@ public class HomeController {
     AnnouncementService announcementService;
     @Autowired
     private ReviewService reviewService;
+    @Autowired
+    private MovieService movieService;
 
     @RequestMapping("/")
     public String home(Model model) {
-        List<MoviePopularity> top5Movies = interestMovieService.getTop5MoviesByPopularity(model);
+        List<MovieInterest> top5Movies = interestMovieService.getTop5MoviesByInterest(model);
+        List<Movie> movieListForPopularity = movieService.getMovieListByPopularity();
+
 
         List<Review> bestReviews = reviewService.getBestReviewByLikeCount();
         List<Announcement> announcements = announcementService.getAnnounceList();
@@ -36,6 +42,7 @@ public class HomeController {
         model.addAttribute("top5Movies", top5Movies);
         model.addAttribute("bestReviews", bestReviews);
         model.addAttribute("announcements", announcements);
+        model.addAttribute("movieListForPopularity", movieListForPopularity);
         return "index";
     }
 }

@@ -31,7 +31,7 @@
     </div>
     <div class="main-pages">
         <div class="movie-chart">
-            <h1>TOP5 관심 영화</h1>
+            <h1>MVC 관심 영화 TOP5</h1>
             <div class="movie-chartList">
                 <c:forEach var="topMovie" items="${top5Movies}" varStatus="i">
                     <div class="chartList">
@@ -46,6 +46,41 @@
                         </p>
                     </div>
                 </c:forEach>
+            </div>
+        </div>
+        <div class="middle-section">
+            <div class="middle-section-category">
+                <div><h4>무비차트(인기순)</h4></div>
+                <div><h4>이벤트</h4></div>
+            </div>
+            <div class="movieList">
+                <div class="popular-list">
+                    <c:forEach var="mvPopularity" items="${movieListForPopularity}" varStatus="popularityLoop">
+                        <div class="popularMvItem">
+                            <div class="popularMvOrder">${popularityLoop.index + 1}</div>
+                            <div class="popularMvTitle">${mvPopularity.mvTitle}</div>
+                            <div class="popularMvGenre">${mvPopularity.mvGenre}</div>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="event-list">
+                    <div class="eventWrap">
+                        <div class="event1">
+                            <a href="/detailAnnounce?id=42"><img src="/img/event1.png"></a>
+                        </div>
+                        <div class="event2">
+                            <a href="/detailAnnounce?id=40"><img src="/img/event2.png"></a>
+                        </div>
+                    </div>
+                    <div class="eventWrap">
+                        <div class="event3">
+                            <a href="/detailAnnounce?id=41"><img src="/img/event3.png"></a>
+                        </div>
+                        <div class="event4">
+                            <a href="/detailAnnounce?id=44"><img src="/img/event4.png"></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="bottom-section">

@@ -2,7 +2,7 @@ package com.dealim.service;
 
 import com.dealim.domain.InterestMovie;
 import com.dealim.domain.Movie;
-import com.dealim.dto.MoviePopularity;
+import com.dealim.dto.MovieInterest;
 import com.dealim.repository.InterestMovieRepository;
 import com.dealim.repository.MovieRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -95,14 +95,14 @@ public class InterestMovieService {
         model.addAttribute("totalPages", totalPages);
     }
 
-    public List<MoviePopularity> getTop5MoviesByPopularity(Model model) {
+    public List<MovieInterest> getTop5MoviesByInterest(Model model) {
         Page<Object[]> page = interestMovieRepository.findMovieIdAndCountByPopularity(PageRequest.of(0, 5));
-        List<MoviePopularity> moviePopularityList = page.getContent().stream()
-                .map(result -> new MoviePopularity((Long) result[0], (Long) result[1]))
+        List<MovieInterest> movieInterestList = page.getContent().stream()
+                .map(result -> new MovieInterest((Long) result[0], (Long) result[1]))
                 .collect(Collectors.toList());
 
-        List<Long> movieIds = moviePopularityList.stream()
-                .map(MoviePopularity::getMovieId)
+        List<Long> movieIds = movieInterestList.stream()
+                .map(MovieInterest::getMovieId)
                 .collect(Collectors.toList());
 
         List<Movie> movies = movieRepository.findByMovieIdIn(movieIds);
@@ -111,6 +111,6 @@ public class InterestMovieService {
 
         model.addAttribute("moviesInfo", moviesInfo);
 
-        return moviePopularityList;
+        return movieInterestList;
     }
 }
