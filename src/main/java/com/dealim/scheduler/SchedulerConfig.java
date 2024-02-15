@@ -25,7 +25,7 @@ public class SchedulerConfig {
     @Autowired
     private NotificationRepository notificationRepository;
 
-    @Scheduled(fixedRate = 40000) //  매 30초마다 실행 한다는거
+    @Scheduled(fixedRate = 30000)
     public void sendReminderNotifications() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime oneHourLater = now.plusHours(1);
@@ -33,8 +33,6 @@ public class SchedulerConfig {
         List<Ticket> tickets = ticketRepository.findByTicketedDateBetween(now, oneHourLater);
         for (Ticket ticket : tickets) {
             // 중복 알림 생성 방지
-            //  long existingNotificationsCount = notificationRepository.countByMovieIdAndTypeAndCreatedDateTimeBetween(ticket.getMovieId(), Notification.NotificationType.MOVIE_BOOKED, LocalDateTime.now().minusDays(1), LocalDateTime.now());
-
             boolean notificationExists = notificationRepository.existsByTicketIdAndType(ticket.getTicketId(), Notification.NotificationType.MOVIE_BOOKED);
             if (!notificationExists) {
                 notificationService.sendMovieStartNotification(ticket.getMemberId(), ticket);

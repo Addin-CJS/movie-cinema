@@ -23,7 +23,7 @@ public class AnnouncementController {
     AnnouncementService announcementService;
 
 
-    @GetMapping("/goToAnnounce")
+    @GetMapping("/announceList")
     public String getAnnounceList(Model model){
 
         List<Announcement> announceList = announcementService.getAnnounceList();
@@ -33,18 +33,18 @@ public class AnnouncementController {
         return "announcement/announcement";
     }
 
-    @GetMapping("/insertAnnounce")
+    @GetMapping("/writeAnnounce")
     public  String goToInsertAnnounce(){
 
-        return "announcement/announceInsertForm";
+        return "announcement/announcementWrite";
     }
 
-    @PostMapping("/insertAnnounce")
+    @PostMapping("/writeAnnounce")
     public String insertAnnounce(Announcement announcement){
 
         announcementService.insertAnnounce(announcement);
 
-        return "redirect:/goToAnnounce";
+        return "redirect:/announceList";
     }
 
 
@@ -77,7 +77,7 @@ public class AnnouncementController {
     public  String deleteAnnounce(@RequestParam("id") Long announceId ){
 
             announcementService.deleteAnnounce(announceId);
-        return "redirect:/goToAnnounce";
+        return "redirect:/announceList";
     }
 
 

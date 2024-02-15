@@ -6,60 +6,93 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="../layouts/header.jsp"/>
 <style>
-    #announcementDetails {
-        list-style: none;
-        padding: 0;
-        background-color: #ffffff;
-        border: 1px solid #dddddd;
+    .announceDetail-container {
+        max-width: 800px;
+        margin: 20px auto;
+        border: 1px solid #070707;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         border-radius: 8px;
-        padding: 15px;
-        margin-bottom: 10px;
+        overflow: hidden;
     }
 
-    #announcementDetails li {
-        margin-bottom: 8px;
-        color: #333333;
+    .announceDetail-header {
+        background-color: #f7f7f7;
+        padding: 10px 15px;
+        border-bottom: 1px solid #eeeeee;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .announceDetail-content {
+        padding: 15px;
+        background-color: #ffffff;
+        color: #000000;
+    }
+
+    .announceDetail-item {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eeeeee;
+    }
+
+    .announceDetail-item:last-child {
+        border-bottom: none;
     }
 
     .announcement-action-editLink, .announcement-delete-button {
-        display: inline-block;
-        margin-right: 10px;
+        background-color: #e0052d;
+        color: #ffffff;
         text-decoration: none;
         padding: 10px 15px;
         border-radius: 4px;
-        color: white;
         font-weight: bold;
-        text-align: center;
-        background-color: #e0052d;
+        font-size: 16px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5px;
         border: none;
         cursor: pointer;
-        transition: background-color 0.3s;
-        min-width: 100px;
         box-sizing: border-box;
-        font-size: 14px;
     }
 
-
     .announcement-action-editLink:hover, .announcement-delete-button:hover {
-        background-color: #0056b3;
+        background-color: #f10909;
+    }
+
+    .center-content {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
     }
 </style>
 
-
 <sec:authentication var="me" property="principal"/>
 
-<ul id="announcementDetails">
-    <li>ID: ${announcement.id}</li>
-    <li>사용자 이름: ${announcement.username}</li>
-    <li>제목: ${announcement.title}</li>
-    <li>내용: ${announcement.content}</li>
-</ul>
+<div class="announceDetail-container">
+    <div class="announceDetail-header">공지사항 세부정보</div>
+    <div class="announceDetail-content">
+        <div class="announceDetail-item">ID: ${announcement.id}</div>
+        <div class="announceDetail-item">사용자 이름: ${announcement.username}</div>
+        <div class="announceDetail-item">제목: ${announcement.title}</div>
+        <div class="announceDetail-item">내용: ${announcement.content}</div>
+    </div>
+</div>
 
-<a href="/editAnnounce?id=${announcement.id}" class="announcement-action-editLink">수정하기</a>
+<div class="center-content">
+    <a href="/editAnnounce?id=${announcement.id}" class="announcement-action-editLink">수정하기</a>
+    <form action="deleteAnnounce" method="post" onsubmit="return confirmDelete();" style="display: inline;">
+        <input type="hidden" name="id" value="${announcement.id}">
+        <button type="submit" class="announcement-delete-button">삭제하기</button>
+    </form>
+</div>
 
-<form action="deleteAnnounce" method="post" style="display: inline;">
-    <input type="hidden" name="id" value="${announcement.id}">
-    <button type="submit" class="announcement-delete-button">삭제</button>
-</form>
+
+<script>
+    function confirmDelete() {
+        return confirm("정말 삭제하시겠습니까?");
+    }
+</script>
+
 
 <jsp:include page="../layouts/footer.jsp"/>

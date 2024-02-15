@@ -86,7 +86,7 @@
     </c:forEach>
 </ul>
 <div class="announcement-link-container">
-    <a href="/insertAnnounce" class="announcement-create-link">공지사항 작성</a>
+    <a href="/writeAnnounce" class="announcement-create-link">공지사항 작성</a>
 </div>
 
 

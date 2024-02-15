@@ -67,7 +67,7 @@
 
 
 <h1 class="form-header">공지사항 작성</h1>
-<form action="insertAnnounce" method="post" id="insertAnnounceForm">
+<form action="writeAnnounce" method="post" id="insertAnnounceForm">
     <div class="form-group">
         <label for="username" class="form-label">작성자:</label><br>
         <input type="text" id="username" name="username" class="form-input" value='<c:out value="${me.member.username}"/>' readonly><br>
