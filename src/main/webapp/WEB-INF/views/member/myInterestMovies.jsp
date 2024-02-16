@@ -45,5 +45,5 @@
                 <a href="javascript:loadInterestMoviesPage(${nowPage})" class="page-link">다음</a>
             </c:if>
         </div>
-    </div>
+
 </section>

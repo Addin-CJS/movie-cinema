@@ -74,6 +74,21 @@
         background-color: #c9302c;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
+
+
+    .announcementPagination {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    .announcementPagination a {
+        margin: 0 5px;
+        color: #fff;
+
+    }
+
+
 </style>
 
 <h2 class="announcement-header">공지사항 목록</h2>
@@ -89,5 +104,22 @@
 <div class="announcement-link-container">
     <a href="/writeAnnounce" class="announcement-create-link">공지사항 작성</a>
 </div>
+
+<div class="announcementPagination">
+    <c:if test="${nowPage > 1 }">
+        <a href="/announceList?page=${nowPage- 2}" class="page-link">이전</a>
+    </c:if>
+
+    <c:forEach begin="${startPage}" end="${endPage}" var="i">
+        <a href="/announceList?page=${i - 1}" class="page-link">[${i}]</a>
+    </c:forEach>
+
+    <c:if test="${nowPage < totalPages}">
+        <a href="/announceList?page=${nowPage}" class="page-link">다음</a>
+    </c:if>
+</div>
+
+
+
 
 <jsp:include page="../layouts/footer.jsp"/>
