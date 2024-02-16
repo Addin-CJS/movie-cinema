@@ -3,6 +3,8 @@
 <jsp:include page="layouts/header.jsp"/>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <section>
     <div class="main-posters">
         <div class="swiper main-posters-slide">
@@ -51,22 +53,34 @@
         <div class="middle-section">
             <div class="movieList">
                 <h4>무비차트(인기순)</h4>
-                <div class="popular-list">
-                    <c:forEach var="mvPopularity" items="${movieListForPopularity}" varStatus="popularityLoop">
-                        <!-- 아이템 전체를 클릭 가능하게 만드는 외부 링크 -->
-                        <a href="/showDetail?movieId=${mvPopularity.movieId}" class="popularMvItemLink">
-                            <div class="popularMvItem">
-                                <div class="popularMvOrder">${popularityLoop.index + 1}</div>
-                                <div class="popularMvImg">
-                                    <img src="${mvPopularity.mvImg}"
-                                         alt="${mvPopularity.mvTitle}"
-                                         onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
+                <div class="popular-list-wrap">
+                    <div class="stickyHeader">
+                        <span id="header1">순위</span>
+                        <span id="header2">포스터</span>
+                        <span id="header3">제목</span>
+                        <span id="header4">장르</span>
+                        <span id="header5">인기도</span>
+                    </div>
+                    <div class="popular-list">
+                        <c:forEach var="mvPopularity" items="${movieListForPopularity}" varStatus="popularityLoop">
+                            <!-- 아이템 전체를 클릭 가능하게 만드는 외부 링크 -->
+                            <a href="/showDetail?movieId=${mvPopularity.movieId}" class="popularMvItemLink">
+                                <div class="popularMvItem">
+                                    <div class="popularMvOrder">${popularityLoop.index + 1}</div>
+                                    <div class="popularMvImg">
+                                        <img src="${mvPopularity.mvImg}"
+                                             alt="${mvPopularity.mvTitle}"
+                                             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
+                                    </div>
+                                    <div class="popularMvTitle">${mvPopularity.mvTitle}</div>
+                                    <div class="popularMvGenre">${mvPopularity.mvGenre}</div>
+                                    <div class="popularMvPopular">
+                                        <fmt:formatNumber value="${mvPopularity.mvPopularity}" type="number" maxFractionDigits="0" minFractionDigits="0" />
+                                    </div>
                                 </div>
-                                <div class="popularMvTitle">${mvPopularity.mvTitle}</div>
-                                <div class="popularMvGenre">${mvPopularity.mvGenre}</div>
-                            </div>
-                        </a>
-                    </c:forEach>
+                            </a>
+                        </c:forEach>
+                    </div>
                 </div>
                 <div class="event-list">
                     <h4>이벤트</h4>

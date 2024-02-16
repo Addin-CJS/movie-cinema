@@ -2,6 +2,7 @@ package com.dealim.controller;
 
 import com.dealim.domain.Review;
 import com.dealim.security.custom.CustomUserDetails;
+import com.dealim.service.MemberService;
 import com.dealim.service.ReviewService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -30,17 +31,19 @@ public class ReviewController {
     @Autowired
     ReviewService reviewService;
 
+    @Autowired
+    MemberService memberService;
+
     @PostMapping("/reviewInsert")
     @ResponseBody
     public String insertReview(Review review, Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
             return "fail";
         }
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        review.setReviewWriter(userDetails.getUsername());
 
-        reviewService.reviewInsert(review);
-        return "success";
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        String result = reviewService.reviewInsert(review, userDetails.getUsername());
+        return result;
     }
 
     @GetMapping("/reviewList")
