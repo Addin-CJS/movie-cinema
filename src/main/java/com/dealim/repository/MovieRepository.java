@@ -26,7 +26,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     Page<Movie> findByMvReleaseDateAfter(LocalDate date, Pageable pageable);
 
-    @Query("SELECT m FROM Movie m ORDER BY m.mvPopularity")
+    @Query("SELECT m FROM Movie m ORDER BY m.mvPopularity desc ")
     List<Movie> findAllByMvPopularity();
 
 }

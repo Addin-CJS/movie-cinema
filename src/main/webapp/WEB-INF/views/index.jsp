@@ -28,8 +28,6 @@
             <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
         </div>
-    </div>
-    <div class="main-pages">
         <div class="movie-chart">
             <h1>MVC 관심 영화 TOP5</h1>
             <div class="movie-chartList">
@@ -39,7 +37,7 @@
                         <a href="/showDetail?movieId=${movie.movieId}">
                             <img src="${movie.mvImg}"
                                  onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
-                            <span class="movierank">${i.count}</span>
+                            <span class="movieRank">${i.count}</span>
                         </a>
                         <p class="movie-name">
                             <a href="/showDetail?movieId=${movie.movieId}">${movie.mvTitle}</a>
@@ -48,38 +46,41 @@
                 </c:forEach>
             </div>
         </div>
+    </div>
+    <div class="main-pages">
         <div class="middle-section">
-            <div class="middle-section-category">
-                <div><h4>무비차트(인기순)</h4></div>
-                <div><h4>이벤트</h4></div>
-            </div>
             <div class="movieList">
+                <h4>무비차트(인기순)</h4>
                 <div class="popular-list">
                     <c:forEach var="mvPopularity" items="${movieListForPopularity}" varStatus="popularityLoop">
-                        <div class="popularMvItem">
-                            <div class="popularMvOrder">${popularityLoop.index + 1}</div>
-                            <div class="popularMvTitle">${mvPopularity.mvTitle}</div>
-                            <div class="popularMvGenre">${mvPopularity.mvGenre}</div>
-                        </div>
+                        <!-- 아이템 전체를 클릭 가능하게 만드는 외부 링크 -->
+                        <a href="/showDetail?movieId=${mvPopularity.movieId}" class="popularMvItemLink">
+                            <div class="popularMvItem">
+                                <div class="popularMvOrder">${popularityLoop.index + 1}</div>
+                                <div class="popularMvImg">
+                                    <img src="${mvPopularity.mvImg}"
+                                         alt="${mvPopularity.mvTitle}"
+                                         onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
+                                </div>
+                                <div class="popularMvTitle">${mvPopularity.mvTitle}</div>
+                                <div class="popularMvGenre">${mvPopularity.mvGenre}</div>
+                            </div>
+                        </a>
                     </c:forEach>
                 </div>
                 <div class="event-list">
+                    <h4>이벤트</h4>
                     <div class="eventWrap">
                         <div class="event1">
                             <a href="/detailAnnounce?id=42"><img src="/img/event1.png"></a>
                         </div>
                         <div class="event2">
-                            <a href="/detailAnnounce?id=40"><img src="/img/event2.png"></a>
-                        </div>
-                    </div>
-                    <div class="eventWrap">
-                        <div class="event3">
                             <a href="/detailAnnounce?id=41"><img src="/img/event3.png"></a>
                         </div>
-                        <div class="event4">
+                        <div class="event3">
                             <a href="/detailAnnounce?id=44"><img src="/img/event4.png"></a>
                         </div>
-                    </div>
+                </div>
                 </div>
             </div>
         </div>
