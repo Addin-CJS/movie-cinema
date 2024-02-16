@@ -114,6 +114,8 @@ header nav .logo a {
 
 header nav .logo span {
     color: #DB0000;
+    font-weight: 1000;
+    font-size: 25px;
 }
 
 header nav ul .marker {
@@ -3026,17 +3028,14 @@ div.myTicket .myTicketPagination .active {
 
 .middle-section {
     width: 100%;
-    margin: 20px 0px;
-    margin: 30px 0px;
-    margin: 70px 0px;
+    margin: 40px 0px;
     color: black;
 }
 
 .middle-section .movieList h4 {
     font-weight: bold;
     font-size: 26px;
-    margin-bottom: 20px;
-    margin-right: 910px;
+    margin-bottom: 10px;
 }
 
 .popularMvItem .popularMvTitle a {
@@ -3047,26 +3046,78 @@ div.myTicket .myTicketPagination .active {
     width: 100%;
     display: flex;
     justify-content: space-around;
-    align-items: center;
     flex-direction: column;
 }
 
-.movieList .event-list h4 {
-    text-align: left;
-    margin: 0;
-}
-
-.movieList .popular-list {
+.movieList .popular-list-wrap {
     overflow-y: scroll;
-    height: 400px;
+    height: 500px;
     width: 100%;
     border-radius: 10px;
-    padding: 20px;
-    margin: auto;
+    padding: 0;
+    margin: 0;
     background: #ffffff;
     border: 1px solid #e1e1e1;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
+}
+
+
+.stickyHeader {
+    position: sticky;
+    top: 0;
+    background-color: #f9f9f9; 
+    margin-top: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+
+.movieList .stickyHeader span {
+    font-size: 16px;
+    margin: 7px;
+}
+
+
+.movieList .stickyHeader #header1 {
+    width: 80px;
+    color: black;
+    font-weight: bold;
+}
+
+.movieList .stickyHeader #header2 {
+    width: 105px;
+    color:black;
+    object-fit: cover;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.movieList .stickyHeader #header3 {
+    flex: 1;
+    margin-left: 10px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+
+.movieList .stickyHeader #header4 {
+    width: 150px;
+    color: black;
+    font-weight:bold;
+}
+
+.movieList .stickyHeader #header5 {
+    width: 100px;
+    color: black;
+    font-weight:bold;
+}
+
+
+.popular-list {
+    margin-top: 0;
 }
 
 .movieList .popular-list .popularMvItem {
@@ -3101,7 +3152,7 @@ div.myTicket .myTicketPagination .active {
 }
 
 .movieList .popular-list .popularMvItem .popularMvTitle {
-    flex-grow: 1;
+    flex: 1;
     margin-left: 10px;
     text-decoration: none;
     color: black;
@@ -3110,7 +3161,13 @@ div.myTicket .myTicketPagination .active {
 
 
 .movieList .popular-list .popularMvItem .popularMvGenre {
-    width: 150px;
+    width: 165px;
+    color: #666;
+    font-weight:bold;
+}
+
+.movieList .popular-list .popularMvItem .popularMvPopular{
+    width: 115px;
     color: #666;
     font-weight:bold;
 }
@@ -3122,18 +3179,16 @@ div.myTicket .myTicketPagination .active {
     margin-top: 50px;
 }
 
+.movieList .event-list h4{
+    margin-bottom: -20px;
+}
+
 .movieList .event-list .eventWrap {
     height: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 20px;
-}
-
-.event-list .eventWrap .event1,
-.event-list .eventWrap .event2,
-.event-list .eventWrap .event3 {
-    width: 32%;
 }
 
 
@@ -3141,20 +3196,21 @@ div.myTicket .myTicketPagination .active {
 .event-list .eventWrap .event2 a > img,
 .event-list .eventWrap .event3 a > img {
     width: 100%;
-    height: 200px;
-    border-radius: 5px;
+    height: 250px;
+    border-radius: 15px;
+    padding: 7px;
 }
 
-.movieList .popular-list::-webkit-scrollbar {
+.movieList .popular-list-wrap::-webkit-scrollbar {
     width: 10px;
 }
 
-.movieList .popular-list::-webkit-scrollbar-thumb {
+.movieList .popular-list-wrap::-webkit-scrollbar-thumb {
     background-color: #DB0000;
     border-radius: 5px;
 }
 
-.movieList .popular-list::-webkit-scrollbar-track {
+.movieList .popular-list-wrap::-webkit-scrollbar-track {
     background-color: antiquewhite;
 }
 
@@ -3226,7 +3282,7 @@ div.myTicket .myTicketPagination .active {
 .announcement-title2 .announceTitle1 {
     flex:1;
     margin: 15px;
-    color: #ccc;
+    color: white;
     text-decoration: none;
     transition: color 0.3s;
 }
@@ -3302,7 +3358,7 @@ div.myTicket .myTicketPagination .active {
     width: 100%;
     color: black;
     display: block;
-    font-weight: lighter;
+    font-weight: normal;
 }
 
 .bestReviewCreateReviewDate {

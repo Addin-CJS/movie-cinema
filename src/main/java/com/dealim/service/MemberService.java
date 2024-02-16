@@ -125,4 +125,8 @@ public class MemberService {
         deleteMember.setWithdrawnAt(LocalDateTime.now());
         return memberRepository.save(deleteMember);
     }
+
+    public Long findMemberIdByUsername(String username) {
+        return memberRepository.findMemberMemberIdByUsername(username);
+    }
 }

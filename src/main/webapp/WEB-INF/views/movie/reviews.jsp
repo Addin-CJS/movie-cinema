@@ -62,6 +62,8 @@
                         returnUrl = '/showDetail?movieId=${movie.movieId}'
                         location.href = '/member/login?returnUrl=' + returnUrl;
                     }
+                } else if (result === "notReserved") {
+                    alert('해당 영화의 예매 내역이 있어야 리뷰 작성 가능합니다.');
                 } else {
                     updateReviewList(movieId);
                     $("#reviewContent").val("");
