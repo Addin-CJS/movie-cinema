@@ -3,12 +3,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <div class="chooseInfo">
     <div class="stepWrapper">
         <!-- Step 1 -->
         <div class="step" id="step1">
-            <h4>STEP1<br>지역/영화관 선택</h4>
+            <div class="step1Title">
+                <h4>STEP1<br>지역/영화관 선택</h4>
+                <span class="fa fa-undo" onclick="reset('step1')"> 재선택</span>
+            </div>
             <div class="chooseRegion">
             </div>
             <div class="chooseTheater">
@@ -16,14 +20,20 @@
         </div>
         <!-- Step 2 -->
         <div class="step" id="step2">
-            <h4>STEP2<br>날짜 선택</h4>
+            <div class="step2Title">
+                <h4>STEP2<br>날짜 선택</h4>
+                <span class="fa fa-undo" onclick="reset('step2')"> 재선택</span>
+            </div>
             <div class="chooseDate">
                 <div class="datepicker"></div>
             </div>
         </div>
         <!-- Step 3 -->
         <div class="step" id="step3">
-            <h4>STEP3<br>시간 선택</h4>
+            <div class="step2Title">
+                <h4>STEP3<br>시간 선택</h4>
+                <span class="fa fa-undo" onclick="reset('step3')"> 재선택</span>
+            </div>
             <div>
                 <div class="chooseTime"></div>
             </div>
@@ -46,6 +56,7 @@
 </div>
 
 <script>
+
     $(document).ready(function() {
         $.ajax({
             url: '/region',
@@ -267,5 +278,33 @@
         }
         location.href = 'movieSeats?movieId=${movie.movieId}';
     }
+
+    function reset(stepId) {
+        switch(stepId) {
+            case 'step1':
+                $('.chooseRegion .region-btn.selected').removeClass('selected');
+                $('.chooseTheater .theater-btn.selected').removeClass('selected');
+                $('.chooseTime .time-option.selected').removeClass('selected');
+                $('.datepicker').datepicker('setDate', null);
+
+                localStorage.removeItem("selectedRegion");
+                localStorage.removeItem("selectedTheater");
+                localStorage.removeItem("selectedTheaterId");
+                localStorage.removeItem("selectedDate");
+                localStorage.removeItem("selectedTime");
+                break;
+            case 'step2' :
+                $('.datepicker').datepicker('setDate', null);
+                $('.chooseTime .time-option.selected').removeClass('selected');
+                localStorage.removeItem("selectedDate");
+                localStorage.removeItem("selectedTime");
+                break;
+            case 'step3':
+                $('.chooseTime .time-option.selected').removeClass('selected');
+                localStorage.removeItem("selectedTime");
+                break;
+        }
+    }
+
 
 </script>

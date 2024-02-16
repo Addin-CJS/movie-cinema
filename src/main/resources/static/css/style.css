@@ -3069,7 +3069,7 @@ div.myTicket .myTicketPagination .active {
 .stickyHeader {
     position: sticky;
     top: 0;
-    background-color: #f9f9f9; 
+    background-color: #f9f9f9;
     margin-top: 0;
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
@@ -3610,6 +3610,16 @@ div.myTicket .myTicketPagination .active {
 }
 #step1 {
     flex: 1;
+}
+
+#step1 span, #step2 span, #step3 span {
+    color: black;
+    font-size: 13px;
+}
+
+.step1Title, .step2Title, .step3Title {
+    display: flex;
+    justify-content: space-between;
 }
 
 #step2 {
