@@ -1,17 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@font-face {
-    font-family: 'TheJamsil5Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     transition: all .2s;
-    font-family: "TheJamsil5Bold";
+    font-family: "Roboto";
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -120,6 +114,8 @@ header nav .logo a {
 
 header nav .logo span {
     color: #DB0000;
+    font-weight: 1000;
+    font-size: 25px;
 }
 
 header nav ul .marker {
@@ -2977,14 +2973,15 @@ div.myTicket .myTicketPagination .active {
 .movie-chart h1 {
     font-weight: bold;
     text-align: center;
-    margin: 20px;
+    margin: 50px;
     font-size: 30px;
-    margin-bottom: 40px;
+    color: white;
 }
 
 .movie-chartList {
     display: flex;
-    padding: 0 30px;
+    padding: 0 50px;
+    margin-bottom: 50px;
 }
 
 .movie-chartList .chartList {
@@ -3000,7 +2997,7 @@ div.myTicket .myTicketPagination .active {
     position: relative;
 }
 
-.movie-chartList .chartList .movierank {
+.movie-chartList .chartList .movieRank {
     position: absolute;
     bottom: 0;
     left: 20px;
@@ -3024,126 +3021,234 @@ div.myTicket .myTicketPagination .active {
     word-break: keep-all;
 }
 
-.middle-section {
-    width: 100%;
-    margin: 20px 0px;
-    margin: 30px 0px;
-    height: 400px;
-}
-.middle-section-category {
-    display: flex;
+.main-pages {
+    padding: 10px 200px;
+    background-color: #ffffff;
+    color: black;
+    position: relative;
 }
 
-.middle-section-category  div{
-    width: 50%;
+
+.middle-section {
+    width: 100%;
+    margin: 40px 0px;
+    color: black;
 }
+
+.middle-section .movieList h4 {
+    font-weight: bold;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.popularMvItem .popularMvTitle a {
+    color: black;
+}
+
 .middle-section .movieList{
     width: 100%;
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    flex-direction: row;
+    flex-direction: column;
 }
 
-.movieList .popular-list {
+.movieList .popular-list-wrap {
     overflow-y: scroll;
-    height: 400px;
-    width: 45%;
+    height: 500px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 0;
+    margin: 0;
+    background: #ffffff;
+    border: 1px solid #e1e1e1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+.stickyHeader {
+    position: sticky;
+    top: 0;
+    background-color: #f9f9f9; 
+    margin-top: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+
+.movieList .stickyHeader span {
+    font-size: 16px;
+    margin: 7px;
+}
+
+
+.movieList .stickyHeader #header1 {
+    width: 80px;
+    color: black;
+    font-weight: bold;
+}
+
+.movieList .stickyHeader #header2 {
+    width: 105px;
+    color:black;
+    object-fit: cover;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.movieList .stickyHeader #header3 {
+    flex: 1;
+    margin-left: 10px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+
+.movieList .stickyHeader #header4 {
+    width: 150px;
+    color: black;
+    font-weight:bold;
+}
+
+.movieList .stickyHeader #header5 {
+    width: 100px;
+    color: black;
+    font-weight:bold;
+}
+
+
+.popular-list {
+    margin-top: 0;
 }
 
 .movieList .popular-list .popularMvItem {
     display: flex;
-    margin-bottom: 10px;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e1e1e1;
+    transition: background-color 0.3s;
+}
+
+.popularMvItem:last-child {
+    border-bottom: none;
+}
+
+.popularMvItem:hover {
+    background-color: #f8f8f8;
+    cursor: pointer;
+    border-left: 4px solid #DB0000;
 }
 
 .movieList .popular-list .popularMvItem .popularMvOrder {
-    width: 50px;
+    width: 100px;
+    color: #666;
+    font-weight:bold;
+}
+
+.movieList .popular-list .popularMvItem .popularMvImg img {
+    width: 100px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .movieList .popular-list .popularMvItem .popularMvTitle {
-    flex:1;
+    flex: 1;
+    margin-left: 10px;
+    text-decoration: none;
+    color: black;
+    font-weight:bold;
 }
-.movieList .popular-list .popularMvItem .popularMvGenre{
-    width:100px;
+
+
+.movieList .popular-list .popularMvItem .popularMvGenre {
+    width: 165px;
+    color: #666;
+    font-weight:bold;
 }
+
+.movieList .popular-list .popularMvItem .popularMvPopular{
+    width: 115px;
+    color: #666;
+    font-weight:bold;
+}
+
 .movieList .event-list {
     display: flex;
-}
-.movieList .event-list .eventWrap {
-    height: 400px;
-    display: flex;
     flex-direction: column;
+    width: 100%;
+    margin-top: 50px;
 }
+
+.movieList .event-list h4{
+    margin-bottom: -20px;
+}
+
+.movieList .event-list .eventWrap {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
 
 .event-list .eventWrap .event1 a > img,
 .event-list .eventWrap .event2 a > img,
-.event-list .eventWrap .event3 a > img,
-.event-list .eventWrap .event4 a > img{
+.event-list .eventWrap .event3 a > img {
     width: 100%;
-    height: 200px;
-    border-radius: 20px;
-    padding: 10px;
+    height: 250px;
+    border-radius: 15px;
+    padding: 7px;
 }
 
-.movieList .popular-list::-webkit-scrollbar {
+.movieList .popular-list-wrap::-webkit-scrollbar {
     width: 10px;
 }
 
-.movieList .popular-list::-webkit-scrollbar-thumb {
+.movieList .popular-list-wrap::-webkit-scrollbar-thumb {
     background-color: #DB0000;
     border-radius: 5px;
 }
 
-.movieList .popular-list::-webkit-scrollbar-track {
-    background-color: #333333;
-}
-
-
-
-.middle-section h4 {
-    font-weight: bold;
-    text-align: left;
-    font-size: 26px;
-    margin-bottom: 20px;
-    margin-left: 30px;
-}
-
-.middle-section h3 {
-    margin-left: 30px;
-    margin-bottom: 10px;
+.movieList .popular-list-wrap::-webkit-scrollbar-track {
+    background-color: antiquewhite;
 }
 
 .bottom-section {
     display: flex;
     width: 100%;
     margin: 20px 0px;
-    margin: 30px 0px;
     justify-content: space-around;
     align-items: center;
-    padding: 90px 0;
 }
 
 .best-review {
-    width: 45%;
+    width: 55%;
     margin: 20px;
+    color: black;
 }
 .best-review h4, .announce h4 {
     font-weight: bold;
     text-align: center;
     font-size: 26px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .best_review_slide{
     height: 330px;
 }
 
-
 .announce {
-    width: 45%;
+    width: 40%;
     margin: 20px;
     color: #fff;
-    padding: 1em;
+}
+
+.announce h4 {
+    color: black;
 }
 
 .announce-wrapper {
@@ -3168,9 +3273,8 @@ div.myTicket .myTicketPagination .active {
     display: flex;
 }
 .announcement-item {
-    font-size: 16px;
+    font-size: 14px;
     margin-bottom: 12px;
-    text-align: center;
 }
 
 .announcement-title2 {
@@ -3181,13 +3285,13 @@ div.myTicket .myTicketPagination .active {
 .announcement-title2 .announceTitle1 {
     flex:1;
     margin: 15px;
-    color: #ccc;
+    color: white;
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .announcement-title2 .announceTitle2{
-    width: 50px;
+    width: 30px;
     font-size: 20px;
     margin: 15px;
 }
@@ -3225,6 +3329,7 @@ div.myTicket .myTicketPagination .active {
 .bestReviewId {
     width: 5%;
     margin: 10px;
+    color: black;
 }
 
 .bestReviewWriter {
@@ -3233,6 +3338,7 @@ div.myTicket .myTicketPagination .active {
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
+    color: black;
 }
 
 .bestReviewContent {
@@ -3249,18 +3355,22 @@ div.myTicket .myTicketPagination .active {
     word-break:keep-all;
 }
 
-.bestReviewItem {
-    color: rgba(255, 255, 255, 0.6);
-}
+
 
 .bestReviewContent a {
     width: 100%;
-    color: #fff;
+    color: black;
     display: block;
+    font-weight: normal;
 }
 
 .bestReviewCreateReviewDate {
     width: 150px;
+    color: black;
+}
+
+.bestReviewItem {
+    color: rgba(255, 255, 255, 0.6);
 }
 
 #interest-movies-section {
@@ -3676,6 +3786,3 @@ html .ui-button.ui-state-disabled:active {font-weight: normal; color: #454545; t
     color: white;
 }
 
-.main-pages {
-    padding: 80px;
-}

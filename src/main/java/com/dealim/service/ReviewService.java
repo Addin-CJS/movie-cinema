@@ -2,6 +2,7 @@ package com.dealim.service;
 
 import com.dealim.domain.Review;
 import com.dealim.repository.ReviewRepository;
+import com.dealim.repository.TicketRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,10 +21,26 @@ public class ReviewService {
     ReviewRepository reviewRepository;
     @Autowired
     NotificationService notificationService;
+    @Autowired
+    MemberService memberService;
+    @Autowired
+    TicketRepository ticketRepository;
 
-    public Review reviewInsert(Review review) {
-        return reviewRepository.save(review);
+    public String reviewInsert(Review review, String username) {
+        Long memberId = memberService.findMemberIdByUsername(username);
+        if (memberId == null) {
+            return "userNotFound";
+        }
+
+        if (!ticketRepository.existsByMovieIdAndMemberId(review.getMovieNo(), memberId)) {
+            return "notReserved";
+        }
+
+        review.setReviewWriter(username);
+        reviewRepository.save(review);
+        return "success";
     }
+
     public Page<Review> selectReviewListByMovieNo(Long movieId, Pageable pageable, String sortType) {
         Sort sort;
         if ("likes".equals(sortType)) {
