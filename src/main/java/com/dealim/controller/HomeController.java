@@ -39,6 +39,7 @@ public class HomeController {
         List<Review> bestReviews = reviewService.getBestReviewByLikeCount();
         List<Announcement> announcements = announcementService.getAnnounceList();
 
+
         model.addAttribute("top5Movies", top5Movies);
         model.addAttribute("bestReviews", bestReviews);
         model.addAttribute("announcements", announcements);

@@ -13,8 +13,8 @@
                     <li id="showMyInfo" onclick="showSubMenu('myInfo');">
                         <span>회원 관리</span>
                     </li>
-                    <li id="writeAnnounce">
-                        <a href="/writeAnnounce">공지사항 작성</a>
+                    <li id="listAnnouce">
+                        <a href="/announceList">공지사항</a>
                     </li>
                 </ul>
             </aside>
