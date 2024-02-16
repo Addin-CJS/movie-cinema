@@ -2,7 +2,7 @@ package com.dealim.controller;
 
 
 import com.dealim.domain.Announcement;
-import com.dealim.dto.AnnouncementPageDTO;
+import com.dealim.dto.AnnouncementPageDto;
 import com.dealim.dto.EditAnnounceDto;
 import com.dealim.service.AnnouncementService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ public class AnnouncementController {
     @GetMapping("/announceList")
     public String getAnnounceList(Model model,@PageableDefault(size = 5, sort = "createAnnouncementDate", direction = Sort.Direction.DESC) Pageable pageable) {
 
-        AnnouncementPageDTO announcementPageDTO = announcementService.getAnnouncePagedList(pageable);
+        AnnouncementPageDto announcementPageDTO = announcementService.getAnnouncePagedList(pageable);
 
         model.addAttribute("announceList", announcementPageDTO.getAnnouncements());
         model.addAttribute("nowPage", announcementPageDTO.getNowPage());

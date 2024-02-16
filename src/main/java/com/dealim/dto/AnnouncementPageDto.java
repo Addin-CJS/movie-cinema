@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class AnnouncementPageDTO {
+public class AnnouncementPageDto {
     private List<Announcement> announcements;
     private int nowPage;
     private int startPage;

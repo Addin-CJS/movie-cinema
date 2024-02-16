@@ -2,7 +2,7 @@ package com.dealim.service;
 
 
 import com.dealim.domain.Announcement;
-import com.dealim.dto.AnnouncementPageDTO;
+import com.dealim.dto.AnnouncementPageDto;
 import com.dealim.dto.EditAnnounceDto;
 import com.dealim.repository.AnnouncementRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ public class AnnouncementService {
     }
 
 
-    public AnnouncementPageDTO getAnnouncePagedList(Pageable pageable) {
+    public AnnouncementPageDto getAnnouncePagedList(Pageable pageable) {
         Page<Announcement> announcementsPagedList = announcementRepository.findAllByOrderByIdDesc(pageable);
 
         int nowPage = announcementsPagedList.getNumber();
@@ -41,7 +41,7 @@ public class AnnouncementService {
         int startPage = (nowPage / pageGroupSize) * pageGroupSize +1 ;
         int endPage =  Math.min(startPage + pageGroupSize - 1, totalPages);
 
-        AnnouncementPageDTO dto = new AnnouncementPageDTO();
+        AnnouncementPageDto dto = new AnnouncementPageDto();
         dto.setAnnouncements(announcementsPagedList.getContent());
         dto.setNowPage(nowPage +1);
         dto.setStartPage(startPage);
