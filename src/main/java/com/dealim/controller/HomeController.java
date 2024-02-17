@@ -35,10 +35,8 @@ public class HomeController {
         List<MovieInterest> top5Movies = interestMovieService.getTop5MoviesByInterest(model);
         List<Movie> movieListForPopularity = movieService.getMovieListByPopularity();
 
-
         List<Review> bestReviews = reviewService.getBestReviewByLikeCount();
         List<Announcement> announcements = announcementService.getAnnounceList();
-
 
         model.addAttribute("top5Movies", top5Movies);
         model.addAttribute("bestReviews", bestReviews);

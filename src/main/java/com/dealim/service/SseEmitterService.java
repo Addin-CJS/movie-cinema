@@ -53,7 +53,6 @@ public class SseEmitterService {
                 emitter.send(SseEmitter.event().name("notification").data(notificationJson));
                 log.info("알림 sendNotification -> {}: {}", username, notificationJson);
                 log.debug("Notification JSON: {}", notificationJson);
-                System.out.println(notificationJson);
             } catch (IOException e) {
                 emitter.completeWithError(e);
                 userEmitters.remove(username);

@@ -28,7 +28,7 @@ body {
 
 body, a {
     font-size: 16px;
-    font-weight: 100;
+    font-weight: normal;
     font-style: normal;
     color: #fff;
     font-family: "TheJamsil5Bold";
@@ -2631,11 +2631,6 @@ section.showMyPage .myPage-navbar ul li {
     border-top: 1px solid #555;
 }
 
-section.showMyPage .myPage-navbar ul li i,
-section.showMyPage .myPage-navbar ul li span {
-    margin-right: 10px;
-}
-
 section.showMyPage .myPage-navbar ul li span {
     flex-grow: 1;
 }
@@ -3190,17 +3185,16 @@ div.myTicket .myTicketPagination .active {
     height: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 20px;
 }
-
 
 .event-list .eventWrap .event1 a > img,
 .event-list .eventWrap .event2 a > img,
 .event-list .eventWrap .event3 a > img {
     border-radius: 15px;
     padding: 7px;
-    max-width: 100%;
+    max-width: 90%;
 }
 
 .movieList .popular-list-wrap::-webkit-scrollbar {
@@ -3225,8 +3219,7 @@ div.myTicket .myTicketPagination .active {
 }
 
 .best-review {
-    width: 55%;
-    margin: 50px;
+    width: 45%;
     color: black;
 }
 .best-review h4, .announce h4 {
@@ -3241,8 +3234,7 @@ div.myTicket .myTicketPagination .active {
 }
 
 .announce {
-    width: 40%;
-    margin: 50px;
+    width: 45%;
     color: #fff;
 }
 

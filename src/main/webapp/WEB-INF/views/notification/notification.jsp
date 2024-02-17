@@ -61,7 +61,7 @@
 <script>
     <sec:authorize access="isAuthenticated()">
     var username = "<c:out value='${me.member.username}'/>";
-    
+
     window.onload = function () {
         fetchInitialUnreadNotificationCount();
 
