@@ -26,6 +26,7 @@ public class AnnouncementService {
         return announcementRepository.save(announcement);
 
     }
+    //메인에서 사용하는거
     public List<Announcement> getAnnounceList() {
         return announcementRepository.findAllByOrderByIdDesc();
 
@@ -50,7 +51,7 @@ public class AnnouncementService {
         return dto;
     }
 
-    public Announcement editAnnounce(EditAnnounceDto editAnnounceDto) {
+     public Announcement editAnnounce(EditAnnounceDto editAnnounceDto) {
         try {
 
             Optional<Announcement> optionalAnnouncement = announcementRepository.findById(editAnnounceDto.getId());
