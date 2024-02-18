@@ -61,18 +61,18 @@
 <script>
     <sec:authorize access="isAuthenticated()">
     var username = "<c:out value='${me.member.username}'/>";
-    </sec:authorize>
+
 
     function fetchInitialUnreadNotificationCount() {
         fetch('/unread-count/' + encodeURIComponent(username))
             .then(response => response.json())
             .then(data => {
-                console.log("알림숫자", data)
+
                 document.getElementById("notification-count").innerText = data.count;
             })
             .catch(error => console.error('읽지 않은 알림 수 조회 중 오류 발생:', error));
     }
-    // 알림 목록에서 체크하면 알림 상태가 변환됨 (true) , 여기서는 알림이 오면 거기서 확인할수있게 원래는 notification.jsp에 있음
+
     function checkReadNotification(notificationId, btn) {
         if (confirm("알림을 확인하시겠습니까? 확인을 누르면 더이상 해당 알림은 확인할 수 없습니다.")) {
             $.ajax({
@@ -109,27 +109,15 @@
         var eventSourceUrl = '/connect/' + encodeURIComponent(username);
         var source = new EventSource(eventSourceUrl);
 
-        source.onopen = function (event) {
-            console.log("SSE 연결이 열렸습니다.", event);
-        };
-
-        source.onerror = function (event) {
-            console.error("SSE 연결에 오류가 발생했습니다.", event);
-        };
-
-        source.onmessage = function (event) {
-            console.log("알림 message: ", event.data);
-        };
-
         var receivedNotifications = {}; // 이미 받은 알림을 추적하는 객체
 
         source.addEventListener('notification', function (e) {
-            console.log(" function(e) 알림: ", e.data);
+
             try {
                 var data = JSON.parse(e.data);
-                console.log("JSON.parse ", data);
+
             } catch (error) {
-                console.error("JSON.parse 오류 알림: ", error);
+
             }
             if (data.type === "UNREAD_NOTIFICATION_COUNT") {
 
@@ -147,7 +135,6 @@
             const [hour, minute] = time.split(':').map(num => parseInt(num, 10));
             return new Date(year, month - 1, day, hour, minute);
         }
-
 
         function displayNotification(data) {
             if (!receivedNotifications[data.id]) {
@@ -167,7 +154,6 @@
                   }
                 }
 
-                console.log("알림 데이터: ",messageContent);
                 receivedNotifications[data.id] = true;
 
                 var notification = document.createElement('div');
@@ -195,4 +181,5 @@
             }
         }
     };
+    </sec:authorize>
 </script>
