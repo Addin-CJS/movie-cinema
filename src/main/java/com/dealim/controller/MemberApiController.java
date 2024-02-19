@@ -37,7 +37,7 @@ public class MemberApiController {
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<?> modifyMember(Member updatedMember) throws Exception {
         Member repositoryMember = memberService.findById(updatedMember.getMemberId());
-        memberService.modifyMember(updatedMember, repositoryMember);
+        memberService.modifyMember(repositoryMember, updatedMember);
         return ResponseEntity.ok("회원 정보 수정 성공");
     }
 }

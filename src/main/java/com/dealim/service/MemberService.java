@@ -5,8 +5,8 @@ import com.dealim.domain.MemberRole;
 import com.dealim.dto.MyPageMember;
 import com.dealim.repository.MemberRepository;
 import com.dealim.repository.MemberRoleRepository;
+import com.dealim.util.CopyBeanUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -70,9 +70,11 @@ public class MemberService {
         return member;
     }
 
-    public Member modifyMember(Member updatedMember, Member repositoryMember) {
-        BeanUtils.copyProperties(updatedMember, repositoryMember);
-        return memberRepository.save(repositoryMember);
+    public Member modifyMember(Member repositoryMember, Member updatedMember) throws IllegalAccessException {
+
+        CopyBeanUtil.copyNonNullProperties(repositoryMember, updatedMember);
+
+        return memberRepository.save(updatedMember);
     }
 
     public Member findIdByNameAndPhoneNumber(String name, String phoneNumber) {
