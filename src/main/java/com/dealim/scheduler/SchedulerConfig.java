@@ -19,7 +19,6 @@ public class SchedulerConfig {
 
     @Autowired
     private TicketRepository ticketRepository;
-
     @Autowired
     private NotificationService notificationService;
     @Autowired

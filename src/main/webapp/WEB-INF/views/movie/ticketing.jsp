@@ -11,7 +11,7 @@
     <title>Ticketing</title>
 </head>
 <body>
-<section id="section">
+<section id="section" style="background-color: #f1f1f1; height: 100%">
     <div id="test"></div>
     <div class="container">
         <div class="confirmCont">
@@ -60,11 +60,11 @@
                         <button id="cancelBtn">취소</button>
                     </div>
                     <div class="proceedBtnEl">
-                        <button id="proceedBtn">결제하기</button>
+                        <button id="proceedBtn" onclick="requestPay()">결제하기</button>
                     </div>
                 </div>
                 <div>
-                    <button id="kakaoPayButton" class="kakao-pay-button" onclick="requestPay()"></button>
+<%--                    <button id="kakaoPayButton" class="kakao-pay-button" onclick="requestPay()"></button>--%>
                 </div>
             </div>
         </div>
@@ -117,28 +117,28 @@
         });
 
         // 결제하기
-        $("#proceedBtn").click(() => {
-            $.ajax({
-                url: "ticketing",
-                type: "POST",
-                data: {
-                    takenSeats: localStorage.getItem("takenSeats"),
-                    selectedTime: localStorage.getItem("selectedTime"),
-                    selectedDate: localStorage.getItem("selectedDate"),
-                    ticketPrice: localStorage.getItem("ticketedPrice"),
-                    movieId: ${movie.movieId},
-                    theaterId: localStorage.getItem("selectedTheaterId"),
-                    memberId: ${me.memberId}
-                },
-                success: function (response) {
-                    window.opener.location.href = "/ticketing/success";
-                    window.close();
-                },
-                error: function (xhr, status, error) {
-                    alert(status, error, xhr);
-                }
-            });
-        });
+        <%--$("#proceedBtn").click(() => {--%>
+        <%--    $.ajax({--%>
+        <%--        url: "ticketing",--%>
+        <%--        type: "POST",--%>
+        <%--        data: {--%>
+        <%--            takenSeats: localStorage.getItem("takenSeats"),--%>
+        <%--            selectedTime: localStorage.getItem("selectedTime"),--%>
+        <%--            selectedDate: localStorage.getItem("selectedDate"),--%>
+        <%--            ticketPrice: localStorage.getItem("ticketedPrice"),--%>
+        <%--            movieId: ${movie.movieId},--%>
+        <%--            theaterId: localStorage.getItem("selectedTheaterId"),--%>
+        <%--            memberId: ${me.memberId}--%>
+        <%--        },--%>
+        <%--        success: function (response) {--%>
+        <%--            window.opener.location.href = "/ticketing/success";--%>
+        <%--            window.close();--%>
+        <%--        },--%>
+        <%--        error: function (xhr, status, error) {--%>
+        <%--            alert(status, error, xhr);--%>
+        <%--        }--%>
+        <%--    });--%>
+        <%--});--%>
 
         // 일자 업데이트
         let dateOn = $("#dateOn");
@@ -155,8 +155,6 @@
 
     });
 
-
-///////////////////////////////////
     //카카오 결제하기
     var IMP = window.IMP;
     IMP.init("imp55612646");
@@ -166,7 +164,6 @@
         var movieName = $("#movieName").text();
         var moviePrice = parseInt(localStorage.getItem("ticketedPrice"), 10);
         var selectedSeats = JSON.parse(localStorage.getItem("takenSeats")).length;
-
 
         // 결제 요청
         IMP.request_pay({

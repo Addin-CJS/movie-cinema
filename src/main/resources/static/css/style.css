@@ -28,7 +28,7 @@ body {
 
 body, a {
     font-size: 16px;
-    font-weight: 100;
+    font-weight: normal;
     font-style: normal;
     color: #fff;
     font-family: "TheJamsil5Bold";
@@ -2631,11 +2631,6 @@ section.showMyPage .myPage-navbar ul li {
     border-top: 1px solid #555;
 }
 
-section.showMyPage .myPage-navbar ul li i,
-section.showMyPage .myPage-navbar ul li span {
-    margin-right: 10px;
-}
-
 section.showMyPage .myPage-navbar ul li span {
     flex-grow: 1;
 }
@@ -3069,7 +3064,7 @@ div.myTicket .myTicketPagination .active {
 .stickyHeader {
     position: sticky;
     top: 0;
-    background-color: #f9f9f9; 
+    background-color: #f9f9f9;
     margin-top: 0;
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
@@ -3190,18 +3185,16 @@ div.myTicket .myTicketPagination .active {
     height: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 20px;
 }
-
 
 .event-list .eventWrap .event1 a > img,
 .event-list .eventWrap .event2 a > img,
 .event-list .eventWrap .event3 a > img {
-    width: 100%;
-    height: 250px;
     border-radius: 15px;
     padding: 7px;
+    max-width: 90%;
 }
 
 .movieList .popular-list-wrap::-webkit-scrollbar {
@@ -3226,15 +3219,14 @@ div.myTicket .myTicketPagination .active {
 }
 
 .best-review {
-    width: 55%;
-    margin: 20px;
+    width: 45%;
     color: black;
 }
 .best-review h4, .announce h4 {
     font-weight: bold;
     text-align: center;
     font-size: 26px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .best_review_slide{
@@ -3242,8 +3234,7 @@ div.myTicket .myTicketPagination .active {
 }
 
 .announce {
-    width: 40%;
-    margin: 20px;
+    width: 45%;
     color: #fff;
 }
 
@@ -3271,6 +3262,7 @@ div.myTicket .myTicketPagination .active {
 
 .announcement-title2 {
     display: flex;
+    align-items: center;
 }
 .announcement-item {
     font-size: 14px;
@@ -3610,6 +3602,16 @@ div.myTicket .myTicketPagination .active {
 }
 #step1 {
     flex: 1;
+}
+
+#step1 span, #step2 span, #step3 span {
+    color: black;
+    font-size: 13px;
+}
+
+.step1Title, .step2Title, .step3Title {
+    display: flex;
+    justify-content: space-between;
 }
 
 #step2 {

@@ -151,9 +151,10 @@
                         messageContent += "<br> ->상영까지 남은 시간: " + minutesLeft + "분 남았습니다";
                     } else {
                         console.error("Invalid showtime received:", data.showtime);
-                  }
+                    }
                 }
 
+                console.log("알림 데이터: ",messageContent);
                 receivedNotifications[data.id] = true;
 
                 var notification = document.createElement('div');
@@ -182,4 +183,44 @@
         }
     };
     </sec:authorize>
+
+    function fetchInitialUnreadNotificationCount() {
+        fetch('/unread-count/' + encodeURIComponent(username))
+            .then(response => response.json())
+            .then(data => {
+                console.log("알림숫자", data)
+                document.getElementById("notification-count").innerText = data.count;
+            })
+            .catch(error => console.error('읽지 않은 알림 수 조회 중 오류 발생:', error));
+    }
+
+    // 알림 목록에서 체크하면 알림 상태가 변환됨 (true) , 여기서는 알림이 오면 거기서 확인할수있게 원래는 notification.jsp에 있음
+    function checkReadNotification(notificationId, btn) {
+        if (confirm("알림을 확인하시겠습니까? 확인을 누르면 더이상 해당 알림은 확인할 수 없습니다.")) {
+            $.ajax({
+                type: 'POST',
+                url: '/notifications/' + notificationId + '/readNotification',
+                success: function (response) {
+
+                    var countElement = document.getElementById("notification-count");
+                    var count = parseInt(countElement.textContent) || 0;
+                    if (count > 0) {
+                        countElement.textContent = count - 1;
+                    }
+
+                    if (btn && btn.parentNode) {
+                        btn.parentNode.style.display = 'none';
+                        document.body.removeChild(btn.parentNode);
+                    }
+
+                    document.getElementById("notification-item-" + notificationId).remove();
+                },
+                error: function (xhr, status, error) {
+                    alert('알림 읽기 중 오류가 발생했습니다.');
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    }
+
 </script>
