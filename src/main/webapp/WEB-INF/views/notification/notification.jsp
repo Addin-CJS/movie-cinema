@@ -62,6 +62,45 @@
     <sec:authorize access="isAuthenticated()">
     var username = "<c:out value='${me.member.username}'/>";
 
+
+    function fetchInitialUnreadNotificationCount() {
+        fetch('/unread-count/' + encodeURIComponent(username))
+            .then(response => response.json())
+            .then(data => {
+
+                document.getElementById("notification-count").innerText = data.count;
+            })
+            .catch(error => console.error('읽지 않은 알림 수 조회 중 오류 발생:', error));
+    }
+
+    function checkReadNotification(notificationId, btn) {
+        if (confirm("알림을 확인하시겠습니까? 확인을 누르면 더이상 해당 알림은 확인할 수 없습니다.")) {
+            $.ajax({
+                type: 'POST',
+                url: '/notifications/' + notificationId + '/readNotification',
+                success: function (response) {
+
+                    var countElement = document.getElementById("notification-count");
+                    var count = parseInt(countElement.textContent) || 0;
+                    if (count > 0) {
+                        countElement.textContent = count - 1;
+                    }
+
+                    if (btn && btn.parentNode) {
+                        btn.parentNode.style.display = 'none';
+                        document.body.removeChild(btn.parentNode);
+                    }
+
+                    document.getElementById("notification-item-" + notificationId).remove();
+                },
+                error: function (xhr, status, error) {
+                    alert('알림 읽기 중 오류가 발생했습니다.');
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    }
+
     window.onload = function () {
         fetchInitialUnreadNotificationCount();
 
@@ -70,27 +109,15 @@
         var eventSourceUrl = '/connect/' + encodeURIComponent(username);
         var source = new EventSource(eventSourceUrl);
 
-        source.onopen = function (event) {
-            console.log("SSE 연결이 열렸습니다.", event);
-        };
-
-        source.onerror = function (event) {
-            console.error("SSE 연결에 오류가 발생했습니다.", event);
-        };
-
-        source.onmessage = function (event) {
-            console.log("알림 message: ", event.data);
-        };
-
         var receivedNotifications = {}; // 이미 받은 알림을 추적하는 객체
 
         source.addEventListener('notification', function (e) {
-            console.log(" function(e) 알림: ", e.data);
+
             try {
                 var data = JSON.parse(e.data);
-                console.log("JSON.parse ", data);
+
             } catch (error) {
-                console.error("JSON.parse 오류 알림: ", error);
+
             }
             if (data.type === "UNREAD_NOTIFICATION_COUNT") {
 
@@ -108,7 +135,6 @@
             const [hour, minute] = time.split(':').map(num => parseInt(num, 10));
             return new Date(year, month - 1, day, hour, minute);
         }
-
 
         function displayNotification(data) {
             if (!receivedNotifications[data.id]) {
@@ -196,6 +222,5 @@
             });
         }
     }
-
 
 </script>

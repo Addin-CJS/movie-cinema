@@ -3788,3 +3788,13 @@ html .ui-button.ui-state-disabled:active {font-weight: normal; color: #454545; t
     color: white;
 }
 
+
+.kakao-pay-button {
+    background-image: url('../img/kakaoPay.png');
+    background-color: #FEE500;
+    background-size: cover;
+    border: none;
+    padding: 12px 30px;
+
+}
+

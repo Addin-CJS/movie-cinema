@@ -3,6 +3,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <link rel="stylesheet" href="/css/style.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <sec:authentication property="principal.member" var="me"></sec:authentication>
 <html>
 <head>
@@ -60,6 +62,9 @@
                     <div class="proceedBtnEl">
                         <button id="proceedBtn">결제하기</button>
                     </div>
+                </div>
+                <div>
+                    <button id="kakaoPayButton" class="kakao-pay-button" onclick="requestPay()"></button>
                 </div>
             </div>
         </div>
@@ -149,5 +154,60 @@
         theaterOn.text(localStorage.getItem("selectedTheater"))
 
     });
+
+
+///////////////////////////////////
+    //카카오 결제하기
+    var IMP = window.IMP;
+    IMP.init("imp55612646");
+
+    function requestPay() {
+
+        var movieName = $("#movieName").text();
+        var moviePrice = parseInt(localStorage.getItem("ticketedPrice"), 10);
+        var selectedSeats = JSON.parse(localStorage.getItem("takenSeats")).length;
+
+
+        // 결제 요청
+        IMP.request_pay({
+            pg: "kakaopay",
+            name: "영화 티켓: " + movieName + " / 좌석수: " + selectedSeats,
+            amount: moviePrice,
+
+        }, function(rsp) {
+            if (rsp.success) {
+                $.ajax({
+                    url: "ticketing",
+                    type: "POST",
+                    data: {
+                        takenSeats: localStorage.getItem("takenSeats"),
+                        selectedTime: localStorage.getItem("selectedTime"),
+                        selectedDate: localStorage.getItem("selectedDate"),
+                        ticketPrice: localStorage.getItem("ticketedPrice"),
+                        movieId: ${movie.movieId},
+                        theaterId: localStorage.getItem("selectedTheaterId"),
+                        memberId: ${me.memberId}
+                    },
+                    success: function (response) {
+                        window.opener.location.href = "/ticketing/success";
+                        window.close();
+                    },
+                    error: function (xhr, status, error) {
+                        alert(status, error, xhr);
+                    }
+                });
+                console.log("결제 성공", rsp);
+
+            } else {
+
+                console.log("결제 실패", rsp);
+            }
+        });
+    }
 </script>
+
+
+
+
+
 </html>

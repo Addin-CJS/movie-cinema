@@ -71,7 +71,7 @@ public class MemberService {
     }
 
     public Member modifyMember(Member updatedMember, Member repositoryMember) {
-        BeanUtils.copyProperties(repositoryMember, updatedMember);
+        BeanUtils.copyProperties(updatedMember, repositoryMember);
         return memberRepository.save(repositoryMember);
     }
 
