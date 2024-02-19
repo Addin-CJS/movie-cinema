@@ -37,6 +37,8 @@
                 <div id="findIdAndPw">
                     <a href="/member/findId">아이디 찾기 |</a><a href="/member/resetPw"> 비밀번호 재설정</a>
                 </div>
+                </div>
+
             </form>
         </div>
     </div>

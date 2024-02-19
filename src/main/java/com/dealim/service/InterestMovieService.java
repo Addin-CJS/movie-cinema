@@ -82,8 +82,8 @@ public class InterestMovieService {
                 .collect(Collectors.toMap(Movie::getMovieId, Function.identity()));
 
         int nowPage = interestMoviesPage.getNumber(); // 현재 페이지 (0-index 기준)
-        int totalPages = interestMoviesPage.getTotalPages();
         int pageGroupSize = 5;
+        int totalPages = interestMoviesPage.getTotalPages();
         int startPage = (nowPage / pageGroupSize) * pageGroupSize + 1;
         int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
 

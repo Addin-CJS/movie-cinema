@@ -50,7 +50,6 @@
         font-size: 16px;
     }
 
-
 </style>
 
 <section>

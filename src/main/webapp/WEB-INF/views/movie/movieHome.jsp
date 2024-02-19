@@ -135,6 +135,7 @@
     function submitSearchForm() {
         document.searchForm.submit();
     }
+
     document.querySelector('.date-filters').addEventListener('click', function () {
         var releaseList = document.getElementById('release-list');
         if (releaseList.style.display === 'none') {

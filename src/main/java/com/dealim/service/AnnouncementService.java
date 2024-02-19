@@ -2,10 +2,13 @@ package com.dealim.service;
 
 
 import com.dealim.domain.Announcement;
+import com.dealim.dto.AnnouncementPageDto;
 import com.dealim.dto.EditAnnounceDto;
 import com.dealim.repository.AnnouncementRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.acls.model.NotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +26,28 @@ public class AnnouncementService {
         return announcementRepository.save(announcement);
 
     }
-
     public List<Announcement> getAnnounceList() {
-
         return announcementRepository.findAllByOrderByIdDesc();
+
+    }
+
+
+    public AnnouncementPageDto getAnnouncePagedList(Pageable pageable) {
+        Page<Announcement> announcementsPagedList = announcementRepository.findAllByOrderByIdDesc(pageable);
+
+        int nowPage = announcementsPagedList.getNumber();
+        int totalPages = announcementsPagedList.getTotalPages();
+        int pageGroupSize = 5;
+        int startPage = (nowPage / pageGroupSize) * pageGroupSize +1 ;
+        int endPage =  Math.min(startPage + pageGroupSize - 1, totalPages);
+
+        AnnouncementPageDto dto = new AnnouncementPageDto();
+        dto.setAnnouncements(announcementsPagedList.getContent());
+        dto.setNowPage(nowPage +1);
+        dto.setStartPage(startPage);
+        dto.setEndPage(endPage);
+        dto.setTotalPage(totalPages);
+        return dto;
     }
 
     public Announcement editAnnounce(EditAnnounceDto editAnnounceDto) {
@@ -82,4 +103,7 @@ public class AnnouncementService {
         return announcementRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("해당글을 찾을수없습니다: " + id));
     }
-    }
+
+
+
+}

@@ -58,37 +58,52 @@ public class NotificationService {
 
     public void sendLikeNotification(Long reviewId, String likerUsername) {
         try {
-            Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("리뷰를 찾을 수 없습니다."));
+            Review review = reviewRepository.findById(reviewId)
+                    .orElseThrow(() -> new RuntimeException("리뷰를 찾을 수 없습니다."));
             String reviewWriterUsername = review.getReviewWriter();
 
-            if (!notificationRepository.existsByUsernameAndTypeAndReviewId(reviewWriterUsername, Notification.NotificationType.LIKE_NOTIFICATION, reviewId)) {
+            if (!notificationRepository.existsByUsernameAndTypeAndReviewId(reviewWriterUsername,
+                    Notification.NotificationType.LIKE_NOTIFICATION,
+                    reviewId)) {
                 String message = likerUsername + "님이 당신의 " + review.getReviewId() + "번 영화후기 에 좋아요를 눌렀습니다.";
                 Notification notification = createNotificationForReviewLiked(reviewWriterUsername, reviewId, message);
 
-                sseEmitterService.sendNotification(reviewWriterUsername, formatNotificationJson(notification, message, null));
+                sseEmitterService.sendNotification(reviewWriterUsername,
+                        formatNotificationJson(notification, message, null));
                 updateAndSendUnreadNotificationCountByUsername(reviewWriterUsername);
             }
         } catch (Exception e) {
             log.error("좋아요 알림 전송 중 오류 발생", e);
         }
     }
-
     public void sendMovieStartNotification(Long memberId, Ticket ticket) {
         try {
-            Movie movie = movieRepository.findById(ticket.getMovieId()).orElseThrow(() -> new RuntimeException("영화 정보를 찾을 수 없습니다."));
+            Movie movie = movieRepository.findById(ticket.getMovieId())
+                    .orElseThrow(() -> new RuntimeException("영화 정보를 찾을 수 없습니다."));
             Member member = getMemberOrThrow(memberId);
-            boolean notificationExists = notificationRepository.existsByUsernameAndTypeAndTicketId(member.getUsername(), Notification.NotificationType.MOVIE_BOOKED, ticket.getTicketId());
+            boolean notificationExists = notificationRepository.existsByUsernameAndTypeAndTicketId(member.getUsername(),
+                    Notification.NotificationType.MOVIE_BOOKED,
+                    ticket.getTicketId());
 
             if (!notificationExists) {
                 LocalDateTime showtime = ticket.getTicketedDate();
                 String showtimeFormatted = showtime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
-                String message = String.format("%s님의 예매내역, <br>티켓 번호: %d, <br>영화 제목: '%s', <br>좌석 번호: '%s', <br>상영 시간: %s",
-                        member.getUsername(), ticket.getTicketId(), movie.getMvTitle(), ticket.getTicketedSeat(), showtimeFormatted);
+                String message = String.format(
+                        "%s님의 예매내역, <br>티켓 번호: %d, <br>영화 제목: '%s', <br>좌석 번호: '%s', <br>상영 시간: %s",
+                        member.getUsername(),
+                        ticket.getTicketId(),
+                        movie.getMvTitle(),
+                        ticket.getTicketedSeat(),
+                        showtimeFormatted);
 
-                Notification notification = createNotificationForMovieStart(member.getUsername(), ticket, movie, message);
+                Notification notification = createNotificationForMovieStart(member.getUsername(),
+                        ticket,
+                        movie,
+                        message);
 
-                sseEmitterService.sendNotification(member.getUsername(), formatNotificationJson(notification, message, showtime));
+                sseEmitterService.sendNotification(member.getUsername(),
+                        formatNotificationJson(notification, message, showtime));
 
                 updateAndSendUnreadNotificationCount(memberId);
             }
@@ -135,7 +150,9 @@ public class NotificationService {
             jsonBuilder.append(String.format(", \"showtime\": \"%s\"", showtimeFormatted));
         }
 
-        jsonBuilder.append(String.format(", \"type\": \"%s\"}", notification.getType().toString()));
+        jsonBuilder.append(String.format(", \"type\": \"%s\"}",
+                notification.getType()
+                        .toString()));
 
         return jsonBuilder.toString();
     }
@@ -145,15 +162,15 @@ public class NotificationService {
         if (optionalNotification.isPresent()) {
             Notification notification = optionalNotification.get();
             notification.setRead(true);
-           notificationRepository.save(notification);
+            notificationRepository.save(notification);
         } else {
             throw new RuntimeException("해당알림이 존재하지않거나 오류입니다: " + notificationId);
         }
     }
 
-    public void setAllNotificationAsRead(){
+    public void setAllNotificationAsRead() {
         List<Notification> notifications = notificationRepository.findAllByIsReadFalse();
-        for (Notification notification :notifications) {
+        for (Notification notification : notifications) {
             notification.setRead(true);
         }
         notificationRepository.saveAll(notifications);
@@ -166,7 +183,8 @@ public class NotificationService {
 
     private void updateAndSendUnreadNotificationCountByUsername(String username) {
         long unreadCount = notificationRepository.countByUsernameAndIsReadFalse(username);
-        String notificationCountJson = String.format("{\"type\": \"UNREAD_NOTIFICATION_COUNT\", \"count\": %d}", unreadCount);
+        String notificationCountJson = String.format("{\"type\": \"UNREAD_NOTIFICATION_COUNT\", \"count\": %d}",
+                unreadCount);
         sseEmitterService.sendNotification(username, notificationCountJson);
     }
 
@@ -176,7 +194,8 @@ public class NotificationService {
 
 
     private Member getMemberOrThrow(Long memberId) {
-        return memberRepository.findById(memberId).orElseThrow(() -> new RuntimeException("회원 정보를 찾을 수 없습니다. Member ID: " + memberId));
+        return memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("회원 정보를 찾을 수 없습니다. Member ID: " + memberId));
     }
 
     //알림 목록

@@ -29,9 +29,6 @@ public class MovieController {
     private InterestMovieService interestMovieService;
 
     @Autowired
-    private NotificationService notificationService;
-
-    @Autowired
     private RegionService regionService;
 
     @Autowired

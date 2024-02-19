@@ -46,6 +46,4 @@ public class SseEmitterController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "읽지 않은 알림 수를 가져올 수 없습니다요"));
         }
     }
-
-
 }
