@@ -9,6 +9,7 @@ import com.dealim.service.InterestMovieService;
 import com.dealim.service.MemberService;
 import com.dealim.service.ReviewService;
 import com.dealim.service.TicketService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,7 +43,12 @@ public class MemberController {
     PasswordEncoder pEncoder;
 
     @GetMapping("/member/login")
-    public String loginForm() {
+    public String loginForm(HttpServletRequest request) {
+        // 로그인 폼 이전의 링크를 가져오기 위한 로직
+        request.getSession().setAttribute("PREVIOUS_URL", request.getHeader("Referer"));
+
+        log.info("{}", request.getSession().getAttribute("PREVIOUS_URL"));
+
         return "member/login";
     }
 
