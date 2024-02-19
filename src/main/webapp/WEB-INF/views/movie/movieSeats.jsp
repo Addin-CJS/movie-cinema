@@ -301,7 +301,7 @@
         $(proceedBtnEl).click(() => {
             localStorage.setItem('takenSeats', JSON.stringify(takenSeats));
             var url = "ticketing?movieId=" + ${movie.movieId};
-            var windowFeatures = "width=800,height=516,resizable=no,status=yes";
+            var windowFeatures = "width=800,height=600,resizable=no,status=yes";
 
             // 좌석 선택 안할시 alert
             if (takenSeats.length === 0) {

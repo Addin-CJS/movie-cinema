@@ -44,7 +44,6 @@ public class MemberController {
 
     @GetMapping("/member/login")
     public String loginForm(HttpServletRequest request) {
-        // 로그인 폼 이전의 링크를 가져오기 위한 로직
         request.getSession().setAttribute("PREVIOUS_URL", request.getHeader("Referer"));
 
         log.info("{}", request.getSession().getAttribute("PREVIOUS_URL"));
