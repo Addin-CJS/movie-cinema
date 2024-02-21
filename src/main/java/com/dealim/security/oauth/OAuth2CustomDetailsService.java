@@ -45,7 +45,6 @@ public class OAuth2CustomDetailsService extends DefaultOAuth2UserService {
             email = (String) naverAccount.get("email");
             phoneNumber = (String) naverAccount.get("mobile");
         }
-
         username = provider + "_" + providerId;
         Optional<Member> optionalMember = memberRepository.findByUsername(username);
         Member member;

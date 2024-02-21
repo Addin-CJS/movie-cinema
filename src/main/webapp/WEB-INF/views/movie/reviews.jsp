@@ -91,6 +91,9 @@
             dataType: "json",
             success: function (response) {
                 displayAverageRating(response.content);
+
+                reviews = response.content;
+
                 const reviewsHtml = createReviewsHtml(response.content);
                 const paginationHtml = createPaginationHtml(currentPage, response.totalPages, movieId);
 
@@ -152,6 +155,7 @@
                 $("#editReviewContent").val(review.reviewContent);
                 $("#reviewEditForm").data("reviewId", reviewId);
                 $(".reviewTitleRow").hide();
+
                 $("#reviewEditForm").show();
 
                 var starRating = review.starRating;
@@ -337,6 +341,7 @@
                 </div>
             </div>
         </div>`;
+
         reviews.forEach(function(review) {
             var date = review.updateReviewDate ? review.updateReviewDate : review.createReviewDate;
             var displayDate = formatDate(date);

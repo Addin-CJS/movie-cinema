@@ -66,7 +66,6 @@ public class MovieService {
 
     public void getMovieHome(Pageable pageable, String searchKeyword, String category, String releaseDate, String comingSoon, Model model) {
         Page<Movie> movieList;
-
         if (category != null && !category.trim().isEmpty()) {
             movieList = findMoviesByGenre(category, pageable);
         } else if (releaseDate != null && !releaseDate.trim().isEmpty()) {
@@ -78,7 +77,6 @@ public class MovieService {
         } else {
             movieList = movieList(pageable);
         }
-
         int nowPage = movieList.getPageable().getPageNumber();
         int totalPages = movieList.getTotalPages();
         int pageGroupSize = 5;
@@ -98,9 +96,7 @@ public class MovieService {
     }
 
     public void getShowDetail(Long movieId, Model model) {
-
         Optional<Movie> movie = selectMovieDetailById(movieId);
-
         model.addAttribute("movie", movie.orElse(null));
         if (movie.isPresent()) {
             Float popularityValue = movie.get().getMvPopularity();
@@ -108,7 +104,6 @@ public class MovieService {
             if (popularityValue == null) {
                 popularityValue = 0.0f;
             }
-
             DecimalFormat df = new DecimalFormat("0");
             String formattedPopularity = df.format(popularityValue);
 

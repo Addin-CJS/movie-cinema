@@ -202,25 +202,20 @@
         const now = new Date();
         let currentHour = now.getHours();
         let currentMinutes = now.getMinutes();
-
         if (currentMinutes >= 30) {
             currentMinutes = 30;
         } else {
             currentMinutes = 0;
         }
-
-        // 30분 단위로 24시간을 배열
         for (let i = 0; i < 48; i++) {
             const formattedTime = `${"${currentHour.toString().padStart(2, '0')}"}:${"${currentMinutes.toString().padStart(2, '0')}"}`;
             times.push(formattedTime);
-
             if (currentMinutes === 30) {
                 currentHour++;
                 currentMinutes = 0;
             } else {
                 currentMinutes = 30;
             }
-            // 24시간을 초과하는 경우에 대한 처리
             if (currentHour >= 24) {
                 currentHour -= 24;
             }

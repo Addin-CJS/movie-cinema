@@ -9,7 +9,6 @@
     <div class="popular-movie-slider">
         <img src="${movie.mvImg}" alt="영화 이미지" class="poster">
 
-
         <div class="popular-movie-slider-content">
             <p class="release">개봉 : ${movie.mvReleaseDate}</p>
             <h2 class="movie-name">${movie.mvTitle}</h2>
