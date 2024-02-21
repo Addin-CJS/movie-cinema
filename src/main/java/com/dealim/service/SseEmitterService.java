@@ -22,8 +22,9 @@ public class SseEmitterService {
 
     public SseEmitter createEmitterForUser(String username) {
         //SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);
+        // SseEmitter emitter = new SseEmitter(60000L); // 1분
+
         SseEmitter emitter = new SseEmitter(300_000L); //5분
-      // SseEmitter emitter = new SseEmitter(60000L); // 1분
         this.userEmitters.put(username, emitter);
 
         emitter.onCompletion(() -> {
