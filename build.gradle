@@ -28,6 +28,7 @@ dependencies {
 
     // sesssion
     implementation 'org.springframework.session:spring-session-core'
+
     // jsp를 위한 의존성 주입
     implementation 'jakarta.servlet:jakarta.servlet-api'
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'

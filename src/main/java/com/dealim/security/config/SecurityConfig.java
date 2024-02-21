@@ -1,6 +1,5 @@
 package com.dealim.security.config;
 
-
 import com.dealim.security.error.CustomAuthenticationFailureHandler;
 import com.dealim.security.handler.LoginSuccessHandler;
 import com.dealim.security.oauth.OAuth2CustomDetailsService;
