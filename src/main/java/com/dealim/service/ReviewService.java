@@ -31,11 +31,9 @@ public class ReviewService {
         if (memberId == null) {
             return "userNotFound";
         }
-
         if (!ticketRepository.existsByMovieIdAndMemberId(review.getMovieNo(), memberId)) {
             return "notReserved";
         }
-
         review.setReviewWriter(username);
         reviewRepository.save(review);
         return "success";

@@ -1,8 +1,6 @@
 package com.dealim.controller;
 
 import com.dealim.domain.Member;
-import com.dealim.domain.Review;
-import com.dealim.domain.Ticket;
 import com.dealim.dto.MyPageMember;
 import com.dealim.security.custom.CustomUserDetails;
 import com.dealim.service.InterestMovieService;
@@ -12,7 +10,6 @@ import com.dealim.service.TicketService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -58,7 +55,6 @@ public class MemberController {
 
     @PostMapping("/member/register")
     public String insertMember(Member member) {
-        log.info("====회원가입 진행중====");
 
         String enPass = pEncoder.encode(member.getPassword());
         member.setPassword(enPass);
@@ -112,7 +108,7 @@ public class MemberController {
                                        direction = Sort.Direction.DESC) Pageable pageable) {
         Member loginUser = ((CustomUserDetails) authentication.getPrincipal()).getMember();
 
-        Page<Review> myReviews = reviewService.getMyReviews(loginUser.getUsername(), pageable, model);
+        reviewService.getMyReviews(loginUser.getUsername(), pageable, model);
         return "member/myReviews";
     }
 
@@ -143,11 +139,11 @@ public class MemberController {
 
     @GetMapping("/member/myTickets")
     public String getMyTickets(Authentication authentication, Model model,
-                               @PageableDefault(page = 0, size = 3, sort = "ticketedDate",
+                               @PageableDefault(page = 0, size = 3, sort = "createdAt",
                                        direction = Sort.Direction.DESC) Pageable pageable) {
         Member loginUser = ((CustomUserDetails) authentication.getPrincipal()).getMember();
 
-        Page<Ticket> myTickets = ticketService.getMyTickets(loginUser.getMemberId(), pageable, model);
+        ticketService.getMyTickets(loginUser.getMemberId(), pageable, model);
         return "member/myTickets";
     }
 
@@ -158,7 +154,6 @@ public class MemberController {
 
     @PostMapping("/member/resetMyPw")
     public String resetMyPw(Member member) {
-        String enPass = pEncoder.encode(member.getPassword());
         member.setPassword(pEncoder.encode(member.getPassword()));
 
         Member resetPw = memberService.insertMember(member);
