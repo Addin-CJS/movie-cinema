@@ -42,16 +42,12 @@ Discord
 
 ### DB
 
-Oracle  
+Oracle(synology docker를 통해 배포)
 
-## DB 구조
+## ERD
+[!ERD](/assets/ERD.png)
 
-[]
-
-## 스프링 구조
-
-[]
-
-## 참고
-
-# 기타
+## 폴더 구조
+```
+폴더 구조
+```
