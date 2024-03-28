@@ -1,64 +1,57 @@
+# 에드인에듀 - 영화 예매 웹사이트
+
 ## Members
 
-김지창, 김윤식, 백세진, 안정선
+김지창, 백세진, 안정선  
 
 ## 프로젝트 진행 기간
 
-2023.12.7 ~ 2023.12
+2024.1.27 ~ 2024.2.19 (3주)
 
 ## 개요
 
-간단한 게시판 프로그램을 스프링과 Oracle DB를 사용하여 구현한다
+영화 예매 사이트를 springboot + jsp + oracle을 활용하여 구현한다
 
 ## 프로젝트 목표
 
-1. 게시판 만들기
-2. DB 연동
+1. 가입 기능  
+2. 영화 예매  
+3. 예매한 내역 조회 가능한 마이페이지  
+4. 영화별 리뷰 게시판
 
-## 기술스택
+## 개발환경 및 기술스택
 
 ### Back-End
 
-JAVA 17
-
+JAVA 17  
 Spring boot 3.0.2
 
 ### Front-End
 
-css, js
-
-Figma
+JSP  
+JQeury
 
 ### IDE
 
-IntelliJ
-
-STS4
+IntelliJ  
 
 ### Communication
 
-Notion
-
+Notion  
 Discord
 
 ### DB
 
-Oracle
+Oracle  
 
 ## DB 구조
 
-```java
-
-```
+[]
 
 ## 스프링 구조
 
-```java
-
-```
+[]
 
 ## 참고
-
-### 디자인(피그마)
 
 # 기타
