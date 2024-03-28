@@ -45,7 +45,7 @@ Discord
 Oracle(synology docker를 통해 배포)
 
 ## ERD
-[!ERD](/assets/ERD.png)
+![ERD](./assets/ERD.png)
 
 ## 폴더 구조
 ```
