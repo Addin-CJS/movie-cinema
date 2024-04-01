@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  springboot-app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "9999:9999"
+
+  oracle-server:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    ports:
+      - "1521:1521"
