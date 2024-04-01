@@ -6,10 +6,16 @@ services:
       dockerfile: Dockerfile
     ports:
       - "9999:9999"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@oracle-server:1521:xe
+      SPRING_DATASOURCE_USERNAME: system
+      SPRING_DATASOURCE_PASSWORD: 0000
 
   oracle-server:
     build:
-      context: ./mysql
+      context: ./oracle
       dockerfile: Dockerfile
     ports:
       - "1521:1521"
+    environment:
+      ORACLE_PASSWORD: 0000  
