@@ -5,7 +5,7 @@
 --  DDL for Table ANNOUNCEMENT
 --------------------------------------------------------
 
-  CREATE TABLE "ADDIN"."ANNOUNCEMENT" 
+  CREATE TABLE "SYSTEM"."ANNOUNCEMENT" 
    (	"ID" NUMBER(19,0), 
 	"CONTENT" VARCHAR2(700 CHAR), 
 	"CREATE_DATE" TIMESTAMP (6), 
@@ -19,9 +19,9 @@
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
   BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "USERS" ;
-REM INSERTING into ADDIN.ANNOUNCEMENT
+REM INSERTING into SYSTEM.ANNOUNCEMENT
 SET DEFINE OFF;
-Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (31,'안녕하세요. 고객님
+Insert into SYSTEM.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (31,'안녕하세요. 고객님
 
  
 
@@ -43,7 +43,7 @@ Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAM
 더욱 안정적이고 편리한 서비스를 제공하는 MVC가 되겠습니다.
 
 감사합니다. ',to_timestamp('24/02/15 15:06:38.684809000','RR/MM/DD HH24:MI:SSXFF'),'[[시스템점검]] 현대카드 정기 점검(2/18(일) 01:00 ~ 07:00)',to_timestamp('24/02/15 15:06:38.684809000','RR/MM/DD HH24:MI:SSXFF'),'sejin3');
-Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (33,'안녕하십니까, MVC입니다.
+Insert into SYSTEM.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (33,'안녕하십니까, MVC입니다.
 
 4DX 레드 카드 서비스 종료 사전 안내드립니다. 
 
@@ -72,7 +72,7 @@ MVC 고객센터를 통해 문의 부탁드립니다.
  
 
 감사합니다.',to_timestamp('24/02/15 15:08:26.141318000','RR/MM/DD HH24:MI:SSXFF'),'[[기타]] 4DX 레드 카드 서비스 종료 안내 (~24/12/31)',to_timestamp('24/02/15 15:08:26.141318000','RR/MM/DD HH24:MI:SSXFF'),'sejin3');
-Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (34,'안녕하세요.
+Insert into SYSTEM.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (34,'안녕하세요.
 MVC 천안지점입니다.
 
 천안지점을 이용해주시는 고객님들께 보다 나은 관람 환경 제공을 위하여
@@ -93,7 +93,7 @@ MVC 천안지점입니다.
 관련 문의사항은 관리자를 통해 문의주시면 안내 도와드리겠습니다.
 
 변화하는 천안지점의 새로운 모습에 많은 관심과 응원 부탁드립니다.',to_timestamp('24/02/15 15:09:47.889674000','RR/MM/DD HH24:MI:SSXFF'),'[지점] [천안] 상영관 리뉴얼 공사 일정 안내 (2/14~3/8)',to_timestamp('24/02/15 15:09:47.889674000','RR/MM/DD HH24:MI:SSXFF'),'sejin3');
-Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (1,'안녕하세요, MVC입니다. 
+Insert into SYSTEM.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (1,'안녕하세요, MVC입니다. 
 
 최근 무대 인사 티켓을 대량 구매하여 높은 가격으로 재판매하거나 상영 직전 환불하는 등의 사례가 빈번하게 발생하고 있습니다. 
 
@@ -113,7 +113,7 @@ Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAM
 
 
 시행일: 1월 2일 이후 진행하는 무대인사부터 시행',to_timestamp('24/02/15 14:31:17.514601000','RR/MM/DD HH24:MI:SSXFF'),'[MVC] 무대인사 예매취소 정책 변경 안내',to_timestamp('24/02/15 15:02:35.089215000','RR/MM/DD HH24:MI:SSXFF'),'sejin3');
-Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (35,'안녕하세요, MVC 입니다.
+Insert into SYSTEM.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (35,'안녕하세요, MVC 입니다.
 
 서울페이(서울사랑상품권) 결제서비스 운영이 종료될 예정이오니
 
@@ -131,7 +131,7 @@ Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAM
 더 좋은 서비스로 찾아 뵙겠습니다.
 
 감사합니다.',to_timestamp('24/02/15 15:10:31.637299000','RR/MM/DD HH24:MI:SSXFF'),'[기타] 서울페이(서울사랑상품권) 서비스 종료 안내 (1/31)',to_timestamp('24/02/15 15:10:31.637299000','RR/MM/DD HH24:MI:SSXFF'),'sejin3');
-Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (36,'1. 온라인 예매 시(MVC 홈페이지) 1회 결제 시 최대 8매까지 예매 가능합니다.
+Insert into SYSTEM.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (36,'1. 온라인 예매 시(MVC 홈페이지) 1회 결제 시 최대 8매까지 예매 가능합니다.
 
 2. 1일 5회 또는 최대 24매, 최대 5개 지점까지만 예매 가능합니다. (3가지 조건 중 1개라도 충족시 추가 예매 불가)
   1) 2매씩 총 5번 예매 시도시 회수 조건 충족으로 추가 예매 불가 (5회)
@@ -146,17 +146,17 @@ Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAM
 ※ 만약 단체관람등으로 다량의 좌석 구매가 필요하시다면 관리자를 통해 관람을 원하시는 지점으로 문의 부탁드립니다.
 
 ※적용일: 2024년 2월 10일',to_timestamp('24/02/15 15:12:19.218634000','RR/MM/DD HH24:MI:SSXFF'),'[MVC] 예매 가능 횟수 매수 제한 안내',to_timestamp('24/02/15 15:12:19.218634000','RR/MM/DD HH24:MI:SSXFF'),'sejin3');
-Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (37,'MVC 공식 홈페이지를 통한 예매 진행 시 별도의 수수료는 발생되지 않습니다.
+Insert into SYSTEM.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (37,'MVC 공식 홈페이지를 통한 예매 진행 시 별도의 수수료는 발생되지 않습니다.
 
 * 제휴 사이트를 통한 예매시 별도로 책정된 수수료가 부과되오니,
 
    이점 유의 부탁드립니다.',to_timestamp('24/02/15 15:13:10.384593000','RR/MM/DD HH24:MI:SSXFF'),'[MVC] 인터넷 예매 수수료',to_timestamp('24/02/15 15:13:10.384593000','RR/MM/DD HH24:MI:SSXFF'),'sejin3');
-Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (44,' 페이머니 신규발급 웰컴쿠폰
+Insert into SYSTEM.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (44,' 페이머니 신규발급 웰컴쿠폰
 
 신규 발급하면 MVC 최대 28,000원 할인 혜택
 
 2D 영화관 할인, 콤보할인, 포토티켓 무료 증정 !',to_timestamp('24/02/15 19:18:12.977387000','RR/MM/DD HH24:MI:SSXFF'),'[이벤트] 페이머니 신규발급 웰컴쿠폰',to_timestamp('24/02/16 17:27:36.216779000','RR/MM/DD HH24:MI:SSXFF'),'sejin3');
-Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (32,'안녕하세요. 고객님
+Insert into SYSTEM.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (32,'안녕하세요. 고객님
 
  
 
@@ -183,7 +183,7 @@ Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAM
  
 
 감사합니다.',to_timestamp('24/02/15 15:07:28.885171000','RR/MM/DD HH24:MI:SSXFF'),'[[시스템점검]] 해피머니상품권 해피캐시(모바일, 홈페이지 점검)',to_timestamp('24/02/15 15:07:28.885171000','RR/MM/DD HH24:MI:SSXFF'),'sejin3');
-Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (42,'행사기간: 2023년8월1일~2024년7월31일
+Insert into SYSTEM.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (42,'행사기간: 2023년8월1일~2024년7월31일
 
 행사기간: 본 이벤트를 통해
 
@@ -197,7 +197,7 @@ Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAM
 !꼭확인하세요
 •본 이벤트 혜택은 행사 기간 사이 해당 이벤트 페이지를 통해
 현대백화점 모바일카드를 신규로발급받는고객에 한해 적용됩니다.',to_timestamp('24/02/15 19:12:46.745422000','RR/MM/DD HH24:MI:SSXFF'),'[이벤트] 현대백화점 모바일카드 신규 가입 프로모션',to_timestamp('24/02/15 19:12:46.745422000','RR/MM/DD HH24:MI:SSXFF'),'sejin3');
-Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (40,'네이버 페이로 결제 시 영화 할인 !
+Insert into SYSTEM.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (40,'네이버 페이로 결제 시 영화 할인 !
 
 2024.02.05 ( 월 ) ~ 2024. 02.29( 목 )
 
@@ -209,7 +209,7 @@ Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAM
 본 이벤트는 네이버페이 및 MVC  사정에 의해 변경 및 조기 종료될 수 있습니다.
 지정된 결제수단 외 타 결제수단은 할인 적용이 불가합니다.
 네이버페이 X 삼성페이 결제 시 혜택 대상에서 제외됩니다.',to_timestamp('24/02/15 19:08:00.796087000','RR/MM/DD HH24:MI:SSXFF'),'[이벤트] 네이버페이로 결제 시 영화 할인',to_timestamp('24/02/15 19:08:00.796087000','RR/MM/DD HH24:MI:SSXFF'),'sejin3');
-Insert into ADDIN.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (41,'VIP 콕! 영화 선택하고 무료 예매 혜택 받자
+Insert into SYSTEM.ANNOUNCEMENT (ID,CONTENT,CREATE_DATE,TITLE,UPDATE_DATE,USERNAME) values (41,'VIP 콕! 영화 선택하고 무료 예매 혜택 받자
 
 LG U+ VIP 이상 등급이라면 MVC에서만 받을 수 있는 영화 무료 예매 혜택을
 놓치지 마세요 !
@@ -226,7 +226,7 @@ LG U+ VIP 이상 등급이라면 MVC에서만 받을 수 있는 영화 무료 �
 --  DDL for Index SYS_C008591
 --------------------------------------------------------
 
-  CREATE UNIQUE INDEX "ADDIN"."SYS_C008591" ON "ADDIN"."ANNOUNCEMENT" ("ID") 
+  CREATE UNIQUE INDEX "SYSTEM"."SYS_C008591" ON "SYSTEM"."ANNOUNCEMENT" ("ID") 
   PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
@@ -236,8 +236,8 @@ LG U+ VIP 이상 등급이라면 MVC에서만 받을 수 있는 영화 무료 �
 --  Constraints for Table ANNOUNCEMENT
 --------------------------------------------------------
 
-  ALTER TABLE "ADDIN"."ANNOUNCEMENT" MODIFY ("ID" NOT NULL ENABLE);
-  ALTER TABLE "ADDIN"."ANNOUNCEMENT" ADD PRIMARY KEY ("ID")
+  ALTER TABLE "SYSTEM"."ANNOUNCEMENT" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."ANNOUNCEMENT" ADD PRIMARY KEY ("ID")
   USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1

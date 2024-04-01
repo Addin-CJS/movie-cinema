@@ -1,8 +1,6 @@
 FROM gvenzl/oracle-xe
 
-ENV ORACLE_PASSWORD=1234
-
-VOLUME [ "/oradata:/opt/oracle/oradata/gvenzl/oracle-xe" ]
+ENV ORACLE_PASSWORD=0000
 
 COPY *.sql /container-entrypoint-initdb.d
 
