@@ -34,10 +34,7 @@ public class HomeController {
     private MovieService movieService;
 
     @RequestMapping("/")
-    public String home(Model model, @AuthenticationPrincipal CustomUserDetails user) {
-        if(user != null) {
-            log.info("{}", user.getMember().getRoles());
-        }
+    public String home(Model model) {
         List<MovieInterest> top5Movies = interestMovieService.getTop5MoviesByInterest(model);
         List<Movie> movieListForPopularity = movieService.getMovieListByPopularity();
 
