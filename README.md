@@ -1,7 +1,6 @@
 # 에드인에듀 - 영화 예매 웹사이트
 
 ## Members
-
 김지창, 백세진, 안정선  
 
 ## Project duration

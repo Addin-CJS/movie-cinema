@@ -5,12 +5,14 @@ import com.dealim.domain.Announcement;
 import com.dealim.domain.Movie;
 import com.dealim.domain.Review;
 import com.dealim.dto.MovieInterest;
+import com.dealim.security.custom.CustomUserDetails;
 import com.dealim.service.AnnouncementService;
 import com.dealim.service.InterestMovieService;
 import com.dealim.service.MovieService;
 import com.dealim.service.ReviewService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +34,10 @@ public class HomeController {
     private MovieService movieService;
 
     @RequestMapping("/")
-    public String home(Model model) {
+    public String home(Model model, @AuthenticationPrincipal CustomUserDetails user) {
+        if(user != null) {
+            log.info("{}", user.getMember().getRoles());
+        }
         List<MovieInterest> top5Movies = interestMovieService.getTop5MoviesByInterest(model);
         List<Movie> movieListForPopularity = movieService.getMovieListByPopularity();
 

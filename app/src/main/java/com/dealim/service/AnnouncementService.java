@@ -26,6 +26,7 @@ public class AnnouncementService {
         return announcementRepository.save(announcement);
 
     }
+
     //메인에서 사용하는거
     public List<Announcement> getAnnounceList() {
         return announcementRepository.findAllByOrderByIdDesc();
@@ -39,19 +40,19 @@ public class AnnouncementService {
         int nowPage = announcementsPagedList.getNumber();
         int totalPages = announcementsPagedList.getTotalPages();
         int pageGroupSize = 5;
-        int startPage = (nowPage / pageGroupSize) * pageGroupSize +1 ;
-        int endPage =  Math.min(startPage + pageGroupSize - 1, totalPages);
-
+        int startPage = (nowPage / pageGroupSize) * pageGroupSize + 1;
+        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
         AnnouncementPageDto dto = new AnnouncementPageDto();
+
         dto.setAnnouncements(announcementsPagedList.getContent());
-        dto.setNowPage(nowPage +1);
+        dto.setNowPage(nowPage + 1);
         dto.setStartPage(startPage);
         dto.setEndPage(endPage);
         dto.setTotalPage(totalPages);
         return dto;
     }
 
-     public Announcement editAnnounce(EditAnnounceDto editAnnounceDto) {
+    public Announcement editAnnounce(EditAnnounceDto editAnnounceDto) {
         try {
 
             Optional<Announcement> optionalAnnouncement = announcementRepository.findById(editAnnounceDto.getId());
@@ -104,7 +105,6 @@ public class AnnouncementService {
         return announcementRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("해당글을 찾을수없습니다: " + id));
     }
-
 
 
 }

@@ -55,7 +55,6 @@ public class MemberController {
 
     @PostMapping("/member/register")
     public String insertMember(Member member) {
-
         String enPass = pEncoder.encode(member.getPassword());
         member.setPassword(enPass);
         Member insertedMember = memberService.insertMember(member);

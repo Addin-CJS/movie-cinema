@@ -69,7 +69,6 @@ public class AnnouncementController {
         model.addAttribute("announcement", announcement);
         return "announcement/announcementEdit";
     }
-
     @Secured({"ROLE_ADMIN"})
     @PostMapping("/editAnnounce")
     public String editAnnounce(EditAnnounceDto editAnnounceDto) {
