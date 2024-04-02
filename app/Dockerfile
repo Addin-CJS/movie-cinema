@@ -1,24 +1,25 @@
-FROM gradle:8.6.0-jdk17 AS build
+# Use openjdk:17-jdk-slim for base image
+FROM openjdk:17-jdk-slim
 
+# Set the working directory to '/app'
 WORKDIR /app
 
-COPY gradlew* .
+# Copy the gradlew, gradle folder, and build file to the docker image
+COPY gradlew* ./
 COPY gradle ./gradle
+COPY build.gradle .
 
+# Grant execute permission for 'gradlew'
 RUN chmod +x ./gradlew
 
-COPY build.gradle .
+# Copy source code
 COPY src ./src
 
 # Build the application
-RUN gradle build
+RUN ./gradlew build
 
-# Use adoptopenjdk for base image
-FROM openjdk:17-jdk-slim
-EXPOSE 9090
+# Expose the port the app runs on
+EXPOSE 9999
 
-# Copy build application to 'app' folder in image
-COPY --from=build /app/build/libs/*.jar /app/app.jar
-
-# Run the application
-CMD ["java", "-jar", "/app/app.jar"]
+# Find the .war file and run the application
+CMD java -jar $(find ./build/libs/*.war | head -n 1)

@@ -1,21 +1,46 @@
 version: '3.8'
 services:
-  springboot-app:
-    build:
-      context: ./app
-      dockerfile: Dockerfile
-    ports:
-      - "9999:9999"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@oracle-server:1521:xe
-      SPRING_DATASOURCE_USERNAME: system
-      SPRING_DATASOURCE_PASSWORD: 0000
-
   oracle-server:
     build:
       context: ./oracle
       dockerfile: Dockerfile
+    networks:
+      my_network:
+        ipv4_address: 172.20.0.2
     ports:
       - "1521:1521"
+    restart: always
     environment:
-      ORACLE_PASSWORD: 0000  
+      ORACLE_PASSWORD: '0000'
+    healthcheck:
+      test: ["CMD", "sqlplus", "-S", "/ as sysdba", "exec select 1 from dual;"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+
+  springboot-app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    networks:
+      my_network:
+        ipv4_address: 172.20.0.3
+    ports:
+      - "9999:9999"
+    restart: always
+    environment:
+      ORACLE_URL: 'oracle-server:1521'
+      ORACLE_USERNAME: 'system'
+      ORACLE_PASSWORD: '0000'
+    depends_on:
+      oracle-server:
+        condition: service_healthy
+
+networks:
+  my_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.20.0.0/24"
+          gateway: "172.20.0.1"
