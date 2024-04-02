@@ -12,11 +12,11 @@ services:
     restart: always
     environment:
       ORACLE_PASSWORD: '0000'
-    healthcheck:
-      test: ["CMD", "sqlplus", "-S", "/ as sysdba", "exec select 1 from dual;"]
-      interval: 30s
-      timeout: 10s
-      retries: 10
+#    healthcheck:
+#      test: ["CMD", "sqlplus", "-S", "/ as sysdba", "exec select 1 from dual;"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 10
 
   springboot-app:
     build:
@@ -29,12 +29,10 @@ services:
       - "9999:9999"
     restart: always
     environment:
-      ORACLE_URL: 'oracle-server:1521'
-      ORACLE_USERNAME: 'system'
       ORACLE_PASSWORD: '0000'
-    depends_on:
-      oracle-server:
-        condition: service_healthy
+#    depends_on:
+#      oracle-server:
+#        condition: service_healthy
 
 networks:
   my_network:
