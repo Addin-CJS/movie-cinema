@@ -86,7 +86,7 @@
     ```
    빌드가 완료되고 컨테이너가 실행되면, Oracle 서버와 애플리케이션이 실행됩니다.
    오라클 서버는 실행 성공시 다음과 같은 이미지를 출력합니다.  
-   ![oracle](./assets/success.png)
+   ![success](./assets/success.png)
 
 1. **웹사이트 접속**
    
