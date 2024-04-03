@@ -141,7 +141,9 @@
 
 ```
 ## Roles
-[팀원 역할](./docs/ROLES.md)
-
+![members](./assets/members.png)
+- 김지창 : [Github Link](https://github.com/dealim), [Notion Profile](https://bit.ly/49CcapP)
+- 백세진 : [Github Link](https://github.com/AN-js)
+- 안정선 : [Github Link](https://github.com/baeksejin)
 ## LICENSE
 MIT License Copyright (c) 2024 Addin-CJS

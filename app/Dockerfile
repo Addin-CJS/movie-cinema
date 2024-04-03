@@ -4,12 +4,6 @@ FROM openjdk:17-jdk-slim
 # Set the working directory to '/app'
 WORKDIR /app
 
-# Env config
-ENV ORACLE_PASSWORD='0000' \
-    GOOGLE_CLIENT_SECRET='비밀키를 설정해주세요' \
-    NAVER_CLIENT_SECRET='비밀키를 설정해주세요' \
-    KAKAO_CLIENT_SECRET='비밀키를 설정해주세요'
-
 # Copy the gradlew, gradle folder, and build file to the docker image
 COPY gradlew* ./
 COPY gradle ./gradle
