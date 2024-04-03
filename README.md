@@ -92,8 +92,8 @@
    
    브라우저를 열고 `http://localhost:9999`로 접속합니다. 애플리케이션의 홈페이지가 표시됩니다.
 
-## Architecture
-![](./assets/아키텍처.png)
+## Oracle DB ERD
+![](./assets/ERD.png)
 
 ## Folder Structure
 ```
