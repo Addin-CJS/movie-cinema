@@ -143,3 +143,6 @@
 ```
 ## Roles
 [팀원 역할](./docs/ROLES.md)
+
+## LICENSE
+MIT License Copyright (c) 2024 Addin-CJS
