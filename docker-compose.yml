@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 services:
   oracle-server:
     build:
@@ -7,16 +7,9 @@ services:
     networks:
       my_network:
         ipv4_address: 172.20.0.2
-    ports:
-      - "1521:1521"
     restart: always
     environment:
-      ORACLE_PASSWORD: '0000'
-#    healthcheck:
-#      test: ["CMD", "sqlplus", "-S", "/ as sysdba", "exec select 1 from dual;"]
-#      interval: 30s
-#      timeout: 10s
-#      retries: 10
+      ORACLE_PASSWORD: "0000"
 
   springboot-app:
     build:
@@ -29,10 +22,7 @@ services:
       - "9999:9999"
     restart: always
     environment:
-      ORACLE_PASSWORD: '0000'
-#    depends_on:
-#      oracle-server:
-#        condition: service_healthy
+      ORACLE_PASSWORD: "0000"
 
 networks:
   my_network:
