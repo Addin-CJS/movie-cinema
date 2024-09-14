@@ -9,7 +9,19 @@ services:
         ipv4_address: 172.20.0.2
     restart: always
     environment:
-      ORACLE_PASSWORD: "0000"
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "sh",
+          "-c",
+          "echo 'SELECT 1 FROM dual;' | sqlplus -s system/${ORACLE_PASSWORD}@localhost:1521/XEPDB1",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
 
   springboot-app:
     build:
@@ -22,7 +34,9 @@ services:
       - "9999:9999"
     restart: always
     environment:
-      ORACLE_PASSWORD: "0000"
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+    depends_on:
+      - oracle-server
 
 networks:
   my_network:
