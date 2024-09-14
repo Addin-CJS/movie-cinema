@@ -83,7 +83,7 @@
         password: false,
         name: false,
         phoneNumber: false,
-        email: false
+        emailId: false
     }
 
     // 유효성 검사
@@ -168,6 +168,7 @@
             alert("모든 필드를 정확히 입력해주세요.");
             return false;
         }
+        alert("가입 완료!");
     })
 
     // 카카오 주소
@@ -181,17 +182,15 @@
 
     // 이메일 주소 DB에 저장
     $("#emailId, #emailAddress, #emailOption").on('blur change', function () {
-        email();
-    });
-
-    function email() {
-        const emailId = $("#emailId").val();
-        const middle = $("#middle").text();
-        const emailAddress = $("#emailAddress").val();
-        if (emailId != null && emailAddress != null) {
-            $("#totalEmail").val(emailId + middle + emailAddress);
+        function email() {
+            const emailId = $("#emailId").val();
+            const middle = $("#middle").text();
+            const emailAddress = $("#emailAddress").val();
+            if (emailId != null && emailAddress != null) {
+                $("#totalEmail").val(emailId + middle + emailAddress);
+            }
         }
-    }
+    });
 
     function handleEmailOption() {
         const emailOption = $("#emailOption").val();
