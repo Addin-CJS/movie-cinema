@@ -24,14 +24,12 @@ public class AnnouncementService {
     public Announcement insertAnnounce(Announcement announcement) {
 
         return announcementRepository.save(announcement);
-
     }
+
     //메인에서 사용하는거
     public List<Announcement> getAnnounceList() {
         return announcementRepository.findAllByOrderByIdDesc();
-
     }
-
 
     public AnnouncementPageDto getAnnouncePagedList(Pageable pageable) {
         Page<Announcement> announcementsPagedList = announcementRepository.findAllByOrderByIdDesc(pageable);
@@ -53,31 +51,22 @@ public class AnnouncementService {
 
      public Announcement editAnnounce(EditAnnounceDto editAnnounceDto) {
         try {
-
             Optional<Announcement> optionalAnnouncement = announcementRepository.findById(editAnnounceDto.getId());
 
             if (optionalAnnouncement.isPresent()) {
-
                 Announcement announcement = optionalAnnouncement.get();
-
                 announcement.setTitle(editAnnounceDto.getTitle());
                 announcement.setContent(editAnnounceDto.getContent());
-
                 return announcementRepository.save(announcement);
             } else {
-
                 throw new NotFoundException("공지사항 아디 없음 : " + editAnnounceDto.getId());
             }
         } catch (NotFoundException ex) {
-
             throw ex;
         } catch (Exception ex) {
-
             log.error("공지사항 아이디없음", ex);
             return null;
         }
-
-
     }
 
     public void deleteAnnounce(Long announceId) {
@@ -99,12 +88,8 @@ public class AnnouncementService {
         }
     }
 
-
     public Announcement detailAnnounce(Long id) {
         return announcementRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("해당글을 찾을수없습니다: " + id));
     }
-
-
-
 }

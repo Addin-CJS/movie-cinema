@@ -25,19 +25,15 @@ public class InterestMovieService {
 
     @Autowired
     private NotificationService notificationService;
-
     @Autowired
     private InterestMovieRepository interestMovieRepository;
-
     @Autowired
     private MovieRepository movieRepository;
-
 
        public boolean addInterestMovie(InterestMovie interestMovie) {
         try {
             if (!interestMovieRepository.existsByMovieIdAndUserName(interestMovie.getMovieId(), interestMovie.getUserName())) {
                 interestMovieRepository.save(interestMovie);
-
                 return true;
             }
             return false;
