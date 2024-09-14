@@ -22,4 +22,4 @@ RUN ./gradlew build
 EXPOSE 9999
 
 # Find the .war file and run the application
-CMD java -jar $(find ./build/libs/*-SNAPSHOT.war | grep -v plain | head -n 1)
+CMD ["/bin/sh", "-c", "java -jar $(find ./build/libs/*-SNAPSHOT.war | grep -v plain | head -n 1)"]
